@@ -1,0 +1,38 @@
+/* Login */
+#LoginWrapper {
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#LoginWrapper > #LoginFormContainer {
+  width: 300px;
+  padding: 20px;
+  background-color:#2c3e50;
+  color: #fff;
+}
+
+#LoginWrapper > #LoginFormContainer > .title {
+  text-align: center;
+  margin-top: 0;
+}
+
+#LoginWrapper > #LoginFormContainer > #LoginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#LoginWrapper > #LoginFormContainer > #LoginForm > .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+#LoginWrapper > #LoginFormContainer > #LoginForm > .field > .label {
+  font-size:small;
+}
+
+#LoginWrapper > #LoginFormContainer > #LoginForm > .button {
+  margin-top: 10px;
+}

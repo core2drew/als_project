@@ -8,9 +8,6 @@
 ?>
   <div id="QuestionWrapper" class="wrapper">
     <h1>Question</h1>
-    <a href="/dashboard.php">Dashboard</a>
-    <a href="/logout.php">Logout</a>
-
     <h3>Add Question</h3>
 
     <div class="message"></div>
