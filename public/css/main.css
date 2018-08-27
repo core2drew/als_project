@@ -4,6 +4,8 @@
 @import './header.css';
 @import './sidebar.css';
 @import './dashboard.css';
+@import './lessons.css';
+@import './questions.css';
 @import './components/button.css';
 @import './components/dropdown.css';
 
@@ -17,7 +19,16 @@ a {
   text-decoration: none;
 }
 
+#Dashboard, #Lessons, #Questions {
+  margin-top: 77px;
+}
+
 .wrapper {
   display: flex;
   height: 100%;
+}
+
+.wrapper > .page{
+  width: calc(100% - 300px);
+  margin-left: auto;
 }
