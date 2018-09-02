@@ -1,0 +1,15 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input > .label {
+  font-size: 0.9em;
+}
+
+.input > .error{
+  font-size: 0.75em;
+  color: red;
+  text-align: right;
+}

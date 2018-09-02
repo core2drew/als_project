@@ -1,0 +1,34 @@
+
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #cbcbcb;
+}
+
+.table > thead {
+  background-color: #e0e0e0;
+  color: #000;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.table > thead > tr > th{
+  border-left: 1px solid #cbcbcb;
+  border-width: 0 0 0 1px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+  padding: 0.5em 1em;
+  text-transform: uppercase;
+}
+
+.table > tbody > tr > td {
+  border-left: 1px solid #cbcbcb;
+  border-width: 0 0 0 1px;
+  font-size: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0.5em 1em;
+}

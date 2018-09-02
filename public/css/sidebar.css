@@ -1,5 +1,5 @@
 #Sidebar {
-  width: 300px;
+  width: 250px;
   background-color:red;
   position: fixed;
   height: 100%;
@@ -7,19 +7,19 @@
   flex-direction: column;
 }
 
-#Sidebar > .btn {
+#Sidebar > .button {
   list-style: none;
   color: white;
   font-size: 1.2em;
   padding: 10px 20px;
 }
 
-#Sidebar > .btn.active {
+#Sidebar > .button.active {
   background-color: white;
   color: black;
 }
 
-#Sidebar > .btn:hover {
+#Sidebar > .button:hover {
   background-color: white;
   color: black;
 }

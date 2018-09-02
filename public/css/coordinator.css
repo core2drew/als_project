@@ -1,0 +1,66 @@
+#Coordinator > .page > .table-actions {
+  margin-bottom: 10px;
+}
+
+#Coordinator > .page > .table-actions > .button {
+  padding: 10px;
+  display: inline-block;
+  background: #e0e0e0;
+  color: #000;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+#Coordinator > #Accounts > .title,
+#Coordinator > #AccountForm > .title {
+  text-transform: capitalize;
+}
+
+#Coordinator > #Accounts > .table{
+  width: 100%;
+}
+
+#Coordinator > #Accounts > .table > tbody > tr > td:nth-last-child(1) {
+  text-align: center;
+}
+
+#Coordinator > #Accounts > .table > tbody > tr > td.option {
+  display: flex;
+  justify-content: space-around;
+}
+
+#Coordinator > #Accounts > .table > tbody > tr > td.option > .button {
+  background: #e0e0e0;
+  padding: 5px 10px;
+  color: #000;
+}
+
+#Coordinator > #AccountForm > .form {
+  width: 500px;
+}
+
+#Coordinator > #AccountForm > .form > .input {
+  margin-bottom: 10px;
+}
+
+#Coordinator > #AccountForm > .form > .input > .button {
+  background: #e0e0e0;
+  padding: 5px 10px;
+  color: #000;
+  font-size: small;
+  width: 90px;
+  position: absolute;
+  bottom: 0;
+  right: -120px;
+}
+
+#Coordinator > #AccountForm > .form > .input > input,
+#Coordinator > #AccountForm > .form > .input > select {
+  text-transform: uppercase;
+}
+
+#Coordinator > #AccountForm > .form > .input > .field {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+}

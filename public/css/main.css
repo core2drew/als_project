@@ -6,8 +6,12 @@
 @import './dashboard.css';
 @import './lessons.css';
 @import './questions.css';
+@import './student.css';
+@import './coordinator.css';
 @import './components/button.css';
 @import './components/dropdown.css';
+@import './components/table.css';
+@import './components/input.css';
 
 html, body {
   font-size: 1em;
@@ -19,7 +23,7 @@ a {
   text-decoration: none;
 }
 
-#Dashboard, #Lessons, #Questions {
+#Dashboard, #Lessons, #Questions, #Coordinator {
   margin-top: 77px;
 }
 
@@ -29,6 +33,8 @@ a {
 }
 
 .wrapper > .page{
-  width: calc(100% - 300px);
+  width: calc(100% - 250px);
   margin-left: auto;
+  padding: 20px;
+  box-sizing: border-box;
 }

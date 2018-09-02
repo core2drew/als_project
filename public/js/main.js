@@ -1,25 +1,37 @@
 jQuery(document).ready(function($){
-  var loginForm = $('#LoginForm')
-  loginForm.submit(function(e){
-    e.preventDefault()
-    var form = $(this)
-    var url = "login.php"
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: form.serialize(), // serializes the form data.
-      success: function(data){
-        if(data.success) {
-          window.location.href = 'dashboard.php'
-        } else {
-          alert(data.message); // show response from the php script
-        }
-      },
-      error: function(err) {
-        console.log(err.statusText)
-      }
-    });
-  })
+  // var loginForm = $('#LoginForm')
+  // loginForm.submit(function(e){
+  //   e.preventDefault()
+  //   var form = $(this)
+  //   var url = "login.php"
+  //   $.ajax({
+  //     type: "POST",
+  //     url: url,
+  //     data: form.serialize(), // serializes the form data.
+  //     success: function(data){
+  //       if(data.success) {
+  //         window.location.href = 'dashboard.php'
+  //       } else {
+  //         alert(data.message); // show response from the php script
+  //       }
+  //     },
+  //     error: function(err) {
+  //       console.log(err.statusText)
+  //     }
+  //   });
+  // })
+
+  var showPassword = $('.show-password');
+  showPassword.mousedown(function(e) {
+    e.preventDefault();
+    $(this).siblings("input[name='password']").attr('type','text')
+  });
+
+  showPassword.mouseup(function(e) {
+    e.preventDefault();
+    $(this).siblings("input[name='password']").attr('type','password')
+  });
+
 
   var questionTable = $('#QuestionsTable')
   var addQuestionForm = $("#AddQuestionForm")
@@ -45,13 +57,13 @@ jQuery(document).ready(function($){
         }
       },
       error: function(err) {
-        console.log(err.statusText)
+        console.log(err)
       }
     });
   })
   
   removeQuestion.click(function(e){
-    var url = "resources/question/delete.php"
+    var url = "/resources/question/delete.php"
     $.ajax({
       type: "POST",
       url: url,

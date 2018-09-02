@@ -1,5 +1,5 @@
 <?php
 //Checking user session
-if(!isset($_SESSION['login_user'])) {
+if(!isset($_SESSION['is_logged_in'])) {
   header("location: /");
 }

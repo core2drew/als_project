@@ -8,8 +8,8 @@
     <div class="page">
       <h1>Dashboard</h1>
       <?php
-        if($_SESSION['user_type'] == 'teacher') {
-          echo "<a href='admin/question.php'>Question</a>";
+        if($_SESSION['type'] == 'teacher') {
+          echo "<a href='teacher/question.php'>Question</a>";
         }
       ?>
     </div>

@@ -1,11 +1,10 @@
 /* Question */
-#Questions > .table {
+#Questions > .page > .table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-#Questions > .table,
-#Questions > .table > thead > tr > th,
-#Questions > .table > tbody > tr > td {
+#Questions > .page > .table,
+#Questions > .page > .table > thead > tr > th,
+#Questions > .page > .table > tbody > tr > td {
   border: 1px solid #000;
 }
-

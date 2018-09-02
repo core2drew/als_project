@@ -1,3 +1,4 @@
-.btn {
+.button {
   cursor: pointer;
+  display: inline-block;
 }
