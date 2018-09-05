@@ -12,4 +12,7 @@
   font-size: 0.75em;
   color: red;
   text-align: right;
+  position: absolute;
+  bottom: -15px;
+  right: 0;
 }

@@ -1,10 +1,10 @@
 <?php
 $is_success= false;
-$type = $_GET['type'];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   $error_fields = [];
-
+  $type = $_GET['type'];
+  
   if(empty($_POST['lastname'])) {
     $error_fields['lastname'] = 'Lastname field is required';
   }

@@ -5,8 +5,9 @@
   include '../includes/header.php';
   include '../resources/account/add.php';
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?type=$type";
-  //Query Teachers in current level
+  $type = isset($_GET['type']) ? $_GET['type'] : null;
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type";
+  //Query all Teachers
   $teachers_query = "SELECT users.id,
   CONCAT(users.lastname,', ',users.firstname) as name
   FROM users WHERE users.type = 'teacher'";
@@ -17,7 +18,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Created Successfully</h1>
-        <a href="/coordinator/account.php?type=student">Back</a>
+        <a href="/coordinator/account.php?page=student&type=student">Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Create <?php echo $type ?> Account</h1>

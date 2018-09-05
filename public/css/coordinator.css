@@ -11,16 +11,20 @@
   text-transform: uppercase;
 }
 
-#Coordinator > #Accounts > .title,
-#Coordinator > #AccountForm > .title {
+#Coordinator > .page > .title {
   text-transform: capitalize;
+  margin-top: 0;
 }
 
-#Coordinator > #Accounts > .table{
+#Coordinator > .page > .table{
   width: 100%;
 }
 
 #Coordinator > #Accounts > .table > tbody > tr > td:nth-last-child(1) {
+  text-align: center;
+}
+
+#Coordinator > #Accounts > .table > thead > tr > .options {
   text-align: center;
 }
 
@@ -40,7 +44,7 @@
 }
 
 #Coordinator > #AccountForm > .form > .input {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 #Coordinator > #AccountForm > .form > .input > .button {
@@ -63,4 +67,19 @@
   font-weight: bold;
   text-transform: uppercase;
   margin: 0;
+}
+
+#Coordinator > #AccountForm > .form > .confirm-delete,
+#Coordinator > #AccountForm > .form > .cancel-delete {
+  background: #e0e0e0;
+  padding: 5px 10px;
+  color: #000;
+  font-size: small;
+  border:none;
+}
+
+/* Manage Lessons */
+
+#Coordinator > #ManageSubjects > .tabs{
+  margin-bottom: 20px;
 }

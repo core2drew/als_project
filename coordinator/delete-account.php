@@ -7,7 +7,7 @@
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id";
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&id=$id";
 
     $query = "SELECT
       users.id,
@@ -50,7 +50,9 @@
           ?>
         </div>
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
-        <button class='button' type="submit">Delete</button>
+        <p>Are you sure you want to delete this account?</p>
+        <button class='button confirm-delete' type="submit">Yes</button>
+        <a class='button cancel-delete' href="/coordinator/account.php?<?php echo "page=$type&type=$type" ?>">No</a>
       </form>
     <?php endif; ?>
   </div>

@@ -40,67 +40,67 @@
   <?php include '../includes/sidebar.php'; ?>
   <div id="Accounts" class="page">
     <?php
-      echo "<h1 class='title'>$type's Accounts</h1>";
+      // echo "<h1 class='title'>$type's Accounts</h1>";
     ?>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/create-account.php?type=$type";
+        $create_link = "/coordinator/create-account.php?page=$type&type=$type";
         echo "<a class='button' href=$create_link>Create Account</a>";
       ?>
     </div>
     <?php
-      if($count <= 0) {
+      if($count <= 0):
     ?>
       <table class="table">
         <thead>
-          <?php if($type == 'student') { ?>
-            <th>Student ID</th>
+          <?php if($type == 'student'): ?>
+            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
             <th>Grade Level</th>
             <th>Teacher</th>
-            <th></th>
-          <?php } ?>
+            <th class="options">Options</th>
+          <?php endif; ?>
 
-          <?php if($type == 'teacher'){ ?>
-            <th>Teacher ID</th>
+          <?php if($type == 'teacher'): ?>
+            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
-            <th></th>
-          <?php } ?>
+            <th class="options">Options</th>
+          <?php endif; ?>
         </thead>
       </table>
       <div class="no-records">
         <h3>No Records</h3>
       </div>
     <?php
-      } else {
+      else:
     ?>
       <table class="table">
         <thead>
-          <?php if($type == 'student') { ?>
-            <th>Student ID</th>
+          <?php if($type == 'student'): ?>
+            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
             <th>Grade Level</th>
             <th>Teacher</th>
-            <th></th>
-          <?php } ?>
+            <th class="options">Options</th>
+          <?php endif; ?>
 
-          <?php if($type == 'teacher'){ ?>
-            <th>Teacher ID</th>
+          <?php if($type == 'teacher'): ?>
+            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
-            <th></th>
-          <?php } ?>
+            <th class="options">Options</th>
+          <?php endif ?>
         </thead>
         <tbody>
           <?php
@@ -114,8 +114,8 @@
               $email = $row['email'];
               $grade_level = isset($row['grade_level']) ? $row['grade_level'] : '';
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
-              $update_btn = "<a class='button' href='/coordinator/update-account.php?type=$type&id=$id'>Update</a>";
-              $delete_btn = "<a class='button' href='/coordinator/delete-account.php?id=$id'>Delete</a>";
+              $update_btn = "<a class='button' href='/coordinator/update-account.php?page=$type&type=$type&id=$id'>Update</a>";
+              $delete_btn = "<a class='button' href='/coordinator/delete-account.php?page=$type&type=$type&id=$id'>Delete</a>";
 
               if($type == 'student') {
                 $table_row =
@@ -146,7 +146,7 @@
         </tbody>
       </table>
     <?php
-      }
+      endif;
     ?>
   </div>
 </div>

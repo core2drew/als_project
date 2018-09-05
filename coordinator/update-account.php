@@ -8,7 +8,7 @@
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?type=$type&id=$id";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id";
   //Query Teachers in current level
   $teachers_query = "SELECT users.id,
   CONCAT(users.lastname,', ',users.firstname) as name
@@ -52,7 +52,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Updated Successfully</h1>
-        <a href="/coordinator/account.php?type=student">Back</a>
+        <a href="/coordinator/account.php?page=student&type=student">Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Update <?php echo $type ?> Account</h1>
