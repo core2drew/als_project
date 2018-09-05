@@ -1,8 +1,8 @@
 <?php
-  require '../config/db_connect.php';
-  include '../includes/html/head.php';
-  include '../check_session.php';
-  include '../includes/header.php';
+  require '../../config/db_connect.php';
+  include '../../includes/html/head.php';
+  include '../../check_session.php';
+  include '../../includes/header.php';
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
   $query = "SELECT
@@ -14,15 +14,15 @@
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php'; ?>
   <div id="ManageSubjects" class="page">
     <div class="tabs">
-      <a class="tab <?php echo $grade_level == 1 ? 'active' : null ?>" href="/coordinator/subjects.php?page=subjects&grade_level=1">Elementary Subjects</a>
-      <a class="tab <?php echo $grade_level == 2 ? 'active' : null ?>" href="/coordinator/subjects.php?page=subjects&grade_level=2">High School Subjects</a>
+      <a class="tab <?php echo $grade_level == 1 ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Elementary</a>
+      <a class="tab <?php echo $grade_level == 2 ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=2">High School</a>
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/create-subject.php?page=subjects&grade_level=$grade_level";
+        $create_link = "/coordinator/subject/create-subject.php?page=subjects&grade_level=$grade_level";
         echo "<a class='button' href=$create_link>Create Subject</a>";
       ?>
     </div>
@@ -49,8 +49,8 @@
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             $id = $row['id'];
             $title = $row['title'];
-            $update_btn = "<a class='button' href='/coordinator/update-subject.php?page=subjects&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/delete-subject.php?page=subjects&id=$id'>Delete</a>";
+            $update_btn = "<a class='button' href='/coordinator/subject/update-subject.php?page=subjects&id=$id'>Update</a>";
+            $delete_btn = "<a class='button' href='/coordinator/subject/delete-subject.php?page=subjects&id=$id'>Delete</a>";
 
             $table_row =
             "<tr>
@@ -66,5 +66,5 @@
   </div>
 </div>
 <?php
-  include '../includes/html/footer.php';
+  include '../../includes/html/footer.php';
 ?>

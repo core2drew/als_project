@@ -1,9 +1,9 @@
 <?php
-    require '../config/db_connect.php';
-    include '../includes/html/head.php';
-    include '../check_session.php';
-    include '../includes/header.php';
-    include '../resources/account/delete.php';
+    require '../../config/db_connect.php';
+    include '../../includes/html/head.php';
+    include '../../check_session.php';
+    include '../../includes/header.php';
+    include '../../resources/subject/delete.php';
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects&id=$id";
@@ -15,12 +15,12 @@
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php'; ?>
   <div id="AccountForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Subject Deleted Successfully</h1>
-        <a href="/coordinator/subjects.php?page=subjects&grade_level=1">Back</a>
+        <a href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Delete Subject</h1>
@@ -34,7 +34,7 @@
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
         <p>Are you sure you want to delete this subject?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
-        <a class='button cancel-delete' href="/coordinator/subjects.php?page=subjects&grade_level=1">No</a>
+        <a class='button cancel-delete' href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">No</a>
       </form>
     <?php endif; ?>
   </div>
@@ -42,5 +42,5 @@
 
 
 <?php
-  include '../includes/html/footer.php';
+  include '../../includes/html/footer.php';
 ?>

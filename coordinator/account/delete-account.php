@@ -1,13 +1,13 @@
 <?php
-    require '../config/db_connect.php';
-    include '../includes/html/head.php';
-    include '../check_session.php';
-    include '../includes/header.php';
-    include '../resources/account/delete.php';
+    require '../../config/db_connect.php';
+    include '../../includes/html/head.php';
+    include '../../check_session.php';
+    include '../../includes/header.php';
+    include '../../resources/account/delete.php';
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&id=$id";
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id";
 
     $query = "SELECT
       users.id,
@@ -21,12 +21,12 @@
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php'; ?>
   <div id="AccountForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Deleted Successfully</h1>
-        <a href="/coordinator/account.php?type=student">Back</a>
+        <a href="/coordinator/account/account.php?<?php echo "page=$type&type=$type" ?>">Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Delete <?php echo $type ?> Account</h1>
@@ -52,8 +52,11 @@
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
         <p>Are you sure you want to delete this account?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
-        <a class='button cancel-delete' href="/coordinator/account.php?<?php echo "page=$type&type=$type" ?>">No</a>
+        <a class='button cancel-delete' href="/coordinator/account/account.php?<?php echo "page=$type&type=$type" ?>">No</a>
       </form>
     <?php endif; ?>
   </div>
 </div>
+<?php
+  include '../../includes/html/footer.php';
+?>

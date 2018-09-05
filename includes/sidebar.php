@@ -4,10 +4,10 @@
     <?php
         if( $_SESSION['type'] == 'coordinator' ):
     ?>
-        <a class="button <?php echo basename($_GET['page']) == 'student' ? 'active' : null ?>" href="/coordinator/account.php?page=student&type=student">Student</a>
-        <a class="button <?php echo basename($_GET['page']) == 'teacher' ? 'active' : null ?>" href="/coordinator/account.php?page=teacher&type=teacher">Teacher</a>
-        <a class="button <?php echo basename($_GET['page']) == 'subjects' ? 'active' : null ?>" href="/coordinator/subjects.php?page=subjects&grade_level=1">Subjects</a>
-        <a class="button <?php echo basename($_GET['page']) == 'lessons' ? 'active' : null ?>" href="/coordinator/lessons.php?page=lessons">Lessons</a>
+        <a class="button <?php echo basename($_GET['page']) == 'student' ? 'active' : null ?>" href="/coordinator/account/account.php?page=student&type=student">Student</a>
+        <a class="button <?php echo basename($_GET['page']) == 'teacher' ? 'active' : null ?>" href="/coordinator/account/account.php?page=teacher&type=teacher">Teacher</a>
+        <a class="button <?php echo basename($_GET['page']) == 'subjects' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
+        <a class="button <?php echo basename($_GET['page']) == 'lessons' ? 'active' : null ?>" href="/coordinator/lesson/lessons.php?page=lessons&grade_level=1">Lessons</a>
         <a class="button <?php echo basename($_GET['page']) == 'reviewandexams' ? 'active' : null ?>" href="/coordinator/reviewandexams.php?page=reviewandexams">Review and Exams</a>
         <a class="button <?php echo basename($_GET['page']) == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports">Reports</a>
     <?php

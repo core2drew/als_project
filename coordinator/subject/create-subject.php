@@ -1,21 +1,21 @@
 <?php 
-  require '../config/db_connect.php';
-  include '../includes/html/head.php';
-  include '../check_session.php';
-  include '../includes/header.php';
-  include '../resources/subject/add.php';
+  require '../../config/db_connect.php';
+  include '../../includes/html/head.php';
+  include '../../check_session.php';
+  include '../../includes/header.php';
+  include '../../resources/subject/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects";
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php'; ?>
   <div id="AccountForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Subject Created Successfully</h1>
-        <a href="/coordinator/subjects.php?page=subject&grade_level=1">Back</a>
+        <a href="/coordinator/subject/subjects.php?page=subject&grade_level=1">Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Create Subject</h1>
@@ -33,5 +33,5 @@
 </div>
 
 <?php
-  include '../includes/html/footer.php';
+  include '../../includes/html/footer.php';
 ?>

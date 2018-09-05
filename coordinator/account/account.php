@@ -1,8 +1,8 @@
 <?php
-  require '../config/db_connect.php';
-  include '../includes/html/head.php';
-  include '../check_session.php';
-  include '../includes/header.php';
+  require '../../config/db_connect.php';
+  include '../../includes/html/head.php';
+  include '../../check_session.php';
+  include '../../includes/header.php';
   
   $type = isset($_GET['type']) ? $_GET['type'] : null;
 
@@ -37,14 +37,14 @@
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php'; ?>
   <div id="Accounts" class="page">
     <?php
       // echo "<h1 class='title'>$type's Accounts</h1>";
     ?>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/create-account.php?page=$type&type=$type";
+        $create_link = "/coordinator/account/create-account.php?page=$type&type=$type";
         echo "<a class='button' href=$create_link>Create Account</a>";
       ?>
     </div>
@@ -114,8 +114,8 @@
               $email = $row['email'];
               $grade_level = isset($row['grade_level']) ? $row['grade_level'] : '';
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
-              $update_btn = "<a class='button' href='/coordinator/update-account.php?page=$type&type=$type&id=$id'>Update</a>";
-              $delete_btn = "<a class='button' href='/coordinator/delete-account.php?page=$type&type=$type&id=$id'>Delete</a>";
+              $update_btn = "<a class='button' href='/coordinator/account/update-account.php?page=$type&type=$type&id=$id'>Update</a>";
+              $delete_btn = "<a class='button' href='/coordinator/account/delete-account.php?page=$type&type=$type&id=$id'>Delete</a>";
 
               if($type == 'student') {
                 $table_row =
