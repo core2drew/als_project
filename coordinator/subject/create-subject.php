@@ -6,7 +6,8 @@
   include '../../resources/subject/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects&grade_level=$grade_level";
+  $back_link = "/coordinator/subject/subjects.php?page=subject&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -15,7 +16,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Subject Created Successfully</h1>
-        <a href="/coordinator/subject/subjects.php?page=subject&grade_level=1">Back</a>
+        <a href=<?php echo $back_link ?> >Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Create Subject</h1>

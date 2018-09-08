@@ -8,7 +8,7 @@
   $query = "SELECT
   subjects.id,
   subjects.title
-  FROM subjects WHERE subjects.grade_level = $grade_level";
+  FROM subjects WHERE subjects.grade_level = $grade_level AND subjects.deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
@@ -16,9 +16,17 @@
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
   <div id="ManageSubjects" class="page">
+    
     <div class="tabs">
-      <a class="tab <?php echo $grade_level == 1 ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Elementary</a>
-      <a class="tab <?php echo $grade_level == 2 ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=2">High School</a>
+      <?php 
+        for($i = 1; $i <= 2; $i++) {
+          $href = "/coordinator/subject/subjects.php?page=subjects&grade_level=$i";
+          $label = $i <= 1 ? 'Elementary' : 'High School';
+          $active_class = $grade_level == $i ? " active'" : "'";
+          $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
+          echo $link;
+        }
+      ?>
     </div>
     <div class="table-actions">
       <?php

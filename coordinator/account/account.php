@@ -3,7 +3,8 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  
+
+  $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
 
   //Display all student account
@@ -19,34 +20,41 @@
       CONCAT(teacher.lastname,', ' ,teacher.firstname) as teacher_name
       FROM users student LEFT JOIN users teacher
       ON student.teacher_id = teacher.id
-      WHERE student.type='student'";
+      WHERE student.type='student' AND student.grade_level=$grade_level AND student.deleted_at IS NULL";
   }
   // Display all teachers account
   else if($type == 'teacher') {
     $query = "SELECT
-      users.id,
-      users.lastname,
-      users.firstname,
-      users.address,
-      users.contactno,
-      users.email
-      FROM users WHERE users.type = 'teacher'";
+      teacher.id,
+      teacher.lastname,
+      teacher.firstname,
+      teacher.address,
+      teacher.contactno,
+      teacher.email
+      FROM users teacher WHERE teacher.type = 'teacher' AND teacher.grade_level=$grade_level AND teacher.deleted_at IS NULL";
   }
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
+
+  $create_link = "/coordinator/account/create-account.php?page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../../includes/sidebar.php'; ?>
+  <?php include '../../includes/sidebar.php' ?>
   <div id="Accounts" class="page">
-    <?php
-      // echo "<h1 class='title'>$type's Accounts</h1>";
-    ?>
-    <div class="table-actions">
-      <?php
-        $create_link = "/coordinator/account/create-account.php?page=$type&type=$type";
-        echo "<a class='button' href=$create_link>Create Account</a>";
+    <div class="tabs">
+      <?php 
+        for($i = 1; $i <= 2; $i++) {
+          $href = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$i";
+          $label = $i <= 1 ? 'Elementary' : 'High School';
+          $active_class = $grade_level == $i ? " active'" : "'";
+          $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
+          echo $link;
+        }
       ?>
+    </div>
+    <div class="table-actions">
+      <a class='button' href=<?php echo $create_link ?>>Create Account</a>
     </div>
     <?php
       if($count <= 0):
@@ -59,7 +67,6 @@
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
-            <th>Grade Level</th>
             <th>Teacher</th>
             <th class="options">Options</th>
           <?php endif; ?>
@@ -88,7 +95,6 @@
             <th>Address</th>
             <th>Contact No.</th>
             <th>Email</th>
-            <th>Grade Level</th>
             <th>Teacher</th>
             <th class="options">Options</th>
           <?php endif; ?>
@@ -112,10 +118,9 @@
               $address = $row['address'];
               $contactno = $row['contactno'];
               $email = $row['email'];
-              $grade_level = isset($row['grade_level']) ? $row['grade_level'] : '';
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
-              $update_btn = "<a class='button' href='/coordinator/account/update-account.php?page=$type&type=$type&id=$id'>Update</a>";
-              $delete_btn = "<a class='button' href='/coordinator/account/delete-account.php?page=$type&type=$type&id=$id'>Delete</a>";
+              $update_btn = "<a class='button' href='/coordinator/account/update-account.php?page=$type&type=$type&id=$id&grade_level=$grade_level'>Update</a>";
+              $delete_btn = "<a class='button' href='/coordinator/account/delete-account.php?page=$type&type=$type&id=$id&grade_level=$grade_level'>Delete</a>";
 
               if($type == 'student') {
                 $table_row =
@@ -125,7 +130,6 @@
                   <td>$address</td>
                   <td>$contactno</td>
                   <td>$email</td>
-                  <td>$grade_level</td>
                   <td>$teacher_name</td>
                   <td class='option'>$update_btn $delete_btn</td>
                 </tr>";
@@ -151,5 +155,5 @@
   </div>
 </div>
 <?php
-  include '../includes/html/footer.php';
+  include '../../includes/html/footer.php';
 ?>

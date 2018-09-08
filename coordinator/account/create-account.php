@@ -6,11 +6,16 @@
   include '../../resources/account/add.php';
 
   $type = isset($_GET['type']) ? $_GET['type'] : null;
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type";
+  $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&grade_level=$grade_level";
+
   //Query all Teachers
   $teachers_query = "SELECT users.id,
   CONCAT(users.lastname,', ',users.firstname) as name
-  FROM users WHERE users.type = 'teacher'";
+  FROM users WHERE users.type = 'teacher' AND users.grade_level=$grade_level AND deleted_at IS NULL";
+
+  $success_back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
 ?> 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
@@ -18,7 +23,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Created Successfully</h1>
-        <a href="/coordinator/account/account.php?page=student&type=student">Back</a>
+        <a href=<?php echo $success_back_link ?>>Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Create <?php echo $type ?> Account</h1>
@@ -42,14 +47,6 @@
           <label class="label">Contact No.</label>
           <input type="text" name="contactno" value="<?php echo isset($_POST['contactno']) ? $_POST['contactno'] : '' ?>"/>
           <?php echo isset($error_fields['contactno']) ? "<label class='error'>$error_fields[contactno]</label>" : null ?>
-        </div>
-        <div class="input">
-          <label class="label">Grade Level</label>
-          <select name="grade_level">
-            <option value="elementary">Elementary</option>
-            <option value="highschool">High School</option>
-          </select>
-          <?php echo isset($error_fields['grade_level']) ? "<label class='error'>$error_fields[grade_level]</label>" : null ?>
         </div>
         <?php if($type == 'student'): ?>
           <div class="input">
@@ -82,6 +79,7 @@
           <span class="button show-password">Show Password</span>
           <?php echo isset($error_fields['password']) ? "<label class='error'>$error_fields[password]</label>" : null ?>
         </div>
+        <input type="hidden" name="grade_level" value=<?php echo $grade_level ?> />
         <input type="hidden" name="type" value=<?php echo $type ?> />
         <button class='button' type="submit">Create</button>
       </form>

@@ -7,12 +7,14 @@
 
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
+  $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id&grade_level=$grade_level";
+
   //Query Teachers in current level
   $teachers_query = "SELECT users.id,
   CONCAT(users.lastname,', ',users.firstname) as name
-  FROM users WHERE users.type = 'teacher'";
+  FROM users WHERE users.type = 'teacher' AND users.grade_level=$grade_level AND deleted_at IS NULL";
 
   //Diplay specific student or teacher
   if($type == 'student') {
@@ -44,6 +46,7 @@
   }
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+  $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -52,7 +55,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Updated Successfully</h1>
-        <a href="/coordinator/account/account.php?page=student&type=student">Back</a>
+        <a href=<?php echo $back_link ?>>Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Update <?php echo $type ?> Account</h1>
@@ -77,14 +80,14 @@
           <input type="text" name="contactno" value="<?php echo isset($_POST['contactno']) ? $_POST['contactno'] : $row['contactno'] ?>"/>
           <?php echo isset($error_fields['contactno']) ? "<label class='error'>$error_fields[contactno]</label>" : null ?>
         </div>
-        <div class="input">
+        <!-- <div class="input">
           <label class="label">Grade Level</label>
           <select name="grade_level">
             <option value="elementary">Elementary</option>
             <option value="highschool">High School</option>
           </select>
-          <?php echo isset($error_fields['grade_level']) ? "<label class='error'>$error_fields[grade_level]</label>" : null ?>
-        </div>
+          <?php //echo isset($error_fields['grade_level']) ? "<label class='error'>$error_fields[grade_level]</label>" : null ?>
+        </div> -->
         <?php if($type == 'student'): ?>
           <div class="input">
             <label class="label">Teacher</label>
@@ -120,6 +123,7 @@
         </div>
         <input type="hidden" name="id" value=<?php echo $id ?> />
         <input type="hidden" name="type" value=<?php echo $type ?> />
+        <input type="hidden" name="grade_level" value=<?php echo $grade_level ?> />
         <button class='button' type="submit">Update</button>
       </form>
     <?php endif; ?>

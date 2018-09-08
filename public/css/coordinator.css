@@ -20,6 +20,14 @@
   width: 100%;
 }
 
+
+/* Accounts */
+
+#Coordinator > #Accounts > .tabs {
+  margin-bottom: 20px;
+}
+
+
 #Coordinator > #Accounts > .table > tbody > tr > td:nth-last-child(1) {
   text-align: center;
 }
@@ -38,6 +46,8 @@
   padding: 5px 10px;
   color: #000;
 }
+
+/* AccountsForm */
 
 #Coordinator > #AccountForm > .form {
   width: 500px;
@@ -78,8 +88,20 @@
   border:none;
 }
 
-/* Manage Lessons */
+/* Subjects */
 
 #Coordinator > #ManageSubjects > .tabs{
+  margin-bottom: 20px;
+}
+
+/* Lessons */
+
+#Coordinator > #ManageLessons > .tabs{
+  margin-bottom: 20px;
+}
+
+/* Learning Videos */
+
+#Coordinator > #ManageLearningVideos > .tabs {
   margin-bottom: 20px;
 }

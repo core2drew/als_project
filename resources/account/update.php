@@ -21,9 +21,9 @@
       $error_fields['contactno'] = 'Contact No. field is required';
     }
   
-    if(empty($_POST['grade_level'])) {
-      $error_fields['grade_level'] = 'Grade level field is required';
-    }
+    // if(empty($_POST['grade_level'])) {
+    //   $error_fields['grade_level'] = 'Grade level field is required';
+    // }
   
     if($type == 'student') {
       // if(empty($_POST['teacher_id'])) {
@@ -39,7 +39,7 @@
     $current_email = mysqli_real_escape_string($conn, $_POST['current_email']);
    
     if($email != $current_email) {
-      $check_email_query = "SELECT id FROM users WHERE email='$email'";
+      $check_email_query = "SELECT id FROM users WHERE email='$email' AND deleted_at IS NULL";
       $check_email_result = mysqli_query($conn, $check_email_query);
       $check_email_count = mysqli_num_rows($check_email_result);
       
@@ -65,9 +65,10 @@
       $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
+      $updated_at = date("Y-m-d H:i:s");
   
       $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', address='$address', contactno='$contactno', grade_level='$grade_level', 
-      teacher_id='$teacher_id', email='$email', password='$password', type='$type' WHERE id='$id'";
+      teacher_id='$teacher_id', email='$email', password='$password', type='$type', updated_at='$updated_at' WHERE id='$id'";
       $result = mysqli_query($conn, $query);
       if($result) {
         $is_success = true;

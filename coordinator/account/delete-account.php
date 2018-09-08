@@ -7,7 +7,8 @@
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id";
+    $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id&grade_level=$grade_level";
 
     $query = "SELECT
       users.id,
@@ -18,6 +19,7 @@
 
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -26,7 +28,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Deleted Successfully</h1>
-        <a href="/coordinator/account/account.php?<?php echo "page=$type&type=$type" ?>">Back</a>
+        <a href=<?php echo $back_link ?>>Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Delete <?php echo $type ?> Account</h1>
@@ -52,7 +54,7 @@
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
         <p>Are you sure you want to delete this account?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
-        <a class='button cancel-delete' href="/coordinator/account/account.php?<?php echo "page=$type&type=$type" ?>">No</a>
+        <a class='button cancel-delete' href="<?php echo $back_link ?>">No</a>
       </form>
     <?php endif; ?>
   </div>

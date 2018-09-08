@@ -6,12 +6,15 @@
     include '../../resources/subject/delete.php';
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects&id=$id";
+    $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects&id=$id&grade_level=$grade_level";
 
     $query = "SELECT subjects.id, subjects.title FROM subjects WHERE subjects.id = $id";
 
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+    $back_link = "/coordinator/subject/subjects.php?page=subjects&grade_level=$grade_level"
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -20,7 +23,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Subject Deleted Successfully</h1>
-        <a href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Back</a>
+        <a href=<?php echo $back_link ?>>Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Delete Subject</h1>
