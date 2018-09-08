@@ -3,7 +3,7 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  include '../../resources/learningvideo/add.php';
+  include '../../resources/lesson/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 

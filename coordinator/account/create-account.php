@@ -15,7 +15,7 @@
   CONCAT(users.lastname,', ',users.firstname) as name
   FROM users WHERE users.type = 'teacher' AND users.grade_level=$grade_level AND deleted_at IS NULL";
 
-  $success_back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
+  $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
 ?> 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
@@ -23,7 +23,7 @@
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Account Created Successfully</h1>
-        <a href=<?php echo $success_back_link ?>>Back</a>
+        <a href=<?php echo $back_link ?>>Back</a>
       </div>
     <?php else: ?>
       <h1 class='title'>Create <?php echo $type ?> Account</h1>

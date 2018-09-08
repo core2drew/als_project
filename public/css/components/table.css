@@ -32,3 +32,12 @@
   overflow: visible;
   padding: 0.5em 1em;
 }
+
+.no-records {
+  padding: 10px 18px;
+  background-color: #f3f3f3;
+}
+
+.no-records > h3 {
+  margin: 0;
+}

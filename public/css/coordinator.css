@@ -49,15 +49,15 @@
 
 /* AccountsForm */
 
-#Coordinator > #AccountForm > .form {
+#Coordinator > .page > .form {
   width: 500px;
 }
 
-#Coordinator > #AccountForm > .form > .input {
+#Coordinator > .page > .form > .input {
   margin-bottom: 15px;
 }
 
-#Coordinator > #AccountForm > .form > .input > .button {
+#Coordinator > .page > .form > .input > .button {
   background: #e0e0e0;
   padding: 5px 10px;
   color: #000;
@@ -68,19 +68,19 @@
   right: -120px;
 }
 
-#Coordinator > #AccountForm > .form > .input > input,
-#Coordinator > #AccountForm > .form > .input > select {
+#Coordinator > .page > .form > .input > input,
+#Coordinator > .page > .form > .input > select {
   text-transform: uppercase;
 }
 
-#Coordinator > #AccountForm > .form > .input > .field {
+#Coordinator > .page > .form > .input > .field {
   font-weight: bold;
   text-transform: uppercase;
   margin: 0;
 }
 
-#Coordinator > #AccountForm > .form > .confirm-delete,
-#Coordinator > #AccountForm > .form > .cancel-delete {
+#Coordinator > .page > .form > .confirm-delete,
+#Coordinator > .page > .form > .cancel-delete {
   background: #e0e0e0;
   padding: 5px 10px;
   color: #000;
@@ -93,7 +93,6 @@
 #Coordinator > #ManageSubjects > .tabs{
   margin-bottom: 20px;
 }
-
 /* Lessons */
 
 #Coordinator > #ManageLessons > .tabs{

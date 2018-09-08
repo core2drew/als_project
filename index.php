@@ -11,7 +11,7 @@
         header("Location: dashboard.php");
         break;
       case 'coordinator':
-        header("Location: /coordinator/account/account.php?type=student");
+        header("Location: /coordinator/account/account.php?page=student&type=student&grade_level=1");
         break;
     }
   }

@@ -50,7 +50,7 @@
       <table class="table">
       <thead>
         <th>Title</th>
-        <th></th>
+        <th class="options">Options</th>
       </thead>
       <tbody>
         <?php

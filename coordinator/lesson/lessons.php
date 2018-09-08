@@ -7,9 +7,11 @@
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
   $query = "SELECT
-  lessons.id,
-  lessons.title
-  FROM lessons WHERE lessons.grade_level = $grade_level AND lessons.deleted_at IS NULL";
+  les.id,
+  les.title
+  FROM lessons les LEFT JOIN subjects sub
+  ON les.subject_id = sub.id
+  WHERE sub.grade_level = $grade_level AND les.deleted_at IS NULL AND sub.deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
@@ -30,7 +32,7 @@
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/lesson/create-lesson.php?page=lessons&grade_level=$grade_level";
+        $create_link = "/coordinator/lesson/create.php?page=lessons&grade_level=$grade_level";
         echo "<a class='button' href=$create_link>Create Lesson</a>";
       ?>
     </div>
@@ -50,15 +52,15 @@
       <table class="table">
       <thead>
         <th>Title</th>
-        <th></th>
+        <th>Options</th>
       </thead>
       <tbody>
         <?php
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             $id = $row['id'];
             $title = $row['title'];
-            $update_btn = "<a class='button' href='/coordinator/subject/update-subject.php?page=subjects&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/subject/delete-subject.php?page=subjects&id=$id'>Delete</a>";
+            $update_btn = "<a class='button' href='/coordinator/lesson/update.php?page=lessons&grade_level=$grade_level&id=$id'>Update</a>";
+            $delete_btn = "<a class='button' href='/coordinator/lesson/delete.php?page=lessons&grade_level=$grade_level&id=$id'>Delete</a>";
 
             $table_row =
             "<tr>

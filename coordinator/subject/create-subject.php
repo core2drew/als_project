@@ -12,7 +12,7 @@
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
-  <div id="AccountForm" class="page">
+  <div id="SubjectForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Subject Created Successfully</h1>
