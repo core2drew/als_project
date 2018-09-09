@@ -8,10 +8,11 @@
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessons&id=$id&grade_level=$grade_level";
-  $back_link = "/coordinator/subject/subjects.php?page=lessons&grade_level=$grade_level";
+  $back_link = "/coordinator/lesson/lessons.php?page=lessons&grade_level=$grade_level";
 
   $query = "SELECT
-  lessons.title
+  lessons.title,
+  lessons.subject_id
   FROM lessons WHERE lessons.id = $id";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -39,7 +40,7 @@
               $subjects_result = mysqli_query($conn, $subjects_query);
 
               while($subject_row = mysqli_fetch_array($subjects_result, MYSQLI_ASSOC)) {
-                if($row['id'] == $subject_row['id'] ) {
+                if($row['subject_id'] == $subject_row['id'] ) {
                   echo "<option value='$subject_row[id]' selected>$subject_row[title]</option>";
                 }else {
                   echo "<option value='$subject_row[id]'>$subject_row[title]</option>";
