@@ -32,6 +32,28 @@ jQuery(document).ready(function($){
     $(this).siblings("input[name='password']").attr('type','password')
   });
 
+  var uploadVideo = $('#UploadVideo');
+  var uploadVideoButton = uploadVideo.find('.upload-btn');
+  var uploadFileInput = uploadVideo.find('input[type=file]');
+  var uploadTextInput = uploadVideo.find('input[type=text]');
+
+
+  function clearUploadVideo() {
+    uploadVideo.wrap('<form>').closest('form').get(0).reset();
+    uploadVideo.unwrap();
+    uploadTextInput.val('');
+  }
+
+  uploadVideoButton.on('click', function(e) {
+    e.preventDefault();
+    var fileInput = $(this).siblings('input[type=file]').trigger('click');
+  })
+
+  uploadFileInput.on('change', function(){
+    var $this = $(this)
+    $filename = $this[0].files[0].name;
+    uploadTextInput.val($filename);
+  })
 
   var questionTable = $('#QuestionsTable')
   var addQuestionForm = $("#AddQuestionForm")

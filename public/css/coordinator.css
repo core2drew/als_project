@@ -101,6 +101,15 @@
 
 /* Learning Videos */
 
-#Coordinator > #ManageLearningVideos > .tabs {
+#Coordinator > #ManageLearningVideos > .tabs,
+#Coordinator > #LearningVideoForm > .tabs {
   margin-bottom: 20px;
+}
+
+#Coordinator > #LearningVideoForm > .form > #VideoLink {
+  display: none;
+}
+
+#Coordinator > #LearningVideoForm > .form > #UploadVideo > input[type='file'] {
+  display: none;
 }
