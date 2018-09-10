@@ -20,35 +20,6 @@
   width: 100%;
 }
 
-
-/* Accounts */
-
-#Coordinator > #Accounts > .tabs {
-  margin-bottom: 20px;
-}
-
-
-#Coordinator > #Accounts > .table > tbody > tr > td:nth-last-child(1) {
-  text-align: center;
-}
-
-#Coordinator > #Accounts > .table > thead > tr > .options {
-  text-align: center;
-}
-
-#Coordinator > #Accounts > .table > tbody > tr > td.option {
-  display: flex;
-  justify-content: space-around;
-}
-
-#Coordinator > #Accounts > .table > tbody > tr > td.option > .button {
-  background: #e0e0e0;
-  padding: 5px 10px;
-  color: #000;
-}
-
-/* AccountsForm */
-
 #Coordinator > .page > .form {
   width: 500px;
 }
@@ -87,6 +58,47 @@
   font-size: small;
   border:none;
 }
+
+/* Accounts */
+
+#Coordinator > #Accounts > .tabs {
+  margin-bottom: 20px;
+}
+
+
+#Coordinator > #Accounts > .table > tbody > tr > td:nth-last-child(1) {
+  text-align: center;
+}
+
+#Coordinator > #Accounts > .table > thead > tr > .options {
+  text-align: center;
+}
+
+#Coordinator > #Accounts > .table > tbody > tr > td.option {
+  display: flex;
+  justify-content: space-around;
+}
+
+#Coordinator > #Accounts > .table > tbody > tr > td.option > .button {
+  background: #e0e0e0;
+  padding: 5px 10px;
+  color: #000;
+}
+
+/* AccountsForm */
+#Coordinator > #AccountForm > .form > #ProfileImage > .image {
+  height: 115px;
+  width: 115px;
+}
+
+#Coordinator > #AccountForm > .form > #ProfileImage > input[name='profile_image'] {
+  display: none;
+}
+
+#Coordinator > #AccountForm > .form > #ProfileImage > .upload-btn {
+  align-self: flex-start;
+}
+
 
 /* Subjects */
 

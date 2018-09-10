@@ -21,6 +21,39 @@ jQuery(document).ready(function($){
   //   });
   // })
 
+  //Account
+  var profileImage = $('#ProfileImage');
+  var uploadProfileImageButton = profileImage.find('.upload-btn');
+  var uploadProfileImageInput = profileImage.find('input[type=file]');
+  var profileImageContainer = profileImage.find('.image');
+  
+  uploadProfileImageButton.on('click', function(e){
+    e.preventDefault();
+    var fileInput = $(this).siblings('input[type=file]').trigger('click');
+  })
+
+  uploadProfileImageInput.on('change', function(){
+    var reader = new FileReader();
+    if(this.files[0].size>528385){
+      alert("Image Size should not be greater than 500Kb");
+      clearInputFile(uploadProfileImageInput)
+      return false;
+    }
+
+    if(this.files[0].type.indexOf("image")==-1){
+        alert("Invalid Type");
+        clearInputFile(uploadProfileImageInput)       
+        return false;
+    } 
+
+    reader.onload = function (e) {
+      // get loaded data and render thumbnail.
+      profileImageContainer.attr('src', e.target.result)
+    };
+
+    reader.readAsDataURL(this.files[0]);
+  })
+
   var showPassword = $('.show-password');
   showPassword.mousedown(function(e) {
     e.preventDefault();
@@ -32,16 +65,16 @@ jQuery(document).ready(function($){
     $(this).siblings("input[name='password']").attr('type','password')
   });
 
+  //Upload Videos
   var uploadVideo = $('#UploadVideo');
   var uploadVideoButton = uploadVideo.find('.upload-btn');
   var uploadFileInput = uploadVideo.find('input[type=file]');
   var uploadTextInput = uploadVideo.find('input[type=text]');
 
-
-  function clearUploadVideo() {
-    uploadVideo.wrap('<form>').closest('form').get(0).reset();
-    uploadVideo.unwrap();
-    uploadTextInput.val('');
+  function clearInputFile(elem) {
+    elem.wrap('<form>').closest('form').get(0).reset();
+    elem.unwrap();
+    elem.val('');
   }
 
   uploadVideoButton.on('click', function(e) {
@@ -55,6 +88,7 @@ jQuery(document).ready(function($){
     uploadTextInput.val($filename);
   })
 
+  //Questions
   var questionTable = $('#QuestionsTable')
   var addQuestionForm = $("#AddQuestionForm")
   var removeQuestion = questionTable.find('.button.remove')

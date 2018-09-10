@@ -28,6 +28,7 @@
       student.grade_level,
       student.teacher_id,
       student.password,
+      student.profile_image_url,
       CONCAT(teacher.lastname,', ' ,teacher.firstname) as teacher_name
       FROM users student LEFT JOIN users teacher
       ON student.teacher_id = teacher.id
@@ -41,12 +42,15 @@
       users.address,
       users.contactno,
       users.email,
-      users.password
+      users.password,
+      users.profile_image_url
       FROM users WHERE users.type = 'teacher' AND users.id = $id";
   }
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
   $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
+
+  $profile_image_url = !empty($row['profile_image_url']) ? $row['profile_image_url'] : '/public/images/profile-placeholder-image.png';
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -59,7 +63,13 @@
       </div>
     <?php else: ?>
       <h1 class='title'>Update <?php echo $type ?> Account</h1>
-      <form class="form" method="POST" action="<?php echo $form_action ?>">
+      <form class="form" method="POST" action="<?php echo $form_action ?>" enctype="multipart/form-data">
+        <div class="input" id="ProfileImage">
+          <img class="image" src="<?php echo $profile_image_url ?>" />
+          <input type="file" name="profile_image" accept="image/*" />
+          <button class="btn upload-btn">Upload Image</button>
+          <?php echo isset($error_fields['lastname']) ? "<label class='error'>$error_fields[lastname]</label>" : null ?>
+        </div>
         <div class="input">
           <label class="label">Last name</label>
           <input type="text" name="lastname" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : $row['lastname'] ?>"/>

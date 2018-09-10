@@ -9,7 +9,7 @@
         <a class="button <?php echo basename($_GET['page']) == 'subjects' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
         <a class="button <?php echo basename($_GET['page']) == 'lessons' ? 'active' : null ?>" href="/coordinator/lesson/lessons.php?page=lessons&grade_level=1">Lessons</a>
         <a class="button <?php echo basename($_GET['page']) == 'learningvideos' ? 'active' : null ?>" href="/coordinator/learningvideo/learningvideos.php?page=learningvideos&grade_level=1">Learning Videos</a>
-        <a class="button <?php echo basename($_GET['page']) == 'reviewandexams' ? 'active' : null ?>" href="/coordinator/reviewandexams.php?page=reviewandexams">Review and Exams</a>
+        <a class="button <?php echo basename($_GET['page']) == 'reviewandexams' ? 'active' : null ?>" href="/coordinator/reviewandexam/reviewandexams.php?page=reviewandexams">Review and Exams</a>
         <a class="button <?php echo basename($_GET['page']) == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports">Reports</a>
     <?php
         endif;

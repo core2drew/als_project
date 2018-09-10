@@ -27,7 +27,13 @@
       </div>
     <?php else: ?>
       <h1 class='title'>Create <?php echo $type ?> Account</h1>
-      <form class="form" method="POST" action="<?php echo $form_action ?>">
+      <form class="form" method="POST" action="<?php echo $form_action ?>" enctype="multipart/form-data">
+        <div class="input" id="ProfileImage">
+          <img class="image" src="/public/images/profile-placeholder-image.png" />
+          <input type="file" name="profile_image" accept="image/*" />
+          <button class="btn upload-btn">Upload Image</button>
+          <?php echo isset($error_fields['lastname']) ? "<label class='error'>$error_fields[lastname]</label>" : null ?>
+        </div>
         <div class="input">
           <label class="label">Last name</label>
           <input type="text" name="lastname" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>"/>

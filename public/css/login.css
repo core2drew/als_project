@@ -36,3 +36,11 @@
 #LoginWrapper > #LoginFormContainer > #LoginForm > .button {
   margin-top: 10px;
 }
+
+
+#LoginWrapper > #LoginFormContainer > #LoginForm > .error_message {
+  font-size: 0.7em;
+  margin: 0;
+  color: #ff5a5a;
+  text-align: right;
+}

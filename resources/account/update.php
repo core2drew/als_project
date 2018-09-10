@@ -1,4 +1,6 @@
 <?php 
+  include "../../resources/_global.php";
+
   $is_success = false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,6 +58,18 @@
     }
 
     if(count($error_fields) <= 0) {
+      
+      $tmp_name = $_FILES["profile_image"]["tmp_name"];
+      if(!empty($tmp_name)) {
+        $ext = findexts($_FILES['profile_image']['name']); 
+        $filename = time().".".$ext;
+        move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
+        $profile_image_url = "/public/images/profile/" . $filename;
+        $_SESSION['profile_image_url'] = $profile_image_url;
+      }
+
+      $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
+
       $id = mysqli_real_escape_string($conn, $_POST['id']);
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
@@ -65,10 +79,9 @@
       $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
-      $updated_at = date("Y-m-d H:i:s");
   
-      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', address='$address', contactno='$contactno', grade_level='$grade_level', 
-      teacher_id='$teacher_id', email='$email', password='$password', type='$type', updated_at='$updated_at' WHERE id='$id'";
+      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', profile_image_url='$profile_image_url', address='$address', contactno='$contactno', grade_level='$grade_level', 
+      teacher_id='$teacher_id', email='$email', password='$password', type='$type' WHERE id='$id'";
       $result = mysqli_query($conn, $query);
       if($result) {
         $is_success = true;

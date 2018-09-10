@@ -28,6 +28,7 @@
           <label class="label">Password</label>
           <input class="input" type="password" name="password" />
         </div>
+        <?php echo isset($error_fields['login']) ? "<p class='error_message'>$error_fields[login]</p>" : null ?>
         <button class="button" type="submit">Login</button>
       </form>
     </div>

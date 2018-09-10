@@ -33,6 +33,9 @@
     <?php else: ?>
       <h1 class='title'>Delete <?php echo $type ?> Account</h1>
       <form class="form" method="POST" action="<?php echo $form_action ?>">
+      <div class="input" id="ProfileImage">
+        <img class="image" src="/public/images/profile-placeholder-image.png" />
+      </div>
       <div class="input">
           <label class="label">Last name</label>
           <?php 
