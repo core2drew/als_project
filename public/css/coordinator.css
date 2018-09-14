@@ -105,9 +105,40 @@
 #Coordinator > #ManageSubjects > .tabs{
   margin-bottom: 20px;
 }
+
 /* Lessons */
 
 #Coordinator > #ManageLessons > .tabs{
+  margin-bottom: 20px;
+}
+
+/* Questions */
+
+#Coordinator > #ManageQuestions > .tabs {
+  margin-bottom: 20px;
+}
+
+#Coordinator > #ManageQuestions > .form > .input > textarea[name='question'],
+#Coordinator > #ManageQuestions > .form > .input > textarea[name='explanation'] {
+  resize: none;
+}
+
+#Coordinator > #ManageQuestions > .form > .input > .choice-answer {
+  display: flex;
+  align-items: center;
+}
+
+#Coordinator > #ManageQuestions > .form > .input > .choice-answer > input[type='radio'] {
+  margin-left: 10px;
+}
+
+#Coordinator > #ManageQuestions > .form > .input > .choice-answer > input[type='text'] {
+  width: 100%;
+}
+
+/* Exams */
+
+#Coordinator > #ManageExams > .tabs {
   margin-bottom: 20px;
 }
 
