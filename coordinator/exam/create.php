@@ -3,84 +3,55 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
+  include '../../resources/question/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-  $subject = isset($_GET['subject']) ? $_GET['subject'] : null;
 
-  $subject_query = "SELECT title FROM subjects WHERE grade_level = $grade_level AND deleted_at IS NULL";
-  
-  $subject_result = mysqli_query($conn, $subject_query);
-  $subject_count = mysqli_num_rows($subject_result);
-  $count = 0;
+  //Query all subjects
+  $subjects_query = "SELECT subjects.id, subjects.title
+  FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL";
+
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=questions&grade_level=$grade_level";
+  $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level";
+
+  function handleErrorMessage($field, $error_fields = null){
+    if(isset($error_fields)) {
+      echo isset($error_fields[$field]) ? "<label class='error'>$error_fields[$field]</label>" : null;
+    }
+  }
 ?>
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
-  <div id="ManageExams" class="page">
-    <?php
-      if($subject_count > 0):
-    ?>
-      <div class="tabs">
-        <?php
-         while($subject_row = mysqli_fetch_array($subject_result, MYSQLI_ASSOC)) {
-            $href = "/coordinator/exam/create.php?page=exams&subject=$subject_row[title]&grade_level=$grade_level";
-            $active_class = $subject_row == $subject ? " active'" : "'";
-            $link = "<a class='tab". $active_class ." href='$href'>$subject_row[title]</a>";
-            echo $link;
-         }
-        ?>
-      </div>
-    <?php endif; ?>
-    <div class="table-actions">
-      <?php
-        $create_link = "/coordinator/exam/create.php?page=exams&grade_level=$grade_level";
-        echo "<a class='button' href=$create_link>Create Exam</a>";
-      ?>
-    </div>
-    <?php
-      if($count <= 0):
-    ?>
-      <table class="table">
-        <thead>
-          <th>Title</th>
-          <th>Subject</th>
-          <th>View Questions</th>
-          <th class="options">Options</th>
-        </thead>
-      </table>
-      <div class="no-records">
-        <h3>No Records</h3>
+  <div id="ManageQuestions" class="page">
+    <?php if(isset($is_success) && $is_success): ?>
+      <div class="message">
+        <h1>Exam Created Successfully</h1>
+        <a href=<?php echo $back_link ?> >Back</a>
       </div>
     <?php else: ?>
-      <table class="table">
-      <thead>
-        <th>Title</th>
-        <th>Subject</th>
-        <th>View Questions</th>
-        <th class="options">Options</th>
-      </thead>
-      <tbody>
-        <?php
-          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $id = $row['id'];
-            $title = $row['title'];
-            $url = $row['url'];
-            $upload_option = $row['type'];
-            $update_btn = "<a class='button' href='/coordinator/learningvideo/update.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/learningvideo/delete.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Delete</a>";
-
-            $table_row =
-            "<tr>
-              <td>$title</td>
-              <td><a href=$url target='_blank'>Watch</a></td>
-              <td class='option'>$update_btn $delete_btn</td>
-            </tr>";
-            echo $table_row;
-          }
-        ?>
-      </tbody>
+      <h1 class='title'>Create Exam Question</h1>
+      <form class="form" method="POST" action="<?php echo $form_action ?>">
+        <div class="input">
+          <label class="label">Subject</label>
+          <select name="subject_id">
+            <?php 
+              $subjects_result = mysqli_query($conn, $subjects_query);
+              while($subject_row = mysqli_fetch_array($subjects_result, MYSQLI_ASSOC)) {
+                echo "<option value='$subject_row[id]'>$subject_row[title]</option>";
+              }
+            ?>
+          </select>
+          <?php handleErrorMessage('subject_id', $error_fields) ?>
+        </div>
+        <div class="input">
+          <label class="label">Title</label>
+          <input type="text" name="choice_1" value="<?php echo isset($_POST['choice_1']) ? $_POST['choice_1'] : '' ?>"/>
+          <?php handleErrorMessage('choice_1', $error_fields) ?>
+        </div>
+        <button class='button' type="submit">Create</button>
+      </form>
     <?php endif; ?>
-    </table>
   </div>
 </div>
 <?php
