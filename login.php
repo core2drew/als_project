@@ -8,7 +8,6 @@
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
     $query = "SELECT id, profile_image_url, type, CONCAT(firstname, ' ', lastname) as fullname from users where email='$email' and password='$password' and deleted_at IS NULL";
-    echo $query;
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
