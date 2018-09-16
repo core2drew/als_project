@@ -95,14 +95,14 @@
               $id = $row['id'];
               $title = $row['question'];
               $subject = $row['subject'];
-              $view_btn = "<a class='button' href='/coordinator/question/update.php?page=questions&grade_level=$grade_level&id=$id'>View</a>";
-              $update_btn = "<a class='button' href='/coordinator/question/update.php?page=questions&grade_level=$grade_level&id=$id'>Update</a>";
+              $view_btn = "<a class='button' href='/coordinator/question/view.php?page=questions&grade_level=$grade_level&id=$id'>View</a>";
+              //$update_btn = "<a class='button' href='/coordinator/question/update.php?page=questions&grade_level=$grade_level&id=$id'>Update</a>";
               $delete_btn = "<a class='button' href='/coordinator/question/delete.php?page=questions&grade_level=$grade_level&id=$id'>Delete</a>";
               $table_row =
               "<tr>
                 <td>$title</td>
                 <td>$subject</td>
-                <td class='option'>$view_btn $update_btn $delete_btn</td>
+                <td class='option'>$view_btn $delete_btn</td>
               </tr>";
               echo $table_row;
             }
