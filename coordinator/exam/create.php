@@ -13,7 +13,7 @@
   $subjects_result = mysqli_query($conn, $subjects_query);
 
   $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=exams&grade_level=$grade_level";
-  $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level";
+  $back_link = "/coordinator/exam/exams.php?page=exams&grade_level=$grade_level";
 
   function handleErrorMessage($field, $error_fields = null){
     if(isset($error_fields)) {

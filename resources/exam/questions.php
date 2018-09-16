@@ -53,16 +53,17 @@
     $subject_id = mysqli_real_escape_string($conn, $_GET['subject_id']);
     $exam_id = mysqli_real_escape_string($conn, $_GET['exam_id']);
   
-    $exam_query = "SELECT questions_id FROM exams WHERE id=$exam_id";
+    $exam_query = "SELECT questions_id, subject_id FROM exams WHERE id=$exam_id";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
-    $questions_id = explode(',', $exam_row['questions_id']);
+    $questions_id = $exam_row['questions_id'];
+    $subject_id = $exam_row['subject_id'];
+    $questions_id_array = explode(',', $questions_id);
     
     $question_query = "SELECT DISTINCT quest.id, quest.question
     FROM exams ex LEFT JOIN questions quest ON ex.subject_id = quest.subject_id
-    WHERE quest.id NOT IN ('". implode("','",$questions_id) ."') AND quest.deleted_at IS NULL";
+    WHERE quest.id NOT IN ('". implode("','",$questions_id_array) ."') AND quest.subject_id = $subject_id AND quest.deleted_at IS NULL";
     $question_result = mysqli_query($conn, $question_query);
-
     $json_data['data'] = [];
 
     while($question_row = mysqli_fetch_array($question_result, MYSQLI_ASSOC)) {
