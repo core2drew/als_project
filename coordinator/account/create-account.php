@@ -3,6 +3,7 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
+  include "../../resources/_global.php";
   include '../../resources/account/add.php';
 
   $type = isset($_GET['type']) ? $_GET['type'] : null;

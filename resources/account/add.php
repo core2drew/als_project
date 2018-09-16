@@ -1,5 +1,4 @@
 <?php
-  include "../../resources/_global.php";
   $is_success= false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {

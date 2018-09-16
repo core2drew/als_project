@@ -42,8 +42,7 @@
       $check_email_query = "SELECT id FROM users WHERE email='$email' AND deleted_at IS NULL";
       $check_email_result = mysqli_query($conn, $check_email_query);
       $check_email_count = mysqli_num_rows($check_email_result);
-      
-      if($check_email_query > 0) {
+      if($check_email_count > 0) {
         $error_fields['email'] = 'Email already exist';
       }
     }
@@ -61,7 +60,7 @@
       if(!empty($tmp_name)) {
         $ext = findexts($_FILES['profile_image']['name']); 
         $filename = time().".".$ext;
-        move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
+        move_uploaded_file($tmp_name, "./public/images/profile/" . $filename);
         $profile_image_url = "/public/images/profile/" . $filename;
 
         if($_SESSION['user_id'] == $_POST['id']) {
@@ -77,12 +76,11 @@
       $address = mysqli_real_escape_string($conn, $_POST['address']);
       $contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
       $grade_level = mysqli_real_escape_string($conn, $_POST['grade_level']);
-      $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
   
-      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', profile_image_url='$profile_image_url', address='$address', contactno='$contactno', grade_level='$grade_level', 
-      teacher_id='$teacher_id', email='$email', password='$password', type='$type' WHERE id='$id'";
+      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', profile_image_url='$profile_image_url', address='$address', contactno='$contactno', 
+      email='$email', password='$password' WHERE id='$id'";
       $result = mysqli_query($conn, $query);
       if($result) {
         $is_success = true;

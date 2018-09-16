@@ -1,21 +1,16 @@
 <?php 
-  require '../../config/db_connect.php';
-  include '../../includes/html/head.php';
-  include '../../check_session.php';
-  include '../../includes/header.php';
-  include "../../resources/_global.php";
-  include '../../resources/account/update.php';
+  require './config/db_connect.php';
+  include './includes/html/head.php';
+  include './check_session.php';
+  include './includes/header.php';
+  include "./resources/_global.php";
+  include './resources/profile/update.php';
 
   $id = isset($_GET['id']) ? $_GET['id'] : null;
-  $type = isset($_GET['type']) ? $_GET['type'] : null;
-  $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+  $type = isset($_SESSION['type']) ? $_SESSION['type'] : null;
+  $grade_level = isset($_SESSION['grade_level']) ? $_SESSION['grade_level'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id&grade_level=$grade_level";
-
-  //Query Teachers in current level
-  $teachers_query = "SELECT users.id,
-  CONCAT(users.lastname,', ',users.firstname) as name
-  FROM users WHERE users.type = 'teacher' AND users.grade_level=$grade_level AND deleted_at IS NULL";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&type=$type";
 
   //Diplay specific student or teacher
   if($type == 'student') {
@@ -49,13 +44,14 @@
   }
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-  $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
+
+  $back_link = "/profile.php?id=$id";
 
   $profile_image_url = !empty($row['profile_image_url']) ? $row['profile_image_url'] : '/public/images/profile-placeholder-image.png';
 ?>
 
 <div id="Coordinator" class="wrapper">
-  <?php include '../../includes/sidebar.php'; ?>
+  <?php include './includes/sidebar.php'; ?>
   <div id="AccountForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
@@ -63,7 +59,7 @@
         <a href=<?php echo $back_link ?>>Back</a>
       </div>
     <?php else: ?>
-      <h1 class='title'>Update <?php echo $type ?> Account</h1>
+      <h1 class='title'>Update Account</h1>
       <form class="form" method="POST" action="<?php echo $form_action ?>" enctype="multipart/form-data">
         <div class="input" id="ProfileImage">
           <img class="image" src="<?php echo $profile_image_url ?>" />
@@ -91,34 +87,6 @@
           <input type="text" name="contactno" value="<?php echo isset($_POST['contactno']) ? $_POST['contactno'] : $row['contactno'] ?>"/>
           <?php echo isset($error_fields['contactno']) ? "<label class='error'>$error_fields[contactno]</label>" : null ?>
         </div>
-        <!-- <div class="input">
-          <label class="label">Grade Level</label>
-          <select name="grade_level">
-            <option value="elementary">Elementary</option>
-            <option value="highschool">High School</option>
-          </select>
-          <?php //echo isset($error_fields['grade_level']) ? "<label class='error'>$error_fields[grade_level]</label>" : null ?>
-        </div> -->
-        <?php if($type == 'student'): ?>
-          <div class="input">
-            <label class="label">Teacher</label>
-            <select name="teacher_id">
-              <?php 
-                $teachers_result = mysqli_query($conn, $teachers_query);
-                $teachers_count = mysqli_num_rows($teachers_result);
-
-                while($teacher_row = mysqli_fetch_array($teachers_result, MYSQLI_ASSOC)) {
-                  if($row['teacher_id'] == $teacher_row['id']) {
-                    echo "<option value='$teacher_row[id]' selected>$teacher_row[name]</option>";
-                  }else {
-                    echo "<option value='$teacher_row[id]'>$teacher_row[name]</option>";
-                  }
-                }
-              ?>
-            </select>
-            <?php echo isset($error_fields['teacher_id']) ? "<label class='error'>$error_fields[teacher_id]</label>" : null ?>
-          </div>
-        <?php endif; ?>
         <div class="input">
           <label class="label">Email</label>
           <input type="text" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : $row['email'] ?>"/>
@@ -136,10 +104,11 @@
         <input type="hidden" name="type" value=<?php echo $type ?> />
         <input type="hidden" name="grade_level" value=<?php echo $grade_level ?> />
         <button class='button' type="submit">Update</button>
+        <a class="button" href="/dashboard.php">Cancel</a>
       </form>
     <?php endif; ?>
   </div>
 </div>
 <?php
-  include '../../includes/html/footer.php';
+  include './includes/html/footer.php';
 ?>
