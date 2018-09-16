@@ -1,4 +1,10 @@
 .button {
   cursor: pointer;
   display: inline-block;
+  border: none;
+  padding: 10px;
+}
+
+.button:focus {
+  outline: none;
 }

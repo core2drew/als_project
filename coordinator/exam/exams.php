@@ -6,14 +6,18 @@
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
+  //Query first subject
+  $subject_query = "SELECT subjects.id FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL LIMIT 1";
+  $subject_result = mysqli_query($conn, $subject_query);
+  $subject_row = mysqli_fetch_array($subject_result, MYSQLI_ASSOC);
+
   $query = "SELECT
-  vid.id,
-  vid.title,
-  vid.url,
-  vid.type
-  FROM videos vid LEFT JOIN subjects sub
-  ON vid.subject_id = sub.id
-  WHERE sub.grade_level = $grade_level AND vid.deleted_at IS NULL AND sub.deleted_at IS NULL";
+  exam.id,
+  exam.title,
+  sub.title as subject_title
+  FROM exams exam LEFT JOIN subjects sub
+  ON exam.subject_id = sub.id
+  WHERE sub.grade_level = $grade_level AND exam.deleted_at IS NULL AND sub.deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
@@ -34,7 +38,7 @@
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/exam/create.php?page=exams&grade_level=$grade_level";
+        $create_link = "/coordinator/exam/create.php?page=exams&grade_level=$grade_level&subject_id=$subject_row[id]";
         echo "<a class='button' href=$create_link>Create Exam</a>";
       ?>
     </div>
@@ -44,7 +48,7 @@
       <table class="table">
         <thead>
           <th>Title</th>
-          <th class="watch">View Questions</th>
+          <th>Subject</th>
           <th class="options">Options</th>
         </thead>
       </table>
@@ -53,33 +57,31 @@
       </div>
     <?php else: ?>
       <table class="table">
-      <thead>
-        <th>Title</th>
-        <th class="watch">View Questions</th>
-        <th class="options">Options</th>
-      </thead>
-      <tbody>
-        <?php
-          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $id = $row['id'];
-            $title = $row['title'];
-            $url = $row['url'];
-            $upload_option = $row['type'];
-            $update_btn = "<a class='button' href='/coordinator/learningvideo/update.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/learningvideo/delete.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Delete</a>";
-
-            $table_row =
-            "<tr>
-              <td>$title</td>
-              <td><a href=$url target='_blank'>Watch</a></td>
-              <td class='option'>$update_btn $delete_btn</td>
-            </tr>";
-            echo $table_row;
-          }
-        ?>
-      </tbody>
+        <thead>
+          <th>Title</th>
+          <th>Subject</th>
+          <th class="options">Options</th>
+        </thead>
+        <tbody>
+          <?php
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $id = $row['id'];
+              $title = $row['title'];
+              $subject = $row['subject_title'];
+              $update_exam = "<a href=/coordinator/exam/update.php?page=exams&id=$id>Update</a>";
+              $remove_exam = "<a href=/coordinator/exam/delete.php?page=exams&id=$id>Remove</a>";
+              $table_row =
+              "<tr>
+                <td>$title</td>
+                <td>$subject</td>
+                <td class='option'>$update_exam $remove_exam</td>
+              </tr>";
+              echo $table_row;
+            }
+          ?>
+        </tbody>
+      </table>
     <?php endif; ?>
-    </table>
   </div>
 </div>
 <?php

@@ -112,6 +112,10 @@
   margin-bottom: 20px;
 }
 
+#Coordinator > #ManageLessons > .form > #PDFLesson > input[name='pdf_file'] {
+  display: none;
+}
+
 /* Questions */
 
 #Coordinator > #ManageQuestions > .tabs {
@@ -134,12 +138,6 @@
 
 #Coordinator > #ManageQuestions > .form > .input > .choice-answer > input[type='text'] {
   width: 100%;
-}
-
-/* Exams */
-
-#Coordinator > #ManageExams > .tabs {
-  margin-bottom: 20px;
 }
 
 /* Learning Videos */
