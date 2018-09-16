@@ -14,12 +14,12 @@
       $file_name = $_FILES["video_file"]["name"];
       $file_size = $_FILES['video_file']['size'];
       $tmp_name = $_FILES["video_file"]["tmp_name"];
-
+      $max_file_size = 100 * 1000000;
       if(empty($file_name)) {
         $error_fields['video_file'] = 'Upload video field is required';
       }
-      if ($file_size > 2000000) {
-        $error_fields['video_file'] = 'This file is larger than 2MB. It must be less than or equal to 2MB';
+      if ($file_size > $max_file_size) {
+        $error_fields['video_file'] = 'This file is larger than 100MB. It must be less than or equal to 100MB';
       }
       if (file_exists("../../public/videos/" . $file_name)){
         $error_fields['video_file'] = $file_name . " already exists";
