@@ -1,0 +1,30 @@
+#ManageQuestions > .tabs {
+  margin-bottom: 20px;
+}
+
+#ManageQuestions > .form > .input > textarea[name='question'],
+#ManageQuestions > .form > .input > textarea[name='explanation'] {
+  resize: none;
+}
+
+#ManageQuestions > .form > .input > .choice-answer {
+  display: flex;
+  align-items: center;
+}
+
+#ManageQuestions > .form > .input > .choice-answer > input[type='radio'] {
+  margin-left: 10px;
+}
+
+#ManageQuestions > .form > .input > .choice-answer > input[type='text'] {
+  width: 100%;
+}
+
+#ManageQuestions > .table-actions {
+  display: flex;
+  align-items: center;
+}
+
+#ManageQuestions > .table-actions > .filter {
+  margin-right: 10px;
+}

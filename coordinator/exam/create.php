@@ -38,8 +38,6 @@
           <label class="label">Subject</label>
           <select name="subject_id">
             <?php 
-              $subjects_result = mysqli_query($conn, $subjects_query);
-
               while($subject_row = mysqli_fetch_array($subjects_result, MYSQLI_ASSOC)) {
                 if($row['subject_id'] == $subject_row['id'] ) {
                   echo "<option value='$subject_row[id]' selected>$subject_row[title]</option>";

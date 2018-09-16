@@ -5,14 +5,31 @@
   include '../../includes/header.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+  $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
 
-  $query = "SELECT
-  quest.id,
-  quest.question,
-  sub.title as subject
-  FROM questions quest LEFT JOIN subjects sub
-  ON quest.subject_id = sub.id
-  WHERE sub.grade_level = $grade_level AND quest.deleted_at IS NULL AND sub.deleted_at IS NULL";
+  //Query all subjects
+  $subjects_query = "SELECT subjects.id, subjects.title
+  FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL";
+  $subjects_result = mysqli_query($conn, $subjects_query);
+
+  if(isset($_GET['subject_id'])) {
+    $query = "SELECT
+    quest.id,
+    quest.question,
+    sub.title as subject
+    FROM questions quest LEFT JOIN subjects sub
+    ON quest.subject_id = sub.id
+    WHERE sub.grade_level = $grade_level AND sub.id = $subject_id AND quest.deleted_at IS NULL AND sub.deleted_at IS NULL";
+  } else {
+    $query = "SELECT
+    quest.id,
+    quest.question,
+    sub.title as subject
+    FROM questions quest LEFT JOIN subjects sub
+    ON quest.subject_id = sub.id
+    WHERE sub.grade_level = $grade_level AND quest.deleted_at IS NULL AND sub.deleted_at IS NULL";
+  }
+
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
@@ -32,6 +49,21 @@
       ?>
     </div>
     <div class="table-actions">
+      <div class="filter">
+        <label class="label">Filter Subject</label>
+        <select class="filter-dropdown" name="subject_id">
+          <option value='all'>ALL</option>
+          <?php 
+            while($subject_row = mysqli_fetch_array($subjects_result, MYSQLI_ASSOC)) {
+              if($subject_id == $subject_row['id'] ) {
+                echo "<option value='$subject_row[id]' selected>$subject_row[title]</option>";
+              }else {
+                echo "<option value='$subject_row[id]'>$subject_row[title]</option>";
+              }
+            }
+          ?>
+        </select>
+      </div>
       <?php
         $create_link = "/coordinator/question/create.php?page=questions&grade_level=$grade_level";
         echo "<a class='button' href=$create_link>Create Question</a>";

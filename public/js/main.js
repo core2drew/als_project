@@ -1,26 +1,4 @@
 jQuery(document).ready(function($){
-  // var loginForm = $('#LoginForm')
-  // loginForm.submit(function(e){
-  //   e.preventDefault()
-  //   var form = $(this)
-  //   var url = "login.php"
-  //   $.ajax({
-  //     type: "POST",
-  //     url: url,
-  //     data: form.serialize(), // serializes the form data.
-  //     success: function(data){
-  //       if(data.success) {
-  //         window.location.href = 'dashboard.php'
-  //       } else {
-  //         alert(data.message); // show response from the php script
-  //       }
-  //     },
-  //     error: function(err) {
-  //       console.log(err.statusText)
-  //     }
-  //   });
-  // })
-
   function clearInputFile(elem) {
     elem.wrap('<form>').closest('form').get(0).reset();
     elem.unwrap();
@@ -156,8 +134,20 @@ jQuery(document).ready(function($){
   //   });
   // })
 
-  //Exam Questions
+  //Questions
+  var manageQuestions = $("#ManageQuestions");
+  var filterDropdown = manageQuestions.find('.filter-dropdown');
+  
+  filterDropdown.on('change', function(e) {
+    var filter = e.target.value
+    if(filter === 'all') {
+      location.assign('/coordinator/question/questions.php?page=questions&grade_level=1')
+    } else {
+      location.assign('/coordinator/question/questions.php?page=questions&grade_level=1&subject_id='+filter)
+    }
+  })
 
+  //Exam
   var includedQuestions = [];
   var question_url = '/resources/exam/questions.php'
   var modalContainer = $(".modal-container");
@@ -220,7 +210,6 @@ jQuery(document).ready(function($){
           tableBody.append(row);
       });
     }
-    
     return container.append(tableBody);
   }
 
@@ -260,6 +249,18 @@ jQuery(document).ready(function($){
     });
   }
 
+  var manageExams = $("#ManageExams");
+  var examQuestionTable = manageExams.find('.exam-questions');
+  var removeExamQuestionButton = examQuestionTable.find('.remove-question');
+
+  removeExamQuestionButton.on('click', function(){
+    var $this = $(this)
+    var questionId = $this.data('questionId');
+    var examId = addExamQuestionModal.data('examId');
+    removeExamQuestion(questionId, examId)
+    $this.closest('tr').remove();
+  })
+
   function removeExamQuestion(questionId, examId) {
     $.ajax({
       type: "POST",
@@ -278,15 +279,4 @@ jQuery(document).ready(function($){
       }
     });
   }
-
-  var manageExams = $("#ManageExams");
-  var examQuestionTable = manageExams.find('.exam-questions');
-  var removeExamQuestionButton = examQuestionTable.find('.remove-question');
-  removeExamQuestionButton.on('click', function(){
-    var $this = $(this)
-    var questionId = $this.data('questionId');
-    var examId = addExamQuestionModal.data('examId');
-    removeExamQuestion(questionId, examId)
-    $this.closest('tr').remove();
-  })
 })
