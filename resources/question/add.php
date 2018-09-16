@@ -13,19 +13,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_fields['question'] = 'Question field is required';
   }
 
-  if(empty($_POST['choice_1'])) {
+  if(empty($_POST['choice_1']) && !is_numeric($_POST['choice_1'])) {
     $error_fields['choice_1'] = 'Choice 1 field is required';
   }
 
-  if(empty($_POST['choice_2'])) {
+  if(empty($_POST['choice_2']) && !is_numeric($_POST['choice_2'])) {
     $error_fields['choice_2'] = 'Choice 2 field is required';
   }
 
-  if(empty($_POST['choice_3'])) {
+  if(empty($_POST['choice_3']) && !is_numeric($_POST['choice_3'])) {
     $error_fields['choice_3'] = 'Choice 3 field is required';
   }
 
-  if(empty($_POST['choice_4'])) {
+  if(empty($_POST['choice_4']) && !is_numeric($_POST['choice_4'])) {
     $error_fields['choice_4'] = 'Choice 4 field is required';
   }
 
