@@ -42,7 +42,8 @@
       <table class="table">
         <thead>
           <th>Title</th>
-          <th class="options">Options</th>
+          <th>View</th>
+          <th>Options</th>
         </thead>
       </table>
       <div class="no-records">
@@ -52,6 +53,7 @@
       <table class="table">
       <thead>
         <th>Title</th>
+        <th>View</th>
         <th>Options</th>
       </thead>
       <tbody>
@@ -65,6 +67,7 @@
             $table_row =
             "<tr>
               <td>$title</td>
+              <td>View</td>
               <td class='option'>$update_btn $delete_btn</td>
             </tr>";
             echo $table_row;

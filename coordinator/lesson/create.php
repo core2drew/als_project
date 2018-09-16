@@ -17,7 +17,7 @@
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
-  <div id="LessonForm" class="page">
+  <div id="ManageLessons" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Lesson Created Successfully</h1>
@@ -34,11 +34,7 @@
               $subjects_count = mysqli_num_rows($subjects_result);
 
               while($subject_row = mysqli_fetch_array($subjects_result, MYSQLI_ASSOC)) {
-                if($row['id'] == $subject_row['id'] ) {
-                  echo "<option value='$subject_row[id]' selected>$subject_row[title]</option>";
-                }else {
-                  echo "<option value='$subject_row[id]'>$subject_row[title]</option>";
-                }
+                echo "<option value='$subject_row[id]'>$subject_row[title]</option>";
               }
             ?>
           </select>
@@ -47,6 +43,13 @@
           <label class="label">Title</label>
           <input type="text" name="title" value="<?php echo isset($_POST['title']) ? $_POST['title'] : '' ?>"/>
           <?php echo isset($error_fields['title']) ? "<label class='error'>$error_fields[title]</label>" : null ?>
+        </div>
+        <div class="input" id="PDFLesson">
+          <label class="label">Upload PDF</label>
+          <input type="text" name="filename" readonly/>
+          <input type="file" name="pdf_file" accept="application/pdf" value=''/>
+          <?php echo isset($error_fields['pdf_file']) ? "<label class='error'>$error_fields[pdf_file]</label>" : null ?>
+          <button class="btn upload-btn">Upload</button>
         </div>
         <button class='button' type="submit">Create</button>
       </form>
