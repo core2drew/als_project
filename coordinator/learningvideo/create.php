@@ -70,7 +70,7 @@
           ?>
             <label class="label">Upload Video</label>
             <input type="text" name="filename" readonly/>
-            <input type="file" name="video_file" accept="video/*" value=''/>
+            <input type="file" name="video_file" accept="video/mp4" value=''/>
             <?php echo isset($error_fields['video_file']) ? "<label class='error'>$error_fields[video_file]</label>" : null ?>
             <button class="btn upload-btn">Upload</button>
           <?php 

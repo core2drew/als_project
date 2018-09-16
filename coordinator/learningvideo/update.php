@@ -81,7 +81,7 @@
           ?>
             <label class="label">Upload Video</label>
             <input type="text" name="filename"  value="<?php echo isset($_POST['filename']) ? $_POST['filename'] : $row['filename'] ?>" readonly/>
-            <input type="file" name="video_file" accept="video/*" />
+            <input type="file" name="video_file" accept="video/mp4" />
             <?php echo isset($error_fields['video_file']) ? "<label class='error'>$error_fields[video_file]</label>" : null ?>
             <button class="btn upload-btn">Upload</button>
           <?php
