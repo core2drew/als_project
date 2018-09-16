@@ -9,6 +9,7 @@
 @import './student.css';
 @import './coordinator.css';
 @import './exam.css';
+@import './question.css';
 @import './components/button.css';
 @import './components/dropdown.css';
 @import './components/table.css';
