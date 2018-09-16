@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+#ManageQuestions > .table > tbody > tr > td {
+  padding: 0 1em;
+}
+
 #ManageQuestions > .table-actions {
   display: flex;
   align-items: center;
