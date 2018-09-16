@@ -1,3 +1,8 @@
+#ManageQuestions {
+  width: 800px;
+  margin-left: 250px;
+}
+
 #ManageQuestions > .tabs {
   margin-bottom: 20px;
 }
@@ -31,4 +36,35 @@
 
 #ManageQuestions > .table-actions > .filter {
   margin-right: 10px;
+}
+
+#ManageQuestions > #ViewQuestion > .choice-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#ManageQuestions > #ViewQuestion > .question {
+  margin-top: 0;
+}
+
+#ManageQuestions > #ViewQuestion > .label {
+  margin-bottom: 10px;
+  display: inline-block;
+  font-size: small;
+}
+
+#ManageQuestions > #ViewQuestion > .choice-container > .answer {
+  margin-right: 10px;
+}
+
+#ManageQuestions > #ViewQuestion > .choice-container > .check{
+  width: 15px;
+  fill: green;
+}
+#ManageQuestions > #ViewQuestion > .choice-container > .answer,
+#ManageQuestions > #ViewQuestion > .choice-container > .choice,
+#ManageQuestions > #ViewQuestion > .explanation {
+  margin-top: 0;
+  margin-bottom: 0;
 }
