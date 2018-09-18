@@ -1,8 +1,6 @@
 @import './normalizer.css';
 @import './font/style.css';
 @import './login.css';
-@import './header.css';
-@import './sidebar.css';
 @import './dashboard.css';
 @import './lessons.css';
 @import './questions.css';
@@ -10,6 +8,8 @@
 @import './coordinator.css';
 @import './exam.css';
 @import './question.css';
+@import './components/header.css';
+@import './components/sidebar.css';
 @import './components/button.css';
 @import './components/dropdown.css';
 @import './components/segment.css';
@@ -18,6 +18,7 @@
 @import './components/tabs.css';
 @import "./components/modal.css";
 @import "./components/loading.css";
+@import "./components/ckeditor.css";
 
 html, body {
   font-size: 1em;
@@ -34,7 +35,6 @@ a {
 }
 
 .wrapper {
-  display: flex;
   height: 100%;
 }
 
@@ -43,4 +43,9 @@ a {
   margin-left: auto;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.wrapper > .page > .content {
+  width: 60%;
+  margin: auto;
 }

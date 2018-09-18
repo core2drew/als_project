@@ -5,25 +5,91 @@ jQuery(document).ready(function($){
     elem.val('');
   }
 
-  //Lesson
+  function $_GET(param) {
+    var vars = {};
+    window.location.href.replace( location.hash, '' ).replace( 
+      /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+      function( m, key, value ) { // callback
+        vars[key] = value !== undefined ? value : '';
+      }
+    );
+  
+    if ( param ) {
+      return vars[param] ? vars[param] : null;	
+    }
+    return vars;
+  }
 
-   //Upload PDF
-   var PDFLesson = $('#PDFLesson');
-   var uploadPDFLessonButton = PDFLesson.find('.upload-btn');
-   var uploadPDFLessonInput = PDFLesson.find('input[type=file]');
-   var uploadPDFLessonTextInput = PDFLesson.find('input[type=text]');
- 
-   uploadPDFLessonButton.on('click', function(e) {
-     e.preventDefault();
-     console.log("test")
-     var fileInput = $(this).siblings('input[type=file]').trigger('click');
-   })
- 
-   uploadPDFLessonInput.on('change', function(){
-     var $this = $(this)
-     $filename = $this[0].files[0].name;
-     uploadPDFLessonTextInput.val($filename);
-   })
+  //Lesson
+  var lessonEditor;
+  var Lessons = $("#Lessons");
+  var LessonForm = Lessons.find('.form');
+  var formSubmitButton = LessonForm.find('.submit');
+
+  //Ckeditor Init
+  DecoupledEditor
+    .create( document.querySelector( '.document-editor__editable' ), {
+      cloudServices: {
+        tokenUrl: '/resources/ckeditor/token.php',
+        uploadUrl: '/public/images/lesson'
+      }
+    })
+    .then( editor => {
+        const toolbarContainer = document.querySelector( '.document-editor__toolbar' );
+        toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+        lessonEditor = editor;
+    } )
+    .catch( err => {
+        console.error( err );
+    } );
+
+  formSubmitButton.on('click', function(e) {
+    e.preventDefault();
+    var data = LessonForm.serializeArray()
+    data.push({name: 'editor_data', value: lessonEditor.getData()})
+    // update request has id
+    if($_GET('id')) {
+      data.push({name: 'id', value: $_GET('id')})
+      saveLesson(data)
+    } else {
+      createLesson(data)
+    }
+  })
+
+  function createLesson(data){
+    $.ajax({
+      type: "POST",
+      url: '/resources/lesson/add.php',
+      data: data,
+      success: function(res){
+        if(res.success) {
+          //show modal created success
+          //modal go to lesson table
+        }
+      },
+      error: function(err) {
+        console.error("Something went wrong");
+      }
+    });
+  }
+
+  function saveLesson(data) {
+    $.ajax({
+      type: "POST",
+      url: `/resources/lesson/update.php`,
+      data: data,
+      success: function(res){
+        if(res.success) {
+          //show modal created success
+          //modal go to lesson table
+          console.log(res)
+        }
+      },
+      error: function(err) {
+        console.error("Something went wrong");
+      }
+    });
+  }
 
   //Account
   var profileImage = $('#ProfileImage');
