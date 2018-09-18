@@ -104,6 +104,4 @@
     <?php endif; ?>
   </div>
 </div>
-<?php
-  include '../../includes/html/footer.php';
-?>
+<?php include '../../includes/html/footer.php'; ?>

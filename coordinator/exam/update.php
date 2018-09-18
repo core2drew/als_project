@@ -134,6 +134,6 @@
     <button class='button save-question'>Save</button>
   </div>
 </div>
-<?php
-  include '../../includes/html/footer.php';
-?>
+<?php include '../../includes/html/scripts.php';?>
+<script src="/public/js/modules/exam.js"></script>
+<?php include '../../includes/html/footer.php'; ?>

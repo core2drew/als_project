@@ -154,6 +154,7 @@
     ?>
   </div>
 </div>
+
 <?php
   include '../../includes/html/footer.php';
 ?>

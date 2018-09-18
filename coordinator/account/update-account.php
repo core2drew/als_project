@@ -140,6 +140,6 @@
     <?php endif; ?>
   </div>
 </div>
-<?php
-  include '../../includes/html/footer.php';
-?>
+<?php include '../../includes/html/scripts.php';?>
+<script src="/public/js/modules/account.js"></script>
+<?php include '../../includes/html/footer.php'; ?>
