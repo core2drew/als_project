@@ -1,3 +1,9 @@
-#Lessons {
-  
+#Lessons > .content > .form > #PDFLesson > input[name='pdf_file'] {
+  display: none;
+}
+
+#Lessons > .content > .form > .button {
+  display: block;
+  margin-left: auto;
+  margin-top: 20px;
 }

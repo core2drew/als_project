@@ -11,24 +11,25 @@
   text-transform: uppercase;
 }
 
-#Coordinator > .page > .title {
+#Coordinator > .page > .tabs {
+  margin-bottom: 20px;
+}
+
+#Coordinator > .page > .content > .title {
   text-transform: capitalize;
   margin-top: 0;
 }
 
-#Coordinator > .page > .table{
+#Coordinator > .page > .content > .table{
   width: 100%;
 }
 
-#Coordinator > .page > .form {
-  width: 500px;
-}
 
-#Coordinator > .page > .form > .input {
+#Coordinator > .page > .content > .form > .input {
   margin-bottom: 15px;
 }
 
-#Coordinator > .page > .form > .input > .button {
+#Coordinator > .page > .content > .form > .input > .button {
   background: #e0e0e0;
   padding: 5px 10px;
   color: #000;
@@ -106,15 +107,6 @@
   margin-bottom: 20px;
 }
 
-/* Lessons */
-
-#Coordinator > #ManageLessons > .tabs{
-  margin-bottom: 20px;
-}
-
-#Coordinator > #ManageLessons > .form > #PDFLesson > input[name='pdf_file'] {
-  display: none;
-}
 
 /* Learning Videos */
 
