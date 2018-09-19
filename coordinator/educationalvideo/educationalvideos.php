@@ -24,7 +24,7 @@
     <div class="tabs">
       <?php 
         for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/learningvideo/learningvideos.php?page=learningvideos&grade_level=$i";
+          $href = "/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$i";
           $label = $i <= 1 ? 'Elementary' : 'High School';
           $active_class = $grade_level == $i ? " active'" : "'";
           $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -34,7 +34,7 @@
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/learningvideo/create.php?page=learningvideos&grade_level=$grade_level&upload_option=upload";
+        $create_link = "/coordinator/educationalvideo/create.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=upload";
         echo "<a class='button' href=$create_link>Create Learning Videos</a>";
       ?>
     </div>

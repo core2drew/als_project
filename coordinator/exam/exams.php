@@ -28,7 +28,7 @@
     <div class="tabs">
       <?php
         for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/exam/exams.php?page=exams&grade_level=$i";
+          $href = "/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$i";
           $label = $i <= 1 ? 'Elementary' : 'High School';
           $active_class = $grade_level == $i ? " active'" : "'";
           $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -38,7 +38,7 @@
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/exam/create.php?page=exams&grade_level=$grade_level&subject_id=$subject_row[id]";
+        $create_link = "/coordinator/exam/create.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_row[id]";
         echo "<a class='button' href=$create_link>Create Exam</a>";
       ?>
     </div>

@@ -12,7 +12,7 @@
     <div class="tabs">
       <?php 
         for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/lesson/lessons.php?page=lessons&grade_level=$i";
+          $href = "/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$i";
           $label = $i <= 1 ? 'Elementary' : 'High School';
           $active_class = $grade_level == $i ? " active'" : "'";
           $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -22,7 +22,7 @@
     </div>
     <div class="table-actions">
       <?php
-        $create_link = "/coordinator/lesson/create.php?page=lessons&grade_level=$grade_level";
+        $create_link = "/coordinator/lesson/create.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
         echo "<a class='button' href=$create_link>Create Lesson</a>";
       ?>
     </div>

@@ -4,14 +4,20 @@
     <?php
         if( $_SESSION['type'] == 'coordinator' ):
     ?>
-        <a class="button <?php echo basename($_GET['page']) == 'student' ? 'active' : null ?>" href="/coordinator/account/account.php?page=student&type=student&grade_level=1">Student</a>
-        <a class="button <?php echo basename($_GET['page']) == 'teacher' ? 'active' : null ?>" href="/coordinator/account/account.php?page=teacher&type=teacher&grade_level=1">Teacher</a>
-        <a class="button <?php echo basename($_GET['page']) == 'subjects' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
-        <a class="button <?php echo basename($_GET['page']) == 'lessons' ? 'active' : null ?>" href="/coordinator/lesson/lessons.php?page=lessons&grade_level=1">Lessons</a>
-        <a class="button <?php echo basename($_GET['page']) == 'learningvideos' ? 'active' : null ?>" href="/coordinator/learningvideo/learningvideos.php?page=learningvideos&grade_level=1">Learning Videos</a>
-        <a class="button <?php echo basename($_GET['page']) == 'questions' ? 'active' : null ?>" href="/coordinator/question/questions.php?page=questions&grade_level=1">Questions</a>
-        <a class="button <?php echo basename($_GET['page']) == 'exams' ? 'active' : null ?>" href="/coordinator/exam/exams.php?page=exams&grade_level=1">Exams</a>
-        <a class="button <?php echo basename($_GET['page']) == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
+        <?php if($_GET['page'] === 'accounts'): ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'student' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=student&type=student&grade_level=1">Student</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'teacher' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Teacher</a>
+        <?php elseif($_GET['page'] === 'subjects'): ?>
+            <a class="button <?php echo $_GET['page'] == 'subjects' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
+        <?php elseif($_GET['page'] === 'lessonandvideos'): ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'lessons' ? 'active' : null ?>" href="/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'educationalvideos' ? 'active' : null ?>" href="/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=1">Educational Videos</a>
+        <?php elseif($_GET['page'] === 'examandquestions'): ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'questions' ? 'active' : null ?>" href="/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Questions</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'exams' ? 'active' : null ?>" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=1">Exams</a>
+        <?php elseif($_GET['page'] === 'reports'): ?>
+            <a class="button <?php echo $_GET['page'] == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
+        <?php endif ?>
     <?php
         endif;
     ?>
@@ -31,7 +37,7 @@
     ?>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : null ?>" href="/dashboard.php">Dashboard</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lesson.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'learningvideo.php' ? 'active' : null ?>" href="/learningvideo.php">Learning Video</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Learning Video</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'examreviewer.php' ? 'active' : null ?>" href="/examreviewer.php">Exam Reviewer</a>
     <?php
         endif;
