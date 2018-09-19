@@ -3,7 +3,6 @@
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_fields = [];
-    $type = $_GET['type'];
     
     if(empty($_POST['lastname'])) {
       $error_fields['lastname'] = 'Lastname field is required';
@@ -19,16 +18,6 @@
   
     if(empty($_POST['contactno'])) {
       $error_fields['contactno'] = 'Contact No. field is required';
-    }
-  
-    // if(empty($_POST['grade_level'])) {
-    //   $error_fields['grade_level'] = 'Grade level field is required';
-    // }
-  
-    if($type == 'student') {
-      // if(empty($_POST['teacher_id'])) {
-      //   $error_fields['teacher_id'] = 'Teacher field is required';
-      // }
     }
   
     if(empty($_POST['email'])) {

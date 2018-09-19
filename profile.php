@@ -1,53 +1,35 @@
 <?php 
-  require './config/db_connect.php';
-  include './includes/html/head.php';
-  include './check_session.php';
-  include './includes/header.php';
-  include "./resources/_global.php";
-  include './resources/profile/update.php';
+  require 'config/db_connect.php';
+  include 'includes/html/head.php';
+  include 'check_session.php';
+  include 'includes/header.php';
+  include 'resources/_global.php';
+  include 'resources/profile/update.php';
 
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $type = isset($_SESSION['type']) ? $_SESSION['type'] : null;
   $grade_level = isset($_SESSION['grade_level']) ? $_SESSION['grade_level'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id&type=$type";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id";
 
   //Diplay specific student or teacher
-  if($type == 'student') {
-    $query = "SELECT
-      student.id,
-      student.lastname,
-      student.firstname,
-      student.address,
-      student.contactno,
-      student.email,
-      student.grade_level,
-      student.teacher_id,
-      student.password,
-      student.profile_image_url,
-      CONCAT(teacher.lastname,', ' ,teacher.firstname) as teacher_name
-      FROM users student LEFT JOIN users teacher
-      ON student.teacher_id = teacher.id
-      WHERE student.id = $id";
-  }
-  else if($type == 'teacher') {
-    $query = "SELECT
-      users.id,
-      users.lastname,
-      users.firstname,
-      users.address,
-      users.contactno,
-      users.email,
-      users.password,
-      users.profile_image_url
-      FROM users WHERE users.type = 'teacher' AND users.id = $id";
-  }
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+  $query = "SELECT
+    users.id,
+    users.lastname,
+    users.firstname,
+    users.address,
+    users.contactno,
+    users.email,
+    users.password,
+    users.profile_image_url
+    FROM users WHERE users.id = $id";
 
-  $back_link = "/profile.php?id=$id";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-  $profile_image_url = !empty($row['profile_image_url']) ? $row['profile_image_url'] : '/public/images/profile-placeholder-image.png';
+    $back_link = "/profile.php?id=$id";
+
+    $profile_image_url = !empty($row['profile_image_url']) ? $row['profile_image_url'] : '/public/images/profile-placeholder-image.png';
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -109,6 +91,6 @@
     <?php endif; ?>
   </div>
 </div>
-<?php
-  include './includes/html/footer.php';
-?>
+<?php include 'includes/html/scripts.php';?>
+<script src="/public/js/modules/account.js"></script>
+<?php include 'includes/html/footer.php'; ?>
