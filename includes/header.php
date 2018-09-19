@@ -8,6 +8,13 @@
   <div class="als-logo">
     <img class="img" src="/public/images/als-logo.png"/>
   </div>
+  <div class="menu">
+    <a class="item" href="/coordinator/account/account.php?page=accounts&sub_page=student&type=student&grade_level=1">Accounts</a>
+    <a class="item" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
+    <a class="item" href="/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons & Videos</a>
+    <a class="item" href="/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Exam & Questions</a>
+    <a class="item" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
+  </div>
   <div class="profile">
     <img class="img" src="<?php echo $profile_image_url ?>"/>
     <div class="button dropdown">

@@ -36,7 +36,7 @@
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
-  $create_link = "/coordinator/account/create-account.php?page=$type&type=$type&grade_level=$grade_level";
+  $create_link = "/coordinator/account/create-account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -45,7 +45,7 @@
     <div class="tabs">
       <?php 
         for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$i";
+          $href = "/coordinator/account/account.php?page=accounts&sub_page=$type&type=$type&grade_level=$i";
           $label = $i <= 1 ? 'Elementary' : 'High School';
           $active_class = $grade_level == $i ? " active'" : "'";
           $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
