@@ -6,6 +6,8 @@
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
+  $sub_page = isset($_GET['sub_page']) ? $_GET['sub_page'] : null;
+  $create_link = "/coordinator/account/create-account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 
   //Display all student account
   if($type == 'student') {
@@ -33,26 +35,39 @@
       teacher.email
       FROM users teacher WHERE teacher.type = 'teacher' AND teacher.grade_level=$grade_level AND teacher.deleted_at IS NULL";
   }
+  //DIsplay all coordinators account
+  else if($type == 'coordinator') {
+    $query = "SELECT
+      id,
+      lastname,
+      firstname,
+      address,
+      contactno,
+      email
+      FROM users WHERE type = 'coordinator' AND is_admin = 0 AND deleted_at IS NULL";
+      $create_link = "/coordinator/account/create.php?page=accounts&sub_page=$type&type=$type";
+  }
+
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
-
-  $create_link = "/coordinator/account/create-account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php' ?>
   <div id="Accounts" class="page">
-    <div class="tabs">
-      <?php 
-        for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/account/account.php?page=accounts&sub_page=$type&type=$type&grade_level=$i";
-          $label = $i <= 1 ? 'Elementary' : 'High School';
-          $active_class = $grade_level == $i ? " active'" : "'";
-          $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
-          echo $link;
-        }
-      ?>
-    </div>
+    <?php if($sub_page !== 'coordinator'): ?>
+      <div class="tabs">
+        <?php 
+          for($i = 1; $i <= 2; $i++) {
+            $href = "/coordinator/account/account.php?page=accounts&sub_page=$type&type=$type&grade_level=$i";
+            $label = $i <= 1 ? 'Elementary' : 'High School';
+            $active_class = $grade_level == $i ? " active'" : "'";
+            $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
+            echo $link;
+          }
+        ?>
+      </div>
+    <?php endif ?>
     <div class="table-actions">
       <a class='button' href=<?php echo $create_link ?>>Create Account</a>
     </div>
@@ -71,7 +86,7 @@
             <th class="options">Options</th>
           <?php endif; ?>
 
-          <?php if($type == 'teacher'): ?>
+          <?php if($type == 'teacher' || 'coordinator'): ?>
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
@@ -99,7 +114,7 @@
             <th class="options">Options</th>
           <?php endif; ?>
 
-          <?php if($type == 'teacher'): ?>
+          <?php if($type == 'teacher' || 'coordinator'): ?>
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
@@ -110,7 +125,6 @@
         </thead>
         <tbody>
           <?php
-            //Teacher Rows
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
               $id = $row['id'];
               $last_name = $row['lastname'];
@@ -119,8 +133,14 @@
               $contactno = $row['contactno'];
               $email = $row['email'];
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
-              $update_btn = "<a class='button' href='/coordinator/account/update-account.php?page=accounts&sub_page=$type&type=$type&id=$id&grade_level=$grade_level'>Update</a>";
-              $delete_btn = "<a class='button' href='/coordinator/account/delete-account.php?page=accounts&sub_page=$type&type=$type&id=$id&grade_level=$grade_level'>Delete</a>";
+              if($type == 'coordinator') {
+                $update_btn = "<a class='button' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&id=$id'>Update</a>";
+                $delete_btn = "<a class='button' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&id=$id'>Delete</a>";
+              } else {
+                $update_btn = "<a class='button' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Update</a>";
+                $delete_btn = "<a class='button' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Delete</a>";
+              }
+             
 
               if($type == 'student') {
                 $table_row =
@@ -133,7 +153,7 @@
                   <td>$teacher_name</td>
                   <td class='option'>$update_btn $delete_btn</td>
                 </tr>";
-              }else if($type == 'teacher') {
+              }else if($type == 'teacher' || $type == 'coordinator') {
                 $table_row =
                 "<tr>
                   <td>$id</td>
