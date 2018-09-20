@@ -54,6 +54,10 @@
           <input type="text" name="title" value="<?php echo isset($_POST['title']) ? $_POST['title'] : '' ?>"/>
           <?php handleErrorMessage('title', $error_fields) ?>
         </div>
+        <div class="input">
+          <label class="label">Instruction</label>
+          <textarea name="instruction"><?php echo isset($_POST['instruction']) ? $_POST['instruction'] : '' ?></textarea>
+        </div>
         <button class='button' type="submit">Create</button>
       </form>
     <?php endif; ?>
