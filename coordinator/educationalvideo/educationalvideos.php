@@ -65,8 +65,8 @@
             $title = $row['title'];
             $url = $row['url'];
             $upload_option = $row['type'];
-            $update_btn = "<a class='button' href='/coordinator/learningvideo/update.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/learningvideo/delete.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Delete</a>";
+            $update_btn = "<a class='button' href='/coordinator/educationalvideo/update.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Update</a>";
+            $delete_btn = "<a class='button' href='/coordinator/educationalvideo/delete.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id'>Delete</a>";
 
             $table_row =
             "<tr>

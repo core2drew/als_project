@@ -7,14 +7,14 @@
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessons&id=$id&grade_level=$grade_level";
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessonandvideos&sub_page=lessons&id=$id&grade_level=$grade_level";
 
     $query = "SELECT lessons.id, lessons.title FROM lessons WHERE lessons.id = $id";
 
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-    $back_link = "/coordinator/lesson/lessons.php?page=lessons&grade_level=$grade_level"
+    $back_link = "/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level"
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -37,7 +37,7 @@
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
         <p>Are you sure you want to delete this lesson?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
-        <a class='button cancel-delete' href="/coordinator/lesson/lessons.php?page=lessons&grade_level=1">No</a>
+        <a class='button cancel-delete' href="/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">No</a>
       </form>
     <?php endif; ?>
   </div>

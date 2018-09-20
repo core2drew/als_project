@@ -3,7 +3,6 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  include '../../resources/lesson/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
@@ -11,8 +10,8 @@
   $subjects_query = "SELECT subjects.id, subjects.title
   FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL";
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessons&grade_level=$grade_level";
-  $back_link = "/coordinator/lesson/lessons.php?page=lessons&grade_level=$grade_level";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
+  $back_link = "/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
 ?>
 
 <div class="wrapper">
@@ -49,7 +48,7 @@
             <div class="document-editor">
               <div class="document-editor__toolbar"></div>
               <div class="document-editor__editable-container">
-                  <div class="document-editor__editable"><p>The initial editor data.</p></div>
+                  <div class="document-editor__editable"></div>
               </div>
             </div>
           </div>

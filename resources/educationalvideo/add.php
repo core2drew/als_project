@@ -21,7 +21,7 @@
       if ($file_size > $max_file_size) {
         $error_fields['video_file'] = 'This file is larger than 100MB. It must be less than or equal to 100MB';
       }
-      if (file_exists("../../public/videos/" . $file_name)){
+      if (file_exists("../../public/videos/" . $file_name)) {
         $error_fields['video_file'] = $file_name . " already exists";
       }
     } 

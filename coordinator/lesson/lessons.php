@@ -51,8 +51,8 @@
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             $id = $row['id'];
             $title = $row['title'];
-            $update_btn = "<a class='button' href='/coordinator/lesson/update.php?page=lessons&grade_level=$grade_level&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/lesson/delete.php?page=lessons&grade_level=$grade_level&id=$id'>Delete</a>";
+            $update_btn = "<a class='button' href='/coordinator/lesson/update.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&id=$id'>Update</a>";
+            $delete_btn = "<a class='button' href='/coordinator/lesson/delete.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&id=$id'>Delete</a>";
 
             $table_row =
             "<tr>

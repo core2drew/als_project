@@ -1,10 +1,12 @@
 <?php
   require '../../config/db_connect.php';
+  header('Content-Type: application/json');
 
   $is_success = false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_fields = [];
+    $json_data = [];
 
     if(empty($_POST['title'])) {
       $error_fields['title'] = 'Title field is required';
@@ -18,9 +20,10 @@
 
       $query = "UPDATE lessons SET title='$title', subject_id=$subject_id, lesson='$editor_data' WHERE id=$id";
       $result = mysqli_query($conn, $query);
-      echo $query;
       if($result) {
-        $json_data['success'] = true;
+       $json_data['success'] = true;
       }
+
+      echo json_encode($json_data);
     }
   }

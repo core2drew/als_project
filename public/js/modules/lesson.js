@@ -15,6 +15,7 @@ jQuery(document).ready(function($){
           if(res.success) {
             //show modal created success
             //modal go to lesson table
+            alert("Lesson created!")
           }
         },
         error: function(err) {
@@ -32,6 +33,7 @@ jQuery(document).ready(function($){
           if(res.success) {
             //show modal created success
             //modal go to lesson table
+            alert("Lesson update!")
             console.log(res)
           }
         },

@@ -3,7 +3,7 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  include '../../resources/learningvideo/add.php';
+  include '../../resources/educationalvideo/add.php';
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $upload_option =  isset($_GET['upload_option']) ? $_GET['upload_option'] : null;
@@ -12,8 +12,8 @@
   $subjects_query = "SELECT subjects.id, subjects.title
   FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL";
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option";
-  $back_link = "/coordinator/learningvideo/learningvideos.php?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$upload_option";
+  $back_link = "/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$upload_option";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -31,7 +31,7 @@
         <?php
           $upload_options = array('upload', 'link');
           foreach($upload_options as $opt){
-            $href = "/coordinator/learningvideo/create.php?page=learningvideos&grade_level=$grade_level&upload_option=$opt";
+            $href = "/coordinator/educationalvideo/create.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$opt";
             $active_class = $opt === $upload_option ? " active'" : "'";
             $link = "<a class='tab". $active_class ." href=$href>$opt</a>";
             echo $link;

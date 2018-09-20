@@ -5,7 +5,6 @@
     $error_fields = [];
     $type = $_GET['type'];
 
-    
     if(empty($_POST['lastname'])) {
       $error_fields['lastname'] = 'Lastname field is required';
     }

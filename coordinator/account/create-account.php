@@ -9,14 +9,14 @@
   $type = isset($_GET['type']) ? $_GET['type'] : null;
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&grade_level=$grade_level";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 
   //Query all Teachers
   $teachers_query = "SELECT users.id,
   CONCAT(users.lastname,', ',users.firstname) as name
   FROM users WHERE users.type = 'teacher' AND users.grade_level=$grade_level AND deleted_at IS NULL";
 
-  $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
+  $back_link = "/coordinator/account/account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 ?> 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>

@@ -8,7 +8,7 @@
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
     $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=$type&type=$type&id=$id&grade_level=$grade_level";
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=accounts&sub_page=$type&type=$type&id=$id&grade_level=$grade_level";
 
     $query = "SELECT
       users.id,
@@ -19,7 +19,7 @@
 
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    $back_link = "/coordinator/account/account.php?page=$type&type=$type&grade_level=$grade_level";
+    $back_link = "/coordinator/account/account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">

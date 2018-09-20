@@ -7,7 +7,7 @@
 
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=subjects&grade_level=$grade_level";
-  $back_link = "/coordinator/subject/subjects.php?page=subject&grade_level=$grade_level";
+  $back_link = "/coordinator/subject/subjects.php?page=subjects&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">

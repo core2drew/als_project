@@ -3,7 +3,7 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  include '../../resources/learningvideo/update.php';
+  include '../../resources/educationalvideo/update.php';
 
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
@@ -23,8 +23,8 @@
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=learningvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id";
-  $back_link = "/coordinator/learningvideo/learningvideos.php?page=learningvideos&grade_level=$grade_level&upload_option=upload";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$upload_option&id=$id";
+  $back_link = "/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=upload";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -42,7 +42,7 @@
         <?php
           $upload_options = array('upload', 'link');
           foreach($upload_options as $opt) {
-            $href = "/coordinator/learningvideo/update.php?page=learningvideos&grade_level=$grade_level&upload_option=$opt&id=$id";
+            $href = "/coordinator/educationalvideo/update.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&upload_option=$opt&id=$id";
             $active_class = $upload_option === $opt ? " active'" : "'";
             $link = "<a class='tab". $active_class ." href=$href>$opt</a>";
             echo $link;
