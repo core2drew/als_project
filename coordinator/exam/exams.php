@@ -68,8 +68,8 @@
               $id = $row['id'];
               $title = $row['title'];
               $subject = $row['subject_title'];
-              $update_exam = "<a href=/coordinator/exam/update.php?page=examandquestions&sub_page=exams&id=$id>Update</a>";
-              $remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&id=$id>Remove</a>";
+              $update_exam = "<a href=/coordinator/exam/update.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&id=$id>Update</a>";
+              $remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&id=$id>Remove</a>";
               $table_row =
               "<tr>
                 <td>$title</td>
