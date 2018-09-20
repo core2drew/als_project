@@ -24,7 +24,7 @@
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
-  <div id="ManageQuestions" class="page">
+  <div id="ManageExam" class="page">
     <?php if(isset($is_success) && $is_success): ?>
       <div class="message">
         <h1>Exam Created Successfully</h1>
