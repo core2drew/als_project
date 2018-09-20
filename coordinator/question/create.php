@@ -11,8 +11,8 @@
   $subjects_query = "SELECT subjects.id, subjects.title
   FROM subjects WHERE subjects.grade_level=$grade_level AND deleted_at IS NULL";
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=questions&grade_level=$grade_level";
-  $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=questions&grade_level=$grade_level";
+  $back_link = "/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level";
 
   function handleErrorMessage($field, $error_fields = null){
     if(isset($error_fields)) {

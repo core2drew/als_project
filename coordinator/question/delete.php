@@ -7,14 +7,12 @@
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=questions&id=$id&grade_level=$grade_level";
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=questions&grade_level=$grade_level&id=$id";
+    $back_link = "/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level";
 
     $query = "SELECT id FROM questions WHERE id = $id";
-
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-    $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level"
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -31,7 +29,7 @@
         <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
         <p>Are you sure you want to delete this question?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
-        <a class='button cancel-delete' href="/coordinator/question/questions.php?page=questions&grade_level=1">No</a>
+        <a class='button cancel-delete' href="<?php echo $back_link ?>">No</a>
       </form>
     <?php endif; ?>
   </div>

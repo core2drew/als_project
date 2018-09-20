@@ -23,8 +23,8 @@
   $answer_result = mysqli_query($conn, $answer_query);
   
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=questions&grade_level=$grade_level&id=$question_id";
-  $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=questions&grade_level=$grade_level&id=$question_id";
+  $back_link = "/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level";
 
   function handleErrorMessage($field, $error_fields = null){
     if(isset($error_fields)) {
@@ -37,7 +37,7 @@
   <?php include '../../includes/sidebar.php'; ?>
   <div id="ManageQuestions" class="page">
     <h1 class='title'>View Exam Question</h1>
-    <a href=<?php echo $back_link ?> >Back</a>
+    <a href=<?php echo $back_link ?>>Back</a>
 
     <div id="ViewQuestion" class="segment">
       <label class="label">Question:</label>

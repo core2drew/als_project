@@ -65,7 +65,7 @@
         </select>
       </div>
       <?php
-        $create_link = "/coordinator/question/create.php?page=examandquestions&page=examandquestions&sub_page=questions&grade_level=$grade_level";
+        $create_link = "/coordinator/question/create.php?page=examandquestions&sub_page=questions&grade_level=$grade_level";
         echo "<a class='button' href=$create_link>Create Question</a>";
       ?>
     </div>
@@ -95,9 +95,9 @@
               $id = $row['id'];
               $title = $row['question'];
               $subject = $row['subject'];
-              $view_btn = "<a class='button' href='/coordinator/question/view.php?page=questions&grade_level=$grade_level&id=$id'>View</a>";
+              $view_btn = "<a class='button' href='/coordinator/question/view.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&id=$id'>View</a>";
               //$update_btn = "<a class='button' href='/coordinator/question/update.php?page=questions&grade_level=$grade_level&id=$id'>Update</a>";
-              $delete_btn = "<a class='button' href='/coordinator/question/delete.php?page=questions&grade_level=$grade_level&id=$id'>Delete</a>";
+              $delete_btn = "<a class='button' href='/coordinator/question/delete.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&id=$id'>Delete</a>";
               $table_row =
               "<tr>
                 <td>$title</td>
