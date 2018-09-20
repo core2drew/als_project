@@ -7,3 +7,9 @@ function findexts ($filename) {
   $exts = $exts[$n]; 
   return $exts; 
 } 
+
+function handleErrorMessage($field, $error_fields = null) {
+  if(isset($error_fields)) {
+    echo isset($error_fields[$field]) ? "<label class='error'>$error_fields[$field]</label>" : null;
+  }
+}

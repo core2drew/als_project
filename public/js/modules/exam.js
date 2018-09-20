@@ -3,6 +3,8 @@ jQuery(document).ready(function($){
     var includedQuestions = [];
     var question_url = '/resources/exam/questions.php'
     var modalContainer = $(".modal-container");
+    var $examForm = $("#ExamForm");
+    var $saveExamButton = $examForm.find('#SaveExam');
     var addExamQuestionModal = $("#AddExamQuestionModal");
     var addExamQuestionModalClose = addExamQuestionModal.find('.close');
     var addExamQuestionModalTable = addExamQuestionModal.find('.table');
@@ -10,8 +12,7 @@ jQuery(document).ready(function($){
     var manageExams = $("#ManageExams");
     var examQuestionTable = manageExams.find('.exam-questions');
     var removeExamQuestionButton = examQuestionTable.find('.remove-question');
-  
-
+    
     function saveExamQuestions(includedQuestions, examId) {
       $.ajax({
         type: "POST",
@@ -104,6 +105,42 @@ jQuery(document).ready(function($){
         }
       });
     }
+
+    function saveExam(e){
+      e.preventDefault();
+      var url = '/resources/exam/add.php';
+      var data = $examForm.serialize(); // Convert form data to URL params
+
+      //Validate form field
+      $examForm.validate({
+        errorClass: "error-field",
+        rules:{
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          }
+        }
+      })
+      
+      //Is form valid
+      if($examForm.valid()) {
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(res){
+            if(res.success) {
+              alert("New exam created!");
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
     
     function init() {
       $("#AddExamQuestionBtn").on("click", function(){
@@ -132,6 +169,8 @@ jQuery(document).ready(function($){
         removeExamQuestion(questionId, examId)
         $this.closest('tr').remove();
       })
+
+      $saveExamButton.on('click', saveExam)
     }
 
     return {
