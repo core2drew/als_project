@@ -4,6 +4,7 @@
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_fields = [];
     $type = $_GET['type'];
+    $profile_image_url = "";
 
     if(empty($_POST['lastname'])) {
       $error_fields['lastname'] = 'Lastname field is required';
@@ -46,18 +47,18 @@
     if(empty($_POST['password'])) {
       $error_fields['password'] = 'Password field is required';
     }
-
+    
     if(count($error_fields) <= 0) {
       $tmp_name = $_FILES["profile_image"]["tmp_name"];
+
       if(!empty($tmp_name)) {
         $ext = findexts($_FILES['profile_image']['name']); 
         $filename = time().".".$ext;
-        move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
+        //move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
         $profile_image_url = "/public/images/profile/" . $filename;
         $_SESSION['profile_image_url'] = $profile_image_url;
+        $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
       }
-
-      $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
 
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);

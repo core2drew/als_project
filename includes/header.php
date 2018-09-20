@@ -1,7 +1,6 @@
 <?php 
   $profile_image_url = !empty($_SESSION['profile_image_url']) ? $_SESSION['profile_image_url'] : '/public/images/profile-placeholder-image.png';
   $id = $_SESSION['user_id'];
-
 ?>
 
 <div id="Header">
