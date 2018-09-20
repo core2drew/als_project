@@ -35,8 +35,8 @@
   
   $question_count = count($questions_id);
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=exams&grade_level=$grade_level";
-  $back_link = "/coordinator/question/questions.php?page=questions&grade_level=$grade_level";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=exams&grade_level=$grade_level";
+  $back_link = "/coordinator/question/questions.php?page=examandquestions&sub_page=exams&grade_level=$grade_level";
 
   function handleErrorMessage($field, $error_fields = null){
     if(isset($error_fields)) {
