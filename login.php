@@ -7,7 +7,7 @@
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $query = "SELECT id, profile_image_url, type, CONCAT(firstname, ' ', lastname) as fullname, grade_level from users where email='$email' and password='$password' and deleted_at IS NULL";
+    $query = "SELECT id, profile_image_url, type, CONCAT(firstname, ' ', lastname) as fullname, grade_level, is_admin from users where email='$email' and password='$password' and deleted_at IS NULL";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
@@ -16,6 +16,7 @@
     $user_id = $row['id'];
     $grade_level = $row['grade_level'];
     $profile_image_url = $row['profile_image_url'];
+    $is_admin = $row['is_admin'];
     
     $count = mysqli_num_rows($result);
     mysqli_close($conn);
@@ -27,6 +28,7 @@
       $_SESSION['user_id'] = $user_id;
       $_SESSION['grade_level'] = $grade_level;
       $_SESSION['profile_image_url'] = $profile_image_url;
+      $_SESSION['is_admin'] = $is_admin;
     }else {
       $error_fields['login'] = 'Incorrect username or Password';
       //echo "Error " . mysqli_error($conn);
