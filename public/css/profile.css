@@ -1,0 +1,17 @@
+#Profile > #AccountForm {
+  width: 50%;
+  margin: auto;
+}
+
+#Profile > #AccountForm > .form > #ProfileImage > .image {
+  height: 115px;
+  width: 115px;
+}
+
+#Profile > #AccountForm > .form > #ProfileImage > input[name='profile_image'] {
+  display: none;
+}
+
+#Profile > #AccountForm > .form > #ProfileImage > .upload-btn {
+  align-self: flex-start;
+}

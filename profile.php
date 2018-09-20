@@ -10,7 +10,8 @@
   $type = isset($_SESSION['type']) ? $_SESSION['type'] : null;
   $grade_level = isset($_SESSION['grade_level']) ? $_SESSION['grade_level'] : null;
 
-  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?id=$id";
+  $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=profile&id=$id";
+  $back_link = "/profile.php?page=profile&id=$id";
 
   //Diplay specific student or teacher
   $query = "SELECT
@@ -27,12 +28,10 @@
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-    $back_link = "/profile.php?id=$id";
-
     $profile_image_url = !empty($row['profile_image_url']) ? $row['profile_image_url'] : '/public/images/profile-placeholder-image.png';
 ?>
 
-<div id="Coordinator" class="wrapper">
+<div id="Profile" class="wrapper">
   <?php include './includes/sidebar.php'; ?>
   <div id="AccountForm" class="page">
     <?php if(isset($is_success) && $is_success): ?>
@@ -86,7 +85,6 @@
         <input type="hidden" name="type" value=<?php echo $type ?> />
         <input type="hidden" name="grade_level" value=<?php echo $grade_level ?> />
         <button class='button' type="submit">Update</button>
-        <a class="button" href="/dashboard.php">Cancel</a>
       </form>
     <?php endif; ?>
   </div>

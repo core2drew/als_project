@@ -8,6 +8,7 @@
 @import './coordinator.css';
 @import './exam.css';
 @import './question.css';
+@import './profile.css';
 @import './components/header.css';
 @import './components/sidebar.css';
 @import './components/button.css';
@@ -30,7 +31,7 @@ a {
   text-decoration: none;
 }
 
-#Dashboard, #Lessons, #Questions, #Coordinator {
+#Dashboard, #Lessons, #Questions, #Coordinator, #Profile {
   margin-top: 77px;
 }
 
