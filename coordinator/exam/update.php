@@ -56,7 +56,7 @@
     <?php else: ?>
       <h1 class='title'>Update <?php echo $title ?> Question</h1>
       <div class="table-actions">
-        <button class='button' id="AddExamQuestionBtn">Add Question</button>
+        <button class='button' id="AddExamQuestion">Add Question</button>
       </div>
       <?php
         if($question_count <= 0):
@@ -120,12 +120,7 @@
         <th>Question</th>
         <th>Include</th>
       </thead>
-      <!-- <div class="body">
-        <div class="row">
-          <span class="td">What is science?</span>
-          <span class="td">View</span>
-        </div>
-      </div> -->
+      <tbody></tbody>
     </table>
     <div class="no-records">
       <h3>No Records</h3>

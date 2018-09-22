@@ -38,7 +38,7 @@
           $id = $row['id'];
           $title = $row['title'];
           $minutes = $row['minutes'];
-          $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=$subject_id&id=$id>Questions</a>";
+          $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=$subject_id&exam_id=$id>Questions</a>";
           $update = "<span class='button update' data-exam-id=$id>Update</span>";
           $remove = "<span class='button delete' data-exam-id=$id>Remove</span>";
           $table_row =

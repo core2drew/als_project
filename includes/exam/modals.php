@@ -56,4 +56,30 @@
       <span class="action button no">Cancel</span>
     </div>
   </div>
+  <?php  ?>
+  <div id="ExamQuestionModal" class="modal" data-subject-id="<?php echo $subject_id ?>" data-exam-id="<?php echo $_GET['exam_id'] ?>">
+    <div class="loading">
+      <div class="lds-ripple">
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+      </div>
+    </div>
+    <div class="title">Add Questions</div>
+    <div class="content">
+      <table class="table">
+        <thead class="header">
+          <th>Question</th>
+          <th>Include</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="no-records">
+        <h3>No Records</h3>
+      </div>
+    </div>
+    <div class="actions">
+      <span class='action button save'>Save</span>
+      <span class="action button no">Cancel</span>
+    </div>
+  </div>
 </div>
