@@ -33,12 +33,13 @@
           $title = $row['title'];
           $minutes = $row['minutes'];
           $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=$subject_id&id=$id>Questions</a>";
-          $remove_exam = "<span class='button delete' data-exam-id=$id>Remove</a>";
+          $update = "<span class='button update' data-exam-id=$id>Update</span>";
+          $remove = "<span class='button delete' data-exam-id=$id>Remove</span>";
           $table_row =
           "<tr>
             <td>$title</td>
             <td>$minutes</td>
-            <td class='option'>$questions $remove_exam</td>
+            <td class='option'>$questions $update $remove</td>
           </tr>";
           echo $table_row;
         }
