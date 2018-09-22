@@ -5,16 +5,27 @@ jQuery(document).ready(function($){
     var question_url = '/resources/exam/questions.php'
     var modalContainer = $(".modal-container");
     var $tableActions = $(".table-actions");
+    var $table = $('.table');
     var $modal = modalContainer.find('.modal')
 
+    //Table Actions
+    var $createExamBtn = $tableActions.find('#CreateExam')
+    
     //Create
     var $createModal = modalContainer.find('#CreateModal');
     var $createModalForm = $createModal.find(".form");
     var $saveButton = $createModal.find('.create');
 
+    //Update
+    var $updateModal = modalContainer.find('#UpdateModal');
+    var $updateModalForm = $updateModal.find(".form");
+    var $updateButton = $updateModal.find('.update');
+    var $updateRecordButton = $table.find('.update');
+
     //Delete
     var $deleteModal = modalContainer.find('#DeleteModal');
-    var $deleteButton = $('.delete');
+    var $yesDeleteButton = $deleteModal.find('.yes')
+    var $deleteRecordButton = $table.find('.delete');
 
     var addExamQuestionModal = $("#AddExamQuestionModal");
     var addExamQuestionModalClose = addExamQuestionModal.find('.close');
@@ -119,7 +130,6 @@ jQuery(document).ready(function($){
     }
 
     function saveExam(e){
-      e.preventDefault();
       var url = '/resources/exam/add.php';
       var data = $createModalForm.serialize(); // Convert form data to URL params
 
@@ -158,6 +168,45 @@ jQuery(document).ready(function($){
       }
     }
 
+    function updateExam(e) {
+      var data = $updateModalForm.serializeArray(); // Convert form data to URL params
+      data.push({name: 'id', value: examId})
+      
+      //Validate form field
+      $updateModalForm.validate({
+        errorClass: "error-field",
+        rules:{
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          }
+        }
+      })
+      
+      //If form valid update exam
+      if($updateModalForm.valid()) {
+        $.ajax({
+          type: "POST",
+          url: '/resources/exam/update.php',
+          data: $.param(data),
+          success: function(res){
+            if(res.success) {
+              location.reload();
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
+
     function deleteExam() {
       var url = '/resources/exam/delete.php';
       $.ajax({
@@ -180,26 +229,53 @@ jQuery(document).ready(function($){
       $createModal.show();
     }
 
+    function showUpdateModal() {
+      var url = '/resources/exam/exam.php';
+      var $title = $updateModal.find('input[name=title]');
+      var $instruction = $updateModal.find('textarea[name=instruction]');
+      var $minutes = $updateModal.find('input[name=minutes]');
+
+      examId = $(this).data('examId'); //get id of selected exam
+      modalContainer.addClass('active')
+      
+      //Display selected record details
+      $.ajax({
+        type: "GET",
+        url: url,
+        data: $.param({'id': examId}),
+        success: function(res){
+          if(res.success) {
+            $title.val(res.data.title)
+            $instruction.val(res.data.instruction)
+            $minutes.val(res.data.minutes)
+            $updateModal.show();
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
     function showDeleteModal(e){
       examId = $(this).data('examId'); //get id of selected exam
       modalContainer.addClass('active')
       $deleteModal.show();
     }
 
-    function tableActionsInit(){
-      var createExamBtn = $tableActions.find('#CreateExam')
-      createExamBtn.on('click', showCreateModal)
-    }
+    function actionsInit(){
+      $createExamBtn.on('click', showCreateModal)
+      $yesDeleteButton.on('click', deleteExam)
 
-    function modalActionsInit(){
-      var $yesBtn = $deleteModal.find('.yes')
-      $yesBtn.on('click', deleteExam)
+      //Show Modal
+      $updateRecordButton.on('click', showUpdateModal)
+      $deleteRecordButton.on('click', showDeleteModal)
 
       //Close all modals
       $modal.find('.no').on('click', closeModals)
 
       $saveButton.on('click', saveExam)
-      $deleteButton.on('click', showDeleteModal)
+      $updateButton.on('click', updateExam)
     }
 
     function closeModals(){
@@ -209,8 +285,7 @@ jQuery(document).ready(function($){
     }
 
     function init() {
-      tableActionsInit()
-      modalActionsInit()
+      actionsInit()
 
       $("#AddExamQuestionBtn").on("click", function(){
         modalContainer.addClass('active');
