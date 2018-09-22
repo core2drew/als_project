@@ -18,7 +18,8 @@ jQuery(document).ready(function($){
 
     //Exam Question Table Actions
     var $removeExamQuestionButton = $examQuestionTable.find('.remove');
-    
+    var $viewExamQuestionButton = $examQuestionTable.find('.view');
+
     //Create Exam
     var $createModal = $modalContainer.find('#CreateModal');
     var $createModalForm = $createModal.find(".form");
@@ -37,9 +38,11 @@ jQuery(document).ready(function($){
 
     //Add Exam Question Modal
     var $examQuestionModal = $modalContainer.find("#ExamQuestionModal");
-    var $examQuestionModalClose = $examQuestionModal.find('.close');
     var $examQuestionModalTable = $examQuestionModal.find('.table');
     var $saveExamQuestionsButton = $examQuestionModal.find('.save');
+
+    //View Exam Question modal
+    var $examViewQuestionModal = $modalContainer.find('#ExamViewQuestionModal');
 
     function makeQuestionTable(container, data) {
       var tableBody = container.find('tbody')
@@ -199,10 +202,52 @@ jQuery(document).ready(function($){
       });
     }
 
+    function viewExamQuestion(){
+      var questionId = $(this).data('questionId');
+
+      $modalContainer.addClass('active');
+      $examViewQuestionModal.show();
+
+      $question = $examViewQuestionModal.find('.question')
+      $choices = $examViewQuestionModal.find('.choices')
+      $explanation = $examViewQuestionModal.find('.explanation')
+
+      $choices.empty()
+      $explanation.hide()
+      
+      $.ajax({
+        type: "GET",
+        url: '/resources/question/question.php',
+        data: $.param({
+          id: questionId
+        }),
+        success: function(res){
+          if(res.success) {
+            $question.html(res.data.question)
+            if(res.data.explanation) {
+              $explanation.show()
+              $explanation.html(res.data.explanation)
+            }
+            
+            res.data.answers.map(function(data, index){
+              var $choice = $('<span/>').addClass('choice')
+              if(data.is_answer) {
+                $choice.addClass('answer')
+              }
+              $choice.html(data.answer)
+              $choices.append($choice)
+            })
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
     function removeExamQuestion() {
       var questionId = $(this).data('questionId');
       examId = $examQuestionModal.data('examId');
-      console.log(questionId)
       $.ajax({
         type: "POST",
         url: question_url,
@@ -288,6 +333,7 @@ jQuery(document).ready(function($){
       $deleteModal.hide();
       $createModal.hide();
       $examQuestionModal.hide();
+      $examViewQuestionModal.hide();
       includedQuestions = []; //reset included
     }
 
@@ -302,7 +348,7 @@ jQuery(document).ready(function($){
       $deleteRecordButton.on('click', showDeleteModal)
   
       //Close all modals
-      $modal.find('.no').on('click', closeModals)
+      $modal.find('.close').on('click', closeModals)
   
       $saveButton.on('click', saveExam)
       $updateButton.on('click', updateExam)
@@ -311,6 +357,8 @@ jQuery(document).ready(function($){
       $saveExamQuestionsButton.on('click', saveExamQuestions)
       //remove question to exam
       $removeExamQuestionButton.on('click', removeExamQuestion)
+      //view question
+      $viewExamQuestionButton.on('click', viewExamQuestion)
     }
 
     return {

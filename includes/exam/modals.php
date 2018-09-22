@@ -4,7 +4,7 @@
     <div class="content">Are you sure you want to delete?</div>
     <div class="actions">
       <span class="action button yes">Yes</span>
-      <span class="action button no">No</span>
+      <span class="action button close">No</span>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
     <div class="title">Create Exam</div>
     <div class="content">
       <form id="CreateForm" class="form" method="POST">
-        <input type="hidden" name="subject_id" value="<?php echo $_GET['subject_id'] ?>" />
+        <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
         <div class="input">
           <label class="label">Title</label>
           <input type="text" name="title" value=""/>
@@ -29,7 +29,7 @@
     </div>
     <div class="actions">
       <span class="action button create">Create</span>
-      <span class="action button no">Cancel</span>
+      <span class="action button close">Cancel</span>
     </div>
   </div>
 
@@ -53,10 +53,10 @@
     </div>
     <div class="actions">
       <span class="action button update">Update</span>
-      <span class="action button no">Cancel</span>
+      <span class="action button close">Cancel</span>
     </div>
   </div>
-  <?php  ?>
+
   <div id="ExamQuestionModal" class="modal" data-subject-id="<?php echo $subject_id ?>" data-exam-id="<?php echo $_GET['exam_id'] ?>">
     <div class="loading">
       <div class="lds-ripple">
@@ -79,7 +79,24 @@
     </div>
     <div class="actions">
       <span class='action button save'>Save</span>
-      <span class="action button no">Cancel</span>
+      <span class="action button close">Cancel</span>
+    </div>
+  </div>
+
+  <div id="ExamViewQuestionModal" class="modal">
+    <div class="title">View Question</div>
+    <div class="content">
+      <div class="question">This is test question</div>
+      <div class="choices">
+        <span class="choice answer">Choice 1</span>
+        <span class="choice">Choice 1</span>
+        <span class="choice">Choice 1</span>
+        <span class="choice">Choice 1</span>
+      </div>
+      <div class="explanation">This is a test explanation</div>
+    </div>
+    <div class="actions">
+      <span class="action button close">Close</span>
     </div>
   </div>
 </div>

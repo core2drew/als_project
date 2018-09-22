@@ -27,7 +27,7 @@
 
 <div class="title">
   <h2>Exam Questions</h2>
-  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=1">Go Back</a>
+  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=<?php echo $subject_id ?>">Go Back</a>
 </div>
 
 <div class="table-actions">
@@ -60,7 +60,7 @@
           $id = $qr['id'];
           $question = $qr['question'];
           $answer = $qr['answer'];
-          $view = "<button class='button view'>View</button>";
+          $view = "<button class='button view' data-question-id=$id>View</button>";
           $remove = "<button class='button remove' data-question-id=$id>Remove</button>";
           $table_row =
           "<tr>
