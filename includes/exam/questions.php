@@ -11,7 +11,7 @@
   $questions_id = explode(',', $exam_row['questions_id']);
   
   // format array to string 1','2','3','4
-  $questions_id = implode("','",$questions_id);
+  $questions_id = implode("','", $questions_id);
 
   //Get current questions of exam
   $question_query = "SELECT DISTINCT quest.id, quest.question,
@@ -36,7 +36,7 @@
 <?php
   if($question_count <= 0):
 ?>
-  <table class="table exam-question">
+  <table class="table question">
     <thead>
       <th>Question</th>
       <th>Answer</th>
@@ -47,7 +47,7 @@
     <h3>No Records</h3>
   </div>
 <?php else: ?>
-  <table class="table exam-question">
+  <table class="table question">
     <thead>
       <th>Question</th>
       <th>Answer</th>

@@ -8,13 +8,16 @@ jQuery(document).ready(function($){
     var $modalContainer = $(".modal-container");
 
     var $tableActions = $manageExams.find('.table-actions');
-    var $table = $manageExams.find('.table');
-    var $examQuestionTable = $manageExams.find('.exam-question');
+    var $examTable = $manageExams.find('.table.exam');
+    var $examQuestionTable = $manageExams.find('.table.question');
     var $modal = $modalContainer.find('.modal');
 
-    //Table Actions
+    //Exam Table Actions
     var $createExamButton = $tableActions.find('#CreateExam');
     var $addExamQuestionButton = $tableActions.find("#AddExamQuestion");
+
+    //Exam Question Table Actions
+    var $removeExamQuestionButton = $examQuestionTable.find('.remove');
     
     //Create Exam
     var $createModal = $modalContainer.find('#CreateModal');
@@ -25,23 +28,18 @@ jQuery(document).ready(function($){
     var $updateModal = $modalContainer.find('#UpdateModal');
     var $updateModalForm = $updateModal.find(".form");
     var $updateButton = $updateModal.find('.update');
-    var $updateRecordButton = $table.find('.update');
+    var $updateRecordButton = $examTable.find('.update');
 
     //Delete Exam
     var $deleteModal = $modalContainer.find('#DeleteModal');
     var $yesDeleteButton = $deleteModal.find('.yes');
-    var $deleteRecordButton = $table.find('.delete');
+    var $deleteRecordButton = $examTable.find('.delete');
 
     //Add Exam Question Modal
     var $examQuestionModal = $modalContainer.find("#ExamQuestionModal");
     var $examQuestionModalClose = $examQuestionModal.find('.close');
     var $examQuestionModalTable = $examQuestionModal.find('.table');
     var $saveExamQuestionsButton = $examQuestionModal.find('.save');
-
-    //Exam Question Table Actions
-    console.log($examQuestionTable)
-    var $removeExamQuestionButton = $examQuestionTable.find('.remove');
-
 
     function makeQuestionTable(container, data) {
       var tableBody = container.find('tbody')

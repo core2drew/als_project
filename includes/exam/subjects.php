@@ -22,7 +22,7 @@
 <?php
   if($count <= 0):
 ?>
-  <table class="table">
+  <table class="table subjects">
     <thead>
       <th>Subject</th>
       <th class="options">Options</th>
@@ -32,7 +32,7 @@
     <h3>No Records</h3>
   </div>
 <?php else: ?>
-  <table class="table">
+  <table class="table subjects">
     <thead>
       <th>Subject</th>
       <th class="options">Options</th>
