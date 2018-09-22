@@ -42,7 +42,7 @@
           $title = $row['title'];
           $minutes = $row['minutes'];
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
-          $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=$subject_id&exam_id=$id>Questions</a>";
+          $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
           $update = "<span class='button update' data-exam-id=$id>Update</span>";
           $remove = "<span class='button delete' data-exam-id=$id>Remove</span>";
           $table_row =
