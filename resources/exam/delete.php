@@ -11,10 +11,10 @@
     $result = mysqli_query($conn, $query);
 
     if($result) {
-        $json_data['success'] = true;
-      } else {
-        $json_data['message'] = 'Oops, something went wrong.';
-      }
+      $json_data['success'] = true;
+    } else {
+      $json_data['message'] = 'Oops, something went wrong.';
+    }
   }
 
   echo json_encode($json_data);

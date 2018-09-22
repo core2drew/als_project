@@ -27,7 +27,7 @@
 
 <div class="title">
   <h2>Exam Questions</h2>
-  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=<?php echo $subject_id ?>">Go Back</a>
+  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=<?php echo $grade_level ?>&subject_id=<?php echo $subject_id ?>">Go Back</a>
 </div>
 
 <div class="table-actions">

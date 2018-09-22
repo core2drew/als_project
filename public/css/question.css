@@ -1,10 +1,15 @@
 #ManageQuestions {
-  width: 800px;
   margin-left: 250px;
 }
 
 #ManageQuestions > .tabs {
   margin-bottom: 20px;
+}
+
+#ManageQuestions > .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #ManageQuestions > .form > .input > textarea[name='question'],
@@ -23,10 +28,6 @@
 
 #ManageQuestions > .form > .input > .choice-answer > input[type='text'] {
   width: 100%;
-}
-
-#ManageQuestions > .table > tbody > tr > td {
-  padding: 0 1em;
 }
 
 #ManageQuestions > .table-actions {
@@ -67,4 +68,57 @@
 #ManageQuestions > #ViewQuestion > .explanation {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+#CreateModal > .content > .form > .question,
+#CreateModal > .content > .form > .choices {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#CreateModal > .content > .form > .choices > .choice:nth-last-child(n + 2) {
+  margin-bottom: 5px;
+}
+
+#CreateModal > .content > .form > .add {
+  font-size: small;
+  padding: 5px 20px;
+  width: 100%;
+  text-align: center;
+}
+
+#CreateModal > .content > .form > .choices > .choice .remove {
+  font-size: 0.7em;
+  position: absolute;
+  top: 2px;
+  right: 0;
+  color: #d83737;
+}
+
+#ViewQuestionModal > .content > .question {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgb(249, 249, 249);
+  max-width: 400px;
+  border: 0.5px solid #e6e6e6;
+}
+
+#ViewQuestionModal > .content > .choices {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+#ViewQuestionModal > .content > .choices > .choice {
+  padding: 5px 10px;
+}
+#ViewQuestionModal > .content > .choices > .choice.answer {
+  background-color: #d8ffd8
+}
+
+#ViewQuestionModal > .content > .explanation {
+  font-size: 0.75em;
+  padding: 10px;
+  background: #fff2e5;
+  font-style: italic;
 }
