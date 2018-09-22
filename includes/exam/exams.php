@@ -3,6 +3,12 @@
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
+
+<div class="title">
+  <h2>Exams</h2>
+  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=1">Go Back</a>
+</div>
+
 <div class="table-actions">
   <span id='CreateExam' class='button'>Create Exam</span>
 </div>

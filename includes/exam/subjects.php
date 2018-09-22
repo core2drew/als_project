@@ -3,6 +3,11 @@
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
+
+<div class="title">
+  <h2>Subjects</h2>
+</div>
+
 <div class="tabs">
   <?php
     for($i = 1; $i <= 2; $i++) {
