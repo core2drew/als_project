@@ -2,14 +2,14 @@
   margin-bottom: 20px;
 }
 
-#ManageExams > .table.exam-questions > thead > tr > th:nth-child(3) {
-  width: 1%;
-}
-
 #ManageExams > .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#ManageExams > .table.exam-questions > thead > tr > th:nth-child(3) {
+  width: 1%;
 }
 
 #ExamQuestionModal {
@@ -43,6 +43,7 @@
 #ExamQuestionModal > .content > .table > tbody > tr > td > .remove {
   display: none;
 }
+
 #ExamViewQuestionModal > .content > .question {
   margin-bottom: 10px;
   padding: 10px;

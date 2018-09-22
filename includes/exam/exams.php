@@ -12,6 +12,7 @@
 <div class="table-actions">
   <span id='CreateExam' class='button'>Create Exam</span>
 </div>
+
 <?php
   if($count <= 0):
 ?>

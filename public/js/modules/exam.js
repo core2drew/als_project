@@ -7,10 +7,12 @@ jQuery(document).ready(function($){
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container");
 
+    //All Modals
+    var $modal = $modalContainer.find('.modal');
+
     var $tableActions = $manageExams.find('.table-actions');
     var $examTable = $manageExams.find('.table.exam');
     var $examQuestionTable = $manageExams.find('.table.question');
-    var $modal = $modalContainer.find('.modal');
 
     //Exam Table Actions
     var $createExamButton = $tableActions.find('#CreateExam');
