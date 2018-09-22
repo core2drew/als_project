@@ -7,12 +7,10 @@
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
-    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=exams&grade_level=$grade_level&id=$id";
-    $back_link = "/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$grade_level";
+    $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
 
-    $query = "SELECT id FROM questions WHERE id = $id";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $form_action = htmlspecialchars($_SERVER["PHP_SELF"])."?page=examandquestions&sub_page=exams&subject_id=$subject_id&id=$id";
+    $back_link = "/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&subject_id=$subject_id";
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -26,7 +24,7 @@
     <?php else: ?>
       <h1 class='title'>Delete Exam</h1>
       <form class="form" method="POST" action="<?php echo $form_action ?>">
-        <input type="hidden" name="id" value=<?php echo $row['id'] ?> />
+        <input type="hidden" name="id" value=<?php echo $id ?> />
         <p>Are you sure you want to delete this exam?</p>
         <button class='button confirm-delete' type="submit">Yes</button>
         <a class='button cancel-delete' href="<?php echo $back_link ?>">No</a>
