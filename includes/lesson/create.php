@@ -11,6 +11,12 @@
       </div>
     </div>
   </div>
+  <div class="input" id="PDFLesson">
+    <label class="label">Upload Reviewer</label>
+    <input type="text" name="filename" readonly />
+    <input type="file" name="reviewer_file" accept="application/pdf"/>
+    <span class="button upload">Upload</span>
+  </div>
   <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
   <span class='button create'>Create</span>
 </form>

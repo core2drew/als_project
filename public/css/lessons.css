@@ -12,11 +12,11 @@
   justify-content: space-between;
 }
 
-#Lessons > .content > .form > #PDFLesson > input[name='pdf_file'] {
+#ManageLessons > .form > #PDFLesson > input[name='reviewer_file'] {
   display: none;
 }
 
-#Lessons > .content > .form > .button {
+#ManageLessons > .form > .button {
   display: block;
   margin-left: auto;
   margin-top: 20px;

@@ -10,10 +10,15 @@ jQuery(document).ready(function($){
     //All Modals
     var $modal = $modalContainer.find('.modal');
 
+
+
     var $lessonTable = $manageLessons.find('.table.lessons');
     
     var $createForm = $manageLessons.find('#CreateForm');
     var $createButton = $createForm.find('.create');
+
+    //All forms
+    var $form = $manageLessons.find('.form');
 
     var $updateForm = $manageLessons.find('#UpdateForm');
     var $updateButton = $updateForm.find('.update');
@@ -24,6 +29,10 @@ jQuery(document).ready(function($){
     var $deleteModal = $modalContainer.find('#DeleteModal');
     var $yesDeleteButton = $deleteModal.find('.yes');
 
+    var $uploadVideoButton = $form.find('.upload');
+    var $uploadFileInput = $form.find('input[type=file]');
+    var $uploadTextInput = $form.find('input[name=filename]');
+
     function createLesson(){
       //Validate form field
       $createForm.validate({
@@ -31,17 +40,19 @@ jQuery(document).ready(function($){
       })
 
       if($createForm.valid()) {
-        var data = $createForm.serializeArray()
-        data.push({name: 'editor_data', value: lessonEditor.getData()})
+        var formData = new FormData($createForm[0]);
+        formData.append('editor_data', lessonEditor.getData())
         $.ajax({
           type: "POST",
           url: '/resources/lesson/add.php',
-          data: data,
+          data: formData,
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
           success: function(res){
             if(res.success) {
               //show modal created success
               //modal go to lesson table
-              location.reload();
+              //location.reload();
             }
           },
           error: function(err) {
@@ -138,6 +149,17 @@ jQuery(document).ready(function($){
 
       //Confirmation Delete Modal Action
       $yesDeleteButton.on('click', deleteLesson)
+
+
+      $uploadVideoButton.on('click', function(){
+        $(this).siblings('input[type=file]').trigger('click');
+      })
+  
+      $uploadFileInput.on('change', function(){
+        var $this = $(this)
+        $filename = $this[0].files[0].name;
+        $uploadTextInput.val($filename);
+      })
     }
     return {
       init: init
