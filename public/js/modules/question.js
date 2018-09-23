@@ -2,8 +2,7 @@ jQuery(document).ready(function($){
    //Questions Module
   var questionModule = (function(){
     var questionId = 0;
-    var choicesCount = 2
-
+    var choicesCount;
     var $manageQuestions = $("#ManageQuestions");
     var $modalContainer = $(".modal-container");
 
@@ -22,6 +21,7 @@ jQuery(document).ready(function($){
     var $createModal = $modalContainer.find('#CreateModal');
     var $createModalForm = $createModal.find(".form");
     var $saveButton = $createModal.find('.create');
+    var $choices = $createModal.find('.choices');
 
     //Delete Question Modal / Actions
     var $deleteModal = $modalContainer.find('#DeleteModal');
@@ -30,8 +30,7 @@ jQuery(document).ready(function($){
     //View Question modal
     var $viewModal = $modalContainer.find('#ViewQuestionModal');
     
-    var addChoiceButton = $modalContainer.find('.add')
-    var removeChoiceButton = $modalContainer.find('.remove')
+    var $addChoiceButton = $modalContainer.find('.add')
 
     function showCreateModal(){
       $modalContainer.addClass('active')
@@ -105,28 +104,40 @@ jQuery(document).ready(function($){
     }
 
     function addChoice(){
-      var $choices = $modalContainer.find('.choices');
+      choicesCount = $choices.children().length;
+      currentCount = choicesCount + 1;
       var $choice = $('<div/>').addClass('input choice')
       var $remove = $('<span/>').addClass('basic button remove')
       var $label = $('<label/>').addClass('label')
       var $input = $('<input type=text />')
-
+      $input.attr('name', `choice_${currentCount}`)
+      
       $remove.append('Remove');
-      $label.append('Choice ' + (++choicesCount))
+      $label.append(`Choice ${currentCount}`)
       $choice.append($label).append($input).append($remove)
       $choices.append($choice)
 
-      if(choicesCount >= 4) {
-        addChoiceButton.hide();
+      if($choices.children().length >= 4) {
+        $addChoiceButton.hide();
       }
     }
 
-    function removeChoice(){
-      console.log($(this).closest('.input'))
-      $(this).closest('.input').remove();
+    function removeChoice() {
+      var $input = $(this).closest('.input');
+      var index = $input.index();
+      choicesCount = $choices.children().length;
+      
+      //Remove item 4 if you remove item 3
+      if(index == 2 && choicesCount >= 4) {
+        $input.next('.input').remove();
+        console.log("test")
+      } else {
+        $input.remove();
+        console.log("test2")
+      }
 
       if($choices.children().length < 4) {
-        addChoiceButton.show();
+        $addChoiceButton.show();
       }
     }
 
@@ -152,8 +163,8 @@ jQuery(document).ready(function($){
       //Confirmation Delete Modal Action
       $yesDeleteButton.on('click', deleteQuestion)
 
-      addChoiceButton.on('click', addChoice)
-      removeChoiceButton.on('click', removeChoice)
+      $addChoiceButton.on('click', addChoice)
+      $choices.on('click', '.remove', removeChoice)
     }
 
     return {

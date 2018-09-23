@@ -135,7 +135,7 @@ jQuery(document).ready(function($){
       //Validate form field
       $updateModalForm.validate({
         errorClass: "error-field",
-        rules:{
+        rules: {
           title: {
             required: true
           },
