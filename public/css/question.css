@@ -76,8 +76,12 @@
   position: relative;
 }
 
+#CreateModal > .content > .form > .question > textarea{
+  resize: none;
+}
+
 #CreateModal > .content > .form > .choices > .choice:nth-last-child(n + 2) {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #CreateModal > .content > .form > .add {
@@ -87,12 +91,37 @@
   text-align: center;
 }
 
-#CreateModal > .content > .form > .choices > .choice .remove {
-  font-size: 0.7em;
+#CreateModal > .content > .form > .choices > .choice > .remove {
+  font-size: 0.6em;
   position: absolute;
   top: 2px;
   right: 0;
-  color: #d83737;
+  color: #ffffff;
+  background: #d83737;
+  padding: 2px 10px;
+}
+
+#CreateModal > .content > .form > .choices > .choice > .answer {
+  display: flex;
+  align-items: center;
+}
+
+#CreateModal > .content > .form > .choices > .choice > .answer > input[type='radio'] {
+  margin-right: 10px;
+}
+
+#CreateModal > .content > .form > .choices > .choice > .answer > input[type='text'] {
+  width: 100%;
+}
+
+#CreateModal > .content > .form > .question > label.error-field,
+#CreateModal > .content > .form > .choices > .choice > .answer > label.error-field {
+  position: absolute;
+  font-size: 0.7em;
+  font-style: italic;
+  color: #ff5f5f;
+  bottom: 6px;
+  right: 6px;
 }
 
 #ViewQuestionModal > .content > .question {

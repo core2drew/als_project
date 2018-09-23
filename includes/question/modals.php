@@ -13,18 +13,22 @@
     <div class="content">
       <form id="CreateForm" autocomplete="off" class="form" method="POST">
         <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
+        <input type="hidden" name="user_type" value="<?php echo $_SESSION['type'] ?>" />
         <div class="input question">
-          <label class="label">Question</label>
-          <textarea name="question" required></textarea>
+          <textarea name="question" placeholder="Question" required></textarea>
         </div>
         <div class="choices">
           <div class="input choice">
-            <label class="label">Choice 1</label>
-            <input type="text" name="choice_1" required/>
+            <div class="answer">
+              <input type="radio" name="is_answer" value="choice_1" />
+              <input type="text" name="choice_1" placeholder="Choice 1" required/>
+            </div>
           </div>
           <div class="input choice">
-            <label class="label">Choice 2</label>
-            <input type="text" name="choice_2" required/>
+            <div class="answer">
+              <input type="radio" name="is_answer" value="choice_2" />
+              <input type="text" name="choice_2" placeholder="Choice 2" required/>
+            </div>
           </div>
         </div>
         <span class="add button">Add Choice</span>

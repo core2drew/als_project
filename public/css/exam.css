@@ -29,6 +29,13 @@
   display: block;
 }
 
+#ExamQuestionModal > .content {
+  margin: 20px 0;
+  max-height: 308px;
+  overflow-y: scroll;
+  padding: 0;
+}
+
 #ExamQuestionModal > .content > .table {
   width: 100%;
 }
@@ -55,7 +62,7 @@
 #ExamViewQuestionModal > .content > .choices {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 #ExamViewQuestionModal > .content > .choices > .choice {

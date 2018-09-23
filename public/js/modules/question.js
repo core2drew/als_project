@@ -62,7 +62,14 @@ jQuery(document).ready(function($){
     
     function saveQuestion() {
       var url = '/resources/question/add.php';
-      var data = $createModalForm.serialize(); // Convert form data to URL params
+      var data = $createModalForm.serializeArray(); // Convert form data to URL params
+      var hasAnswer = false;
+
+      data.map(function(d, i){
+        if(d.name == 'is_answer') {
+          hasAnswer = true
+        }
+      })
 
       //Validate form field
       $createModalForm.validate({
@@ -71,11 +78,18 @@ jQuery(document).ready(function($){
       
       //Is form valid
       if($createModalForm.valid()) {
+
+        if(!hasAnswer) {
+          alert('Select answer to proceed')
+          return
+        }
+
         $.ajax({
           type: "POST",
           url: url,
           data: data,
           success: function(res){
+            console.log(res)
             if(res.success) {
               location.reload();
             }
@@ -114,13 +128,18 @@ jQuery(document).ready(function($){
       }
 
       var $choice = $('<div/>').addClass('input choice')
-      var $remove = $('<span/>').addClass('basic button remove')
+      var $remove = $('<span/>').addClass('button remove')
       var $label = $('<label/>').addClass('label')
+
+      var $isAnswer = $(`<input type=radio name=is_answer value=${currentName}/>`)
       var $input = $(`<input type=text name=${currentName} required/>`)
+      var $answer = $('<div/>').addClass('answer')
       
       $remove.append('Remove');
       $label.append(`Choice ${choicesCount}`)
-      $choice.append($label).append($input).append($remove)
+      $answer.append($isAnswer).append($input)
+
+      $choice.append($label).append($remove).append($answer)
       $choices.append($choice)
 
       if($choices.children().length >= 4) {
