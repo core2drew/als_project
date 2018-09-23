@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-#ManageLessons > .form > #PDFLesson > input[name='reviewer_file'] {
+#ManageLessons > .form > #LessonReviewer > input[name='reviewer_file'] {
   display: none;
 }
 

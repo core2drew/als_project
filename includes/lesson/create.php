@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-  <div class="input" id="PDFLesson">
+  <div class="input" id="LessonReviewer">
     <label class="label">Upload Reviewer</label>
     <input type="text" name="filename" readonly />
     <input type="file" name="reviewer_file" accept="application/pdf"/>

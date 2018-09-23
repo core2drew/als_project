@@ -27,7 +27,8 @@
       $editor_data = mysqli_real_escape_string($conn, $editor_data);
       $created_at = date("Y-m-d H:i:s");
 
-      $query = "INSERT INTO lessons (title, subject_id, created_at, lesson, reviewer_link) VALUES ('$title', '$subject_id', '$created_at', '$editor_data', '$reviewer_link')";
+      $query = "INSERT INTO lessons (title, subject_id, created_at, lesson, reviewer_link, reviewer_filename) 
+      VALUES ('$title', '$subject_id', '$created_at', '$editor_data', '$reviewer_link', '$file_name')";
       $result = mysqli_query($conn, $query);
     }
     if($result) {

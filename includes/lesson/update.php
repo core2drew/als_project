@@ -1,5 +1,5 @@
 <?php 
-  $query = "SELECT lessons.title, lessons.lesson FROM lessons WHERE lessons.id = $lesson_id";
+  $query = "SELECT title, lesson, reviewer_filename FROM lessons WHERE id = $lesson_id";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
@@ -18,6 +18,12 @@
           </div>
       </div>
     </div>
+  </div>
+  <div class="input" id="LessonReviewer">
+    <label class="label">Upload Reviewer</label>
+    <input type="text" name="filename" readonly value="<?php echo $row['reviewer_filename'] ?>"/>
+    <input type="file" name="reviewer_file" accept="application/pdf"/>
+    <span class="button upload">Upload</span>
   </div>
   <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
   <input type="hidden" name="lesson_id" value="<?php echo $lesson_id ?>" />

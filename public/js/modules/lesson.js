@@ -52,7 +52,7 @@ jQuery(document).ready(function($){
             if(res.success) {
               //show modal created success
               //modal go to lesson table
-              //location.reload();
+              location.reload();
             }
           },
           error: function(err) {
@@ -69,12 +69,14 @@ jQuery(document).ready(function($){
       })
       
       if($updateForm.valid()) {
-        var data = $updateForm.serializeArray()
-        data.push({name: 'editor_data', value: lessonEditor.getData()})
+        var formData = new FormData($updateForm[0]);
+        formData.append('editor_data', lessonEditor.getData())
         $.ajax({
           type: "POST",
           url: `/resources/lesson/update.php`,
-          data: data,
+          data: formData,
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
           success: function(res){
             if(res.success) {
               //show modal created success
