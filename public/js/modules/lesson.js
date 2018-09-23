@@ -130,8 +130,13 @@ jQuery(document).ready(function($){
         })
         .then( editor => {
             const toolbarContainer = document.querySelector( '.document-editor__toolbar' );
-            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
             lessonEditor = editor;
+            if(toolbarContainer) {
+              toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+            } else {
+              lessonEditor.isReadOnly = true
+            }
+            
         } )
         .catch( err => {
             console.error( err );

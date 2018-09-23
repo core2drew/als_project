@@ -2,7 +2,7 @@
     
     <!-- Coordinator Sidebar Menu-->
     <?php
-        if( $_SESSION['type'] == 'coordinator' ):
+        if( $_SESSION['type'] == 'coordinator'):
     ?>
         <?php if($_GET['page'] === 'accounts'): ?>
             <?php if($_SESSION['is_admin']): ?>
@@ -27,7 +27,7 @@
 
     <!-- Teacher Sidebar Menu-->
     <?php
-        if( $_SESSION['type'] == 'teacher' ):
+        if( $_SESSION['type'] == 'teacher' && !isset($_GET['page'])):
     ?>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'student.php' ? 'active' : null ?>" href="/teacher/student.php">Students</a>
     <?php
@@ -36,17 +36,17 @@
 
     <!-- Student Sidebar Menu-->
     <?php
-        if( $_SESSION['type'] == 'student' ):
+        if( $_SESSION['type'] == 'student' && !isset($_GET['page'])):
     ?>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : null ?>" href="/dashboard.php">Dashboard</a>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lesson.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Learning Video</a>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'examreviewer.php' ? 'active' : null ?>" href="/examreviewer.php">Exam Reviewer</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Educational Video</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'exam.php' ? 'active' : null ?>" href="/exam.php">Exam Reviewer</a>
     <?php
         endif;
     ?>
 
-    <?php if($_GET['page'] === 'profile'): ?>
+    <?php if(isset($_GET['page']) && $_GET['page'] === 'profile'): ?>
         <a class="button <?php echo $_GET['page'] == 'profile' ? 'active' : null ?>" href="/profile.php?page=profile">Profile</a>
     <?php endif ?>
 </div>

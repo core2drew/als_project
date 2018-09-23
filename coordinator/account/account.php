@@ -7,7 +7,7 @@
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
   $sub_page = isset($_GET['sub_page']) ? $_GET['sub_page'] : null;
-  $create_link = "/coordinator/account/create-account.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
+  $create_link = "/coordinator/account/create.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 
   //Display all student account
   if($type == 'student') {
@@ -74,7 +74,7 @@
     <?php
       if($count <= 0):
     ?>
-      <table class="table">
+      <!-- <table class="table">
         <thead>
           <?php if($type == 'student'): ?>
             <th>ID</th>
@@ -95,7 +95,7 @@
             <th class="options">Options</th>
           <?php endif; ?>
         </thead>
-      </table>
+      </table> -->
       <div class="no-records">
         <h3>No Records</h3>
       </div>
