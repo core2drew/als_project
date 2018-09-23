@@ -15,16 +15,16 @@
         <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
         <div class="input question">
           <label class="label">Question</label>
-          <textarea name="question"></textarea>
+          <textarea name="question" required></textarea>
         </div>
         <div class="choices">
           <div class="input choice">
             <label class="label">Choice 1</label>
-            <input type="text" name="choice_1" value=""/>
+            <input type="text" name="choice_1" required/>
           </div>
           <div class="input choice">
             <label class="label">Choice 2</label>
-            <input type="text" name="choice_2" value=""/>
+            <input type="text" name="choice_2" required/>
           </div>
         </div>
         <span class="add button">Add Choice</span>

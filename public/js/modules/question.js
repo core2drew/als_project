@@ -3,6 +3,18 @@ jQuery(document).ready(function($){
   var questionModule = (function(){
     var questionId = 0;
     var choicesCount;
+    var validationRules = {
+      question: {
+        required: true
+      },
+      choice_1: {
+        required: true
+      },
+      choice_2: {
+        required: true
+      }
+    }
+
     var $manageQuestions = $("#ManageQuestions");
     var $modalContainer = $(".modal-container");
 
@@ -54,18 +66,7 @@ jQuery(document).ready(function($){
 
       //Validate form field
       $createModalForm.validate({
-        errorClass: "error-field",
-        rules:{
-          question: {
-            required: true
-          },
-          choice_1: {
-            required: true
-          },
-          choice_2: {
-            required: true
-          }
-        }
+        errorClass: "error-field"
       })
       
       //Is form valid
@@ -104,16 +105,21 @@ jQuery(document).ready(function($){
     }
 
     function addChoice(){
-      choicesCount = $choices.children().length;
-      currentCount = choicesCount + 1;
+      choicesCount = $choices.children().length + 1;
+      currentName = `choice_${choicesCount}`
+
+      //Add new field to validation
+      validationRules[currentName] = {
+        required: true
+      }
+
       var $choice = $('<div/>').addClass('input choice')
       var $remove = $('<span/>').addClass('basic button remove')
       var $label = $('<label/>').addClass('label')
-      var $input = $('<input type=text />')
-      $input.attr('name', `choice_${currentCount}`)
+      var $input = $(`<input type=text name=${currentName} required/>`)
       
       $remove.append('Remove');
-      $label.append(`Choice ${currentCount}`)
+      $label.append(`Choice ${choicesCount}`)
       $choice.append($label).append($input).append($remove)
       $choices.append($choice)
 
@@ -126,14 +132,12 @@ jQuery(document).ready(function($){
       var $input = $(this).closest('.input');
       var index = $input.index();
       choicesCount = $choices.children().length;
-      
+
       //Remove item 4 if you remove item 3
       if(index == 2 && choicesCount >= 4) {
         $input.next('.input').remove();
-        console.log("test")
       } else {
         $input.remove();
-        console.log("test2")
       }
 
       if($choices.children().length < 4) {
