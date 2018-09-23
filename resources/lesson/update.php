@@ -2,28 +2,28 @@
   require '../../config/db_connect.php';
   header('Content-Type: application/json');
 
-  $is_success = false;
+  $json_data['success'] = false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $error_fields = [];
-    $json_data = [];
 
-    if(empty($_POST['title'])) {
-      $error_fields['title'] = 'Title field is required';
-    }
+    $id = isset($_POST['lesson_id']) ? $_POST['lesson_id'] : null;
+    $subject_id = isset($_POST['subject_id']) ? $_POST['subject_id'] : null;
+    $title = isset($_POST['title']) ? $_POST['title'] : null;
+    $editor_data = isset($_POST['editor_data']) ? $_POST['editor_data'] : null;
 
-    if(count($error_fields) <= 0) {
-      $id = mysqli_real_escape_string($conn, $_POST['id']);
-      $title = mysqli_real_escape_string($conn, $_POST['title']);
-      $editor_data = mysqli_real_escape_string($conn, $_POST['editor_data']);
-      $subject_id = mysqli_real_escape_string($conn, $_POST['subject_id']);
+    $id = mysqli_real_escape_string($conn, $id);
+    $subject_id = mysqli_real_escape_string($conn, $subject_id);
+    $title = mysqli_real_escape_string($conn, $title);
+    $editor_data = mysqli_real_escape_string($conn, $editor_data);
 
-      $query = "UPDATE lessons SET title='$title', subject_id=$subject_id, lesson='$editor_data' WHERE id=$id";
-      $result = mysqli_query($conn, $query);
-      if($result) {
-       $json_data['success'] = true;
-      }
+    $query = "UPDATE lessons SET title='$title', subject_id=$subject_id, lesson='$editor_data' WHERE id=$id";
+    $result = mysqli_query($conn, $query);
 
-      echo json_encode($json_data);
+    if($result) {
+      $json_data['success'] = true;
+    } else {
+      $json_data['message'] = 'Oops, something went wrong.';
     }
   }
+
+  echo json_encode($json_data);

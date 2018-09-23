@@ -4,70 +4,28 @@
   include '../../check_session.php';
   include '../../includes/header.php';
   include '../../resources/lesson/lesson.php';
+
+  $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
+  $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
+  $lesson_id = isset($_GET['lesson_id']) ? $_GET['lesson_id'] : null;
+  $action = isset($_GET['action']) ? $_GET['action'] : null;
 ?>
 
 <div id="Coordinator" class="wrapper">
   <?php include '../../includes/sidebar.php'; ?>
   <div id="ManageLessons" class="page">
-    <div class="tabs">
-      <?php 
-        for($i = 1; $i <= 2; $i++) {
-          $href = "/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$i";
-          $label = $i <= 1 ? 'Elementary' : 'High School';
-          $active_class = $grade_level == $i ? " active'" : "'";
-          $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
-          echo $link;
-        }
-      ?>
-    </div>
-    <div class="table-actions">
-      <?php
-        $create_link = "/coordinator/lesson/create.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
-        echo "<a class='button' href=$create_link>Create Lesson</a>";
-      ?>
-    </div>
-    <?php
-      if($count <= 0):
+    <?php 
+      if($subject_id) {
+        include '../../includes/lesson/lessons.php';
+      } else {
+        include '../../includes/lesson/subjects.php';
+      }
     ?>
-      <table class="table">
-        <thead>
-          <th>Title</th>
-          <th>View</th>
-          <th>Options</th>
-        </thead>
-      </table>
-      <div class="no-records">
-        <h3>No Records</h3>
-      </div>
-    <?php else: ?>
-      <table class="table">
-      <thead>
-        <th>Title</th>
-        <th>View</th>
-        <th>Options</th>
-      </thead>
-      <tbody>
-        <?php
-          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $id = $row['id'];
-            $title = $row['title'];
-            $update_btn = "<a class='button' href='/coordinator/lesson/update.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&id=$id'>Update</a>";
-            $delete_btn = "<a class='button' href='/coordinator/lesson/delete.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&id=$id'>Delete</a>";
-
-            $table_row =
-            "<tr>
-              <td>$title</td>
-              <td>View</td>
-              <td class='option'>$update_btn $delete_btn</td>
-            </tr>";
-            echo $table_row;
-          }
-        ?>
-      </tbody>
-    <?php endif; ?>
-    </table>
   </div>
 </div>
-<?php
-  include '../../includes/html/footer.php';
-?>
+
+<?php include '../../includes/lesson/modals.php'; ?>
+<?php include '../../includes/html/scripts.php';?>
+<script src="/public/ckeditor5/ckeditor.js"></script>
+<script src="/public/js/modules/lesson.js"></script>
+<?php include '../../includes/html/footer.php'; ?>

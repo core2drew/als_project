@@ -2,20 +2,91 @@ jQuery(document).ready(function($){
   // Lesson Module
   var lessonModule = (function(){
     var lessonEditor;
-    var Lessons = $("#Lessons");
-    var LessonForm = Lessons.find('.form');
-    var formSubmitButton = LessonForm.find('.submit');
+    var lessonId;
 
-    function createLesson(data){
+    var $manageLessons = $("#ManageLessons");
+    var $modalContainer = $(".modal-container");
+
+    //All Modals
+    var $modal = $modalContainer.find('.modal');
+
+    var $lessonTable = $manageLessons.find('.table.lessons');
+    
+    var $createForm = $manageLessons.find('#CreateForm');
+    var $createButton = $createForm.find('.create');
+
+    var $updateForm = $manageLessons.find('#UpdateForm');
+    var $updateButton = $updateForm.find('.update');
+
+    var $removeLessonButton = $lessonTable.find('.remove');
+
+    //Delete Question Modal / Actions
+    var $deleteModal = $modalContainer.find('#DeleteModal');
+    var $yesDeleteButton = $deleteModal.find('.yes');
+
+    function createLesson(){
+      //Validate form field
+      $createForm.validate({
+        errorClass: "error-field"
+      })
+
+      if($createForm.valid()) {
+        var data = $createForm.serializeArray()
+        data.push({name: 'editor_data', value: lessonEditor.getData()})
+        $.ajax({
+          type: "POST",
+          url: '/resources/lesson/add.php',
+          data: data,
+          success: function(res){
+            if(res.success) {
+              //show modal created success
+              //modal go to lesson table
+              location.reload();
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
+
+    function updateLesson() {
+      //Validate form field
+      $createForm.validate({
+        errorClass: "error-field"
+      })
+      
+      if($updateForm.valid()) {
+        var data = $updateForm.serializeArray()
+        data.push({name: 'editor_data', value: lessonEditor.getData()})
+        $.ajax({
+          type: "POST",
+          url: `/resources/lesson/update.php`,
+          data: data,
+          success: function(res){
+            if(res.success) {
+              //show modal created success
+              //modal go to lesson table
+              location.reload();
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
+
+    function deleteLesson() {
+      var url = '/resources/lesson/delete.php';
       $.ajax({
         type: "POST",
-        url: '/resources/lesson/add.php',
-        data: data,
+        url: url,
+        data: $.param({'id': lessonId}),
         success: function(res){
           if(res.success) {
-            //show modal created success
-            //modal go to lesson table
-            alert("Lesson created!")
+            location.reload();
           }
         },
         error: function(err) {
@@ -24,55 +95,49 @@ jQuery(document).ready(function($){
       });
     }
 
-    function saveLesson(data) {
-      $.ajax({
-        type: "POST",
-        url: `/resources/lesson/update.php`,
-        data: data,
-        success: function(res){
-          if(res.success) {
-            //show modal created success
-            //modal go to lesson table
-            alert("Lesson update!")
-            console.log(res)
+    function showDeleteModal(){
+      lessonId = $(this).data('lessonId'); //get id of selected exam
+      $modalContainer.addClass('active')
+      $deleteModal.show();
+    }
+
+    function closeModals(){
+      $modalContainer.removeClass('active');
+      $deleteModal.hide();
+    }
+
+    function ckeditorInit(){
+      //Create CKEditor
+      if(document.querySelector( '.document-editor__editable' )) {
+        DecoupledEditor.create( document.querySelector( '.document-editor__editable' ), {
+          cloudServices: {
+            tokenUrl: '/resources/ckeditor/token.php',
+            uploadUrl: '/public/images'
           }
-        },
-        error: function(err) {
-          console.error("Something went wrong");
-        }
-      });
+        })
+        .then( editor => {
+            const toolbarContainer = document.querySelector( '.document-editor__toolbar' );
+            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+            lessonEditor = editor;
+        } )
+        .catch( err => {
+            console.error( err );
+        });
+      }
     }
 
     var init = function(){
-      //Create CKEditor
-      DecoupledEditor.create( document.querySelector( '.document-editor__editable' ), {
-        cloudServices: {
-          tokenUrl: '/resources/ckeditor/token.php',
-          uploadUrl: '/public/images'
-        }
-      })
-      .then( editor => {
-          const toolbarContainer = document.querySelector( '.document-editor__toolbar' );
-          toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-          lessonEditor = editor;
-      } )
-      .catch( err => {
-          console.error( err );
-      });
+      ckeditorInit()
 
-      //Handle Form Submission Saving/Update Lesson
-      formSubmitButton.on('click', function(e) {
-        e.preventDefault();
-        var data = LessonForm.serializeArray()
-        data.push({name: 'editor_data', value: lessonEditor.getData()})
-        // update request has id
-        if(helperModule.$_GET('id')) {
-          data.push({name: 'id', value: helperModule.$_GET('id')})
-          saveLesson(data)
-        } else {
-          createLesson(data)
-        }
-      })
+      $createButton.on('click', createLesson)
+      $updateButton.on('click', updateLesson)
+      $removeLessonButton.on('click', showDeleteModal)
+
+      //Modal Actions
+      $modal.find('.close').on('click', closeModals)
+
+      //Confirmation Delete Modal Action
+      $yesDeleteButton.on('click', deleteLesson)
     }
     return {
       init: init
