@@ -1,7 +1,6 @@
 <?php
   include 'includes/html/head.php';
   include './login.php';
-  
   if(isset($_SESSION['is_logged_in'])) {
     switch($_SESSION['type']) {
       case 'student':
@@ -11,7 +10,13 @@
         header("Location: dashboard.php");
         break;
       case 'coordinator':
-        header("Location: /coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1");
+        if($_SESSION['is_admin']) {
+          header("Location: /coordinator/account/account.php?page=accounts&sub_page=coordinator&type=coordinator");
+         
+        } else {
+          header("Location: /coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1");
+        }
+        
         break;
     }
   }

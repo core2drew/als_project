@@ -5,11 +5,11 @@
         if( $_SESSION['type'] == 'coordinator' ):
     ?>
         <?php if($_GET['page'] === 'accounts'): ?>
-            <a class="button <?php echo $_GET['sub_page'] == 'teacher' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Teacher</a>
-            <a class="button <?php echo $_GET['sub_page'] == 'student' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=student&type=student&grade_level=1">Student</a>
             <?php if($_SESSION['is_admin']): ?>
                 <a class="button <?php echo $_GET['sub_page'] == 'coordinator' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=coordinator&type=coordinator">Coordinator</a>
             <?php endif ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'teacher' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Teacher</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'student' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=student&type=student&grade_level=1">Student</a>
         <?php elseif($_GET['page'] === 'subjects'): ?>
             <a class="button <?php echo $_GET['page'] == 'subjects' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
         <?php elseif($_GET['page'] === 'lessonandvideos'): ?>
