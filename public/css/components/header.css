@@ -1,5 +1,5 @@
 #Header{
-  background-color: #d91e18;
+  background-color: #FE141A;
   display: flex;
   align-content: center;
   padding: 0 20px;
@@ -30,7 +30,7 @@
 }
 
 #Header > .menu > .item.active {
-  background:#af1712;
+  background:#C90005;
 }
 
 #Header > .profile {
@@ -69,7 +69,7 @@
 
 #Header > .profile > .dropdown > .menu {
   flex-direction: column;
-  background-color: #af1712;
+  background-color: #C90005;
   width: 115px;
   right: 15px;
   top: 55px;
@@ -82,6 +82,5 @@
 }
 
 #Header > .profile > .dropdown > .menu > .item:hover {
-  background-color:#fff;
-  color: #000;
+  background-color: #FE6E72;
 }

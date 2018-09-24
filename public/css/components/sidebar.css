@@ -1,6 +1,6 @@
 #Sidebar {
   width: 253px;
-  background-color:#d91e18;
+  background-color:#FE141A;
   position: fixed;
   height: 100%;
   display: flex;
@@ -16,6 +16,6 @@
   text-transform: uppercase;
 }
 #Sidebar > .button.active {
-  background-color: #ffffff;
-  color: #d91e18;
+  background-color: #FE6E72;
+  color: #fff;
 }
