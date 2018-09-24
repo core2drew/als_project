@@ -1,19 +1,20 @@
 <?php
-$is_success = false;
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-  $id = isset($_POST['id']) ? $_POST['id'] : null;
-  $filename = isset($_POST['filename']) ? $_POST['filename'] : null;
-  $deleted_at = date("Y-m-d H:i:s");
-  $public_folder = '../../public/videos/';
-  
-  if(isset($id)) {
-    if(!empty($filename)) {
-      unlink($public_folder . $filename);
-    }
+  require '../../config/db_connect.php';
+  header('Content-Type: application/json');
+
+  $json_data['success'] = false;
+
+  if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+    $deleted_at = date("Y-m-d H:i:s");
     $query = "UPDATE videos SET deleted_at='$deleted_at' WHERE id=$id";
     $result = mysqli_query($conn, $query);
+
     if($result) {
-      $is_success = true;
+      $json_data['success'] = true;
+    } else {
+      $json_data['message'] = 'Oops, something went wrong.';
     }
   }
-}
+
+  echo json_encode($json_data);

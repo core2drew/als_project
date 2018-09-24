@@ -1,0 +1,21 @@
+#ManageEducationalVideos {
+  margin-left: 250px;
+}
+
+#ManageEducationalVideos > .tabs {
+  margin-bottom: 20px;
+}
+
+#ManageEducationalVideos > .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-container > .modal > .content > .form > #UploadVideo > input[name='video_file'] {
+  display: none;
+}
+
+.modal-container > .modal > .content > .form > #SaveLink {
+  display: none;
+}

@@ -6,7 +6,14 @@ function findexts ($filename) {
   $n = count($exts)-1; 
   $exts = $exts[$n]; 
   return $exts; 
-} 
+}
+
+function findfilename ($filename) { 
+  $filename = strtolower($filename) ; 
+  $exts = mb_split("[/\\.]", $filename) ; 
+  $exts = $exts[0]; 
+  return $exts; 
+}
 
 function handleErrorMessage($field, $error_fields = null) {
   if(isset($error_fields)) {
