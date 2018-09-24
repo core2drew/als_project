@@ -32,12 +32,9 @@ a {
   text-decoration: none;
 }
 
-#Dashboard, #Lessons, #Questions, #Coordinator, #Profile {
-  margin-top: 77px;
-}
-
 .wrapper {
   height: 100%;
+  margin-top: 77px;
 }
 
 .wrapper > .page{

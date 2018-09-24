@@ -29,7 +29,10 @@
     <?php
         if( $_SESSION['type'] == 'teacher' && !isset($_GET['page'])):
     ?>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'student.php' ? 'active' : null ?>" href="/teacher/student.php">Students</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'students.php' ? 'active' : null ?>" href="/teacher/students.php">Students</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Educational Video</a>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'exam.php' ? 'active' : null ?>" href="/exam.php">Exam Reviewer</a>
     <?php
         endif;
     ?>

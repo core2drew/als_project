@@ -74,28 +74,6 @@
     <?php
       if($count <= 0):
     ?>
-      <!-- <table class="table">
-        <thead>
-          <?php if($type == 'student'): ?>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Contact No.</th>
-            <th>Email</th>
-            <th>Teacher</th>
-            <th class="options">Options</th>
-          <?php endif; ?>
-
-          <?php if($type == 'teacher' || 'coordinator'): ?>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Contact No.</th>
-            <th>Email</th>
-            <th class="options">Options</th>
-          <?php endif; ?>
-        </thead>
-      </table> -->
       <div class="no-records">
         <h3>No Records</h3>
       </div>

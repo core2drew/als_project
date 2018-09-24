@@ -3,7 +3,6 @@
   include '../../includes/html/head.php';
   include '../../check_session.php';
   include '../../includes/header.php';
-  include '../../resources/_global.php';
   
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
