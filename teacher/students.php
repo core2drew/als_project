@@ -11,7 +11,6 @@
   $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
 
   $query = "SELECT
-    id,
     lastname,
     firstname,
     address,
@@ -39,7 +38,6 @@
     ?>
       <table class="table">
         <thead>
-          <th>ID</th>
           <th>Name</th>
           <th>Address</th>
           <th>Contact No.</th>
@@ -48,7 +46,6 @@
         <tbody>
           <?php
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-              $id = $row['id'];
               $last_name = $row['lastname'];
               $first_name = $row['firstname'];
               $address = $row['address'];
@@ -57,7 +54,6 @@
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
               $table_row =
                 "<tr>
-                  <td>$id</td>
                   <td>$last_name, $first_name</td>
                   <td>$address</td>
                   <td>$contactno</td>

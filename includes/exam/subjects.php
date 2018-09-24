@@ -8,17 +8,20 @@
   <h2>Subjects</h2>
 </div>
 
-<div class="tabs">
-  <?php
-    for($i = 1; $i <= 2; $i++) {
-      $href = "/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$i";
-      $label = $i <= 1 ? 'Elementary' : 'High School';
-      $active_class = $grade_level == $i ? " active'" : "'";
-      $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
-      echo $link;
-    }
-  ?>
-</div>
+<?php if($_SESSION['type'] === 'coordinator'):?>
+  <div class="tabs">
+    <?php
+      for($i = 1; $i <= 2; $i++) {
+        $href = "/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$i";
+        $label = $i <= 1 ? 'Elementary' : 'High School';
+        $active_class = $grade_level == $i ? " active'" : "'";
+        $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
+        echo $link;
+      }
+    ?>
+  </div>
+<?php endif ?>
+
 <?php
   if($count <= 0):
 ?>

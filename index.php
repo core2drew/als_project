@@ -7,7 +7,7 @@
         header("Location: lessons.php");
         break;
       case 'teacher':
-        header("Location: lessons.php");
+        header("Location: teacher/students.php");
         break;
       case 'coordinator':
         if($_SESSION['is_admin']) {
