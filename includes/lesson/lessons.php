@@ -2,8 +2,7 @@
   $action = isset($_GET['action']) ? $_GET['action'] : null;
   $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
 
-  $self_link =  htmlspecialchars($_SERVER["PHP_SELF"]);
-  $back_to_subjects = $self_link."?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
+  $back_to_subjects = "$_SERVER[PHP_SELF]?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level";
   $back_link_lessons = $back_to_subjects."&subject_id=$subject_id";
 
   $query = "SELECT id, title FROM lessons WHERE subject_id=$subject_id AND deleted_at IS NULL";
@@ -18,13 +17,13 @@
       <h2>Create Lesson</h2>
       <a class="button" href="<?php echo $back_link_lessons ?>">Go Back</a>
     </div>
-    <?php include '../../includes/lesson/create.php' ?>
+    <?php include '../includes/lesson/create.php' ?>
   <?php elseif($action == 'update'): ?>
     <div class="title">
       <h2>Update Lesson</h2>
       <a class="button" href="<?php echo $back_link_lessons ?>">Go Back</a>
     </div>
-    <?php include '../../includes/lesson/update.php' ?>
+    <?php include '../includes/lesson/update.php' ?>
   <?php endif ?>
 <?php else: ?>
 

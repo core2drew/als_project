@@ -6,15 +6,11 @@
   $count = mysqli_num_rows($result);
 ?>
 
-<div class="title">
-  <h2>Subjects</h2>
-</div>
-
 <?php if($_SESSION['type'] === 'coordinator'):?>
   <div class="tabs">
     <?php
       for($i = 1; $i <= 2; $i++) {
-        $href = "/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$i";
+        $href = "$_SERVER[PHP_SELF]?page=lessonandvideos&sub_page=lessons&grade_level=$i";
         $label = $i <= 1 ? 'Elementary' : 'High School';
         $active_class = $grade_level == $i ? " active'" : "'";
         $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -42,9 +38,9 @@
           $id = $row['id'];
           $title = $row['title'];
           if($_SESSION['type'] === 'coordinator') {
-            $question = "<a class='button' href=/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&subject_id=$id>Lessons</a>";
+            $question = "<a class='button' href=$_SERVER[PHP_SELF]?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&subject_id=$id>Lessons</a>";
           } else {
-            $question = "<a class='button href=/lessons.php?grade_level=$grade_level&subject_id=$id>Lessons</a>";
+            $question = "<a class='button href=$_SERVER[PHP_SELF]?grade_level=$grade_level&subject_id=$id>Lessons</a>";
           }
           $table_row =
           "<tr>
