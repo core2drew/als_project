@@ -39,21 +39,6 @@
     }else if($user_type === 'teacher') {
       $type = 'quiz';
     }
-
-    // $choices = [
-    //   'choice_1' => [
-    //     'is_answer' => 0
-    //   ],
-    //   'choice_2' => [
-    //     'is_answer' => 0
-    //   ],
-    //   'choice_3' => [
-    //     'is_answer' => 0
-    //   ],
-    //   'choice_4' => [
-    //     'is_answer' => 0
-    //   ]
-    // ];
   
     $choices[$is_answer]['is_answer'] = 1;
     $created_at = date("Y-m-d H:i:s");

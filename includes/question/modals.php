@@ -32,6 +32,10 @@
           </div>
         </div>
         <span class="add button">Add Choice</span>
+        
+        <div class="input explanation">
+          <textarea name="explanation" placeholder="Explanation"></textarea>
+        </div>
       </form>
     </div>
     <div class="actions">

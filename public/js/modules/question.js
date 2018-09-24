@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 
     //Question Table Actions
     var $createQuestionButton = $tableActions.find('#CreateQuestion');
-    var $viewQuestionButton = $questionTable.find('.view');
+    var $viewRecord = $questionTable.find('.view');
     var $removeQuestionButton = $questionTable.find('.remove');
 
     //Create Question
@@ -50,8 +50,46 @@ jQuery(document).ready(function($){
     }
 
     function showViewModal(){
-      $modalContainer.addClass('active')
-      $viewModal.show();
+      var questionId = $(this).data('questionId');
+
+      $question = $viewModal.find('.question')
+      $choices = $viewModal.find('.choices')
+      $explanation = $viewModal.find('.explanation')
+
+      $choices.empty()
+      $explanation.hide()
+
+      $.ajax({
+        type: "GET",
+        url: '/resources/question/question.php',
+        data: $.param({
+          id: questionId
+        }),
+        success: function(res){
+          if(res.success) {
+            $question.html(res.data.question)
+            if(res.data.explanation) {
+              $explanation.show()
+              $explanation.html(res.data.explanation)
+            }
+            
+            res.data.answers.map(function(data, index){
+              var $choice = $('<span/>').addClass('choice')
+              if(data.is_answer) {
+                $choice.addClass('answer')
+              }
+              $choice.html(data.answer)
+              $choices.append($choice)
+            })
+
+            $modalContainer.addClass('active')
+            $viewModal.show();
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      })
     }
 
     function showDeleteModal(){
@@ -132,14 +170,13 @@ jQuery(document).ready(function($){
       var $label = $('<label/>').addClass('label')
 
       var $isAnswer = $(`<input type=radio name=is_answer value=${currentName}/>`)
-      var $input = $(`<input type=text name=${currentName} required/>`)
+      var $input = $(`<input type=text name=${currentName} placeholder='Choice ${choicesCount}' required/>`)
       var $answer = $('<div/>').addClass('answer')
       
       $remove.append('Remove');
-      $label.append(`Choice ${choicesCount}`)
       $answer.append($isAnswer).append($input)
 
-      $choice.append($label).append($remove).append($answer)
+      $choice.append($remove).append($answer)
       $choices.append($choice)
 
       if($choices.children().length >= 4) {
@@ -174,7 +211,7 @@ jQuery(document).ready(function($){
     function init() {
       //Table Actions
       $createQuestionButton.on('click', showCreateModal)
-      $viewQuestionButton.on('click', showViewModal)
+      $viewRecord.on('click', showViewModal)
       $removeQuestionButton.on('click', showDeleteModal)
   
       //Modal Actions

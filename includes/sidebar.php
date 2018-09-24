@@ -38,7 +38,7 @@
     <?php
         if( $_SESSION['type'] == 'student' && !isset($_GET['page'])):
     ?>
-        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : null ?>" href="/dashboard.php">Dashboard</a>
+        <!-- <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : null ?>" href="/dashboard.php">Dashboard</a> -->
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Educational Video</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'exam.php' ? 'active' : null ?>" href="/exam.php">Exam Reviewer</a>
