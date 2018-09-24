@@ -7,7 +7,7 @@
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $query = "SELECT id, profile_image_url, type, CONCAT(firstname, ' ', lastname) as fullname, grade_level, is_admin from users where email='$email' and password='$password' and deleted_at IS NULL";
+    $query = "SELECT id, profile_image_url, type, CONCAT(lastname, ', ' , firstname) as fullname, grade_level, is_admin from users where email='$email' and password='$password' and deleted_at IS NULL";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 

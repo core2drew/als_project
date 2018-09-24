@@ -40,21 +40,27 @@
 }
 
 #Header > .profile > .img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: auto;
   background: white;
   border-radius: 30px;
 }
 
 #Header > .profile > .dropdown {
+  color: #fff;
   margin: auto;
-  margin-left: 10px;
   background-color: transparent;
 }
 
 #Header > .profile > .dropdown > .name {
   text-transform: capitalize;
+}
+
+#Header > .profile > .dropdown > .name > .dropdown-arrow {
+  height: 10px;
+  width: 10px;
+  margin-left: 5px;
 }
 
 #Header > .profile > .dropdown:hover > .menu {
@@ -63,17 +69,19 @@
 
 #Header > .profile > .dropdown > .menu {
   flex-direction: column;
-  background-color: white;
+  background-color: #af1712;
   width: 115px;
   right: 15px;
-  top: 65px;
+  top: 55px;
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1)
 }
 
 #Header > .profile > .dropdown > .menu > .item {
-  padding: 5px 15px;
+  padding: 7px 15px;
+  color: #fff;
 }
 
 #Header > .profile > .dropdown > .menu > .item:hover {
-  background-color:#e8e8e8;
+  background-color:#fff;
+  color: #000;
 }
