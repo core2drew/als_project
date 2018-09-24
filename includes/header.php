@@ -9,11 +9,11 @@
   </div>
   <?php if($_SESSION['type'] === 'coordinator'): ?>
     <div class="menu">
-      <a class="item" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Accounts</a>
-      <a class="item" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
-      <a class="item" href="/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons & Videos</a>
-      <a class="item" href="/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Exam & Questions</a>
-      <a class="item" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
+      <a class="item <?php echo basename($_SERVER['PHP_SELF']) == 'account.php' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Accounts</a>
+      <a class="item <?php echo basename($_SERVER['PHP_SELF']) == 'subjects.php' ? 'active' : null ?>" href="/coordinator/subject/subjects.php?page=subjects&grade_level=1">Subjects</a>
+      <a class="item <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/coordinator/lesson/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons & Videos</a>
+      <a class="item <?php echo basename($_SERVER['PHP_SELF']) == 'questions.php' ? 'active' : null ?>" href="/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Exam & Questions</a>
+      <a class="item <?php echo basename($_SERVER['PHP_SELF']) == 'reports.php' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
     </div>
   <?php endif; ?>
   <div class="profile">

@@ -247,6 +247,7 @@ jQuery(document).ready(function($){
         $createModal.hide();
         $updateModal.hide();
         $deleteModal.hide();
+        $viewModal.hide();
         $viewModalVideo.pause()
         resetTab()
       }
