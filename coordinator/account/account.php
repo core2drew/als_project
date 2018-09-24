@@ -112,9 +112,8 @@
             <th>Email</th>
             <th>Teacher</th>
             <th class="options">Options</th>
-          <?php endif; ?>
 
-          <?php if($type == 'teacher' || 'coordinator'): ?>
+          <?php elseif($type == 'teacher' || 'coordinator'): ?>
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
@@ -140,7 +139,6 @@
                 $update_btn = "<a class='button' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Update</a>";
                 $delete_btn = "<a class='button' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Delete</a>";
               }
-             
 
               if($type == 'student') {
                 $table_row =
