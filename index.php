@@ -21,7 +21,7 @@
     }
   }
 ?>
-  <div id="LoginWrapper" class="wrapper">
+  <div id="LoginWrapper">
     <div id="LoginFormContainer">
       <h2 class="title">Login</h2>
       <form id="LoginForm" method="POST" action="">

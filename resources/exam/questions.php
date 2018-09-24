@@ -3,6 +3,7 @@
   require '../../config/db_connect.php';
   header('Content-Type: application/json');
 
+  $json_data['success'] = true;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -19,14 +20,16 @@
       if( $index !== FALSE) {
         unset($questions_id_array[$index]);
         if(count($questions_id_array)) {
-          $exam_query = "UPDATE exams SET questions_id='". implode("','", $questions_id_array) ."' WHERE id=$exam_id";
+          $exam_query = "UPDATE exams SET questions_id='". implode(",", $questions_id_array) ."' WHERE id=$exam_id";
         } else {
           $exam_query = "UPDATE exams SET questions_id=NULL WHERE id=$exam_id";
         }
-        
         $exam_result = mysqli_query($conn, $exam_query);
-        $json_data['success'] = true;
-        echo json_encode($json_data);
+        if($exam_result) {
+          $json_data['success'] = true;
+        } else {
+          $json_data['message'] = 'Oops, something went wrong.';
+        }
       }
     } else {
       $new_questions_id = mysqli_real_escape_string($conn, $_POST['questions_id']) ;
@@ -45,14 +48,17 @@
         $exam_query = "UPDATE exams SET questions_id=NULL WHERE id=$exam_id";
       }
       $exam_result = mysqli_query($conn, $exam_query);
-      $json_data['success'] = true;
-  
-      echo json_encode($json_data);
+
+      if($exam_result) {
+        $json_data['success'] = true;
+      } else {
+        $json_data['message'] = 'Oops, something went wrong.';
+      }
     }
-  } else {
-    $subject_id = mysqli_real_escape_string($conn, $_GET['subject_id']);
+  } 
+  else {
+    //$subject_id = mysqli_real_escape_string($conn, $_GET['subject_id']);
     $exam_id = mysqli_real_escape_string($conn, $_GET['exam_id']);
-  
     $exam_query = "SELECT questions_id, subject_id FROM exams WHERE id=$exam_id";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
@@ -64,12 +70,14 @@
     FROM exams ex LEFT JOIN questions quest ON ex.subject_id = quest.subject_id
     WHERE quest.id NOT IN ('". implode("','",$questions_id_array) ."') AND quest.subject_id = $subject_id AND quest.deleted_at IS NULL";
     $question_result = mysqli_query($conn, $question_query);
-    $json_data['data'] = [];
-
-    while($question_row = mysqli_fetch_array($question_result, MYSQLI_ASSOC)) {
-      array_push($json_data['data'], $question_row);
+    if($question_result) {
+      $json_data['success'] = true;
+      $json_data['data'] = [];
+      while($question_row = mysqli_fetch_array($question_result, MYSQLI_ASSOC)) {
+        array_push($json_data['data'], $question_row);
+      }
+    } else {
+      $json_data['message'] = 'Oops, something went wrong.';
     }
-
-    echo json_encode($json_data);
   }
-
+  echo json_encode($json_data);

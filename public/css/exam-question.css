@@ -1,0 +1,35 @@
+#ExamQuestions > .question-item:nth-last-child(n + 2) {
+  margin-bottom: 15px;
+}
+
+#ExamQuestions > .question-item > .question {
+  background: #fff0cf;
+  padding: 15px;
+}
+#ExamQuestions > .question-item > .question > .numbering {
+  margin-right: 5px;
+}
+
+#ExamQuestions > .question-item > .choices {
+  background: #fffbde;
+}
+
+#ExamQuestions > .question-item > .choices > .choice {
+  padding: 15px 37px;
+}
+
+#ExamQuestions > .question-item > .choices > .choice.is-answer {
+  background: #c2ffc2;
+}
+
+#ManageExams > .exam-detail:nth-last-child(n + 2) {
+  margin-bottom: 10px;
+}
+
+#ManageExams > .exam-minutes > label,
+#ManageExams > .exam-items > label,
+#ManageExams > .exam-instruction > label {
+  font-weight: bold;
+}
+
+

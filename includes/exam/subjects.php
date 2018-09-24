@@ -45,8 +45,10 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
-          $exam = "<a href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Exam</a>";
-          //$remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Remove</a>";
+          $exam = "<a href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Exams</a>";
+          if($_SESSION['type'] === 'teacher') {
+            $exam = "<a class='button' href=/teacher/exams.php?subject_id=$id>Exams</a>";
+          }
           $table_row =
           "<tr>
             <td>$title</td>
