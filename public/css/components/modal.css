@@ -24,16 +24,9 @@
   background-color: #fff;
 }
 
-.modal-container > .modal > .close {
-  width: 15px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
-}
-
 .modal-container > .modal > .title {
   font-weight: bold;
+  font-size: 1.3em;
 }
 
 .modal-container > .modal > .content {
@@ -42,13 +35,26 @@
 
 .modal-container > .modal > .actions {
   display: flex;
-  justify-content: flex-end;
-}
-
-.modal-container > .modal > .actions > .action {
-  padding: 5px 15px;
+  justify-content: space-between;
+  font-size: 0.85em;
+  text-transform: uppercase;
 }
 
 .modal-container > .modal > .actions > .yes {
   margin-right: 10px;
+}
+
+.modal-container > .modal > .actions > .button {
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.modal-container > .modal > .actions > .create {
+  background: #FFB214;
+  color: #fff;
+}
+
+.modal-container > .modal > .actions > .update {
+  background: #08A500;
+  color: #fff;
 }

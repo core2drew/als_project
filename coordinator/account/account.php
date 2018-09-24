@@ -75,7 +75,7 @@
       if($count <= 0):
     ?>
       <div class="no-records">
-        <h3>No Records</h3>
+        <p class="message">No Records</p>
       </div>
     <?php
       else:

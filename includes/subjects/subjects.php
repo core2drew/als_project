@@ -4,14 +4,10 @@
   $count = mysqli_num_rows($result);
 ?>
 
-<div class="title">
-  <h2>Subjects</h2>
-</div>
-
 <div class="tabs">
-  <?php
+  <?php 
     for($i = 1; $i <= 2; $i++) {
-      $href = "/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$i";
+      $href = "$_SERVER[PHP_SELF]?page=subjects&grade_level=$i";
       $label = $i <= 1 ? 'Elementary' : 'High School';
       $active_class = $grade_level == $i ? " active'" : "'";
       $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -19,6 +15,11 @@
     }
   ?>
 </div>
+
+<div class="table-actions">
+  <span id='CreateSubject' class='button'>Create Subject</span>
+</div>
+
 <?php
   if($count <= 0):
 ?>
@@ -36,12 +37,13 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
-          $question = "<a class='button' href=/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&subject_id=$id>Questions</a>";
-          //$remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Remove</a>";
+          $update_btn = "<span class='button update' data-subject-id=$id>Update</span>";
+          $delete_btn = "<span class='button delete' data-subject-id=$id>Delete</span>";
+
           $table_row =
           "<tr>
             <td>$title</td>
-            <td class='option'>$question</td>
+            <td class='option'>$update_btn $delete_btn</td>
           </tr>";
           echo $table_row;
         }

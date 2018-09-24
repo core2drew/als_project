@@ -36,15 +36,8 @@
 <?php
   if($question_count <= 0):
 ?>
-  <table class="table question">
-    <thead>
-      <th>Question</th>
-      <th>Answer</th>
-      <th>Option</th>
-    </thead>
-  </table>
   <div class="no-records">
-    <h3>No Records</h3>
+    <p class="message">No Records</p>
   </div>
 <?php else: ?>
   <table class="table question">

@@ -25,14 +25,8 @@
 <?php
   if($count <= 0):
 ?>
-  <table class="table subjects">
-    <thead>
-      <th>Subject</th>
-      <th class="options">Options</th>
-    </thead>
-  </table>
   <div class="no-records">
-    <h3>No Records</h3>
+    <p class="message">No Records</p>
   </div>
 <?php else: ?>
   <table class="table subjects">
