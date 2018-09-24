@@ -48,9 +48,9 @@
           $id = $row['id'];
           $title = $row['title'];
           if($_SESSION['type'] === 'coordinator') {
-            $videos = "<a href=/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&subject_id=$id>Videos</a>";
+            $videos = "<a class='button' href=/coordinator/educationalvideo/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level&subject_id=$id>Videos</a>";
           } else {
-            $videos = "<a href=/educationalvideos.php?grade_level=$grade_level&subject_id=$id>Videos</a>";
+            $videos = "<a class='button' href=/educationalvideos.php?grade_level=$grade_level&subject_id=$id>Videos</a>";
           }
           $table_row =
           "<tr>

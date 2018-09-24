@@ -111,11 +111,11 @@
               $email = $row['email'];
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
               if($type == 'coordinator') {
-                $update_btn = "<a class='button' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&id=$id'>Update</a>";
-                $delete_btn = "<a class='button' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&id=$id'>Delete</a>";
+                $update_btn = "<a class='button update' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&id=$id'>Update</a>";
+                $delete_btn = "<a class='button delete' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&id=$id'>Delete</a>";
               } else {
-                $update_btn = "<a class='button' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Update</a>";
-                $delete_btn = "<a class='button' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Delete</a>";
+                $update_btn = "<a class='button update' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Update</a>";
+                $delete_btn = "<a class='button delete' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Delete</a>";
               }
 
               if($type == 'student') {

@@ -42,7 +42,7 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
-          $question = "<a href=/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&subject_id=$id>Questions</a>";
+          $question = "<a class='button' href=/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&subject_id=$id>Questions</a>";
           //$remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Remove</a>";
           $table_row =
           "<tr>

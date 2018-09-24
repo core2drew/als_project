@@ -16,14 +16,8 @@
 <?php
   if($count <= 0):
 ?>
-  <table class="table questions">
-    <thead>
-      <th>Question</th>
-      <th class="options">Options</th>
-    </thead>
-  </table>
   <div class="no-records">
-    <h3>No Records</h3>
+    <p class="message">No Records</p>
   </div>
 <?php else: ?>
   <table class="table questions">
@@ -35,7 +29,7 @@
       <?php
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $view = "<span class='button view' data-question-id=$row[id]>View</span>";
-          $remove_exam = "<span class='button remove' data-question-id=$row[id]>Remove</span>";
+          $remove_exam = "<span class='button delete' data-question-id=$row[id]>Remove</span>";
           $table_row =
           "<tr>
             <td>$row[question]</td>
