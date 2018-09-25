@@ -86,7 +86,7 @@ jQuery(document).ready(function($){
               } else if (res.data.type === 'link') {
                 $tab.eq(1).addClass('active')
                 $uploadVideo.hide();
-                $saveLink.show();
+                $saveLink.css('display','flex');
                 $uploadFilename.rules('add', { required: false })
                 $uploadVideoLink.rules('add', { required: true })
               }
@@ -241,9 +241,9 @@ jQuery(document).ready(function($){
       }
 
       function resetForm() {
-        // helperModule.clearInputFile($createUploadFileInput)
-        // helperModule.clearInputFile($createUploadFilename)
-        // helperModule.clearInputFile($createUploadVideoLink)
+        helperModule.clearInputFile($createUploadFileInput)
+        helperModule.clearInputFile($createUploadFilename)
+        helperModule.clearInputFile($createUploadVideoLink)
         validateCreate.resetForm();
         validateUpdate.resetForm();
       }
