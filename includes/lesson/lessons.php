@@ -55,8 +55,7 @@
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             if($is_coordinator) {
               $update = "<a class='button update' href=$back_link_lessons&action=update&lesson_id=$row[id]>Update</a>";
-              $remove_exam = "<span class='button remove' data-lesson-id=$row[id]>Remove</span>";
-
+              $remove_exam = "<span class='button delete' data-lesson-id=$row[id]>Remove</span>";
               $table_row =
               "<tr>
                 <td>$row[title]</td>

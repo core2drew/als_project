@@ -42,3 +42,9 @@
   color: #fff;
   width: 100px;
 }
+
+#ManageLessons > .table.lessons > thead > tr > th:nth-child(2),
+#ManageLessons > .table.lessons > tbody > tr > td:nth-child(2) {
+  text-align: center;
+  width: 175px;
+} 
