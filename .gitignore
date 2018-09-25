@@ -1,3 +1,4 @@
-/public/videos
-/public/images/profile
+/public/videos/*
+/public/images/profile/*
+/public/reviewers/*
 /vendor/
