@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="CreateModal" class="modal">
+  <div id="CreateModal" class="modal educationalvideo">
     <div class="title">Upload Video</div>
     <div class="content">
       <div class="tabs">
@@ -17,19 +17,16 @@
       </div>
       <form id="CreateForm" autocomplete="off" class="form" method="POST">
         <div class="input">
-          <label class="label">Title</label>
-          <input type="text" name="title" value="" required/>
+          <input type="text" name="title" placeholder="Title" required/>
         </div>
         <div class="input" id="UploadVideo">
-          <label class="label">Upload Video</label>
-          <input type="text" name="filename" readonly required/>
+          <span class="button choose-video">Choose Video</span>
+          <input type="text" name="filename" placeholder="Upload Video" readonly required/>
           <input type="file" name="video_file" accept="video/mp4"/>
-          <span class="button browse-video">Upload</span>
         </div>
         <div class="input" id="SaveLink">
-          <label class="label">Video Link</label>
-          <input type="hidden" name="filename" value="" />
-          <input type="text" name="video_link"/>
+          <input type="hidden" name="filename" value = ""/>
+          <input type="text" name="video_link" placeholder="Video Link"/>
         </div>
         <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
       </form>
@@ -40,7 +37,7 @@
     </div>
   </div>
 
-  <div id="UpdateModal" class="modal">
+  <div id="UpdateModal" class="modal educationalvideo">
     <div class="title">Update Video</div>
     <div class="content">
       <div class="tabs">
@@ -49,19 +46,16 @@
       </div>
       <form id="UpdateForm" autocomplete="off" class="form" method="POST">
         <div class="input">
-          <label class="label">Title</label>
-          <input type="text" name="title" value="" required/>
+          <input type="text" name="title" placeholder="Title" required/>
         </div>
         <div class="input" id="UploadVideo">
-          <label class="label">Upload Video</label>
-          <input type="text" name="filename" readonly required/>
+          <span class="button choose-video">Choose Video</span>
+          <input type="text" name="filename" placeholder="Upload Video" readonly required/>
           <input type="file" name="video_file" accept="video/mp4"/>
-          <span class="button browse-video">Upload</span>
         </div>
         <div class="input" id="SaveLink">
-          <label class="label">Video Link</label>
           <input type="hidden" name="filename" value=""/>
-          <input type="text" name="video_link"/>
+          <input type="text" name="video_link" placeholder="Video Link"/>
         </div>
         <input type="hidden" name="video_id" value="<?php echo $video_id ?>" />
       </form>

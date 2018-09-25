@@ -12,13 +12,17 @@
   justify-content: space-between;
 }
 
-#ManageEducationalVideos > .table.subjects > thead > tr > th:nth-child(1) {
-  width: 100%;
+#ManageEducationalVideos > .table.subjects > thead > tr > th:nth-child(2),
+#ManageEducationalVideos > .table.subjects > tbody > tr > td:nth-child(2) {
+  text-align: center;
+  width: 90px;
 }
 
-#ManageEducationalVideos > .table.subjects > thead > tr > th:nth-child(2) {
+#ManageEducationalVideos > .table.educationalvideo > thead > tr > th:nth-child(2),
+#ManageEducationalVideos > .table.educationalvideo > tbody > tr > td:nth-child(2) {
+  width: 250px;
   text-align: center;
-} 
+}
 
 .modal-container > .modal > .content > .form > #UploadVideo > input[name='video_file'] {
   display: none;
@@ -26,4 +30,19 @@
 
 .modal-container > .modal > .content > .form > #SaveLink {
   display: none;
+}
+
+.educationalvideo > .content > .form > .input:nth-last-child(n + 2) {
+  margin-bottom: 10px;
+}
+
+.educationalvideo > .content > .form > #UploadVideo {
+  flex-direction: row;
+}
+
+.educationalvideo > .content > .form > #UploadVideo > .choose-video {
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  text-transform: uppercase;
 }

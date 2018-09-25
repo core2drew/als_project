@@ -1,7 +1,10 @@
 jQuery(document).ready(function($){
     //Upload Video Module
     var learningVideoModule = (function(){
-      var videoId;
+      var videoId,
+          validateCreate,
+          validateUpdate,
+          currentFilename;
       var uploadOption = 'upload';
 
       var $manageEducationalVideos= $("#ManageEducationalVideos");
@@ -37,7 +40,7 @@ jQuery(document).ready(function($){
 
       //Modal Actions
       var $tab = $modal.find('.tab');
-      var $browserVideos = $modal.find('.browse-video');
+      var $chooseVideo = $modal.find('.choose-video');
       var $uploadFileInput = $modal.find('input[type=file]');
       var $uploadFilename = $modal.find('input[name=filename]');
       var $uploadVideoLink = $modal.find('input[name=video_link]');
@@ -87,7 +90,7 @@ jQuery(document).ready(function($){
                 $uploadFilename.rules('add', { required: false })
                 $uploadVideoLink.rules('add', { required: true })
               }
-
+              currentFilename = res.data.filename;
               $title.val(res.data.title)
               $filename.val(res.data.filename)
               $video_link.val(res.data.video_link)
@@ -140,6 +143,7 @@ jQuery(document).ready(function($){
           var formData = new FormData($updateForm[0]);
           formData.append('upload_option', uploadOption)
           formData.append('id', videoId)
+          formData.append('current_file_name', currentFilename)
           $.ajax({
             type: "POST",
             url: '/resources/educationalvideo/update.php',
@@ -216,7 +220,7 @@ jQuery(document).ready(function($){
          
         } else if (action == 'link') {
           $uploadVideo.hide();
-          $saveLink.show();
+          $saveLink.css('display','flex');
           $uploadFilename.rules('add', { required: false })
           $uploadVideoLink.rules('add', { required: true })
         }
@@ -237,9 +241,11 @@ jQuery(document).ready(function($){
       }
 
       function resetForm() {
-        helperModule.clearInputFile($createUploadFileInput)
-        helperModule.clearInputFile($createUploadFilename)
-        helperModule.clearInputFile($createUploadVideoLink)
+        // helperModule.clearInputFile($createUploadFileInput)
+        // helperModule.clearInputFile($createUploadFilename)
+        // helperModule.clearInputFile($createUploadVideoLink)
+        validateCreate.resetForm();
+        validateUpdate.resetForm();
       }
 
       function closeModals(){
@@ -253,8 +259,8 @@ jQuery(document).ready(function($){
       }
       
       function init(){
-        $createForm.validate({ errorClass: "error-field" })
-        $updateForm.validate({ errorClass: "error-field" })
+        validateCreate = $createForm.validate({ errorClass: "error-field" })
+        validateUpdate = $updateForm.validate({ errorClass: "error-field" })
         $tab.on('click', changeTab)
 
         //Close all modals
@@ -270,7 +276,7 @@ jQuery(document).ready(function($){
         $updateButton.on('click', updateRecord)
         $yesDeleteButton.on('click', deleteRecord)
 
-        $browserVideos.on('click', function(e) {
+        $chooseVideo.on('click', function(e) {
           e.preventDefault();
           var fileInput = $(this).siblings('input[type=file]').trigger('click');
         })
