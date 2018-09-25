@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<?php include '../includes/exam/modals.php' ?>
+<?php include '../includes/teacher/modals.php' ?>
 <?php include '../includes/html/scripts.php'?>
 <script src="/public/js/modules/teacher.js"></script>
 <?php include '../includes/html/footer.php' ?>

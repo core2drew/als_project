@@ -5,7 +5,7 @@
 ?>
 
 <div id="UpdateForm" class="form" method="POST">
-  <div class="input">
+  <div class="title">
     <h3><?php echo $row['title'] ?></h3>
   </div>
   <div id="LessonEditorContainer">
@@ -19,6 +19,6 @@
     </div>
   </div>
   <?php if(isset($row['reviewer_link'])): ?>
-    <a href="<?php echo $row['reviewer_link'] ?>"><?php echo $row['reviewer_filename'] ?></a>
+    <a class="button" target="_blank" href="<?php echo $row['reviewer_link'] ?>">Download Reviewer</a>
   <?php endif ?>
 </div>

@@ -10,7 +10,7 @@
 ?>
   <div id="Lessons" class="wrapper">
     <?php include 'includes/sidebar.php'; ?>
-    <div class="page">
+    <div id="ManageLessons" class="page">
       <?php 
         if(isset($subject_id)) {
           if(isset($lesson_id)) {

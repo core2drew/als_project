@@ -62,7 +62,7 @@
                 <td class='option'>$update $remove_exam</td>
               </tr>";
             } else {
-              $view = "<a class='button update' href=/lessons.php?grade_level=$grade_level&subject_id=$subject_id&lesson_id=$row[id]>View</a>";
+              $view = "<a class='button view' href=/lessons.php?grade_level=$grade_level&subject_id=$subject_id&lesson_id=$row[id]>View</a>";
               $table_row =
               "<tr>
                 <td>$row[title]</td>

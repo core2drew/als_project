@@ -37,11 +37,12 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
+          $question = "<a class='button' href=$_SERVER[PHP_SELF]?grade_level=$grade_level&subject_id=$id>Lessons</a>";
+
           if($_SESSION['type'] === 'coordinator') {
             $question = "<a class='button' href=$_SERVER[PHP_SELF]?page=lessonandvideos&sub_page=lessons&grade_level=$grade_level&subject_id=$id>Lessons</a>";
-          } else {
-            $question = "<a class='button href=$_SERVER[PHP_SELF]?grade_level=$grade_level&subject_id=$id>Lessons</a>";
           }
+
           $table_row =
           "<tr>
             <td>$title</td>
