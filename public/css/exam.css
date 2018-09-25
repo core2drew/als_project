@@ -16,11 +16,17 @@
 #ManageExams > .table.subjects > tbody > tr > td:nth-child(2) {
   width: 60px;
   text-align: center;
-} 
+}
 
 #ManageExams > .table.exam > thead > tr > th:nth-last-child(1),
 #ManageExams > .table.exam > tbody > tr > td:nth-last-child(1) {
   width: 265px;
+  text-align: center;
+}
+
+#ManageExams > .table.exam.questions > thead > tr > th:nth-last-child(1),
+#ManageExams > .table.exam.questions > tbody > tr > td:nth-last-child(1) {
+  width: 150px;
   text-align: center;
 }
 
@@ -89,6 +95,7 @@
   padding: 10px;
   background: #fff2e5;
   font-style: italic;
+  max-width: 400px;
 }
 
 .modal-container > .modal.exams > .content > .form > .input:nth-last-child(n + 2) {

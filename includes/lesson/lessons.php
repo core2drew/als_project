@@ -48,7 +48,7 @@
     <table class="table lessons">
       <thead>
         <th>Title</th>
-        <th class="options">Options</th>
+        <th>Options</th>
       </thead>
       <tbody>
         <?php

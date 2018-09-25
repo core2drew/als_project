@@ -42,7 +42,7 @@
     <p class="message">No Records</p>
   </div>
 <?php else: ?>
-  <table class="table question">
+  <table class="table exam questions">
     <thead>
       <th>Question</th>
       <th>Answer</th>
@@ -55,8 +55,8 @@
           $id = $qr['id'];
           $question = $qr['question'];
           $answer = $qr['answer'];
-          $view = "<button class='button view' data-question-id=$id>View</button>";
-          $remove = "<button class='button remove' data-question-id=$id>Remove</button>";
+          $view = "<span class='button view' data-question-id=$id>View</span>";
+          $remove = "<span class='button delete' data-question-id=$id>Remove</span>";
           $table_row =
           "<tr>
             <td>$question</td>

@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
 
     var $tableActions = $manageExams.find('.table-actions');
     var $examTable = $manageExams.find('.table.exam');
-    var $examQuestionTable = $manageExams.find('.table.question');
+    var $examQuestionTable = $manageExams.find('.table.exam.questions');
 
     //Exam Table Actions
     var $createExamButton = $tableActions.find('#CreateExam');
@@ -333,6 +333,7 @@ jQuery(document).ready(function($){
     function closeModals(){
       $modalContainer.removeClass('active');
       $deleteModal.hide();
+      $updateModal.hide();
       $createModal.hide();
       $examQuestionModal.hide();
       $examViewQuestionModal.hide();
