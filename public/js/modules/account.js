@@ -14,16 +14,16 @@ jQuery(document).ready(function($){
 
     uploadProfileImageInput.on('change', function(){
       var reader = new FileReader();
-      if(this.files[0].size>528385){
-        alert("Image Size should not be greater than 500Kb");
+      if(this.files[0].size>3538500){
+        alert("Image Size should not be greater than 3MB");
         helperModule.clearInputFile(uploadProfileImageInput)
         return false;
       }
   
       if(this.files[0].type.indexOf("image")==-1){
-          alert("Invalid Type");
-          helperModule.clearInputFile(uploadProfileImageInput)       
-          return false;
+        alert("Invalid Type");
+        helperModule.clearInputFile(uploadProfileImageInput)       
+        return false;
       } 
   
       reader.onload = function (e) {
