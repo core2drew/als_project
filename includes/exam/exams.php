@@ -55,8 +55,8 @@
               <td class='option'>$questions $update $remove</td>
             </tr>";
           } else {
-            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id>Questions</a>";
-            $assign_exam = "<span class='button' data-exam-id=$id>Assign Exam</span>";
+            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id>View</a>";
+            $assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
             $table_row =
             "<tr>
               <td>$title</td>

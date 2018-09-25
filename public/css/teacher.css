@@ -1,0 +1,12 @@
+#AssignExamModal > .content > .table > thead > tr > th:nth-last-child(1){
+  text-align: center;
+}
+
+#AssignExamModal > .content > .table > tbody > tr > td > .button {
+  text-align: center;
+  width: 100%;
+}
+
+#AssignExamModal > .content > .table > tbody > tr > td > .remove {
+  display: none;
+}
