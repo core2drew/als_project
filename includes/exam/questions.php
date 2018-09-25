@@ -23,11 +23,13 @@
   $question_result = mysqli_query($conn, $question_query);
   //Record count of query
   $question_count = mysqli_num_rows($question_result);
+
+  $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id";
 ?>
 
 <div class="title">
   <h2>Exam Questions</h2>
-  <a class="button" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=<?php echo $grade_level ?>&subject_id=<?php echo $subject_id ?>">Back</a>
+  <a class="button" href="<?php echo $go_back_to_subjects ?>">Back</a>
 </div>
 
 <div class="table-actions">

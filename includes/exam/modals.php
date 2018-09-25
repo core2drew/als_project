@@ -8,22 +8,19 @@
     </div>
   </div>
 
-  <div id="CreateModal" class="modal">
+  <div id="CreateModal" class="modal exams">
     <div class="title">Create Exam</div>
     <div class="content">
       <form id="CreateForm" class="form" method="POST">
         <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
         <div class="input">
-          <label class="label">Title</label>
-          <input type="text" name="title" value=""/>
+          <input type="text" name="title" placeholder="Title"/>
+        </div>
+        <div class="input instruction">
+          <textarea name="instruction" placeholder="Instruction"></textarea>
         </div>
         <div class="input">
-          <label class="label">Instruction</label>
-          <textarea name="instruction"></textarea>
-        </div>
-        <div class="input">
-          <label class="label">Minutes</label>
-          <input name="minutes" value=""/>
+          <input type="text" name="minutes" placeholder="Minutes" />
         </div>
       </form>
     </div>
@@ -33,21 +30,18 @@
     </div>
   </div>
 
-  <div id="UpdateModal" class="modal">
+  <div id="UpdateModal" class="modal exams">
     <div class="title">Update Exam</div>
     <div class="content">
       <form id="UpdateForm" class="form" method="POST">
         <div class="input">
-          <label class="label">Title</label>
-          <input type="text" name="title" value=""/>
+          <input type="text" name="title" placeholder="Title"/>
+        </div>
+        <div class="input instruction">
+          <textarea name="instruction" placeholder="Instruction"></textarea>
         </div>
         <div class="input">
-          <label class="label">Instruction</label>
-          <textarea name="instruction"></textarea>
-        </div>
-        <div class="input">
-          <label class="label">Minutes</label>
-          <input name="minutes" value=""/>
+          <input type="text" name="minutes" placeholder="Minutes" />
         </div>
       </form>
     </div>

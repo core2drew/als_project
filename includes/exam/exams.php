@@ -44,7 +44,7 @@
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
           
           if($is_coordinator) {
-            $questions = "<a class='button' href=/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
+            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
             $update = "<span class='button update' data-exam-id=$id>Update</span>";
             $remove = "<span class='button delete' data-exam-id=$id>Remove</span>";
             $table_row =
