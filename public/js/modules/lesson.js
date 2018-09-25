@@ -1,16 +1,13 @@
 jQuery(document).ready(function($){
   // Lesson Module
   var lessonModule = (function(){
-    var lessonEditor;
-    var lessonId;
+    var lessonEditor, lessonId, validateCreate, validateUpdate;
 
     var $manageLessons = $("#ManageLessons");
     var $modalContainer = $(".modal-container");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
-
-
 
     var $lessonTable = $manageLessons.find('.table.lessons');
     
@@ -34,11 +31,6 @@ jQuery(document).ready(function($){
     var $uploadTextInput = $form.find('input[name=filename]');
 
     function createLesson(){
-      //Validate form field
-      $createForm.validate({
-        errorClass: "error-field"
-      })
-
       if($createForm.valid()) {
         var formData = new FormData($createForm[0]);
         formData.append('editor_data', lessonEditor.getData())
@@ -63,11 +55,6 @@ jQuery(document).ready(function($){
     }
 
     function updateLesson() {
-      //Validate form field
-      $createForm.validate({
-        errorClass: "error-field"
-      })
-      
       if($updateForm.valid()) {
         var formData = new FormData($updateForm[0]);
         formData.append('editor_data', lessonEditor.getData())
@@ -81,7 +68,7 @@ jQuery(document).ready(function($){
             if(res.success) {
               //show modal created success
               //modal go to lesson table
-              location.reload();
+              //location.reload();
             }
           },
           error: function(err) {
@@ -146,6 +133,8 @@ jQuery(document).ready(function($){
 
     var init = function(){
       ckeditorInit()
+      validateCreate = $createForm.validate({ errorClass: "error-field" })
+      validateUpdate = $updateForm.validate({ errorClass: "error-field" })
 
       $createButton.on('click', createLesson)
       $updateButton.on('click', updateLesson)

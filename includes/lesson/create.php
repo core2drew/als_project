@@ -1,7 +1,6 @@
 <form id="CreateForm" class="form" method="POST" autocomplete="off">
   <div class="input">
-    <label class="label">Title</label>
-    <input type="text" name="title" required/>
+    <input type="text" name="title" placeholder="Title" required/>
   </div>
   <div id="LessonEditorContainer">
     <div class="document-editor">
@@ -12,8 +11,7 @@
     </div>
   </div>
   <div class="input" id="LessonReviewer">
-    <label class="label">Upload Reviewer</label>
-    <input type="text" name="filename" readonly />
+    <input type="text" name="filename" placeholder="Upload Reviewer" readonly />
     <input type="file" name="reviewer_file" accept="application/pdf"/>
     <span class="button upload">Upload</span>
   </div>

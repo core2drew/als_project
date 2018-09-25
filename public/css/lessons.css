@@ -16,16 +16,6 @@
   display: none;
 }
 
-#ManageLessons > .form > .button {
-  display: block;
-  margin-left: auto;
-  margin-top: 20px;
-}
-
-#ManageLessons > .table.subjects {
-  width: 50%;
-}
-
 #ManageLessons > .table.subjects > thead > tr > th:nth-child(1) {
   width: 100%;
 }
@@ -33,3 +23,22 @@
 #ManageLessons > .table.subjects > thead > tr > th:nth-child(2) {
   text-align: center;
 } 
+
+#ManageLessons > .form > #LessonEditorContainer {
+  margin-bottom: 10px;
+}
+
+#ManageLessons > .form > #LessonReviewer{
+  flex-direction: row;
+}
+
+#ManageLessons > .form > .input{
+  margin-bottom: 10px;
+}
+
+#ManageLessons > .form > .create {
+  text-align: center;
+  background-color: #FFB214;
+  color: #fff;
+  width: 100px;
+}

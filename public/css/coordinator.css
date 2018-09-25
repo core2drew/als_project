@@ -24,11 +24,6 @@
   right: -120px;
 }
 
-#Coordinator > .page > .form > .input > input,
-#Coordinator > .page > .form > .input > select {
-  text-transform: uppercase;
-}
-
 #Coordinator > .page > .form > .input > .field {
   font-weight: bold;
   text-transform: uppercase;

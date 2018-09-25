@@ -35,10 +35,6 @@
   align-items: center;
 }
 
-#ManageQuestions > .table.subjects {
-  width: 50%;
-}
-
 #ManageQuestions > .table.subjects > thead > tr > th:nth-child(1) {
   width: 100%;
 }

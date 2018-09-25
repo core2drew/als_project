@@ -12,10 +12,6 @@
   width: 1%;
 }
 
-#ManageExams > .table.subjects {
-  width: 50%;
-}
-
 #ManageExams > .table.subjects > thead > tr > th:nth-child(1) {
   width: 100%;
 }

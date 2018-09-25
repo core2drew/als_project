@@ -6,8 +6,7 @@
 
 <form id="UpdateForm" class="form" method="POST">
   <div class="input">
-    <label class="label">Title</label>
-    <input type="text" name="title" value="<?php echo $row['title'] ?>"/>
+    <input type="text" name="title" placeholder="Title" value="<?php echo $row['title'] ?>" required/>
   </div>
   <div id="LessonEditorContainer">
     <div class="document-editor">
@@ -20,8 +19,7 @@
     </div>
   </div>
   <div class="input" id="LessonReviewer">
-    <label class="label">Upload Reviewer</label>
-    <input type="text" name="filename" readonly value="<?php echo $row['reviewer_filename'] ?>"/>
+    <input type="text" name="filename" readonly placeholder="Upload Reviewer" value="<?php echo $row['reviewer_filename'] ?>"/>
     <input type="file" name="reviewer_file" accept="application/pdf"/>
     <span class="button upload">Upload</span>
   </div>
