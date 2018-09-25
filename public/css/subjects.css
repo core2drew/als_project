@@ -1,0 +1,9 @@
+#ManageSubjects > .table.subjects {
+  width: 50%;
+}
+
+#ManageSubjects > .table.subjects > thead > tr > th:nth-child(2),
+#ManageSubjects > .table.subjects > tbody > tr > td:nth-child(2) {
+  width: 150px;
+  text-align: center;
+} 

@@ -12,6 +12,18 @@
   justify-content: space-between;
 }
 
+#ManageEducationalVideos > .table.subjects {
+  width: 50%;
+}
+
+#ManageEducationalVideos > .table.subjects > thead > tr > th:nth-child(1) {
+  width: 100%;
+}
+
+#ManageEducationalVideos > .table.subjects > thead > tr > th:nth-child(2) {
+  text-align: center;
+} 
+
 .modal-container > .modal > .content > .form > #UploadVideo > input[name='video_file'] {
   display: none;
 }
