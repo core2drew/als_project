@@ -10,3 +10,9 @@
 #AssignExamModal > .content > .table > tbody > tr > td > .remove {
   display: none;
 }
+
+#AssignExamModal > .content > .table > tbody > tr > td > .taken { 
+  background: #e6e6e6;
+  color: #989898;
+  cursor: not-allowed;
+}

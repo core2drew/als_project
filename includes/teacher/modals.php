@@ -14,7 +14,6 @@
       </div>
     </div>
     <div class="actions">
-      <span class="action button save">Save</span>
       <span class="action button close">Close</span>
     </div>
   </div>

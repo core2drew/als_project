@@ -7,17 +7,27 @@
   $teacher_id = mysqli_real_escape_string($conn, $_GET['teacher_id']);
   $exam_id = mysqli_real_escape_string($conn, $_GET['exam_id']);
 
-  $query = "SELECT users.id, users.firstname FROM users WHERE NOT EXISTS 
-  (SELECT user_id FROM users_has_exam WHERE users_has_exam.user_id = users.id AND users_has_exam.exam_id = $exam_id) AND users.teacher_id = $teacher_id AND users.deleted_at iS NULL";
+  // $query = "SELECT users.id, CONCAT(lastname, ', ' ,firstname) as name,
+  // (SELECT COUNT(id) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id) as has_exam
+  // FROM users WHERE users.teacher_id = $teacher_id";
+
+  // $query ="SELECT users.id, CONCAT(users.lastname, ', ' ,users.firstname) as name,
+  // (SELECT (id IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id) as has_exam,
+  // (SELECT (taken_at IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id AND users_has_exam.deleted_at IS NULL) as is_taken
+  // FROM users WHERE users.teacher_id = $teacher_id";
+
+  $query ="SELECT users.id, CONCAT(users.lastname, ', ' ,users.firstname) as name,
+  (SELECT DISTINCT (id IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id ORDER BY users_has_exam.id DESC LIMIT 1) as has_exam,
+  (SELECT DISTINCT (taken_at IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id AND users_has_exam.deleted_at IS NULL ORDER BY users_has_exam.id DESC LIMIT 1) as is_taken
+  FROM users WHERE users.teacher_id = $teacher_id";
+  
   $result = mysqli_query($conn, $query);
-  $count = mysqli_num_rows($result);
 
   if($result) {
-    if($count > 0) {
-      $json_data['success'] = true;
-    } else {
-      $json_data['success'] = false;
-      $json_data['message'] = 'You don\'t have student to assign this exam';
+    $json_data['success'] = true;
+    $json_data['data'] = [];
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $json_data['data'][] = $row;
     }
   } else {
     $json_data['message'] = 'Oops, something went wrong.';

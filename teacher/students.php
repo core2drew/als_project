@@ -26,7 +26,6 @@
 <div id="Teacher" class="wrapper">
   <?php include '../includes/sidebar.php' ?>
   <div id="ManageStudent" class="page">
-    <h2>Students</h2>
     <?php
       if($count <= 0):
     ?>

@@ -1,7 +1,6 @@
 jQuery(document).ready(function($){
 
   var teacherModule = (function() {
-    var studentsHasExam = []
     var examId;
 
     var $manageExams = $("#ManageExams");
@@ -29,39 +28,58 @@ jQuery(document).ready(function($){
         container.siblings('.no-records').hide();// hide no record
         $.each(data, function(index, data) {
           var row = $("<tr/>").addClass('row');
-          var studentName = $('<td/>').addClass('td');
+          var name = $('<td/>').addClass('td');
           var view = $('<td/>').addClass('td');
-          studentName.text(data.student_name);
-          view.append(
-            "<span class='button assign'>Assign</span>"
-          )
-          view.append(
-            "<span class='button remove'>Unassign</span>"
-          )
-          row.append(studentName);
-          row.append(view);
-          var assign = view.find('.assign')
-          var remove = view.find('.remove')
 
-          assign.on('click', function(){
-            studentsHasExam.push(data.id)
-            $(this).hide();
-            remove.css('display','block')
-          })
+          name.text(data.name);
+          row.append(name);
+  
+          if(data.is_taken == "0" || data.is_taken == null) {
+            view.append(
+              `<span class='button assign' data-student-id=${data.id}>Assign</span>`
+            )
+            view.append(
+              `<span class='button remove' data-student-id=${data.id}>Unassign</span>`
+            )
+            var assign = view.find('.assign')
+            var remove = view.find('.remove')
+            row.append(view);
 
-          remove.on('click', function(){
-            var index = studentsHasExam.indexOf(data.id);
-            studentsHasExam.splice(index, 1);
-            $(this).hide();
-            assign.css('display','block')
-          })
+            if(data.has_exam && data.is_taken != null) {
+              assign.hide()
+              remove.css('display','block')
+            }
+
+            assign.on('click', function(){
+              var $this = $(this)
+              var studentId = $this.data('studentId')
+              $this.hide();
+              remove.css('display','block')
+              assignExam(studentId, examId)
+            })
+  
+            remove.on('click', function(){
+              var $this = $(this)
+              var studentId = $this.data('studentId')
+              $(this).hide();
+              assign.css('display','block')
+              removeAssignExam(studentId, examId)
+            })
+
+          } else if (data.is_taken == "1"){
+            view.append(
+              "<span class='button basic taken'>Taken</span>"
+            )
+            row.append(view);
+          }
+
           tableBody.append(row);
         });
       }
       return container.append(tableBody);
     }
 
-    function assignExam(){
+    function showAssignExamModal(){
       examId = $(this).data('examId')
       $.ajax({
         type: "GET",
@@ -72,29 +90,10 @@ jQuery(document).ready(function($){
         }),
         success: function(res){
           if(res.success) {
-            // makeStudentTable($assignExamModalTable, res.data)
-            // $modalContainer.addClass('active')
-            // $assignExamModal.show();
-
-            $.ajax({
-              type: "GET",
-              url: '/resources/teacher/students-assign-exam.php',
-              data: $.param({
-                teacher_id: $assignExamModal.data('userId'),
-                exam_id: examId
-              }),
-              success: function(res){
-                if(res.success) {
-                  // makeStudentTable($assignExamModalTable, res.data)
-                  // $modalContainer.addClass('active')
-                  // $assignExamModal.show();
-                  alert(res.message)
-                }
-              },
-              error: function(err) {
-                console.error("Something went wrong");
-              }
-            });
+            console.log(res.data)
+            makeStudentTable($assignExamModalTable, res.data)
+            $modalContainer.addClass('active')
+            $assignExamModal.show();
           } else {
             alert(res.message)
           }
@@ -110,8 +109,49 @@ jQuery(document).ready(function($){
       $assignExamModal.hide();
     }
 
-    function saveExamAssignment() {
-      console.log(studentsHasExam)
+    function assignExam(studentId, examId) {
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-exam.php',
+        data: $.param({
+          student_id: studentId,
+          exam_id: examId
+        }),
+        success: function(res){
+          if(res.success) {
+            // makeStudentTable($assignExamModalTable, res.data)
+            // $modalContainer.addClass('active')
+            // $assignExamModal.show();
+            alert(res.message)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function removeAssignExam(studentId, examId){
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-exam.php',
+        data: $.param({
+          student_id: studentId,
+          exam_id: examId,
+          action: 'remove'
+        }),
+        success: function(res){
+          if(res.success) {
+            // makeStudentTable($assignExamModalTable, res.data)
+            // $modalContainer.addClass('active')
+            // $assignExamModal.show();
+            alert(res.message)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
     }
     
     function init(){
@@ -119,9 +159,7 @@ jQuery(document).ready(function($){
       //Close all modals
       $modal.find('.close').on('click', closeModals)
 
-      $assignExamButton.on('click', assignExam)
-      
-      $saveAssignExamButton.on('click', saveExamAssignment)
+      $assignExamButton.on('click', showAssignExamModal)
 
       if($examQuestions.length) {
         $.ajax({
