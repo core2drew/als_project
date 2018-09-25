@@ -20,6 +20,7 @@
 @import './components/segment.css';
 @import './components/table.css';
 @import './components/input.css';
+@import './components/textarea.css';
 @import './components/select.css';
 @import './components/tabs.css';
 @import "./components/modal.css";

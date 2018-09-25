@@ -43,6 +43,13 @@
   text-align: center;
 } 
 
+
+#ManageQuestions > .table.questions > thead > tr > th:nth-last-child(1),
+#ManageQuestions > .table.questions > tbody > tr > td:nth-last-child(1) {
+  text-align: center;
+  width: 160px;
+} 
+
 #ManageQuestions > .table-actions > .filter {
   margin-right: 10px;
 }
@@ -84,6 +91,12 @@
   position: relative;
 }
 
+#CreateModal > .content > .form > .choices{
+  border: 1px solid #d6d6d6;
+  padding: 15px;
+  border-radius: .28571429rem;
+}
+
 #CreateModal > .content > .form > .question > textarea,
 #CreateModal > .content > .form > .explanation > textarea{
   resize: none;
@@ -95,10 +108,24 @@
 
 #CreateModal > .content > .form > .add {
   font-size: small;
-  padding: 5px 20px;
+  padding: 8px;
   width: 100%;
   text-align: center;
   margin-bottom: 10px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #09B400;
+  border: 1px solid #09B400;
+}
+
+#CreateModal > .content > .form > .add > .icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  fill: #09B400;
 }
 
 #CreateModal > .content > .form > .choices > .choice > .remove {
@@ -118,10 +145,6 @@
 
 #CreateModal > .content > .form > .choices > .choice > .answer > input[type='radio'] {
   margin-right: 10px;
-}
-
-#CreateModal > .content > .form > .choices > .choice > .answer > input[type='text'] {
-  width: 100%;
 }
 
 #CreateModal > .content > .form > .question > label.error-field,
@@ -160,4 +183,14 @@
   padding: 10px;
   background: #fff2e5;
   font-style: italic;
+  max-width: 400px;
+}
+
+
+.modal-container > .modal.questions {
+  min-width: 500px;
+}
+.modal-container > .modal.questions > .content > .form > .question > textarea,
+.modal-container > .modal.questions > .content > .form > .explanation > textarea {
+  height: 80px;
 }

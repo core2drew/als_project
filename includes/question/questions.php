@@ -1,5 +1,5 @@
 <?php
-  $query = "SELECT id, question FROM questions WHERE subject_id=$subject_id AND deleted_at IS NULL";
+  $query = "SELECT id, question, explanation FROM questions WHERE subject_id=$subject_id AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
@@ -25,7 +25,8 @@
   <table class="table questions">
     <thead>
       <th>Question</th>
-      <th class="options">Options</th>
+      <th>Explanation</th>
+      <th>Options</th>
     </thead>
     <tbody>
       <?php
@@ -35,6 +36,7 @@
           $table_row =
           "<tr>
             <td>$row[question]</td>
+            <td>$row[explanation]</td>
             <td class='option'>$view $remove_exam</td>
           </tr>";
           echo $table_row;

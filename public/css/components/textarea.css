@@ -1,11 +1,4 @@
-.input {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.input input[type='text'],
-.input input[type='password'] {
+textarea {
   margin: 0;
   max-width: 100%;
   -webkit-box-flex: 1;
@@ -27,25 +20,4 @@
   -webkit-box-shadow: none;
   box-shadow: none;
   font-size: 0.85em;
-}
-
-.input > .label {
-  font-size: 0.9em;
-}
-
-.input > .error{
-  font-size: 0.75em;
-  color: red;
-  text-align: right;
-  position: absolute;
-  bottom: -15px;
-  right: 0;
-}
-
-.input > label.error-field {
-  font-size: 0.67em;
-  color: #FE141A;
-  position: absolute;
-  top: 11px;
-  right: 7px;
 }
