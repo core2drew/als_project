@@ -95,13 +95,8 @@
           $contactno = $row['contactno'];
           $email = $row['email'];
           $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
-          if($type == 'coordinator') {
-            $update_btn = "<a class='button update' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&id=$id'>Update</a>";
-            $delete_btn = "<a class='button delete' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&id=$id'>Delete</a>";
-          } else {
-            $update_btn = "<a class='button update' href='/coordinator/account/update.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Update</a>";
-            $delete_btn = "<a class='button delete' href='/coordinator/account/delete.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level&id=$id'>Delete</a>";
-          }
+          $update_btn = "<span class='button update' data-user-id=$row[id] data-user-type=$type>Update</span>";
+          $delete_btn = "<span class='button delete' data-user-id=$row[id] data-user-type=$type>Delete</span>";
 
           if($type == 'student') {
             $table_row =

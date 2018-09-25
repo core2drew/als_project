@@ -25,6 +25,8 @@
         $profile_image_url = "/public/images/profile/" . $filename;
         $_SESSION['profile_image_url'] = $profile_image_url;
         $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
+      } else {
+        $profile_image_url = '/public/images/profile-placeholder-image.png';
       }
       $type = mysqli_real_escape_string($conn, $_POST['type']);
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);

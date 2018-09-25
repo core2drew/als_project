@@ -24,7 +24,7 @@
   <div id="LoginWrapper">
     <div id="LoginFormContainer">
       <h2 class="title">Login</h2>
-      <form id="LoginForm" method="POST" action="">
+      <form id="LoginForm" method="POST" autocomplete="off">
         <div class="field">
           <label class="label">Email</label>
           <input class="input" type="text" name="email"/>
