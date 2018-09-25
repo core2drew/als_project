@@ -4,14 +4,10 @@
   $count = mysqli_num_rows($result);
 ?>
 
-<div class="title">
-  <h2>Subjects</h2>
-</div>
-
 <div class="tabs">
   <?php
     for($i = 1; $i <= 2; $i++) {
-      $href = "/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$i";
+      $href = "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=questions&grade_level=$i";
       $label = $i <= 1 ? 'Elementary' : 'High School';
       $active_class = $grade_level == $i ? " active'" : "'";
       $link = "<a class='tab". $active_class ." href='$href'>$label</a>";
@@ -36,7 +32,7 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
-          $question = "<a class='button' href=/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=$grade_level&subject_id=$id>Questions</a>";
+          $question = "<a class='button' href=$_SERVER[PHP_SELF]?page=examandquestions&sub_page=questions&grade_level=$grade_level&subject_id=$id>Questions</a>";
           //$remove_exam = "<a href=/coordinator/exam/delete.php?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$id>Remove</a>";
           $table_row =
           "<tr>

@@ -35,6 +35,18 @@
   align-items: center;
 }
 
+#ManageQuestions > .table.subjects {
+  width: 50%;
+}
+
+#ManageQuestions > .table.subjects > thead > tr > th:nth-child(1) {
+  width: 100%;
+}
+
+#ManageQuestions > .table.subjects > thead > tr > th:nth-child(2) {
+  text-align: center;
+} 
+
 #ManageQuestions > .table-actions > .filter {
   margin-right: 10px;
 }

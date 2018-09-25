@@ -16,8 +16,8 @@
             <a class="button <?php echo $_GET['sub_page'] == 'lessons' ? 'active' : null ?>" href="/coordinator/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons</a>
             <a class="button <?php echo $_GET['sub_page'] == 'educationalvideos' ? 'active' : null ?>" href="/coordinator/educationalvideos.php?page=lessonandvideos&sub_page=educationalvideos&grade_level=1">Educational Videos</a>
         <?php elseif($_GET['page'] === 'examandquestions'): ?>
-            <a class="button <?php echo $_GET['sub_page'] == 'questions' ? 'active' : null ?>" href="/coordinator/question/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Questions</a>
-            <a class="button <?php echo $_GET['sub_page'] == 'exams' ? 'active' : null ?>" href="/coordinator/exam/exams.php?page=examandquestions&sub_page=exams&grade_level=1">Exams</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'questions' ? 'active' : null ?>" href="/coordinator/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Questions</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'exams' ? 'active' : null ?>" href="/coordinator/exams.php?page=examandquestions&sub_page=exams&grade_level=1">Exams</a>
         <?php elseif($_GET['page'] === 'reports'): ?>
             <a class="button <?php echo $_GET['page'] == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
         <?php endif ?>

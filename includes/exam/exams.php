@@ -3,8 +3,8 @@
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
-  $go_back_link = $_SERVER['PHP_SELF']."?page=examandquestions&sub_page=exams&grade_level=$grade_level";
-  
+  $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=questions&grade_level=$grade_level";
+
   if(!$is_coordinator) {
     $go_back_link = $_SERVER['PHP_SELF'];
   }
@@ -12,7 +12,7 @@
 
 <div class="title">
   <h2>Exams</h2>
-  <a class="button" href="<?php echo $go_back_link ?>">Go Back</a>
+  <a class="button" href="<?php echo $go_back_to_subjects ?>">Go Back</a>
 </div>
 
 <?php if($is_coordinator): ?>
@@ -55,8 +55,8 @@
               <td class='option'>$questions $update $remove</td>
             </tr>";
           } else {
-            $questions = "<a class='button' href=/teacher/exams.php?subject_id=$subject_id&exam_id=$id>Questions</a>";
-            $assign_exam = "<span class='button' href=/teacher/exams.php?subject_id=$subject_id&exam_id=$id>Assign Exam</span>";
+            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id>Questions</a>";
+            $assign_exam = "<span class='button' data-exam-id=$id>Assign Exam</span>";
             $table_row =
             "<tr>
               <td>$title</td>
