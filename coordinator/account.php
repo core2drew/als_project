@@ -7,12 +7,11 @@
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
   $sub_page = isset($_GET['sub_page']) ? $_GET['sub_page'] : null;
-  //$create_link = "/coordinator/account/create.php?page=accounts&sub_page=$type&type=$type&grade_level=$grade_level";
 ?>
 
 <div id="Coordinator" class="wrapper">
   <?php include '../includes/sidebar.php' ?>
-  <div id="ManageAccounts" class="page">
+  <div id="ManageAccounts" class="page" data-current-user-id=<?php echo $_SESSION['user_id'] ?>>
     <?php include '../includes/account/accounts.php' ?>
   </div>
 </div>

@@ -1,39 +1,12 @@
 <?php 
-  $is_success = false;
+  require '../../config/db_connect.php';
+  include "../../resources/_global.php";
+  header('Content-Type: application/json');
+
+  $json_data['success'] = false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $error_fields = [];
-    $type = $_GET['type'];
-    
-    if(empty($_POST['lastname'])) {
-      $error_fields['lastname'] = 'Lastname field is required';
-    }
-  
-    if(empty($_POST['firstname'])) {
-      $error_fields['firstname'] = 'Firstname field is required';
-    }
-  
-    if(empty($_POST['address'])) {
-      $error_fields['address'] = 'Address field is required';
-    }
-  
-    if(empty($_POST['contactno'])) {
-      $error_fields['contactno'] = 'Contact No. field is required';
-    }
-  
-    // if(empty($_POST['grade_level'])) {
-    //   $error_fields['grade_level'] = 'Grade level field is required';
-    // }
-  
-    if($type == 'student') {
-      // if(empty($_POST['teacher_id'])) {
-      //   $error_fields['teacher_id'] = 'Teacher field is required';
-      // }
-    }
-  
-    if(empty($_POST['email'])) {
-      $error_fields['email'] = 'Email field is required';
-    }
+    $hasError = false;
 
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $current_email = mysqli_real_escape_string($conn, $_POST['current_email']);
@@ -42,51 +15,53 @@
       $check_email_query = "SELECT id FROM users WHERE email='$email' AND deleted_at IS NULL";
       $check_email_result = mysqli_query($conn, $check_email_query);
       $check_email_count = mysqli_num_rows($check_email_result);
-      
-      if($check_email_query > 0) {
-        $error_fields['email'] = 'Email already exist';
+
+      if($check_email_count > 0) {
+        $json_data['success'] = false;
+        $json_data['message'] = 'Email is already exist';
+        $hasError = true;
       }
     }
 
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $current_password = mysqli_real_escape_string($conn, $_POST['current_password']);
-
-    if($password != $current_password && $password == '') {
-      $error_fields['password'] = 'Password field is required';
-    }
-
-    if(count($error_fields) <= 0) {
-      
+    if(!$hasError) {
       $tmp_name = $_FILES["profile_image"]["tmp_name"];
+      
+      $profile_image_url = mysqli_real_escape_string($conn, $_POST['profile_image_url']);
+
       if(!empty($tmp_name)) {
         $ext = findexts($_FILES['profile_image']['name']); 
         $filename = time().".".$ext;
         move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
         $profile_image_url = "/public/images/profile/" . $filename;
 
-        if($_SESSION['user_id'] == $_POST['id']) {
+        //Update user profile image when updating their own account
+        if($_POST['current_user_id'] == $_POST['id']) {
           $_SESSION['profile_image_url'] = $profile_image_url;
         }
+      } else {
+        $profile_image_url = $_POST['profile_image_url'];
       }
-
-      $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
 
       $id = mysqli_real_escape_string($conn, $_POST['id']);
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
       $address = mysqli_real_escape_string($conn, $_POST['address']);
       $contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
-      $grade_level = mysqli_real_escape_string($conn, $_POST['grade_level']);
-      $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
+      $profile_image_url = mysqli_real_escape_string($conn, $profile_image_url);
+      $teacher_id = isset($_POST['teacher_id']) && !empty($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
   
-      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', profile_image_url='$profile_image_url', address='$address', contactno='$contactno', grade_level='$grade_level', 
-      teacher_id='$teacher_id', email='$email', password='$password', type='$type' WHERE id='$id'";
+      $query = "UPDATE users SET lastname='$lastname', firstname='$firstname', profile_image_url='$profile_image_url', 
+      address='$address', contactno='$contactno', teacher_id='$teacher_id', email='$email', password='$password' WHERE id=$id";
       $result = mysqli_query($conn, $query);
+
       if($result) {
-        $is_success = true;
+        $json_data['success'] = true;
+      } else {
+        $json_data['message'] = 'Oops, something went wrong.';
       }
     }
   }
 
+  echo json_encode($json_data);

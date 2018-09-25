@@ -4,7 +4,10 @@ jQuery(document).ready(function($){
     var validateCreate, 
         validateUpdate, 
         userType,
-        userId;
+        userId,
+        currentEmail,
+        currentUserId,
+        currentProfileImage;
 
     var $manageAccounts = $('#ManageAccounts')
     var $modalContainer = $(".modal-container");
@@ -76,6 +79,9 @@ jQuery(document).ready(function($){
             $teacher.val(res.data.teacher_id)
             $email.val(res.data.email)
             $password.val(res.data.password)
+
+            currentEmail = res.data.email
+            currentProfileImage = res.data.profile_image_url
             //Show Modal
             $modalContainer.addClass('active')
             $updateModal.show();
@@ -162,6 +168,37 @@ jQuery(document).ready(function($){
       }
     }
 
+    function updateRecord(){
+      currentUserId = $manageAccounts.data('currentUserId')
+      if($updateForm.valid()) {
+        var formData = new FormData($updateForm[0]);
+        formData.append('id', userId)
+        formData.append('current_user_id', currentUserId)
+        formData.append('current_email', currentEmail)
+        formData.append('profile_image_url', currentProfileImage)
+        $.ajax({
+          type: "POST",
+          url: '/resources/account/update.php',
+          data: formData,
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
+          success: function(res){
+            if(res.success) {
+              //show modal created success
+              //modal go to lesson table
+              location.reload();
+            }
+            else {
+              alert(res.message)
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
+
     function deleteRecord() {
       var url = '/resources/account/delete.php';
       $.ajax({
@@ -190,6 +227,7 @@ jQuery(document).ready(function($){
       $yesDeleteButton.on('click', deleteRecord)
 
       $saveButton.on('click', createRecord)
+      $updateButton.on('click', updateRecord)
 
       //Close all modals
       $modal.find('.close').on('click', closeModals)
