@@ -1,0 +1,45 @@
+#ManageAccounts > .accounts > thead > tr > th:nth-last-child(1),
+#ManageAccounts > .accounts > tbody > tr > td:nth-last-child(1)  {
+  width: 185px;
+  text-align: center;
+}
+#ManageAccounts > .accounts > tbody > tr > td:nth-last-child(1) > .update {
+  margin-right: 15px;
+}
+
+
+
+.modal.account > .content > .form > #ProfileImage {
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal.account > .content > .form > #ProfileImage > .image {
+  height: 115px;
+  width: 115px;
+  margin-bottom: 5px;
+  border-radius: 70px;
+  background: #f7f7f7;
+}
+
+.modal.account > .content > .form > #ProfileImage > .choose-image {
+  font-size: 0.65em;
+  padding: 10px 20px;
+  background: #FFB214;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.modal.account > .content > .form > #ProfileImage > input[name='profile_image'] {
+  display: none;
+}
+
+.modal.account > .content > .form > .input:nth-last-child(n + 2) {
+  margin-bottom: 15px;
+}
+
+.modal.account > .content > .form > .input > .show-password {
+  font-size: 0.75em;
+  margin-left: auto;
+  padding: 3px 10px;
+}

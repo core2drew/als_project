@@ -11,10 +11,10 @@
         break;
       case 'coordinator':
         if($_SESSION['is_admin']) {
-          header("Location: /coordinator/account/account.php?page=accounts&sub_page=coordinator&type=coordinator");
+          header("Location: /coordinator/account.php?page=accounts&sub_page=coordinator&type=coordinator");
          
         } else {
-          header("Location: /coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1");
+          header("Location: /coordinator/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1");
         }
         
         break;

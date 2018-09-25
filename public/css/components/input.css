@@ -4,7 +4,8 @@
   position: relative;
 }
 
-.input > input[type='text'] {
+.input > input[type='text'],
+.input > input[type='password'] {
   margin: 0;
   max-width: 100%;
   -webkit-box-flex: 1;

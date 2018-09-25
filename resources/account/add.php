@@ -1,65 +1,32 @@
 <?php
-  $is_success= false;
+  require '../../config/db_connect.php';
+  include "../../resources/_global.php";
+  header('Content-Type: application/json');
+
+  $json_data['success'] = false;
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $error_fields = [];
-    $type = $_GET['type'];
     $profile_image_url = "";
-
-    if(empty($_POST['lastname'])) {
-      $error_fields['lastname'] = 'Lastname field is required';
-    }
-
-    if(empty($_POST['firstname'])) {
-      $error_fields['firstname'] = 'Firstname field is required';
-    }
-
-    if(empty($_POST['address'])) {
-      $error_fields['address'] = 'Address field is required';
-    }
-
-    if(empty($_POST['contactno'])) {
-      $error_fields['contactno'] = 'Contact No. field is required';
-    }
-
-    // if(empty($_POST['grade_level'])) {
-    //   $error_fields['grade_level'] = 'Grade level field is required';
-    // }
-
-    if($type == 'student') {
-      // if(empty($_POST['teacher_id'])) {
-      //   $error_fields['teacher_id'] = 'Teacher field is required';
-      // }
-    }
-
-    if(empty($_POST['email'])) {
-      $error_fields['email'] = 'Email field is required';
-    }
 
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $check_email_query = "SELECT id FROM users WHERE email='$email' AND deleted_at IS NULL";
     $check_email_result = mysqli_query($conn, $check_email_query);
     $check_email_count = mysqli_num_rows($check_email_result);
+
     if($check_email_count > 0) {
-      $error_fields['email'] = 'Email already exist';
-    }
-
-    if(empty($_POST['password'])) {
-      $error_fields['password'] = 'Password field is required';
-    }
-    
-    if(count($error_fields) <= 0) {
+      $json_data['success'] = false;
+      $json_data['message'] = 'Email is already exist';
+    } else {
       $tmp_name = $_FILES["profile_image"]["tmp_name"];
-
       if(!empty($tmp_name)) {
         $ext = findexts($_FILES['profile_image']['name']); 
         $filename = time().".".$ext;
-        //move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
+        move_uploaded_file($tmp_name, "../../public/images/profile/" . $filename);
         $profile_image_url = "/public/images/profile/" . $filename;
         $_SESSION['profile_image_url'] = $profile_image_url;
         $profile_image_url = isset($profile_image_url) ? $profile_image_url : null;
       }
-
+      $type = mysqli_real_escape_string($conn, $_POST['type']);
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
       $address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -69,12 +36,17 @@
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
       $created_at = date("Y-m-d H:i:s");
-
+  
       $query = "INSERT INTO users (lastname, firstname, address, profile_image_url, contactno, grade_level, teacher_id, email, password, type, created_at) VALUES 
       ('$lastname', '$firstname', '$address', '$profile_image_url', '$contactno', '$grade_level', '$teacher_id', '$email', '$password', '$type', '$created_at')";
       $result = mysqli_query($conn, $query);
+      
       if($result) {
-        $is_success= true;
+        $json_data['success'] = true;
+      } else {
+        $json_data['message'] = 'Oops, something went wrong.';
       }
     }
   }
+
+  echo json_encode($json_data);

@@ -10,9 +10,9 @@
   <?php if($_SESSION['type'] === 'coordinator'): ?>
     <div class="menu">
       <?php if($_SESSION['is_admin']): ?>
-        <a class="item <?php echo $_GET['page'] == 'accounts' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=coordinator&type=coordinator">Accounts</a>
+        <a class="item <?php echo $_GET['page'] == 'accounts' ? 'active' : null ?>" href="/coordinator/account.php?page=accounts&sub_page=coordinator&type=coordinator">Accounts</a>
       <?php else: ?>
-        <a class="item <?php echo $_GET['page'] == 'accounts' ? 'active' : null ?>" href="/coordinator/account/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Accounts</a>
+        <a class="item <?php echo $_GET['page'] == 'accounts' ? 'active' : null ?>" href="/coordinator/account.php?page=accounts&sub_page=teacher&type=teacher&grade_level=1">Accounts</a>
       <?php endif ?>
       <a class="item <?php echo $_GET['page'] == 'subjects' ? 'active' : null ?>" href="/coordinator/subjects.php?page=subjects&grade_level=1">Subjects</a>
       <a class="item <?php echo $_GET['page'] == 'lessonandvideos' ? 'active' : null ?>" href="/coordinator/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons & Videos</a>
