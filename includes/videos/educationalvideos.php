@@ -1,8 +1,6 @@
 <?php
   $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
-
-  $self_link =  htmlspecialchars($_SERVER["PHP_SELF"]);
-  $back_to_subjects = $self_link."?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level";
+  $back_to_subjects = "$_SERVER[PHP_SELF]?page=lessonandvideos&sub_page=educationalvideos&grade_level=$grade_level";
 
   $query = "SELECT id, title, url, type FROM videos WHERE subject_id=$subject_id AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
@@ -13,7 +11,7 @@
 <?php if($is_coordinator): ?>
   <div class="title">
     <h2>Subject Lessons</h2>
-    <a class="button" href="<?php echo $back_to_subjects ?>">Go Back</a>
+    <a class="button" href="<?php echo $back_to_subjects ?>">Back</a>
   </div>
   <div class="table-actions">
     <span id='UploadVideo' class='button'>Upload Video</span>

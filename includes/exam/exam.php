@@ -19,7 +19,7 @@
 ?>
 <div class="title">
   <h2><?php echo $exam_row['title'] ?></h2>
-  <a class="button" href="<?php echo $go_back_link ?>">Go Back</a>
+  <a class="button" href="<?php echo $go_back_link ?>">Back</a>
 </div>
 <div class="exam-items exam-detail">
   <label>Items:</label>  

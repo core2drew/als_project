@@ -15,13 +15,13 @@
   <?php if($action == 'create'): ?>
     <div class="title">
       <h2>Create Lesson</h2>
-      <a class="button" href="<?php echo $back_link_lessons ?>">Go Back</a>
+      <a class="button" href="<?php echo $back_link_lessons ?>">Back</a>
     </div>
     <?php include '../includes/lesson/create.php' ?>
   <?php elseif($action == 'update'): ?>
     <div class="title">
       <h2>Update Lesson</h2>
-      <a class="button" href="<?php echo $back_link_lessons ?>">Go Back</a>
+      <a class="button" href="<?php echo $back_link_lessons ?>">Back</a>
     </div>
     <?php include '../includes/lesson/update.php' ?>
   <?php endif ?>
@@ -31,7 +31,7 @@
 <?php if($is_coordinator): ?>
   <div class="title">
     <h2>Subject Lessons</h2>
-    <a class="button" href="<?php echo $back_to_subjects ?>">Go Back</a>
+    <a class="button" href="<?php echo $back_to_subjects ?>">Back</a>
   </div>
   <div class="table-actions">
     <a id='CreateLesson' href="<?php echo $back_link_lessons."&action=create" ?>" class='button'>Create Lesson</a>

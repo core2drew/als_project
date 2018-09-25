@@ -8,7 +8,7 @@
 
 <div class="title">
   <h2>Subject Questions</h2>
-  <a class="button" href="<?php echo $go_back_to_subjects ?>">Go Back</a>
+  <a class="button" href="<?php echo $go_back_to_subjects ?>">Back</a>
 </div>
 
 <div class="table-actions">
