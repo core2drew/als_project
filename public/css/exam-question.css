@@ -15,7 +15,14 @@
 }
 
 #ExamQuestions > .question-item > .choices > .choice {
+  display: flex;
+  align-items: center;
   padding: 15px 37px;
+  font-weight: bold;
+}
+
+#ExamQuestions > .question-item > .choices > .choice > input[type=radio] {
+  margin-right: 10px;
 }
 
 #ExamQuestions > .question-item > .choices > .choice.is-answer {

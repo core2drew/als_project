@@ -3,11 +3,13 @@
   include '../includes/html/head.php';
   include '../check_session.php';
   include '../includes/header.php';
-  
   $grade_level = $_SESSION['grade_level'];
-  $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
   $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
   $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
+
+  $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
+  $is_teacher = $_SESSION['type'] === 'teacher' ? true : false;
+  $is_student = $_SESSION['type'] === 'student' ? true : false;
 ?>
 
 <div id="Teacher" class="wrapper">

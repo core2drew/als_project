@@ -15,19 +15,21 @@
     // format array to string 1','2','3','4
     $questions_id = implode(",", $questions_id);
 
-    $go_back_link = $_SERVER['PHP_SELF']."?subject_id=$subject_id";
+    $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?subject_id=$subject_id" : null;
 ?>
+
 <div class="title">
   <h2><?php echo $exam_row['title'] ?></h2>
-  <a class="button" href="<?php echo $go_back_link ?>">Back</a>
+  <?php if($is_coordinator || $is_teacher): ?>
+    <a class="button" href="<?php echo $go_back_link ?>">Back</a>
+  <?php endif ?>
 </div>
-<div class="exam-items exam-detail">
+<!-- <div class="exam-items exam-detail">
   <label>Items:</label>  
   <?php echo $items_count ?>
-</div>
-<div class="exam-minutes exam-detail">
-  <label>Minutes:</label> 
-  <?php echo $minutes.':00' ?>
+</div> -->
+<div id="CountDown" data-exam-minutes="<?php echo $minutes ?>">
+  <h3 class="minutes"><?php echo '00:'.$minutes.':00' ?></h3>
 </div>
 <div class="exam-instruction exam-detail">
   <label>Instruction:</label>  

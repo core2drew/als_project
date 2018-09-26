@@ -30,6 +30,7 @@
     $json_data['data'] = [];
 
     while($question_row = mysqli_fetch_array($question_result, MYSQLI_ASSOC)) {
+      $data['id'] = $question_row['id'];
       $data['question'] = $question_row['question'];
       $data['answers'] = [];
 
@@ -39,8 +40,8 @@
       while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
         $answer_data = [
           'id' => $answer_row['id'],
-          'answer' => $answer_row['answer'],
-          'is_answer' => (int)$answer_row['is_answer'] === 1 ? true : false
+          'answer' => $answer_row['answer']
+          // 'is_answer' => (int)$answer_row['is_answer'] === 1 ? true : false
         ];
         array_push($data['answers'], $answer_data);
       }

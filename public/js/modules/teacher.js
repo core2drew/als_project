@@ -119,10 +119,7 @@ jQuery(document).ready(function($){
         }),
         success: function(res){
           if(res.success) {
-            // makeStudentTable($assignExamModalTable, res.data)
-            // $modalContainer.addClass('active')
-            // $assignExamModal.show();
-            alert(res.message)
+            //alert(res.message)
           }
         },
         error: function(err) {
@@ -142,10 +139,7 @@ jQuery(document).ready(function($){
         }),
         success: function(res){
           if(res.success) {
-            // makeStudentTable($assignExamModalTable, res.data)
-            // $modalContainer.addClass('active')
-            // $assignExamModal.show();
-            alert(res.message)
+            //alert(res.message)
           }
         },
         error: function(err) {

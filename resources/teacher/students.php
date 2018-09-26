@@ -7,15 +7,6 @@
   $teacher_id = mysqli_real_escape_string($conn, $_GET['teacher_id']);
   $exam_id = mysqli_real_escape_string($conn, $_GET['exam_id']);
 
-  // $query = "SELECT users.id, CONCAT(lastname, ', ' ,firstname) as name,
-  // (SELECT COUNT(id) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id) as has_exam
-  // FROM users WHERE users.teacher_id = $teacher_id";
-
-  // $query ="SELECT users.id, CONCAT(users.lastname, ', ' ,users.firstname) as name,
-  // (SELECT (id IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id) as has_exam,
-  // (SELECT (taken_at IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id AND users_has_exam.deleted_at IS NULL) as is_taken
-  // FROM users WHERE users.teacher_id = $teacher_id";
-
   $query ="SELECT users.id, CONCAT(users.lastname, ', ' ,users.firstname) as name,
   (SELECT DISTINCT (id IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id ORDER BY users_has_exam.id DESC LIMIT 1) as has_exam,
   (SELECT DISTINCT (taken_at IS NOT NULL) FROM users_has_exam WHERE exam_id = $exam_id AND users.id = users_has_exam.user_id AND users_has_exam.deleted_at IS NULL ORDER BY users_has_exam.id DESC LIMIT 1) as is_taken

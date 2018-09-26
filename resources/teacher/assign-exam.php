@@ -10,7 +10,7 @@
 
   if($action === 'remove') {
     $deleted_at = date("Y-m-d H:i:s");
-    $query = "UPDATE users_has_exam SET deleted_at = '$deleted_at' WHERE user_id=$user_id";
+    $query = "UPDATE users_has_exam SET deleted_at = '$deleted_at' WHERE user_id=$user_id AND deleted_at IS NULL";
     $result = mysqli_query($conn, $query);
 
     if($result) {
