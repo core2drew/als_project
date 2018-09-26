@@ -16,6 +16,13 @@
     $questions_id = implode(",", $questions_id);
 
     $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?subject_id=$subject_id" : null;
+
+    //Update take exam
+    if($is_student) {
+      $taken_at = date("Y-m-d H:i:s");
+      $take_exam_query= "UPDATE users_has_exam SET taken_at = '$taken_at' WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL";
+      $take_exam_result = mysqli_query($conn, $take_exam_query);
+    }
 ?>
 
 <div class="title">
