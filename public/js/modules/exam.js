@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
     var $modal = $modalContainer.find('.modal');
 
     var $tableActions = $manageExams.find('.table-actions');
-    var $examTable = $manageExams.find('.table.exam');
+    var $examTable = $manageExams.find('.table.exam').not('.questions');
     var $examQuestionTable = $manageExams.find('.table.exam.questions');
 
     //Exam Table Actions
@@ -250,6 +250,7 @@ jQuery(document).ready(function($){
     function removeExamQuestion() {
       var questionId = $(this).data('questionId');
       examId = $examQuestionModal.data('examId');
+
       $.ajax({
         type: "POST",
         url: question_url,
@@ -359,7 +360,7 @@ jQuery(document).ready(function($){
       //save included question
       $saveExamQuestionsButton.on('click', saveExamQuestions)
       //remove question to exam
-      $removeExamQuestionButton.on('click', removeExamQuestion)
+      $examQuestionTable.on('click', '.delete', removeExamQuestion)
       //view question
       $viewExamQuestionButton.on('click', viewExamQuestion)
     }
