@@ -17,9 +17,8 @@ jQuery(document).ready(function($){
     //Exam Table Actions
     var $createExamButton = $tableActions.find('#CreateExam');
     var $addExamQuestionButton = $tableActions.find("#AddExamQuestion");
-
     //Exam Question Table Actions
-    var $removeExamQuestionButton = $examQuestionTable.find('.remove');
+    var $removeExamQuestionButton = $examQuestionTable.find('.delete');
     var $viewExamQuestionButton = $examQuestionTable.find('.view');
 
     //Create Exam
@@ -250,7 +249,6 @@ jQuery(document).ready(function($){
     function removeExamQuestion() {
       var questionId = $(this).data('questionId');
       examId = $examQuestionModal.data('examId');
-
       $.ajax({
         type: "POST",
         url: question_url,
@@ -360,7 +358,7 @@ jQuery(document).ready(function($){
       //save included question
       $saveExamQuestionsButton.on('click', saveExamQuestions)
       //remove question to exam
-      $examQuestionTable.on('click', '.delete', removeExamQuestion)
+      $removeExamQuestionButton.on('click', removeExamQuestion)
       //view question
       $viewExamQuestionButton.on('click', viewExamQuestion)
     }

@@ -27,7 +27,7 @@ jQuery(document).ready(function($){
     //Question Table Actions
     var $createQuestionButton = $tableActions.find('#CreateQuestion');
     var $viewRecord = $questionTable.find('.view');
-    var $removeQuestionButton = $questionTable.find('.remove');
+    var $removeQuestionButton = $questionTable.find('.delete');
 
     //Create Question
     var $createModal = $modalContainer.find('#CreateModal');
