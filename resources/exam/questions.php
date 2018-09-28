@@ -32,7 +32,7 @@
         }
       }
     } else {
-      $new_questions_id = mysqli_real_escape_string($conn, $_POST['questions_id']) ;
+      $new_questions_id = mysqli_real_escape_string($conn, $_POST['questions_id']);
       //Get all questions id
       $exam_query = "SELECT questions_id FROM exams WHERE id=$exam_id";
       $exam_result = mysqli_query($conn, $exam_query);
@@ -48,7 +48,7 @@
         $exam_query = "UPDATE exams SET questions_id=NULL WHERE id=$exam_id";
       }
       $exam_result = mysqli_query($conn, $exam_query);
-
+      
       if($exam_result) {
         $json_data['success'] = true;
       } else {

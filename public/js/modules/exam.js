@@ -189,7 +189,7 @@ jQuery(document).ready(function($){
         type: "POST",
         url: question_url,
         data: $.param({
-          questions_id: includedQuestions.join(), 
+          questions_id: includedQuestions.join(","), 
           exam_id: examId
         }),
         success: function(res){
