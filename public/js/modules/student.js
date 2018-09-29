@@ -1,40 +1,55 @@
 jQuery(document).ready(function($){
 
   var studentModule = (function() {
-    var examId;
+    var examId, answers = [], userId;
+    var timer;
+
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container");
     var $examQuestions = $manageExams.find('#ExamQuestions')
+    var $countDown =  $manageExams.find('#CountDown');
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
     var $examDetailsModal = $modalContainer.find('#ExamDetailsModal')
     var $examStart = $examDetailsModal.find('.start')
 
+    var $confirmationModal = $modalContainer.find('#Confirmation')
+    var $confirmationMessage = $confirmationModal.find('.content')
+    var $confirmYesButton = $confirmationModal.find('.yes')
+
+    var $attentionModal = $modalContainer.find('#Attention')
+    var $attentionMessage = $attentionModal.find('.content')
+    var $attentionOkButton = $attentionModal.find('.yes')
+
     var $tableExams = $("#ManageExams").find('.table.exam')
     var $takeExam = $tableExams.find('.take-exam')
 
-    var $title = $manageExams.children('.title')
+    var $submitExam = $manageExams.find('#SubmitExam')
 
     function startCountDown() {
-      var timer = new Timer();
-      var $countDown = $('#CountDown');
+      timer = new Timer();
       var $minutes = $countDown.find('.minutes');
       var examMinutes = $countDown.data('examMinutes')
 
-      timer.start({countdown: true, startValues: {minutes: examMinutes}});
+      timer.start({countdown: true, startValues: {seconds: 5}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
       });
       timer.addEventListener('targetAchieved', function (e) {
-        //$('#CountDownMinutes').html('KABOOM!!');
+        $attentionMessage.html(`Time is up, this exam will submit automatically`)
+        $modalContainer.addClass('active');
+        $attentionModal.show();
+        $attentionOkButton.on('click', submitExam)
       });
     }
 
     function closeModals(){
       $modalContainer.removeClass('active');
       $examDetailsModal.hide();
+      $confirmationModal.hide();
+      $attentionModal.hide();
     }
 
     function showInstruction(){
@@ -70,9 +85,127 @@ jQuery(document).ready(function($){
       })
     }
 
+    function generateQuestions(data){
+      data.map(function(data, i) {
+        var $question = $('<div/>').addClass('question')
+        var $questionItem = $('<div/>').addClass('question-item')
+        var $number = $('<span/>').addClass('numbering')
+        var $choices = $('<div/>').addClass('choices')
+
+        var numbering = `${i + 1}).`;
+        $number.html(numbering)
+        $question.append($number)
+        $question.append(data.question)
+
+        $questionItem.append($question)
+
+        data.answers.map(function(ans){
+          var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
+          var $choicesItem = $('<div/>').addClass('choice')
+
+          $radioButton.on('click', function(e) {
+            answers[i] = {
+              'question_id': data.id,
+              'answer_id': ans.id
+            }
+          })
+
+          $choicesItem.append($radioButton).append(ans.answer)
+          $choices.append($choicesItem)
+          $questionItem.append($choices)
+        })
+        $examQuestions.append($questionItem)
+      })
+    }
+
+    function generateAnswers(data) {
+      data.map(function(data, i) {
+        var $question = $('<div/>').addClass('question')
+        var $questionItem = $('<div/>').addClass('question-item')
+        var $number = $('<span/>').addClass('numbering')
+        var $choices = $('<div/>').addClass('choices')
+        var $explanation = $('<div/>').addClass('explanation')
+
+        var numbering = `${i + 1}).`;
+        $number.html(numbering)
+        $question.append($number)
+        $question.append(data.question)
+
+        $questionItem.append($question)
+
+        data.answers.map(function(ans){
+          var $choicesItem = $('<div/>').addClass('choice')
+
+          if(ans.user_answer) {
+            $choicesItem.addClass('user-answer')
+          }
+
+          if(ans.is_answer) {
+            $choicesItem.addClass('correct-answer')
+          }
+
+          $choicesItem.append(ans.answer)
+          $choices.append($choicesItem)
+          $questionItem.append($choices)
+        })
+        if(data.explanation) {
+          $explanation.html(`<label class='label'>Explanation:</label>`)
+          $explanation.append(`${data.explanation}`)
+          $questionItem.append($explanation)
+        }
+
+        $examQuestions.append($questionItem)
+      })
+    }
+
+    function showAnswers(data){
+      $examQuestions.empty();
+      $submitExam.remove()
+      timer.stop();
+      $countDown.remove();
+      generateAnswers(data)
+    }
+
     function startExam(){
       var hostname = window.location.hostname
       window.location.replace(`/exams.php?exam_id=${examId}`)
+    }
+
+    function submitExam() {
+      examId = $examQuestions.data('examId')
+      userId = $examQuestions.data('userId')
+      questionsId = $examQuestions.data('questionsId')
+
+      closeModals();
+
+      $.ajax({
+        type: 'POST',
+        url: '/resources/student/submit-exam.php',
+        data: {
+          user_id: userId,
+          exam_id: examId,
+          questions_id: questionsId,
+          answers: JSON.stringify(answers)
+        },
+        success: function(res) {
+          console.log(res)
+          showAnswers(res.data)
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      })
+    }
+
+    function confirmSubmitExam(){
+      $confirmationMessage.html(`Are you sure you want to submit this exam?`)
+      if(answers.length == 0) {
+        $confirmationMessage.html(`Looks like you don't have any answers. Are you sure you want to submit this exam?`)
+      }
+      $modalContainer.addClass('active');
+      $confirmationModal.show();
+      $confirmYesButton.off('click')
+      $confirmYesButton.on('click', submitExam)
     }
 
     function init(){
@@ -88,32 +221,7 @@ jQuery(document).ready(function($){
           }),
           success: function(res){
             if(res.success) {
-              $title.find('h2').html(res.data.title)
-              res.data.map(function(data, i) {
-                var $question = $('<div/>').addClass('question')
-                var $questionItem = $('<div/>').addClass('question-item')
-                var $number = $('<span/>').addClass('numbering')
-                var $choices = $('<div/>').addClass('choices')
-
-                var numbering = `${i + 1}).`;
-                $number.html(numbering)
-                $question.append($number)
-                $question.append(data.question)
-
-                $questionItem.append($question)
-
-                data.answers.map(function(ans){
-                  var $radioButton = $(`<input type='radio' name='answer_${data.id}'>`)
-                  var $choicesItem = $('<div/>').addClass('choice')
-                  // if(ans.is_answer) {
-                  //   $choicesItem.addClass('is-answer')
-                  // }
-                  $choicesItem.append($radioButton).append(ans.answer)
-                  $choices.append($choicesItem)
-                  $questionItem.append($choices)
-                })
-                $examQuestions.append($questionItem)
-              })
+              generateQuestions(res.data)
             }
           },
           error: function(err) {
@@ -126,6 +234,7 @@ jQuery(document).ready(function($){
 
       $takeExam.on('click', showInstruction)
       $examStart.on('click', startExam)
+      $submitExam.on('click', confirmSubmitExam)
     }
 
     return {

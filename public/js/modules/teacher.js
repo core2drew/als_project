@@ -163,6 +163,11 @@ jQuery(document).ready(function($){
       var $items = $examDetailsModal.find('.items')
       var $instruction = $examDetailsModal.find('.instruction')
 
+      $title.empty()
+      $minutes.empty()
+      $items.empty()
+      $instruction.empty()
+      
       $.ajax({
         type: "GET",
         url: '/resources/student/exam-details.php',
@@ -174,12 +179,13 @@ jQuery(document).ready(function($){
           $title.html(`<b>Title:</b> ${res.data.title}`)
           $minutes.html(`<b>Minutes:</b> ${res.data.minutes}`)
           $items.html(`<b>Items:</b> ${items.length}`)
-          $instruction.html(`
-            <p class="title"><b>Instruction:</b></p>
-            ${res.data.instruction}
-            `
-          )
-
+          if(res.data.instruction) {
+            $instruction.html(`
+              <p class="title"><b>Instruction:</b></p>
+              ${res.data.instruction}
+              `
+            )
+          }
           $modalContainer.addClass('active');
           $examDetailsModal.show();
         },

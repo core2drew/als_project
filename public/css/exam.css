@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 #ManageExams > .table.exam-questions > thead > tr > th:nth-child(3) {
@@ -105,22 +106,4 @@
 .modal-container > .modal.exams > .content > .form > .input.instruction > textarea{
   height: 80px;
   resize:none;
-}
-
-#CountDown {
-  position: fixed;
-  top: 77px;
-  right: 23px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fe141a;
-  color: #fff;
-  padding: 10px 15px;
-}
-
-#CountDown > .minutes {
-  background-color: #c52929;
-  padding: 8px 20px;
-  margin: 0;
 }
