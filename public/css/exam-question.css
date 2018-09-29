@@ -1,20 +1,32 @@
-#ExamQuestions > .question-item:nth-last-child(n + 2) {
+
+#ExamQuestions,
+#ExamQuestionsAnswers {
   margin-bottom: 15px;
+  max-width: 89%;
 }
 
-#ExamQuestions > .question-item > .question {
-  background: #fff0cf;
+#ExamQuestions > .question-item:nth-last-child(n + 2),
+#ExamQuestionsAnswers > .question-item:nth-last-child(n + 2) {
+  margin-bottom: 40px;
+}
+
+#ExamQuestions > .question-item > .question,
+#ExamQuestionsAnswers > .question-item > .question {
+  background: #efefef;
   padding: 15px;
 }
-#ExamQuestions > .question-item > .question > .numbering {
+#ExamQuestions > .question-item > .question > .numbering,
+#ExamQuestionsAnswers > .question-item > .question > .numbering {
   margin-right: 5px;
 }
 
-#ExamQuestions > .question-item > .choices {
-  background: #fffbde;
+#ExamQuestions > .question-item > .choices,
+#ExamQuestionsAnswers > .question-item > .choices {
+  background: #fff;
 }
 
-#ExamQuestions > .question-item > .choices > .choice {
+#ExamQuestions > .question-item > .choices > .choice,
+#ExamQuestionsAnswers > .question-item > .choices > .choice {
   display: flex;
   align-items: center;
   padding: 15px 37px;
@@ -25,32 +37,43 @@
   margin-right: 10px;
 }
 
-#ExamQuestions > .question-item > .choices > .choice.is-answer {
+#ExamQuestions > .question-item > .choices > .choice.is-answer,
+#ExamQuestionsAnswers > .question-item > .choices > .choice.is-answer {
   background: #c2ffc2;
 }
 
-#ExamQuestions > .question-item > .choices > .choice.user-answer {
+#ExamQuestions > .question-item > .choices > .choice.user-answer,
+#ExamQuestionsAnswers > .question-item > .choices > .choice.user-answer {
   background: #ffcecf;
 }
 
-#ExamQuestions > .question-item > .choices > .choice.correct-answer {
+#ExamQuestions > .question-item > .choices > .choice.correct-answer,
+#ExamQuestionsAnswers > .question-item > .choices > .choice.correct-answer {
   background: #c2ffc2 !important;
 }
 
-#ExamQuestions > .question-item > .explanation {
+#ExamQuestions > .question-item > .explanation,
+#ExamQuestionsAnswers > .question-item > .explanation {
   padding: 10px 15px;
   font-size: 0.8em;
   background: #3295ff;
   color: #ffffff;
 }
-#ExamQuestions > .question-item > .explanation > .label {
+#ExamQuestions > .question-item > .explanation > .label,
+#ExamQuestionsAnswers > .question-item > .explanation > .label {
   font-weight: bold;
   margin-right: 10px;
 }
 
-#ExamQuestions {
-  margin-bottom: 15px;
-  max-width: 89%;
+#ExamQuestions > .question-item > .noanswer,
+#ExamQuestionsAnswers > .question-item > .noanswer {
+  font-size: 0.8em;
+  background-color: #fe141a;
+  color: #fff;
+  padding: 3px;
+  display: block;
+  width: 80px;
+  text-align: center;
 }
 
 #SubmitExam {
@@ -60,6 +83,7 @@
   background: #FFAA14;
   color: #fff;
   width: 200px;
+  display: none;
 }
 
 #CountDown {
@@ -83,6 +107,12 @@
 #Confirmation > .content{
   max-width: 400px;
 }
+
+#Attention > .actions > .yes {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 
 #ManageExams > .exam-detail:nth-last-child(n + 2) {
   margin-bottom: 10px;

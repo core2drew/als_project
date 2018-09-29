@@ -2,9 +2,9 @@
   if($_SESSION['type'] !== 'student') {
     $query = "SELECT id, title, questions_id, minutes FROM exams WHERE subject_id = $subject_id AND deleted_at IS NULL";
   } else {
-    $query = "SELECT a.id, a.title, a.minutes, a.questions_id,
+    $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
-    from exams a inner join users_has_exam b on a.id = b.exam_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null and b.taken_at is null";
+    from exams a inner join users_has_exam b on a.id = b.exam_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
   }
 
   $result = mysqli_query($conn, $query);
@@ -62,6 +62,7 @@
           $minutes = $row['minutes'];
           $subject = isset($row['subject']) ? $row['subject'] : null;
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
+          $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
           if($is_coordinator) {
             $questions = "<a class='button' href=$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
             $update = "<span class='button update' data-exam-id=$id>Update</span>";
@@ -86,14 +87,16 @@
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 
+            $view_result = "<span class='button view-result' data-exam-id=$id>View Result</span>";
             $take_exam = "<span class='button take-exam' data-exam-id=$id>Take Exam</span>";
+            $table_action = $is_taken ? $view_result : $take_exam;
             $table_row =
             "<tr>
               <td>$subject</td>
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$take_exam</td>
+              <td class='option'>$table_action</td>
             </tr>";
           }
           echo $table_row;

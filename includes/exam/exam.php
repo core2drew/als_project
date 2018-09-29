@@ -16,12 +16,18 @@
     $questions_id = implode(",", $questions_id);
 
     $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?subject_id=$subject_id" : null;
+    
+    $query = "SELECT * FROM users_has_exam WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL AND taken_at IS NOT NULL";
+    $result = mysqli_query($conn, $query);
+    $count = mysqli_num_rows($result);
 
-    //Update take exam
-    if($is_student) {
-      $taken_at = date("Y-m-d H:i:s");
-      $take_exam_query= "UPDATE users_has_exam SET taken_at = '$taken_at' WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL";
-      $take_exam_result = mysqli_query($conn, $take_exam_query);
+    if($count <= 0) {
+      //Update take exam
+      if($is_student) {
+        $taken_at = date("Y-m-d H:i:s");
+        $take_exam_query= "UPDATE users_has_exam SET taken_at = '$taken_at' WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL";
+        $take_exam_result = mysqli_query($conn, $take_exam_query);
+      }
     }
 ?>
 
@@ -31,11 +37,16 @@
   </div>
 <?php endif ?>
 
-<div id="CountDown" data-exam-minutes="<?php echo $minutes ?>">
-  <h3 class="minutes"><?php echo '00:'.$minutes.':00' ?></h3>
-</div>
+<?php if($is_student && $count <= 0): ?>
+  <div id="CountDown" data-exam-minutes="<?php echo $minutes ?>">
+    <h3 class="minutes"><?php echo '00:'.$minutes.':00' ?></h3>
+  </div>
+  <div id="ExamQuestions" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
+  <div id="SubmitExam" class="button">Submit</div>
+<?php else: ?>
+  <div id="ExamQuestionsAnswers" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
+<?php endif ?>
 
-<div id="ExamQuestions" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
-<?php if($is_student): ?>
-  <div id="SubmitExam">Submit</div>
+<?php if($is_teacher || $is_coordinator): ?>
+  <div id="ExamQuestions" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
 <?php endif ?>

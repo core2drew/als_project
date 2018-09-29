@@ -5,6 +5,7 @@
   include 'includes/header.php';
   $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
   $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
+  $view_result = isset($_GET['view_result']) ? $_GET['view_result'] : null;
 
   $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
   $is_teacher = $_SESSION['type'] === 'teacher' ? true : false;

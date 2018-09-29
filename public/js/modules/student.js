@@ -7,6 +7,7 @@ jQuery(document).ready(function($){
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container");
     var $examQuestions = $manageExams.find('#ExamQuestions')
+    var $examQuestionsAnswer = $manageExams.find('#ExamQuestionsAnswers')
     var $countDown =  $manageExams.find('#CountDown');
 
     //All Modals
@@ -24,15 +25,15 @@ jQuery(document).ready(function($){
 
     var $tableExams = $("#ManageExams").find('.table.exam')
     var $takeExam = $tableExams.find('.take-exam')
+    var $viewResult = $tableExams.find('.view-result')
 
     var $submitExam = $manageExams.find('#SubmitExam')
 
-    function startCountDown() {
+    function startCountDown(minutes) {
       timer = new Timer();
       var $minutes = $countDown.find('.minutes');
-      var examMinutes = $countDown.data('examMinutes')
 
-      timer.start({countdown: true, startValues: {seconds: 5}});
+      timer.start({countdown: true, startValues: {minutes: minutes}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
@@ -86,6 +87,12 @@ jQuery(document).ready(function($){
     }
 
     function generateQuestions(data){
+      var examMinutes = $countDown.data('examMinutes')
+
+      $(window).on("beforeunload", function() {
+        return "If you leave now you can't retake this exam"
+      })
+      
       data.map(function(data, i) {
         var $question = $('<div/>').addClass('question')
         var $questionItem = $('<div/>').addClass('question-item')
@@ -116,28 +123,37 @@ jQuery(document).ready(function($){
         })
         $examQuestions.append($questionItem)
       })
+      $submitExam.show();
+      startCountDown(examMinutes);
     }
 
-    function generateAnswers(data) {
+    function generateAnswers(data, $container) {
       data.map(function(data, i) {
         var $question = $('<div/>').addClass('question')
         var $questionItem = $('<div/>').addClass('question-item')
         var $number = $('<span/>').addClass('numbering')
         var $choices = $('<div/>').addClass('choices')
         var $explanation = $('<div/>').addClass('explanation')
+        var $noAnswer = $('<div/>').addClass('noanswer')
+
+        $noAnswer.html('No Answer')
 
         var numbering = `${i + 1}).`;
         $number.html(numbering)
         $question.append($number)
-        $question.append(data.question)
+        //Display no answer
+        $questionItem.append($noAnswer)
 
+        $question.append(data.question)
         $questionItem.append($question)
 
         data.answers.map(function(ans){
           var $choicesItem = $('<div/>').addClass('choice')
-
+          
           if(ans.user_answer) {
             $choicesItem.addClass('user-answer')
+            //Remove no answer if user has an answer
+            $noAnswer.remove()
           }
 
           if(ans.is_answer) {
@@ -154,7 +170,7 @@ jQuery(document).ready(function($){
           $questionItem.append($explanation)
         }
 
-        $examQuestions.append($questionItem)
+        $container.append($questionItem)
       })
     }
 
@@ -163,7 +179,7 @@ jQuery(document).ready(function($){
       $submitExam.remove()
       timer.stop();
       $countDown.remove();
-      generateAnswers(data)
+      generateAnswers(data, $examQuestions)
     }
 
     function startExam(){
@@ -171,7 +187,14 @@ jQuery(document).ready(function($){
       window.location.replace(`/exams.php?exam_id=${examId}`)
     }
 
+    function viewExamResult() {
+      examId = $(this).data('examId')
+      var hostname = window.location.hostname
+      window.location.replace(`/exams.php?exam_id=${examId}`)
+    }
+
     function submitExam() {
+      $(window).off('beforeunload');
       examId = $examQuestions.data('examId')
       userId = $examQuestions.data('userId')
       questionsId = $examQuestions.data('questionsId')
@@ -208,32 +231,62 @@ jQuery(document).ready(function($){
       $confirmYesButton.on('click', submitExam)
     }
 
-    function init(){
-      startCountDown();
-      if($examQuestions.length) {
-
-        $.ajax({
-          type: "GET",
-          url: '/resources/student/exam-questions.php',
-          data: $.param({
-            exam_id: $examQuestions.data('examId'),
-            questions_id: $examQuestions.data('questionsId')
-          }),
-          success: function(res){
-            if(res.success) {
-              generateQuestions(res.data)
-            }
-          },
-          error: function(err) {
-            console.error("Something went wrong");
+    function getQuestions(){
+      $.ajax({
+        type: "GET",
+        url: '/resources/student/exam-questions.php',
+        data: $.param({
+          exam_id: $examQuestions.data('examId'),
+          questions_id: $examQuestions.data('questionsId')
+        }),
+        success: function(res){
+          if(res.success) {
+            generateQuestions(res.data)
           }
-        });
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function getAnswers(){
+      $.ajax({
+        type: "GET",
+        url: '/resources/student/exam-review.php',
+        data: $.param({
+          exam_id: $examQuestionsAnswer.data('examId'),
+          questions_id: $examQuestionsAnswer.data('questionsId'),
+          user_id: $examQuestionsAnswer.data('userId')
+        }),
+        success: function(res){
+          if(res.success) {
+            generateAnswers(res.data, $examQuestionsAnswer)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function init(){
+      if($examQuestionsAnswer.length) {
+        getAnswers()
       }
+      if($examQuestions.length) {
+        getQuestions()
+      }
+
       //Close all modals
       $modal.find('.close').on('click', closeModals)
 
+      //Modal Actions
       $takeExam.on('click', showInstruction)
+      $viewResult.on('click', viewExamResult)
       $examStart.on('click', startExam)
+
+      //Submit Exam
       $submitExam.on('click', confirmSubmitExam)
     }
 

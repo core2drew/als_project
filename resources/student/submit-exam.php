@@ -4,7 +4,7 @@
 
   $json_data['success'] = false;
 
-  function getQuestionsWithAnswer($questions_id, $conn){
+  function getQuestionsWithAnswer($questions_id, $user_id, $conn){
     // convert string to array example "1,2,3" to [1,2,3]
     $questions_id = explode(',', $questions_id);
     // format array to string 1','2','3','4
@@ -30,9 +30,9 @@
         if(isset($question_row['explanation']) && !empty($question_row['explanation'])) {
           $data['explanation'] = $question_row['explanation'];
         }
+
         $data['answers'] = [];
-        //$answer_query = "SELECT id, answer, is_answer FROM answers WHERE question_id = $question_row[id] ORDER BY id ASC";
-        $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
+        $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
         $answer_result = mysqli_query($conn, $answer_query);
 
         while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
@@ -68,7 +68,7 @@
       }
     }
 
-    $json_data = getQuestionsWithAnswer($questions_id, $conn);
+    $json_data = getQuestionsWithAnswer($questions_id, $user_id, $conn);
   }
 
   echo json_encode($json_data);
