@@ -1,21 +1,42 @@
+
+
 /* Login */
 #LoginWrapper {
-  height: 100%;
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f9f9af;
+  
+}
+
+#LoginWrapper > .header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#LoginWrapper > .header > img {
+  width: 900px;
+  height: 100%;
 }
 
 #LoginWrapper > #LoginFormContainer {
   width: 300px;
   padding: 20px;
-  background-color:#2c3e50;
+  background-color:#83ad44;
   color: #fff;
+  position: relative;
+  top: -70px;
+  box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
-#LoginWrapper > #LoginFormContainer > .title {
-  text-align: center;
-  margin-top: 0;
+#LoginWrapper > #LoginFormContainer > .logo {
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
 }
 
 #LoginWrapper > #LoginFormContainer > #LoginForm {
@@ -35,6 +56,8 @@
 
 #LoginWrapper > #LoginFormContainer > #LoginForm > .button {
   margin-top: 10px;
+  background-color: #c0c92e;
+  color: #fff;
 }
 
 

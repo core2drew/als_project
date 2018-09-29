@@ -22,16 +22,17 @@
   }
 ?>
   <div id="LoginWrapper">
+    <div class="header">
+      <img src="/public/images/als_header.png" />
+    </div>
     <div id="LoginFormContainer">
-      <h2 class="title">Login</h2>
+      <img class="logo" src="/public/images/school-logo.png" />
       <form id="LoginForm" method="POST" autocomplete="off">
         <div class="field">
-          <label class="label">Email</label>
-          <input class="input" type="text" name="email"/>
+          <input class="input" type="text" name="email" placeholder="Email"/>
         </div>
         <div class="field">
-          <label class="label">Password</label>
-          <input class="input" type="password" name="password" />
+          <input class="input" type="password" name="password" placeholder="Password"/>
         </div>
         <?php echo isset($error_fields['login']) ? "<p class='error_message'>$error_fields[login]</p>" : null ?>
         <button class="button" type="submit">Login</button>
