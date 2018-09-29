@@ -29,6 +29,20 @@
   background: #c2ffc2;
 }
 
+#ExamQuestions {
+  margin-bottom: 15px;
+  max-width: 89%;
+}
+
+#SubmitExam {
+  text-align: center;
+  padding: 15px;
+  text-transform: uppercase;
+  background: #FFAA14;
+  color: #fff;
+  width: 200px;
+}
+
 #ManageExams > .exam-detail:nth-last-child(n + 2) {
   margin-bottom: 10px;
 }
@@ -38,5 +52,4 @@
 #ManageExams > .exam-instruction > label {
   font-weight: bold;
 }
-
 

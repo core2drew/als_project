@@ -1,0 +1,11 @@
+#ExamDetailsModal > .content{
+  max-width: 400px;
+}
+
+#ExamDetailsModal > .content > .title {
+  margin-top: 0;
+}
+
+#ExamDetailsModal > .content > .instruction > .title {
+  margin-bottom: 5px;
+}

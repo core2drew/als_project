@@ -18,19 +18,20 @@
     $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?subject_id=$subject_id" : null;
 
     //Update take exam
-    if($is_student) {
-      $taken_at = date("Y-m-d H:i:s");
-      $take_exam_query= "UPDATE users_has_exam SET taken_at = '$taken_at' WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL";
-      $take_exam_result = mysqli_query($conn, $take_exam_query);
-    }
+    // if($is_student) {
+    //   $taken_at = date("Y-m-d H:i:s");
+    //   $take_exam_query= "UPDATE users_has_exam SET taken_at = '$taken_at' WHERE user_id=$_SESSION[user_id] AND exam_id=$exam_id AND deleted_at IS NULL";
+    //   $take_exam_result = mysqli_query($conn, $take_exam_query);
+    // }
 ?>
 
-<div class="title">
+<!-- <div class="title">
   <h2><?php echo $exam_row['title'] ?></h2>
   <?php if($is_coordinator || $is_teacher): ?>
     <a class="button" href="<?php echo $go_back_link ?>">Back</a>
   <?php endif ?>
-</div>
+</div> -->
+
 <!-- <div class="exam-items exam-detail">
   <label>Items:</label>  
   <?php echo $items_count ?>
@@ -38,9 +39,10 @@
 <div id="CountDown" data-exam-minutes="<?php echo $minutes ?>">
   <h3 class="minutes"><?php echo '00:'.$minutes.':00' ?></h3>
 </div>
-<div class="exam-instruction exam-detail">
+<!-- <div class="exam-instruction exam-detail">
   <label>Instruction:</label>  
   <?php echo $exam_row['instruction'] ?>
-</div>
+</div> -->
 
 <div id="ExamQuestions" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-minutes=<?php echo $minutes ?>></div>
+<div id="SubmitExam">Submit</div>

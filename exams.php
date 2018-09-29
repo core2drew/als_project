@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<!-- <?php include 'includes/student/modals.php' ?> -->
+<?php include 'includes/student/modals.php' ?>
 <?php include 'includes/html/scripts.php'?>
 <script src="/public/js/easytimer.min.js"></script>
 <script src="/public/js/modules/student.js"></script>

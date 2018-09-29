@@ -1,9 +1,18 @@
 jQuery(document).ready(function($){
 
   var studentModule = (function() {
-
+    var examId;
     var $manageExams = $("#ManageExams");
+    var $modalContainer = $(".modal-container");
     var $examQuestions = $manageExams.find('#ExamQuestions')
+
+    //All Modals
+    var $modal = $modalContainer.find('.modal');
+    var $examDetailsModal = $modalContainer.find('#ExamDetailsModal')
+    var $examStart = $examDetailsModal.find('.start')
+
+    var $tableExams = $("#ManageExams").find('.table.exam')
+    var $takeExam = $tableExams.find('.take-exam')
 
     var $title = $manageExams.children('.title')
 
@@ -23,9 +32,53 @@ jQuery(document).ready(function($){
       });
     }
 
+    function closeModals(){
+      $modalContainer.removeClass('active');
+      $examDetailsModal.hide();
+    }
+
+    function showInstruction(){
+      examId = $(this).data('examId')
+      var $title = $examDetailsModal.find('.content > .title')
+      var $minutes = $examDetailsModal.find('.minutes')
+      var $items = $examDetailsModal.find('.items')
+      var $instruction = $examDetailsModal.find('.instruction')
+
+      $.ajax({
+        type: "GET",
+        url: '/resources/student/exam-details.php',
+        data: $.param({
+          exam_id: examId
+        }),
+        success: function(res){
+          var items = res.data.questions_id.split(',')
+          $title.html(`<b>Title:</b> ${res.data.title}`)
+          $minutes.html(`<b>Minutes:</b> ${res.data.minutes}`)
+          $items.html(`<b>Items:</b> ${items.length}`)
+          $instruction.html(`
+            <p class="title"><b>Instruction:</b></p>
+            ${res.data.instruction}
+            `
+          )
+
+          $modalContainer.addClass('active');
+          $examDetailsModal.show();
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      })
+    }
+
+    function startExam(){
+      var hostname = window.location.hostname
+      window.location.replace(`/exams.php?exam_id=${examId}`)
+    }
+
     function init(){
       startCountDown();
       if($examQuestions.length) {
+
         $.ajax({
           type: "GET",
           url: '/resources/student/exam-questions.php',
@@ -68,6 +121,11 @@ jQuery(document).ready(function($){
           }
         });
       }
+      //Close all modals
+      $modal.find('.close').on('click', closeModals)
+
+      $takeExam.on('click', showInstruction)
+      $examStart.on('click', startExam)
     }
 
     return {

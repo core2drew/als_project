@@ -49,7 +49,7 @@
       <thead>
         <th>Subject</th>
         <th>Title</th>
-        <th>Question Count</th>
+        <th>Items</th>
         <th>Minutes</th>
         <th class="options">Options</th>
       </thead>
@@ -74,7 +74,8 @@
               <td class='option'>$questions $update $remove</td>
             </tr>";
           } else if($is_teacher){
-            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id>View</a>";
+            //$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id
+            $questions = "<span class='button view-exam'  data-subject-id=$subject_id data-exam-id=$id>View</span>";
             $assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
             $table_row =
             "<tr>
@@ -84,7 +85,8 @@
               <td class='option'>$questions $assign_exam</td>
             </tr>";
           } else if ($is_student) {
-            $take_exam = "<a href=$_SERVER[PHP_SELF]?exam_id=$id class='button assign-exam'>Take Exam</a>";
+            //href=$_SERVER[PHP_SELF]?exam_id=$id 
+            $take_exam = "<span class='button take-exam' data-exam-id=$id>Take Exam</span>";
             $table_row =
             "<tr>
               <td>$subject</td>

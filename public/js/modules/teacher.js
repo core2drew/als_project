@@ -2,6 +2,7 @@ jQuery(document).ready(function($){
 
   var teacherModule = (function() {
     var examId;
+    var subjectId;
 
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container");
@@ -12,11 +13,16 @@ jQuery(document).ready(function($){
     var $examsTable = $manageExams.find('.table.exam');
 
     var $assignExamButton = $examsTable.find('.assign-exam')
+    var $viewExamButton = $examsTable.find('.view-exam')
 
     var $examQuestions = $manageExams.find('#ExamQuestions')
     var $assignExamModal = $modalContainer.find('#AssignExamModal')
+    var $examDetailsModal = $modalContainer.find('#ExamDetailsModal')
+
     var $saveAssignExamButton = $assignExamModal.find('.save')
     var $assignExamModalTable = $assignExamModal.find('.table')
+
+    var $viewExam = $examDetailsModal.find('.view')
 
     var $title = $manageExams.children('.title')
 
@@ -147,6 +153,46 @@ jQuery(document).ready(function($){
         }
       });
     }
+
+    function showInstruction(){
+      var $this = $(this)
+      examId = $this.data('examId')
+      subjectId = $this.data('subjectId')
+      var $title = $examDetailsModal.find('.content > .title')
+      var $minutes = $examDetailsModal.find('.minutes')
+      var $items = $examDetailsModal.find('.items')
+      var $instruction = $examDetailsModal.find('.instruction')
+
+      $.ajax({
+        type: "GET",
+        url: '/resources/student/exam-details.php',
+        data: $.param({
+          exam_id: examId
+        }),
+        success: function(res){
+          var items = res.data.questions_id.split(',')
+          $title.html(`<b>Title:</b> ${res.data.title}`)
+          $minutes.html(`<b>Minutes:</b> ${res.data.minutes}`)
+          $items.html(`<b>Items:</b> ${items.length}`)
+          $instruction.html(`
+            <p class="title"><b>Instruction:</b></p>
+            ${res.data.instruction}
+            `
+          )
+
+          $modalContainer.addClass('active');
+          $examDetailsModal.show();
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      })
+    }
+
+    function startView(){
+      var hostname = window.location.hostname
+      window.location.href = `/teacher/exams.php?subject_id=${subjectId}&exam_id=${examId}`
+    }
     
     function init(){
 
@@ -154,6 +200,8 @@ jQuery(document).ready(function($){
       $modal.find('.close').on('click', closeModals)
 
       $assignExamButton.on('click', showAssignExamModal)
+      $viewExamButton.on('click', showInstruction)
+      $viewExam.on('click', startView)
 
       if($examQuestions.length) {
         $.ajax({
