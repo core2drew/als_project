@@ -96,7 +96,6 @@ jQuery(document).ready(function($){
         }),
         success: function(res){
           if(res.success) {
-            console.log(res.data)
             makeStudentTable($assignExamModalTable, res.data)
             $modalContainer.addClass('active')
             $assignExamModal.show();
@@ -112,6 +111,7 @@ jQuery(document).ready(function($){
 
     function closeModals(){
       $modalContainer.removeClass('active');
+      $examDetailsModal.hide();
       $assignExamModal.hide();
     }
 
