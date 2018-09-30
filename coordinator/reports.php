@@ -7,7 +7,6 @@
   $is_coordinator = $_SESSION['type'] === 'coordinator' ? true : false;
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
-  $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
 ?>
 
 <div id="Coordinator" class="wrapper">
@@ -15,13 +14,9 @@
   <div id="ManageReports" class="page">
     <?php
       if($subject_id) {
-        if($exam_id) {
-          include '../includes/exam/questions.php';
-        } else {
-          include '../includes/exam/exams.php';
-        }
+        include '../includes/reports/questions.php';
       } else {
-        include '../includes/exam/subjects.php';
+        include '../includes/reports/subjects.php';
       }
     ?>
   </div>
