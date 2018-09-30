@@ -6,6 +6,7 @@
 @import './educationalvideo.css';
 @import './questions.css';
 @import './teacher.css';
+@import './reports.css';
 @import './student.css';
 @import './coordinator.css';
 @import './exam.css';
@@ -14,6 +15,7 @@
 @import './exam-question.css';
 @import './question.css';
 @import './profile.css';
+@import './home.css';
 @import './components/header.css';
 @import './components/sidebar.css';
 @import './components/button.css';

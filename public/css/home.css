@@ -1,0 +1,35 @@
+#ManageHome > .activities > tbody > tr > td > .activity{
+  height: 115px;
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-container > #CreateModal > .content > #CreateForm > .input > .image,
+.modal-container > #UpdateModal > .content > #UpdateForm > .input > .image  {
+  display: none;
+}
+
+.modal-container > #CreateModal > .content > #CreateForm > .input > .image-viewer,
+.modal-container > #UpdateModal > .content > #UpdateForm > .input > .image-viewer {
+  max-width: 400px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.modal-container > #CreateModal > .content > #CreateForm > .input > .choose-image,
+.modal-container > #UpdateModal > .content > #UpdateForm > .input > .choose-image {
+  text-align: center;
+}
+
+.modal-container > #CreateModal > .content > #CreateForm > .input > input[type='file'],
+.modal-container > #UpdateModal > .content > #UpdateForm > .input > input[type='file'] {
+  display: none;
+}
+
+.modal-container > #CreateModal > .content > #CreateForm > .input > textarea,
+.modal-container > #UpdateModal > .content > #UpdateForm > .input > textarea {
+  resize: none;
+  height: 100px;
+}
