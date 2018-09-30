@@ -4,7 +4,10 @@
     <?php
         if( $_SESSION['type'] == 'coordinator'):
     ?>
-        <?php if($_GET['page'] === 'accounts'): ?>
+        <?php if($_GET['page'] === 'home'): ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'activities' ? 'active' : null ?>" href="/coordinator/home.php?page=home&sub_page=activities">Activities</a>
+            <a class="button <?php echo $_GET['sub_page'] == 'announcements' ? 'active' : null ?>" href="/coordinator/home.php?page=home&sub_page=announcements">Announcements</a>
+        <?php elseif($_GET['page'] === 'accounts'): ?>
             <?php if($_SESSION['is_admin']): ?>
                 <a class="button <?php echo $_GET['sub_page'] == 'coordinator' ? 'active' : null ?>" href="/coordinator/account.php?page=accounts&sub_page=coordinator&type=coordinator">Coordinator</a>
             <?php endif ?>
@@ -27,8 +30,9 @@
 
     <!-- Teacher Sidebar Menu-->
     <?php
-        if( $_SESSION['type'] == 'teacher' && !isset($_GET['page'])):
+        if( $_SESSION['type'] == 'teacher'):
     ?>
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'announcements.php' ? 'active' : null ?>" href="/teacher/announcements.php">Announcement
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'students.php' ? 'active' : null ?>" href="/teacher/students.php">Students</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Educational Video</a>
@@ -41,7 +45,7 @@
     <?php
         if( $_SESSION['type'] == 'student' && !isset($_GET['page'])):
     ?>
-        <!-- <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : null ?>" href="/dashboard.php">Dashboard</a> -->
+        <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : null ?>" href="/home.php">Home</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'lessons.php' ? 'active' : null ?>" href="/lessons.php">Lessons</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'educationalvideos.php' ? 'active' : null ?>" href="/educationalvideos.php">Educational Video</a>
         <a class="button <?php echo basename($_SERVER['PHP_SELF']) == 'exams.php' ? 'active' : null ?>" href="/exams.php">Exam Reviewer</a>
