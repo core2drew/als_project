@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="CreateModal" class="modal account">
+  <div id="CreateModal" class="modal home">
     <div class="title">Create Activity</div>
     <div class="content">
       <form id="CreateForm" autocomplete="off" class="form" method="POST">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div id="UpdateModal" class="modal account">
+  <div id="UpdateModal" class="modal home">
     <div class="title">Update Activity</div>
     <div class="content">
       <form id="UpdateForm" autocomplete="off" class="form" method="POST">

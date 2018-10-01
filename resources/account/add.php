@@ -33,7 +33,7 @@
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
       $address = mysqli_real_escape_string($conn, $_POST['address']);
       $contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
-      $grade_level = mysqli_real_escape_string($conn, $_POST['grade_level']);
+      $grade_level = isset($_POST['grade_level']) ? mysqli_real_escape_string($conn, $_POST['grade_level']) : null;
       $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
