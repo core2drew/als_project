@@ -4,38 +4,38 @@ jQuery(document).ready(function($){
     var quizId = 0;
     var question_url = '/resources/exam/questions.php'
 
-    var $manageExams = $("#ManageQuiz");
+    var $manageQuiz = $("#ManageQuiz");
     var $modalContainer = $(".modal-container");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
 
-    var $tableActions = $manageExams.find('.table-actions');
-    var $examTable = $manageExams.find('.table.exam').not('.questions');
-    var $examQuestionTable = $manageExams.find('.table.exam.questions');
+    var $tableActions = $manageQuiz.find('.table-actions');
+    var $quizTable = $manageQuiz.find('.table.quiz');
+    var $quizQuestionTable = $manageQuiz.find('.table.quiz.questions');
 
-    //Exam Table Actions
-    var $createExamButton = $tableActions.find('#CreateQuiz');
-    var $addExamQuestionButton = $tableActions.find("#AddExamQuestion");
-    //Exam Question Table Actions
-    var $removeExamQuestionButton = $examQuestionTable.find('.delete');
-    var $viewExamQuestionButton = $examQuestionTable.find('.view');
+    //Table Actions
+    var $createQuizButton = $tableActions.find('#CreateQuiz');
+    var $addQuizQuestionButton = $tableActions.find("#AddQuizQuestion");
+    //Question Table Actions
+    var $removeExamQuestionButton = $quizQuestionTable.find('.delete');
+    var $viewExamQuestionButton = $quizQuestionTable.find('.view');
 
-    //Create Exam
+    //Create
     var $createModal = $modalContainer.find('#CreateModal');
     var $createModalForm = $createModal.find(".form");
     var $saveButton = $createModal.find('.create');
 
-    //Update Exam
+    //Update
     var $updateModal = $modalContainer.find('#UpdateModal');
     var $updateModalForm = $updateModal.find(".form");
     var $updateButton = $updateModal.find('.update');
-    var $updateRecordButton = $examTable.find('.update');
+    var $updateRecordButton = $quizTable.find('.update');
 
     //Delete Exam
     var $deleteModal = $modalContainer.find('#DeleteModal');
     var $yesDeleteButton = $deleteModal.find('.yes');
-    var $deleteRecordButton = $examTable.find('.delete');
+    var $deleteRecordButton = $quizTable.find('.delete');
 
     //Add Exam Question Modal
     var $examQuestionModal = $modalContainer.find("#ExamQuestionModal");
@@ -88,7 +88,7 @@ jQuery(document).ready(function($){
       return container.append(tableBody);
     }
 
-    function saveQuiz(e){
+    function saveRecord(e){
       var url = '/resources/quiz/add.php';
       var data = $createModalForm.serialize(); // Convert form data to URL params
 
@@ -127,7 +127,7 @@ jQuery(document).ready(function($){
       }
     }
 
-    function updateExam(e) {
+    function updateRecord(e) {
       var data = $updateModalForm.serializeArray(); // Convert form data to URL params
       data.push({name: 'id', value: quizId})
       
@@ -152,7 +152,7 @@ jQuery(document).ready(function($){
       if($updateModalForm.valid()) {
         $.ajax({
           type: "POST",
-          url: '/resources/exam/update.php',
+          url: '/resources/quiz/update.php',
           data: $.param(data),
           success: function(res){
             if(res.success) {
@@ -166,7 +166,7 @@ jQuery(document).ready(function($){
       }
     }
 
-    function deleteExam() {
+    function deleteRecord() {
       var url = '/resources/quiz/delete.php';
       $.ajax({
         type: "POST",
@@ -273,19 +273,19 @@ jQuery(document).ready(function($){
     }
 
     function showUpdateModal() {
-      var url = '/resources/exam/exam.php';
+      var url = '/resources/quiz/quiz.php';
       var $title = $updateModal.find('input[name=title]');
       var $instruction = $updateModal.find('textarea[name=instruction]');
       var $minutes = $updateModal.find('input[name=minutes]');
 
-      examId = $(this).data('examId'); //get id of selected exam
+      quizId = $(this).data('quizId'); //get id of selected exam
       $modalContainer.addClass('active')
       
       //Display selected record details
       $.ajax({
         type: "GET",
         url: url,
-        data: $.param({'id': examId}),
+        data: $.param({'id': quizId}),
         success: function(res){
           if(res.success) {
             $title.val(res.data.title)
@@ -340,9 +340,9 @@ jQuery(document).ready(function($){
     }
 
     function init() {
-      $createExamButton.on('click', showCreateModal)
-      $addExamQuestionButton.on('click', showExamQuestionsModal)
-      $yesDeleteButton.on('click', deleteExam)
+      $createQuizButton.on('click', showCreateModal)
+      $addQuizQuestionButton.on('click', showExamQuestionsModal)
+      $yesDeleteButton.on('click', deleteRecord)
   
       //Show Modal
       $updateRecordButton.on('click', showUpdateModal)
@@ -351,8 +351,8 @@ jQuery(document).ready(function($){
       //Close all modals
       $modal.find('.close').on('click', closeModals)
   
-      $saveButton.on('click', saveQuiz)
-      $updateButton.on('click', updateExam)
+      $saveButton.on('click', saveRecord)
+      $updateButton.on('click', updateRecord)
   
       //save included question
       $saveExamQuestionsButton.on('click', saveExamQuestions)

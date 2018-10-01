@@ -33,7 +33,7 @@
     <p class="message">No Records</p>
   </div>
 <?php else: ?>
-  <table class="table exam">
+  <table class="table quiz">
     <?php if($is_teacher): ?>
       <thead>
         <th>Title</th>
@@ -61,14 +61,15 @@
           $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
           if($is_teacher){
             $questions = "<a class='button view-quiz' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&quiz_id=$id>Questions</a>";
-            $assign_quiz = "<span class='button assign-quiz' data-quiz-id=$id>Assign Quiz</span>";
-            $remove_quiz = "<span class='button remove-quiz delete' data-quiz-id=$id>Remove Quiz</span>";
+            $assign_quiz = "<span class='button assign' data-quiz-id=$id>Assign</span>";
+            $update_quiz = "<span class='button update' data-quiz-id=$id>Update</span>";
+            $remove_quiz = "<span class='button delete' data-quiz-id=$id>Remove</span>";
             $table_row =
             "<tr>
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$questions $assign_quiz $remove_quiz</td>
+              <td class='option'>$questions $assign_quiz $update_quiz $remove_quiz</td>
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 
