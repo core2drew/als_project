@@ -36,12 +36,12 @@
       $filename = mysqli_real_escape_string($conn, $filename);
       $query = "INSERT INTO videos (title, subject_id, created_at, url, type, filename) VALUES ('$title', '$subject_id', '$created_at', '$video_url', '$upload_option', '$filename')";
       $result = mysqli_query($conn, $query);
-    }
 
-    if($result) {
-      $json_data['success'] = true;
-    } else {
-      $json_data['message'] = 'Oops, something went wrong.';
+      if($result) {
+        $json_data['success'] = true;
+      } else {
+        $json_data['message'] = 'Oops, something went wrong.';
+      }
     }
   }
 
