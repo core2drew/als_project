@@ -8,6 +8,8 @@
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     $upload_option = isset($_POST['upload_option']) ? $_POST['upload_option'] : null;
     $video_url = '';
+    $result = '';
+    
     //Upload
     if($upload_option === 'upload') {
       $video_filename = $_FILES["video_file"]["name"];
@@ -36,12 +38,11 @@
       $filename = mysqli_real_escape_string($conn, $filename);
       $query = "INSERT INTO videos (title, subject_id, created_at, url, type, filename) VALUES ('$title', '$subject_id', '$created_at', '$video_url', '$upload_option', '$filename')";
       $result = mysqli_query($conn, $query);
-
-      if($result) {
-        $json_data['success'] = true;
-      } else {
-        $json_data['message'] = 'Oops, something went wrong.';
-      }
+    }
+    if($result) {
+      $json_data['success'] = true;
+    } else {
+      $json_data['message'] = 'Oops, something went wrong.';
     }
   }
 
