@@ -33,14 +33,14 @@
       $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
       $address = mysqli_real_escape_string($conn, $_POST['address']);
       $contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
-      $grade_level = mysqli_real_escape_string($conn, $_POST['grade_level']);
+      $grade_level = isset($_POST['grade_level']) ? mysqli_real_escape_string($conn, $_POST['grade_level']) : null;
       $teacher_id = isset($_POST['teacher_id']) ? mysqli_real_escape_string($conn, $_POST['teacher_id']) : null;
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $password = mysqli_real_escape_string($conn, $_POST['password']);
       $created_at = date("Y-m-d H:i:s");
   
       $query = "INSERT INTO users (lastname, firstname, address, profile_image_url, contactno, grade_level, teacher_id, email, password, type, created_at) VALUES 
-      ('$lastname', '$firstname', '$address', '$profile_image_url', '$contactno', '$grade_level', '$teacher_id', '$email', '$password', '$type', '$created_at')";
+      ('$lastname', '$firstname', '$address', '$profile_image_url', '$contactno', $grade_level, '$teacher_id', '$email', '$password', '$type', '$created_at')";
       $result = mysqli_query($conn, $query);
       
       if($result) {
