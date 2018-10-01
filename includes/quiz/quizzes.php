@@ -34,7 +34,7 @@
   </div>
 <?php else: ?>
   <table class="table exam">
-    <?php if($is_coordinator || $is_teacher): ?>
+    <?php if($is_teacher): ?>
       <thead>
         <th>Title</th>
         <th>Question Count</th>
@@ -59,27 +59,16 @@
           $subject = isset($row['subject']) ? $row['subject'] : null;
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
           $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
-          if($is_coordinator) {
-            $questions = "<a class='button' href=$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
-            $update = "<span class='button update' data-exam-id=$id>Update</span>";
-            $remove = "<span class='button delete' data-exam-id=$id>Remove</span>";
+          if($is_teacher){
+            $questions = "<a class='button view-quiz' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&quiz_id=$id>Questions</a>";
+            $assign_quiz = "<span class='button assign-quiz' data-quiz-id=$id>Assign Quiz</span>";
+            $remove_quiz = "<span class='button remove-quiz delete' data-quiz-id=$id>Remove Quiz</span>";
             $table_row =
             "<tr>
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$questions $update $remove</td>
-            </tr>";
-          } else if($is_teacher){
-            //$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id
-            $questions = "<span class='button view-exam'  data-subject-id=$subject_id data-exam-id=$id>View</span>";
-            $assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
-            $table_row =
-            "<tr>
-              <td>$title</td>
-              <td>$questions_count</td>
-              <td>$minutes</td>
-              <td class='option'>$questions $assign_exam</td>
+              <td class='option'>$questions $assign_quiz $remove_quiz</td>
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 

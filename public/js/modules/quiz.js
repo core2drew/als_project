@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
   var quizModule = (function() {
     var includedQuestions = [];
-    var examId = 0;
+    var quizId = 0;
     var question_url = '/resources/exam/questions.php'
 
     var $manageExams = $("#ManageQuiz");
@@ -129,7 +129,7 @@ jQuery(document).ready(function($){
 
     function updateExam(e) {
       var data = $updateModalForm.serializeArray(); // Convert form data to URL params
-      data.push({name: 'id', value: examId})
+      data.push({name: 'id', value: quizId})
       
       //Validate form field
       $updateModalForm.validate({
@@ -167,11 +167,11 @@ jQuery(document).ready(function($){
     }
 
     function deleteExam() {
-      var url = '/resources/exam/delete.php';
+      var url = '/resources/quiz/delete.php';
       $.ajax({
         type: "POST",
         url: url,
-        data: $.param({'id': examId}),
+        data: $.param({'id': quizId}),
         success: function(res){
           if(res.success) {
             location.reload();
@@ -184,13 +184,13 @@ jQuery(document).ready(function($){
     }
 
     function saveExamQuestions() {
-      examId = $examQuestionModal.data('examId');
+      quizId = $examQuestionModal.data('quizId');
       $.ajax({
         type: "POST",
         url: question_url,
         data: $.param({
           questions_id: includedQuestions.join(","), 
-          exam_id: examId
+          exam_id: quizId
         }),
         success: function(res){
           if(res.success) {
@@ -248,13 +248,13 @@ jQuery(document).ready(function($){
 
     function removeExamQuestion() {
       var questionId = $(this).data('questionId');
-      examId = $examQuestionModal.data('examId');
+      quizId = $examQuestionModal.data('quizId');
       $.ajax({
         type: "POST",
         url: question_url,
         data: $.param({
           question_id: questionId, 
-          exam_id: examId
+          exam_id: quizId
         }),
         success: function(res){
           if(res.success) {
@@ -268,7 +268,6 @@ jQuery(document).ready(function($){
     }
 
     function showCreateModal(){
-      console.log("test")
       $modalContainer.addClass('active')
       $createModal.show();
     }
@@ -302,7 +301,7 @@ jQuery(document).ready(function($){
     }
 
     function showDeleteModal(){
-      examId = $(this).data('examId'); //get id of selected exam
+      quizId = $(this).data('quizId'); //get id of selected exam
       $modalContainer.addClass('active')
       $deleteModal.show();
     }
@@ -310,7 +309,7 @@ jQuery(document).ready(function($){
     function showExamQuestionsModal() {
       $modalContainer.addClass('active');
       var subjectId = $examQuestionModal.data('subjectId');
-      var examId = $examQuestionModal.data('examId');
+      var quizId = $examQuestionModal.data('quizId');
       $examQuestionModal.show();
 
       $.ajax({
