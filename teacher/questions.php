@@ -14,7 +14,7 @@
 
 <div id="Teacher" class="wrapper">
   <?php include '../includes/sidebar.php' ?>
-  <div id="ManageQuestions" class="page">
+  <div id="ManageQuiz" class="page">
     <?php
       include '../includes/quiz/questions.php';
     ?>
@@ -23,5 +23,5 @@
 
 <?php include '../includes/question/modals.php' ?>
 <?php include '../includes/html/scripts.php'?>
-<script src="/public/js/modules/question.js"></script>
+<script src="/public/js/modules/quiz-question.js"></script>
 <?php include '../includes/html/footer.php' ?>

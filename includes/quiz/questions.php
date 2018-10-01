@@ -56,7 +56,7 @@
           $question = $qr['question'];
           $answer = $qr['answer'];
           $view = "<span class='button view' data-question-id=$id>View</span>";
-          $remove = "<span class='button delete' data-question-id=$id>Remove</span>";
+          $remove = "<span class='button delete' data-question-id=$id data-quiz-id=$quiz_id>Remove</span>";
           $table_row =
           "<tr>
             <td>$question</td>
