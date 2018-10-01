@@ -11,7 +11,8 @@ jQuery(document).ready(function($){
 
     var $manageAccounts = $('#ManageAccounts')
     var $modalContainer = $(".modal-container");
-
+    var $loading = $modalContainer.find('loading');
+    
     //All Modals
     var $modal = $modalContainer.find('.modal');
 
@@ -49,6 +50,8 @@ jQuery(document).ready(function($){
     }
 
     function showUpdateModal() {
+      $loading.addClass('active')
+      
       var $this = $(this)
       userId = $this.data('userId');
       userType = $this.data('userType');
@@ -70,6 +73,7 @@ jQuery(document).ready(function($){
           'type': userType
         }),
         success: function(res){
+          $loading.removeClass('active')
           if(res.success) {
             $profileImage.attr('src', res.data.profile_image_url)
             $lastName.val(res.data.lastname)
@@ -88,6 +92,7 @@ jQuery(document).ready(function($){
           }
         },
         error: function(err) {
+          $loading.removeClass('active')
           console.error("Something went wrong");
         }
       });
@@ -144,6 +149,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -171,6 +177,7 @@ jQuery(document).ready(function($){
     function updateRecord(){
       currentUserId = $manageAccounts.data('currentUserId')
       if($updateForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', userId)
         formData.append('current_user_id', currentUserId)
@@ -200,6 +207,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
+      $loading.addClass('active')
       var url = '/resources/account/delete.php';
       $.ajax({
         type: "POST",

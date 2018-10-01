@@ -8,6 +8,11 @@
   display: none;
   align-items: center;
   justify-content: center;
+  z-index: 50;
+}
+
+.loading.active {
+  display: flex;
 }
 
 .loading > .lds-ripple {
