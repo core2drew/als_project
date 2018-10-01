@@ -1,5 +1,5 @@
-<div class="modal-container">
-  <div id="DeleteModal" class="modal">
+<div class="modal-container questions">
+  <div id="DeleteModal" class="modal questions">
     <div class="title">Confirmation</div>
     <div class="content">Are you sure you want to delete this question?</div>
     <div class="actions">
@@ -14,6 +14,7 @@
       <form id="CreateForm" autocomplete="off" class="form" method="POST">
         <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
         <input type="hidden" name="user_type" value="<?php echo $_SESSION['type'] ?>" />
+        <input type="hidden" name="quiz_id" value="<?php echo $quiz_id ?>" />
         <div class="input question">
           <textarea name="question" placeholder="Question" required></textarea>
         </div>
@@ -63,7 +64,7 @@
     </div>
   </div>
 
-  <div id="ViewQuestionModal" class="modal">
+  <div id="ViewQuestionModal" class="modal questions">
     <div class="title">View Question</div>
     <div class="content">
       <div class="question"></div>

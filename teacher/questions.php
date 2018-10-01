@@ -14,18 +14,14 @@
 
 <div id="Teacher" class="wrapper">
   <?php include '../includes/sidebar.php' ?>
-  <div id="ManageQuiz" class="page">
+  <div id="ManageQuestions" class="page">
     <?php
-      if($subject_id) {
-        include '../includes/quiz/quizzes.php';
-      } else {
-        include '../includes/quiz/subjects.php';
-      }
+      include '../includes/quiz/questions.php';
     ?>
   </div>
 </div>
 
-<?php include '../includes/quiz/modals.php' ?>
+<?php include '../includes/question/modals.php' ?>
 <?php include '../includes/html/scripts.php'?>
-<script src="/public/js/modules/quiz.js"></script>
+<script src="/public/js/modules/question.js"></script>
 <?php include '../includes/html/footer.php' ?>

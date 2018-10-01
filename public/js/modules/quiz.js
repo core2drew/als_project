@@ -1,8 +1,9 @@
 jQuery(document).ready(function($){
   var quizModule = (function() {
-    var includedQuestions = [];
+    var validateCreateQuiz, 
+    validateUpdateQuiz;
+
     var quizId = 0;
-    var question_url = '/resources/exam/questions.php'
 
     var $manageQuiz = $("#ManageQuiz");
     var $modalContainer = $(".modal-container");
@@ -17,33 +18,26 @@ jQuery(document).ready(function($){
     //Table Actions
     var $createQuizButton = $tableActions.find('#CreateQuiz');
     var $addQuizQuestionButton = $tableActions.find("#AddQuizQuestion");
-    //Question Table Actions
-    var $removeExamQuestionButton = $quizQuestionTable.find('.delete');
-    var $viewExamQuestionButton = $quizQuestionTable.find('.view');
-
-    //Create
-    var $createModal = $modalContainer.find('#CreateModal');
+    
+    //Quiz Table Actions
+    var $removeQuestionButton = $quizQuestionTable.find('.delete');
+    var $viewQuestionButton = $quizQuestionTable.find('.view');
+    
+    //Create Quiz
+    var $createModal = $modalContainer.find('#CreateModal.quiz');
     var $createModalForm = $createModal.find(".form");
     var $saveButton = $createModal.find('.create');
 
-    //Update
-    var $updateModal = $modalContainer.find('#UpdateModal');
+    //Update Quiz
+    var $updateModal = $modalContainer.find('#UpdateModal.quiz');
     var $updateModalForm = $updateModal.find(".form");
     var $updateButton = $updateModal.find('.update');
     var $updateRecordButton = $quizTable.find('.update');
 
-    //Delete Exam
-    var $deleteModal = $modalContainer.find('#DeleteModal');
+    //Delete Quiz
+    var $deleteModal = $modalContainer.find('#DeleteModal.quiz');
     var $yesDeleteButton = $deleteModal.find('.yes');
     var $deleteRecordButton = $quizTable.find('.delete');
-
-    //Add Exam Question Modal
-    var $examQuestionModal = $modalContainer.find("#ExamQuestionModal");
-    var $examQuestionModalTable = $examQuestionModal.find('.table');
-    var $saveExamQuestionsButton = $examQuestionModal.find('.save');
-
-    //View Exam Question modal
-    var $examViewQuestionModal = $modalContainer.find('#ExamViewQuestionModal');
 
     function makeQuestionTable(container, data) {
       var tableBody = container.find('tbody')
@@ -183,90 +177,6 @@ jQuery(document).ready(function($){
       });
     }
 
-    function saveExamQuestions() {
-      quizId = $examQuestionModal.data('quizId');
-      $.ajax({
-        type: "POST",
-        url: question_url,
-        data: $.param({
-          questions_id: includedQuestions.join(","), 
-          exam_id: quizId
-        }),
-        success: function(res){
-          if(res.success) {
-            location.reload();
-          }
-        },
-        error: function(err) {
-          console.error("Something went wrong");
-        }
-      });
-    }
-
-    function viewExamQuestion(){
-      var questionId = $(this).data('questionId');
-
-      $modalContainer.addClass('active');
-      $examViewQuestionModal.show();
-
-      $question = $examViewQuestionModal.find('.question')
-      $choices = $examViewQuestionModal.find('.choices')
-      $explanation = $examViewQuestionModal.find('.explanation')
-
-      $choices.empty()
-      $explanation.hide()
-      
-      $.ajax({
-        type: "GET",
-        url: '/resources/question/question.php',
-        data: $.param({
-          id: questionId
-        }),
-        success: function(res){
-          if(res.success) {
-            $question.html(res.data.question)
-            if(res.data.explanation) {
-              $explanation.show()
-              $explanation.html(res.data.explanation)
-            }
-            
-            res.data.answers.map(function(data, index){
-              var $choice = $('<span/>').addClass('choice')
-              if(data.is_answer) {
-                $choice.addClass('answer')
-              }
-              $choice.html(data.answer)
-              $choices.append($choice)
-            })
-          }
-        },
-        error: function(err) {
-          console.error("Something went wrong");
-        }
-      });
-    }
-
-    function removeExamQuestion() {
-      var questionId = $(this).data('questionId');
-      quizId = $examQuestionModal.data('quizId');
-      $.ajax({
-        type: "POST",
-        url: question_url,
-        data: $.param({
-          question_id: questionId, 
-          exam_id: quizId
-        }),
-        success: function(res){
-          if(res.success) {
-            location.reload();
-          }
-        },
-        error: function(err) {
-          console.error("Something went wrong");
-        }
-      });
-    }
-
     function showCreateModal(){
       $modalContainer.addClass('active')
       $createModal.show();
@@ -306,42 +216,20 @@ jQuery(document).ready(function($){
       $deleteModal.show();
     }
 
-    function showExamQuestionsModal() {
-      $modalContainer.addClass('active');
-      var subjectId = $examQuestionModal.data('subjectId');
-      var quizId = $examQuestionModal.data('quizId');
-      $examQuestionModal.show();
-
-      $.ajax({
-        type: "GET",
-        url: question_url,
-        data: $.param({
-          subject_id: subjectId, 
-          exam_id: examId
-        }),
-        success: function(res){
-          makeQuestionTable($examQuestionModalTable, res.data);
-          $examQuestionModal.show();
-        },
-        error: function(err) {
-          console.error("Something went wrong");
-        }
-      });
-    }
-
     function closeModals(){
       $modalContainer.removeClass('active');
       $deleteModal.hide();
       $updateModal.hide();
       $createModal.hide();
-      $examQuestionModal.hide();
-      $examViewQuestionModal.hide();
-      includedQuestions = []; //reset included
+      validateCreateQuiz.resetForm();
+      validateUpdateQuiz.resetForm();
     }
 
     function init() {
+      validateCreateQuiz = $createModalForm.validate({ errorClass: "error-field" })
+      validateUpdateQuiz = $updateModalForm.validate({ errorClass: "error-field" })
+
       $createQuizButton.on('click', showCreateModal)
-      $addQuizQuestionButton.on('click', showExamQuestionsModal)
       $yesDeleteButton.on('click', deleteRecord)
   
       //Show Modal
@@ -353,13 +241,6 @@ jQuery(document).ready(function($){
   
       $saveButton.on('click', saveRecord)
       $updateButton.on('click', updateRecord)
-  
-      //save included question
-      $saveExamQuestionsButton.on('click', saveExamQuestions)
-      //remove question to exam
-      $removeExamQuestionButton.on('click', removeExamQuestion)
-      //view question
-      $viewExamQuestionButton.on('click', viewExamQuestion)
     }
 
     return {

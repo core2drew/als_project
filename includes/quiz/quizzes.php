@@ -60,7 +60,7 @@
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
           $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
           if($is_teacher){
-            $questions = "<a class='button view-quiz' href=$_SERVER[PHP_SELF]?subject_id=$subject_id&quiz_id=$id>Questions</a>";
+            $questions = "<a class='button view-quiz' href=/teacher/questions.php?subject_id=$subject_id&quiz_id=$id>Questions</a>";
             $assign_quiz = "<span class='button assign' data-quiz-id=$id>Assign</span>";
             $update_quiz = "<span class='button update' data-quiz-id=$id>Update</span>";
             $remove_quiz = "<span class='button delete' data-quiz-id=$id>Remove</span>";
