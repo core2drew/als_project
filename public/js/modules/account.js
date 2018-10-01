@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 
     var $manageAccounts = $('#ManageAccounts')
     var $modalContainer = $(".modal-container");
-    var $loading = $modalContainer.find('loading');
+    var $loading = $modalContainer.find('.loading');
     
     //All Modals
     var $modal = $modalContainer.find('.modal');
