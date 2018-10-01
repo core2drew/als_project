@@ -4,13 +4,13 @@
   background-position: center;
 }
 
-.modal-container > #CreateModal > .content > #CreateForm > .input > .image,
-.modal-container > #UpdateModal > .content > #UpdateForm > .input > .image  {
+.modal-container > #CreateModal.home > .content > #CreateForm > .input > .image,
+.modal-container > #UpdateModal.home > .content > #UpdateForm > .input > .image  {
   display: none;
 }
 
-.modal-container > #CreateModal > .content > #CreateForm > .input > .image-viewer,
-.modal-container > #UpdateModal > .content > #UpdateForm > .input > .image-viewer {
+.modal-container > #CreateModal.home > .content > #CreateForm > .input > .image-viewer,
+.modal-container > #UpdateModal.home  > .content > #UpdateForm > .input > .image-viewer {
   max-width: 400px;
   height: 150px;
   background-size: cover;
@@ -18,18 +18,18 @@
   background-repeat: no-repeat;
 }
 
-.modal-container > #CreateModal > .content > #CreateForm > .input > .choose-image,
-.modal-container > #UpdateModal > .content > #UpdateForm > .input > .choose-image {
+.modal-container > #CreateModal.home > .content > #CreateForm > .input > .choose-image,
+.modal-container > #UpdateModal.home > .content > #UpdateForm > .input > .choose-image {
   text-align: center;
 }
 
-.modal-container > #CreateModal > .content > #CreateForm > .input > input[type='file'],
-.modal-container > #UpdateModal > .content > #UpdateForm > .input > input[type='file'] {
+.modal-container > #CreateModal.home > .content > #CreateForm > .input > input[type='file'],
+.modal-container > #UpdateModal.home > .content > #UpdateForm > .input > input[type='file'] {
   display: none;
 }
 
-.modal-container > #CreateModal > .content > #CreateForm > .input > textarea,
-.modal-container > #UpdateModal > .content > #UpdateForm > .input > textarea {
+.modal-container > #CreateModal.home > .content > #CreateForm > .input > textarea,
+.modal-container > #UpdateModal.home > .content > #UpdateForm > .input > textarea {
   resize: none;
   height: 100px;
 }
