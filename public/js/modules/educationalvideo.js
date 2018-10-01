@@ -9,6 +9,7 @@ jQuery(document).ready(function($){
 
       var $manageEducationalVideos= $("#ManageEducationalVideos");
       var $modalContainer = $(".modal-container");
+      var $loading = $modalContainer.find('.loading');
 
       //All Modals
       var $modal = $modalContainer.find('.modal');
@@ -60,6 +61,7 @@ jQuery(document).ready(function($){
       }
 
       function showUpdateModal() {
+        $loading.addClass('active')
         var url = '/resources/educationalvideo';
         var $title = $updateModal.find('input[name=title]');
         var $filename = $updateModal.find('input[name=filename]');
@@ -77,6 +79,7 @@ jQuery(document).ready(function($){
           data: $.param({'id': videoId}),
           success: function(res){
             if(res.success) {
+              $loading.removeClass('active')
               if(res.data.type === 'upload') {
                 $tab.eq(0).addClass('active')
                 $uploadVideo.show();
@@ -115,6 +118,7 @@ jQuery(document).ready(function($){
 
       function createRecord(){
         if($createForm.valid()) {
+          $loading.addClass('active')
           var formData = new FormData($createForm[0]);
           formData.append('upload_option', uploadOption)
 
@@ -125,6 +129,7 @@ jQuery(document).ready(function($){
             contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
             processData: false, // NEEDED, DON'T OMIT THIS
             success: function(res){
+              $loading.removeClass('active')
               if(res.success) {
                 //show modal created success
                 //modal go to lesson table
@@ -165,6 +170,7 @@ jQuery(document).ready(function($){
       }
 
       function deleteRecord() {
+        $loading.addClass('active')
         var url = '/resources/educationalvideo/delete.php';
         $.ajax({
           type: "POST",
@@ -172,6 +178,7 @@ jQuery(document).ready(function($){
           data: $.param({'id': videoId}),
           success: function(res){
             if(res.success) {
+              $loading.removeClass('active')
               location.reload();
             }
           },
