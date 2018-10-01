@@ -40,7 +40,7 @@
       $created_at = date("Y-m-d H:i:s");
   
       $query = "INSERT INTO users (lastname, firstname, address, profile_image_url, contactno, grade_level, teacher_id, email, password, type, created_at) VALUES 
-      ('$lastname', '$firstname', '$address', '$profile_image_url', '$contactno', $grade_level, '$teacher_id', '$email', '$password', '$type', '$created_at')";
+      ('$lastname', '$firstname', '$address', '$profile_image_url', '$contactno', '$grade_level', '$teacher_id', '$email', '$password', '$type', '$created_at')";
       $result = mysqli_query($conn, $query);
       
       if($result) {
