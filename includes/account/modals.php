@@ -1,4 +1,10 @@
 <div class="modal-container">
+  <div class="loading">
+    <div class="lds-ripple">
+      <div class="ripple"></div>
+      <div class="ripple"></div>
+    </div>
+  </div>
   <div id="DeleteModal" class="modal">
     <div class="title">Confirmation</div>
     <div class="content">Are you sure you want to delete this user?</div>
