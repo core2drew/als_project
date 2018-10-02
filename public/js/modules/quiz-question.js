@@ -54,9 +54,9 @@ jQuery(document).ready(function($){
    function showViewModal(){
      var questionId = $(this).data('questionId');
 
-     $question = $viewModal.find('.question')
-     $choices = $viewModal.find('.choices')
-     $explanation = $viewModal.find('.explanation')
+     var $question = $viewModal.find('.question')
+     var $choices = $viewModal.find('.choices')
+     var $explanation = $viewModal.find('.explanation')
 
      $choices.empty()
      $explanation.hide()
