@@ -52,13 +52,13 @@
     </div>
   </div>
 
-  <div id="AssignExamModal" class="modal quiz" data-user-id="<?php echo $_SESSION['user_id'] ?>">
+  <div id="AssignQuizModal" class="modal quiz" data-user-id="<?php echo $_SESSION['user_id'] ?>">
     <div class="title">Assign Exam</div>
     <div class="content">
       <table class="table">
         <thead class="header">
           <th>Student Name</th>
-          <th>Give Exam</th>
+          <th>Give Quiz</th>
         </thead>
         <tbody></tbody>
       </table>

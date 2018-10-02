@@ -1,17 +1,21 @@
-#AssignExamModal > .content > .table > thead > tr > th:nth-last-child(1){
+#AssignExamModal > .content > .table > thead > tr > th:nth-last-child(1),
+#AssignQuizModal > .content > .table > thead > tr > th:nth-last-child(1){
   text-align: center;
 }
 
-#AssignExamModal > .content > .table > tbody > tr > td > .button {
+#AssignExamModal > .content > .table > tbody > tr > td > .button,
+#AssignQuizModal > .content > .table > tbody > tr > td > .button {
   text-align: center;
   width: 100%;
 }
 
-#AssignExamModal > .content > .table > tbody > tr > td > .remove {
+#AssignExamModal > .content > .table > tbody > tr > td > .remove,
+#AssignQuizModal > .content > .table > tbody > tr > td > .remove {
   display: none;
 }
 
-#AssignExamModal > .content > .table > tbody > tr > td > .taken { 
+#AssignExamModal > .content > .table > tbody > tr > td > .taken,
+#AssignQuizModal > .content > .table > tbody > tr > td > .taken { 
   background: #e6e6e6;
   color: #989898;
   cursor: not-allowed;

@@ -4,7 +4,7 @@
   } else {
     $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
-    from exams a inner join users_has_quiz b on a.id = b.exam_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
+    from quizzes as a inner join users_has_quiz as b on a.id = b.quiz_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
   }
 
   $result = mysqli_query($conn, $query);
@@ -72,10 +72,9 @@
               <td class='option'>$questions $assign_quiz $update_quiz $remove_quiz</td>
             </tr>";
           } else if ($is_student) {
-            //href=$_SERVER[PHP_SELF]?exam_id=$id 
-            $view_result = "<span class='button view-result' data-exam-id=$id>View Result</span>";
-            $take_exam = "<span class='button take-exam' data-exam-id=$id>Take Exam</span>";
-            $table_action = $is_taken ? $view_result : $take_exam;
+            $view_result = "<span class='button view-result' data-quiz-id=$id>View Result</span>";
+            $take_quiz = "<span class='button take-quiz' data-quiz-id=$id>Take Quiz</span>";
+            $table_action = $is_taken ? $view_result : $take_quiz;
             $table_row =
             "<tr>
               <td>$subject</td>

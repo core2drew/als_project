@@ -39,6 +39,11 @@ jQuery(document).ready(function($){
     var $yesDeleteButton = $deleteModal.find('.yes');
     var $deleteRecordButton = $quizTable.find('.delete');
 
+    var $assignQuizModal = $modalContainer.find('#AssignQuizModal')
+    var $assignQuizModalTable = $assignQuizModal.find('.table')
+    var $assignQuizButton = $quizTable.find('.assign')
+    
+
     function makeQuestionTable(container, data) {
       var tableBody = container.find('tbody')
       tableBody.empty();
@@ -80,6 +85,128 @@ jQuery(document).ready(function($){
         });
       }
       return container.append(tableBody);
+    }
+
+    function makeStudentTable(container, data){
+      var tableBody = container.find('tbody')
+      tableBody.empty();
+      container.siblings('.no-records').show();
+      if(data.length > 0) {
+        container.siblings('.no-records').hide();// hide no record
+        $.each(data, function(index, data) {
+          var row = $("<tr/>").addClass('row');
+          var name = $('<td/>').addClass('td');
+          var view = $('<td/>').addClass('td');
+
+          name.text(data.name);
+          row.append(name);
+  
+          if(data.is_taken == "0" || data.is_taken == null) {
+            view.append(
+              `<span class='button assign' data-student-id=${data.id}>Assign</span>`
+            )
+            view.append(
+              `<span class='button remove' data-student-id=${data.id}>Unassign</span>`
+            )
+            var assign = view.find('.assign')
+            var remove = view.find('.remove')
+            row.append(view);
+
+            if(data.has_quiz && data.is_taken != null) {
+              assign.hide()
+              remove.css('display','block')
+            }
+
+            assign.on('click', function(){
+              var $this = $(this)
+              var studentId = $this.data('studentId')
+              $this.hide();
+              remove.css('display','block')
+              assignQuiz(studentId, quizId)
+            })
+  
+            remove.on('click', function(){
+              var $this = $(this)
+              var studentId = $this.data('studentId')
+              $(this).hide();
+              assign.css('display','block')
+              removeAssignQuiz(studentId, quizId)
+            })
+
+          } else if (data.is_taken == "1"){
+            view.append(
+              "<span class='button basic taken'>Taken</span>"
+            )
+            row.append(view);
+          }
+
+          tableBody.append(row);
+        });
+      }
+      return container.append(tableBody);
+    }
+
+    function showAssignQuizModal(){
+      quizId = $(this).data('quizId')
+      $.ajax({
+        type: "GET",
+        url: '/resources/teacher/quiz-students.php',
+        data: $.param({
+          teacher_id: $assignQuizModal.data('userId'),
+          quiz_id: quizId
+        }),
+        success: function(res){
+          if(res.success) {
+            makeStudentTable($assignQuizModalTable, res.data)
+            $modalContainer.addClass('active')
+            $assignQuizModal.show();
+          } else {
+            alert(res.message)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function assignQuiz(studentId, quizId) {
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-quiz.php',
+        data: $.param({
+          student_id: studentId,
+          quiz_id: quizId
+        }),
+        success: function(res){
+          if(res.success) {
+            //alert(res.message)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function removeAssignQuiz(studentId, quizId){
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-quiz.php',
+        data: $.param({
+          student_id: studentId,
+          quiz_id: quizId,
+          action: 'remove'
+        }),
+        success: function(res){
+          if(res.success) {
+            //alert(res.message)
+          }
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
     }
 
     function saveRecord(e){
@@ -221,6 +348,7 @@ jQuery(document).ready(function($){
       $deleteModal.hide();
       $updateModal.hide();
       $createModal.hide();
+      $assignQuizModal.hide();
       validateCreateQuiz.resetForm();
       validateUpdateQuiz.resetForm();
     }
@@ -241,6 +369,8 @@ jQuery(document).ready(function($){
   
       $saveButton.on('click', saveRecord)
       $updateButton.on('click', updateRecord)
+
+      $assignQuizButton.on('click', showAssignQuizModal)
     }
 
     return {
