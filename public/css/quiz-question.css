@@ -1,0 +1,126 @@
+
+#QuizQuestions,
+#QuizQuestionsAnswers {
+  margin-bottom: 15px;
+  max-width: 89%;
+}
+
+#QuizQuestions > .question-item:nth-last-child(n + 2),
+#QuizQuestionsAnswers > .question-item:nth-last-child(n + 2) {
+  margin-bottom: 40px;
+}
+
+#QuizQuestions > .question-item > .question,
+#QuizQuestionsAnswers > .question-item > .question {
+  background: #efefef;
+  padding: 15px;
+}
+#QuizQuestions > .question-item > .question > .numbering,
+#QuizQuestionsAnswers > .question-item > .question > .numbering {
+  margin-right: 5px;
+}
+
+#QuizQuestions > .question-item > .choices,
+#QuizQuestionsAnswers > .question-item > .choices {
+  background: #fff;
+}
+
+#QuizQuestions > .question-item > .choices > .choice,
+#QuizQuestionsAnswers > .question-item > .choices > .choice {
+  display: flex;
+  align-items: center;
+  padding: 15px 37px;
+  font-weight: bold;
+}
+
+#QuizQuestions > .question-item > .choices > .choice > input[type=radio] {
+  margin-right: 10px;
+}
+
+#QuizQuestions > .question-item > .choices > .choice.is-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer {
+  background: #c2ffc2;
+}
+
+#QuizQuestions > .question-item > .choices > .choice.user-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.user-answer {
+  background: #ffcecf;
+}
+
+#QuizQuestions > .question-item > .choices > .choice.correct-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.correct-answer {
+  background: #c2ffc2 !important;
+}
+
+#QuizQuestions > .question-item > .explanation,
+#QuizQuestionsAnswers > .question-item > .explanation {
+  padding: 10px 15px;
+  font-size: 0.8em;
+  background: #3295ff;
+  color: #ffffff;
+}
+#QuizQuestions > .question-item > .explanation > .label,
+#QuizQuestionsAnswers > .question-item > .explanation > .label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#QuizQuestions > .question-item > .noanswer,
+#QuizQuestionsAnswers > .question-item > .noanswer {
+  font-size: 0.8em;
+  background-color: #fe141a;
+  color: #fff;
+  padding: 3px;
+  display: block;
+  width: 80px;
+  text-align: center;
+}
+
+#SubmitQuiz {
+  text-align: center;
+  padding: 15px;
+  text-transform: uppercase;
+  background: #FFAA14;
+  color: #fff;
+  width: 200px;
+  display: none;
+}
+
+#CountDown {
+  position: fixed;
+  top: 77px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fe141a;
+  color: #fff;
+  padding: 10px 15px;
+}
+
+#CountDown > .minutes {
+  background-color: #c52929;
+  padding: 8px 20px;
+  margin: 0;
+}
+
+#Confirmation > .content{
+  max-width: 400px;
+}
+
+#Attention > .actions > .yes {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+
+#ManageQuiz > .quiz-detail:nth-last-child(n + 2) {
+  margin-bottom: 10px;
+}
+
+#ManageQuiz > .quiz-minutes > label,
+#ManageQuiz > .quiz-items > label,
+#ManageQuiz > .quiz-instruction > label {
+  font-weight: bold;
+}
+

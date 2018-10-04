@@ -1,21 +1,24 @@
-jQuery(document).ready(function($){
-
-  var studentModule = (function() {
-    var examId, answers = [], userId;
+jQuery(document).ready(function(){
+  var studentQuizModule = (function() {
+    var quizId, answers = [], userId;
     var timer;
 
-    var $manageExams = $("#ManageExams");
+    var $manageQuiz = $("#ManageQuiz");
     var $modalContainer = $(".modal-container");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
-    
-    var $examQuestions = $manageExams.find('#ExamQuestions')
-    var $examQuestionsAnswer = $manageExams.find('#ExamQuestionsAnswers')
-    var $countDown =  $manageExams.find('#CountDown');
 
-    var $examDetailsModal = $modalContainer.find('#ExamDetailsModal')
-    var $examStart = $examDetailsModal.find('.start')
+    var $quizQuestions = $manageQuiz.find('#QuizQuestions')
+    var $quizQuestionsAnswer = $manageQuiz.find('#QuizQuestionsAnswers')
+    var $countDown =  $manageQuiz.find('#CountDown');
+
+    var $tableQuiz = $manageQuiz.find('.table.quiz')
+    var $takeQuiz = $tableQuiz.find('.take-quiz')
+    var $viewQuizResult = $tableQuiz.find('.view-result')
+
+    var $quizDetailsModal = $modalContainer.find('#QuizDetailsModal')
+    var $quizStart = $quizDetailsModal.find('.start')
 
     var $confirmationModal = $modalContainer.find('#Confirmation')
     var $confirmationMessage = $confirmationModal.find('.content')
@@ -25,48 +28,44 @@ jQuery(document).ready(function($){
     var $attentionMessage = $attentionModal.find('.content')
     var $attentionOkButton = $attentionModal.find('.yes')
 
-    var $tableExams = $manageExams.find('.table.exam')
-    var $takeExam = $tableExams.find('.take-exam')
-    var $viewResult = $tableExams.find('.view-result')
-
-    var $submitExam = $manageExams.find('#SubmitExam')
+    var $submitQuiz = $manageQuiz.find('#SubmitQuiz')
 
     function startCountDown(minutes) {
       timer = new Timer();
       var $minutes = $countDown.find('.minutes');
 
-      timer.start({countdown: true, startValues: {minutes: minutes}});
+      timer.start({countdown: true, startValues: {seconds: 30}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
       });
       timer.addEventListener('targetAchieved', function (e) {
-        $attentionMessage.html(`Time is up, this exam will submit automatically`)
+        $attentionMessage.html(`Time is up, this quiz will submit automatically`)
         $modalContainer.addClass('active');
         $attentionModal.show();
-        $attentionOkButton.on('click', submitExam)
+        $attentionOkButton.on('click', submitQuiz)
       });
     }
 
     function closeModals(){
       $modalContainer.removeClass('active');
-      $examDetailsModal.hide();
+      $quizDetailsModal.hide();
       $confirmationModal.hide();
       $attentionModal.hide();
     }
 
     function showInstruction(){
-      examId = $(this).data('examId')
-      var $title = $examDetailsModal.find('.content > .title')
-      var $minutes = $examDetailsModal.find('.minutes')
-      var $items = $examDetailsModal.find('.items')
-      var $instruction = $examDetailsModal.find('.instruction')
+      quizId = $(this).data('quizId')
+      var $title = $quizDetailsModal.find('.content > .title')
+      var $minutes = $quizDetailsModal.find('.minutes')
+      var $items = $quizDetailsModal.find('.items')
+      var $instruction = $quizDetailsModal.find('.instruction')
 
       $.ajax({
         type: "GET",
-        url: '/resources/student/exam-details.php',
+        url: '/resources/student/quiz-details.php',
         data: $.param({
-          exam_id: examId
+          quiz_id: quizId
         }),
         success: function(res){
           var items = res.data.questions_id.split(',')
@@ -80,7 +79,7 @@ jQuery(document).ready(function($){
           )
 
           $modalContainer.addClass('active');
-          $examDetailsModal.show();
+          $quizDetailsModal.show();
         },
         error: function(err) {
           console.error("Something went wrong");
@@ -89,10 +88,10 @@ jQuery(document).ready(function($){
     }
 
     function generateQuestions(data){
-      var examMinutes = $countDown.data('examMinutes')
+      var quizMinutes = $countDown.data('quizMinutes')
 
       $(window).on("beforeunload", function() {
-        return "If you leave now you can't retake this exam"
+        return "If you leave now you can't retake this quiz"
       })
       
       data.map(function(data, i) {
@@ -123,10 +122,10 @@ jQuery(document).ready(function($){
           $choices.append($choicesItem)
           $questionItem.append($choices)
         })
-        $examQuestions.append($questionItem)
+        $quizQuestions.append($questionItem)
       })
-      $submitExam.show();
-      startCountDown(examMinutes);
+      $submitQuiz.show();
+      startCountDown(quizMinutes);
     }
 
     function generateAnswers(data, $container) {
@@ -177,36 +176,36 @@ jQuery(document).ready(function($){
     }
 
     function showAnswers(data){
-      $examQuestions.empty();
-      $submitExam.remove()
+      $quizQuestions.empty();
+      $submitQuiz.remove()
       timer.stop();
       $countDown.remove();
-      generateAnswers(data, $examQuestions)
+      generateAnswers(data, $quizQuestions)
     }
 
-    function startExam(){
-      window.location.replace(`/exams.php?exam_id=${examId}`)
+    function startQuiz(){
+      window.location.replace(`/quiz.php?quiz_id=${quizId}`)
     }
 
-    function viewExamResult() {
-      examId = $(this).data('examId')
-      window.location.replace(`/exams.php?exam_id=${examId}`)
+    function viewResult() {
+      quizId = $(this).data('quizId')
+      window.location.replace(`/quiz.php?quiz_id=${quizId}`)
     }
 
-    function submitExam() {
+    function submitQuiz() {
       $(window).off('beforeunload');
-      examId = $examQuestions.data('examId')
-      userId = $examQuestions.data('userId')
-      questionsId = $examQuestions.data('questionsId')
+      quizId = $quizQuestions.data('quizId')
+      userId = $quizQuestions.data('userId')
+      questionsId = $quizQuestions.data('questionsId')
 
       closeModals();
 
       $.ajax({
         type: 'POST',
-        url: '/resources/student/submit-exam.php',
+        url: '/resources/student/submit-quiz.php',
         data: {
           user_id: userId,
-          exam_id: examId,
+          quiz_id: quizId,
           questions_id: questionsId,
           answers: JSON.stringify(answers)
         },
@@ -220,27 +219,28 @@ jQuery(document).ready(function($){
       })
     }
 
-    function confirmSubmitExam(){
-      $confirmationMessage.html(`Are you sure you want to submit this exam?`)
+    function confirmSubmitQuiz(){
+      $confirmationMessage.html(`Are you sure you want to submit this quiz?`)
       if(answers.length == 0) {
-        $confirmationMessage.html(`Looks like you don't have any answers. Are you sure you want to submit this exam?`)
+        $confirmationMessage.html(`Looks like you don't have any answers. Are you sure you want to submit this quiz?`)
       }
       $modalContainer.addClass('active');
       $confirmationModal.show();
       $confirmYesButton.off('click')
-      $confirmYesButton.on('click', submitExam)
+      $confirmYesButton.on('click', submitQuiz)
     }
 
     function getQuestions(){
       $.ajax({
         type: "GET",
-        url: '/resources/student/exam-questions.php',
+        url: '/resources/student/quiz-questions.php',
         data: $.param({
-          exam_id: $examQuestions.data('examId'),
-          questions_id: $examQuestions.data('questionsId')
+          quiz_id: $quizQuestions.data('quizId'),
+          questions_id: $quizQuestions.data('questionsId')
         }),
         success: function(res){
           if(res.success) {
+            console.log(res.data)
             generateQuestions(res.data)
           }
         },
@@ -253,15 +253,15 @@ jQuery(document).ready(function($){
     function getAnswers(){
       $.ajax({
         type: "GET",
-        url: '/resources/student/exam-review.php',
+        url: '/resources/student/quiz-review.php',
         data: $.param({
-          exam_id: $examQuestionsAnswer.data('examId'),
-          questions_id: $examQuestionsAnswer.data('questionsId'),
-          user_id: $examQuestionsAnswer.data('userId')
+          quiz_id: $quizQuestionsAnswer.data('quizId'),
+          questions_id: $quizQuestionsAnswer.data('questionsId'),
+          user_id: $quizQuestionsAnswer.data('userId')
         }),
         success: function(res){
           if(res.success) {
-            generateAnswers(res.data, $examQuestionsAnswer)
+            generateAnswers(res.data, $quizQuestionsAnswer)
           }
         },
         error: function(err) {
@@ -270,31 +270,30 @@ jQuery(document).ready(function($){
       });
     }
 
-    function init(){
-      if($examQuestionsAnswer.length) {
+    function init() {
+      if($quizQuestionsAnswer.length) {
         getAnswers()
       }
-      if($examQuestions.length) {
+      if($quizQuestions.length) {
         getQuestions()
       }
 
       //Close all modals
       $modal.find('.close').on('click', closeModals)
 
-      //Modal Actions
-      $takeExam.on('click', showInstruction)
-      $viewResult.on('click', viewExamResult)
-      $examStart.on('click', startExam)
+      $takeQuiz.on('click', showInstruction)
+
+      $viewQuizResult.on('click', viewResult)
+      $quizStart.on('click', startQuiz)
 
       //Submit Exam
-      $submitExam.on('click', confirmSubmitExam)
+      $submitQuiz.on('click', confirmSubmitQuiz)
     }
 
     return {
       init: init
     }
   })()
-  
-  studentModule.init()
-})
 
+  studentQuizModule.init()
+})

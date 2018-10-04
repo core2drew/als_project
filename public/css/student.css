@@ -1,11 +1,14 @@
-#ExamDetailsModal > .content{
+#ExamDetailsModal > .content,
+#QuizDetailsModal > .content{
   max-width: 400px;
 }
 
-#ExamDetailsModal > .content > .title {
+#ExamDetailsModal > .content > .title,
+#QuizDetailsModal > .content > .title {
   margin-top: 0;
 }
 
-#ExamDetailsModal > .content > .instruction > .title {
+#ExamDetailsModal > .content > .instruction > .title,
+#QuizDetailsModal > .content > .instruction > .title {
   margin-bottom: 5px;
 }

@@ -1,6 +1,109 @@
+#ManageQuiz > .tabs {
+  margin-bottom: 20px;
+}
+
 #ManageQuiz > .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+#ManageQuiz > .table.quiz-questions > thead > tr > th:nth-child(3) {
+  width: 1%;
+}
+
+#ManageQuiz > .table.subjects > thead > tr > th:nth-child(2),
+#ManageQuiz > .table.subjects > tbody > tr > td:nth-child(2) {
+  width: 60px;
+  text-align: center;
+}
+
+#ManageQuiz > .table.quiz > thead > tr > th:nth-last-child(1),
+#ManageQuiz > .table.quiz > tbody > tr > td:nth-last-child(1) {
+  width: 265px;
+  text-align: center;
+}
+
+#ManageQuiz > .table.quiz.questions > thead > tr > th:nth-last-child(1),
+#ManageQuiz > .table.quiz.questions > tbody > tr > td:nth-last-child(1) {
+  width: 150px;
+  text-align: center;
+}
+
+#QuizQuestionModal {
+  max-width: 750px;
+  background-color: #fff;
+  display: none;
+  position: relative;
+}
+
+#QuizQuestionModal > .title {
+  margin-top: 0;
+}
+
+#QuizQuestionModal > .button {
+  margin-top: 10px;
+  margin-left: auto;
+  display: block;
+}
+
+#QuizQuestionModal > .content {
+  margin: 20px 0;
+  max-height: 308px;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+#QuizQuestionModal > .content > .table {
+  width: 100%;
+}
+#QuizQuestionModal > .content > .table > thead > tr > th:nth-child(1) {
+  width: 560px;
+}
+
+#QuizQuestionModal > .content > .table > thead > tr > th:nth-child(2) {
+  width: 50px;
+}
+
+#QuizQuestionModal > .content > .table > tbody > tr > td > .remove {
+  display: none;
+}
+
+#QuizViewQuestionModal > .content > .question {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgb(249, 249, 249);
+  max-width: 400px;
+  border: 0.5px solid #e6e6e6;
+}
+
+#QuizViewQuestionModal > .content > .choices {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+#QuizViewQuestionModal > .content > .choices > .choice {
+  padding: 5px 10px;
+}
+#QuizViewQuestionModal > .content > .choices > .choice.answer {
+  background-color: #d8ffd8
+}
+
+#QuizViewQuestionModal > .content > .explanation {
+  font-size: 0.75em;
+  padding: 10px;
+  background: #fff2e5;
+  font-style: italic;
+  max-width: 400px;
+}
+
+.modal-container > .modal.quiz > .content > .form > .input:nth-last-child(n + 2) {
+  margin-bottom: 10px;
+}
+
+.modal-container > .modal.quiz > .content > .form > .input.instruction > textarea{
+  height: 80px;
+  resize:none;
 }

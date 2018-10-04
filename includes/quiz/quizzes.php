@@ -4,23 +4,20 @@
   } else {
     $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
-    from quizzes as a inner join users_has_quiz as b on a.id = b.quiz_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
+    from quizzes as a inner join users_has_quiz as b on a.id = b.quiz_id where b.user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
   }
-
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
-
-  $go_back_link = $is_teacher ? "$_SERVER[PHP_SELF]" : null;
 ?>
 
-<?php if($is_teacher): ?>
+<?php if($user_type == 'teacher'): ?>
   <div class="title">
     <h2>Quizzes</h2>
-    <a class="button" href="<?php echo $go_back_link ?>">Back</a>
+    <a class="button" href="<?php echo $_SERVER['PHP_SELF'] ?>">Back</a>
   </div>
 <?php endif ?>
 
-<?php if($is_teacher): ?>
+<?php if($user_type == 'teacher'): ?>
   <div class="table-actions">
     <span id='CreateQuiz' class='button'>Create Quiz</span>
   </div>
@@ -34,14 +31,14 @@
   </div>
 <?php else: ?>
   <table class="table quiz">
-    <?php if($is_teacher): ?>
+    <?php if($user_type == 'teacher'): ?>
       <thead>
         <th>Title</th>
         <th>Question Count</th>
         <th>Minutes</th>
         <th class="options">Options</th>
       </thead>
-    <?php elseif($is_student): ?>
+    <?php elseif($user_type == 'student'): ?>
       <thead>
         <th>Subject</th>
         <th>Title</th>
@@ -59,7 +56,7 @@
           $subject = isset($row['subject']) ? $row['subject'] : null;
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
           $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
-          if($is_teacher){
+          if($user_type == 'teacher'){
             $questions = "<a class='button view-quiz' href=/teacher/questions.php?subject_id=$subject_id&quiz_id=$id>Questions</a>";
             $assign_quiz = "<span class='button assign' data-quiz-id=$id>Assign</span>";
             $update_quiz = "<span class='button update' data-quiz-id=$id>Update</span>";
@@ -71,7 +68,7 @@
               <td>$minutes</td>
               <td class='option'>$questions $assign_quiz $update_quiz $remove_quiz</td>
             </tr>";
-          } else if ($is_student) {
+          } else if ($user_type == 'student') {
             $view_result = "<span class='button view-result' data-quiz-id=$id>View Result</span>";
             $take_quiz = "<span class='button take-quiz' data-quiz-id=$id>Take Quiz</span>";
             $table_action = $is_taken ? $view_result : $take_quiz;

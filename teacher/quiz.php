@@ -5,11 +5,9 @@
   include '../includes/header.php';
   $grade_level = $_SESSION['grade_level'];
   $user_id = $_SESSION['user_id'];
+  $user_type = $_SESSION['type'];
   $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
   $quiz_id = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : null;
-  
-  $is_teacher = $_SESSION['type'] === 'teacher' ? true : false;
-  $is_student = $_SESSION['type'] === 'student' ? true : false;
 ?>
 
 <div id="Teacher" class="wrapper">
