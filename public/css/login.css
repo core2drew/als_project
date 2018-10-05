@@ -2,68 +2,124 @@
 
 /* Login */
 #LoginWrapper {
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  background-color: #f9f9af;
-  
+  padding-top: 73px;
 }
 
-#LoginWrapper > .header {
+#LoginWrapper > #Header {
   display: flex;
   justify-content: center;
   width: 100%;
+  padding: 5px 20px;
 }
 
-#LoginWrapper > .header > img {
-  width: 900px;
-  height: 100%;
+#LoginWrapper > #Header > .container > .als-logo > .img{
+  width: 80px;
 }
 
-#LoginWrapper > #LoginFormContainer {
-  width: 300px;
-  padding: 20px;
-  background-color:#83ad44;
-  color: #fff;
+#LoginWrapper > #Header > .container > #LoginForm {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
   position: relative;
-  top: -70px;
-  box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
 }
 
-#LoginWrapper > #LoginFormContainer > .logo {
-  display: block;
-  margin: auto;
-  margin-bottom: 15px;
-}
-
-#LoginWrapper > #LoginFormContainer > #LoginForm {
-  display: flex;
-  flex-direction: column;
-}
-
-#LoginWrapper > #LoginFormContainer > #LoginForm > .field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-#LoginWrapper > #LoginFormContainer > #LoginForm > .field > .label {
-  font-size:small;
-}
-
-#LoginWrapper > #LoginFormContainer > #LoginForm > .button {
-  margin-top: 10px;
-  background-color: #c0c92e;
-  color: #fff;
-}
-
-
-#LoginWrapper > #LoginFormContainer > #LoginForm > .error_message {
+#LoginWrapper > #Header > .container > #LoginForm > .error_message {
   font-size: 0.7em;
   margin: 0;
-  color: #ff5a5a;
+  color: #fff;
   text-align: right;
+  position: absolute;
+  top: 45px;
+}
+
+#LoginWrapper > #Header > .container > #LoginForm > .field:nth-child(n + 2) {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+#LoginWrapper > #Header > .container > #LoginForm > .button {
+  margin-left: 10px;
+  background-color: #bf1116;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+#LoginWrapper > #HeaderImage {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  margin: auto
+}
+
+#LoginWrapper > #HeaderImage > img {
+  width: 100%;
+}
+
+#LoginWrapper > .title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+#LoginWrapper > #Features,
+#LoginWrapper > #AboutUs,
+#LoginWrapper > #ContactUs {
+  width: 900px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+#LoginWrapper > #Features > .feature {
+  display: flex;
+  align-items: center;
+}
+
+#LoginWrapper > #AboutUs > .content  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#LoginWrapper > #Features > .feature > .icon {
+  width: 100px;
+  height: 100px;
+  margin-right: 25px;
+}
+#LoginWrapper > #Features > .feature > .details > .title {
+  margin-bottom: 0;
+}
+#LoginWrapper > #Features > .feature > .details > .description{
+  width: 250px;
+  margin-top: 5px;
+}
+
+#LoginWrapper > #AboutUs > .content > .description {
+  width: 330px;
+}
+
+#LoginWrapper > #ContactUs > .content {
+  display: flex;
+  align-content: center;
+}
+
+#LoginWrapper > #ContactUs > .content > .icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+#LoginWrapper > #ContactUs > .content > .details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#LoginWrapper > #ContactUs > .content > .details > .title,
+#LoginWrapper > #ContactUs > .content > .details > .description{
+  margin: 0;
 }

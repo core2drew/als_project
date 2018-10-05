@@ -58,3 +58,17 @@ a {
   width: 60%;
   margin: auto;
 }
+
+.container {
+  display: flex;
+  width: 900px;
+  margin: auto;
+}
+
+footer {
+  background-color: #bf1116;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: small;
+}
