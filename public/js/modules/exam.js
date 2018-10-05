@@ -3,6 +3,7 @@ jQuery(document).ready(function($){
     var includedQuestions = [];
     var examId = 0;
     var question_url = '/resources/exam/questions.php'
+    var validateCreateExam, validateUpdateExam;
 
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container");
@@ -92,25 +93,8 @@ jQuery(document).ready(function($){
       var url = '/resources/exam/add.php';
       var data = $createModalForm.serialize(); // Convert form data to URL params
 
-      //Validate form field
-      $createModalForm.validate({
-        errorClass: "error-field",
-        rules:{
-          title: {
-            required: true
-          },
-          instruction: {
-            required: true
-          },
-          minutes: {
-            required: true,
-            digits: true
-          }
-        }
-      })
-      
       //Is form valid
-      if($createModalForm.valid()) {
+      if(validateCreateExam.form()) {
         $.ajax({
           type: "POST",
           url: url,
@@ -131,25 +115,8 @@ jQuery(document).ready(function($){
       var data = $updateModalForm.serializeArray(); // Convert form data to URL params
       data.push({name: 'id', value: examId})
       
-      //Validate form field
-      $updateModalForm.validate({
-        errorClass: "error-field",
-        rules: {
-          title: {
-            required: true
-          },
-          instruction: {
-            required: true
-          },
-          minutes: {
-            required: true,
-            digits: true
-          }
-        }
-      })
-      
       //If form valid update exam
-      if($updateModalForm.valid()) {
+      if(validateUpdateExam.form()) {
         $.ajax({
           type: "POST",
           url: '/resources/exam/update.php',
@@ -270,9 +237,11 @@ jQuery(document).ready(function($){
     function showCreateModal(){
       $modalContainer.addClass('active')
       $createModal.show();
+      helperModule.clearInputFile($createModalForm)
     }
 
     function showUpdateModal() {
+      helperModule.clearInputFile($updateModalForm)
       var url = '/resources/exam/exam.php';
       var $title = $updateModal.find('input[name=title]');
       var $instruction = $updateModal.find('textarea[name=instruction]');
@@ -337,10 +306,42 @@ jQuery(document).ready(function($){
       $examQuestionModal.hide();
       $examViewQuestionModal.hide();
       includedQuestions = []; //reset included
+      validateCreateExam.resetForm()
+      validateUpdateExam.resetForm()
     }
 
     function init() {
+      validateCreateExam = $createModalForm.validate({ 
+        errorClass: "error-field",
+        rules: {
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          }
+        } 
+      })
 
+      validateUpdateExam = $updateModalForm.validate({ 
+        errorClass: "error-field",
+        rules: {
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          }
+        } 
+      })
       $createExamButton.on('click', showCreateModal)
       $addExamQuestionButton.on('click', showExamQuestionsModal)
       $yesDeleteButton.on('click', deleteExam)
