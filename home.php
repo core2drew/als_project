@@ -13,13 +13,33 @@
 ?>
 <div id="Dashboard" class="wrapper">
   <?php include 'includes/sidebar.php'; ?>
-  <div id="Home" class="page">
-    
+  <div id="ManageHome" class="page">
+
+    <div id="ActivityContainer">
+      <h3 class="title">ALS Activities</h3>
+      <div id="ActivitySlider">
+        <div class="item">
+          <img src="/public/images/sliders/1538289921.jpg" />
+          <p class="caption">Adventurer Cheesecake Brownie</p>
+        </div>
+        <div class="item">
+          <img src="/public/images/sliders/1538289921.jpg" />
+          <p class="caption">Adventurer Lemon</p>
+        </div>
+        <div class="item">
+          <img src="/public/images/sliders/1538289921.jpg" />
+          <p class="caption">Adventurer Donut</p>
+        </div>
+        <div class="item">
+          <img src="/public/images/sliders/1538289921.jpg" />
+          <p class="caption">Adventurer Caramel</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<?php include 'includes/student/modals.php' ?>
 <?php include 'includes/html/scripts.php'?>
-<script src="/public/js/easytimer.min.js"></script>
-<script src="/public/js/modules/student.js"></script>
+<script src="/public/slick/slick.min.js"></script>
+<script src="/public/js/modules/home.js"></script>
 <?php include 'includes/html/footer.php' ?>

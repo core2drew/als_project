@@ -33,3 +33,61 @@
   resize: none;
   height: 100px;
 }
+
+#ActivityContainer > .title {
+  background-color:#FE141A;
+  color: #fff;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+#ActivityContainer > #ActivitySlider {
+  display: flex;
+  align-items: center;
+}
+
+#ActivityContainer > #ActivitySlider > .slidenav {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  fill: #fff;
+}
+
+#ActivityContainer > #ActivitySlider > #prevSlide {
+  left: 10px;
+}
+
+#ActivityContainer > #ActivitySlider > #nextSlide {
+  right: 10px;
+}
+
+#ActivityContainer > #ActivitySlider > .slick-list{
+  height: 500px;
+}
+
+#ActivityContainer > #ActivitySlider > .slick-list > .slick-track {
+  width: 100% !important;
+}
+
+#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item {
+  height: 500px;
+  width: 100% !important;
+  position: relative;
+}
+
+#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item > img {
+  height: 100%;
+  width: 100%;
+}
+
+#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item > .caption {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(167, 167, 167, 0.5);
+  margin: 0;
+  width: 100%;
+  padding: 10px;
+}

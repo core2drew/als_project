@@ -5,19 +5,34 @@
 
   $json_data['success'] = false;
 
-  $id = mysqli_real_escape_string($conn, $_GET['id']);
+  $id = isset($id) ? mysqli_real_escape_string($conn, $_GET['id']) : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
- 
-  $query = "SELECT id, title, description, image_url
-  FROM activities WHERE id = $id AND deleted_at IS NULL";
-  
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-  $count = mysqli_num_rows($result);
+
+
+
+  if($id) {
+    //Get activity by id
+    $query = "SELECT id, title, description, image_url
+    FROM activities WHERE id = $id AND deleted_at IS NULL";
+    
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $json_data['data'] = $row;
+
+  } else {
+    //Get all activities
+    $query = "SELECT id, title, description, image_url
+    FROM activities WHERE deleted_at IS NULL";
+
+    $result = mysqli_query($conn, $query);
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $json_data['data'][] = $row;
+    }
+  }
+
 
   if($result) {
     $json_data['success'] = true;
-    $json_data['data'] = $row;
   } else {
     $json_data['message'] = 'Oops, something went wrong.';
   }
