@@ -96,10 +96,12 @@
 #LoginWrapper > #Features > .feature > .details > .description{
   width: 250px;
   margin-top: 5px;
+  text-align: justify;
 }
 
 #LoginWrapper > #AboutUs > .content > .description {
   width: 330px;
+  text-align: justify;
 }
 
 #LoginWrapper > #ContactUs > .content {
