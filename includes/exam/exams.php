@@ -10,7 +10,7 @@
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
-  $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=questions&grade_level=$grade_level" : null;
+  $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level" : null;
 
   if(!$is_coordinator) {
     $go_back_link = $_SERVER['PHP_SELF'];
