@@ -24,18 +24,18 @@ jQuery(document).ready(function($){
     var $viewQuestionButton = $quizQuestionTable.find('.view');
     
     //Create Quiz
-    var $createModal = $modalContainer.find('#CreateModal.quiz');
+    var $createModal = $modalContainer.find('#CreateModal');
     var $createModalForm = $createModal.find(".form");
     var $saveButton = $createModal.find('.create');
 
     //Update Quiz
-    var $updateModal = $modalContainer.find('#UpdateModal.quiz');
+    var $updateModal = $modalContainer.find('#UpdateModal');
     var $updateModalForm = $updateModal.find(".form");
     var $updateButton = $updateModal.find('.update');
     var $updateRecordButton = $quizTable.find('.update');
 
     //Delete Quiz
-    var $deleteModal = $modalContainer.find('#DeleteModal.quiz');
+    var $deleteModal = $modalContainer.find('#DeleteModal');
     var $yesDeleteButton = $deleteModal.find('.yes');
     var $deleteRecordButton = $quizTable.find('.delete');
 
@@ -212,26 +212,9 @@ jQuery(document).ready(function($){
     function saveRecord(e){
       var url = '/resources/quiz/add.php';
       var data = $createModalForm.serialize(); // Convert form data to URL params
-
-      //Validate form field
-      $createModalForm.validate({
-        errorClass: "error-field",
-        rules:{
-          title: {
-            required: true
-          },
-          instruction: {
-            required: true
-          },
-          minutes: {
-            required: true,
-            digits: true
-          }
-        }
-      })
       
       //Is form valid
-      if($createModalForm.valid()) {
+      if(validateCreateQuiz.form()) {
         $.ajax({
           type: "POST",
           url: url,
@@ -251,26 +234,9 @@ jQuery(document).ready(function($){
     function updateRecord(e) {
       var data = $updateModalForm.serializeArray(); // Convert form data to URL params
       data.push({name: 'id', value: quizId})
-      
-      //Validate form field
-      $updateModalForm.validate({
-        errorClass: "error-field",
-        rules: {
-          title: {
-            required: true
-          },
-          instruction: {
-            required: true
-          },
-          minutes: {
-            required: true,
-            digits: true
-          }
-        }
-      })
-      
+
       //If form valid update exam
-      if($updateModalForm.valid()) {
+      if(validateUpdateQuiz.form()) {
         $.ajax({
           type: "POST",
           url: '/resources/quiz/update.php',
@@ -307,9 +273,11 @@ jQuery(document).ready(function($){
     function showCreateModal(){
       $modalContainer.addClass('active')
       $createModal.show();
+      helperModule.clearInputFile($createModalForm)
     }
 
     function showUpdateModal() {
+      helperModule.clearInputFile($updateModalForm)
       var url = '/resources/quiz/quiz.php';
       var $title = $updateModal.find('input[name=title]');
       var $instruction = $updateModal.find('textarea[name=instruction]');
@@ -354,8 +322,37 @@ jQuery(document).ready(function($){
     }
 
     function init() {
-      validateCreateQuiz = $createModalForm.validate({ errorClass: "error-field" })
-      validateUpdateQuiz = $updateModalForm.validate({ errorClass: "error-field" })
+      validateCreateQuiz = $createModalForm.validate({ 
+        errorClass: "error-field",
+        rules: {
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          }
+        } 
+      })
+
+      validateUpdateQuiz = $updateModalForm.validate({ 
+        errorClass: "error-field",
+        rules: {
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          }
+        } 
+      })
 
       $createQuizButton.on('click', showCreateModal)
       $yesDeleteButton.on('click', deleteRecord)
