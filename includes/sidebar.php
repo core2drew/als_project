@@ -1,10 +1,12 @@
 <div id="Sidebar">
     
     <!-- Coordinator Sidebar Menu-->
+    
     <?php
         if( $_SESSION['type'] == 'coordinator'):
     ?>
         <?php if($_GET['page'] === 'home'): ?>
+            <a class="button <?php echo $_GET['sub_page'] == 'home' ? 'active' : null ?>" href="/home.php?page=home&sub_page=home">Home</a>
             <a class="button <?php echo $_GET['sub_page'] == 'activities' ? 'active' : null ?>" href="/coordinator/home.php?page=home&sub_page=activities">Activities</a>
             <a class="button <?php echo $_GET['sub_page'] == 'announcements' ? 'active' : null ?>" href="/coordinator/home.php?page=home&sub_page=announcements">Announcements</a>
         <?php elseif($_GET['page'] === 'accounts'): ?>
