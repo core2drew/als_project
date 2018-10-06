@@ -9,7 +9,7 @@
   </div>
   <?php if($_SESSION['type'] === 'coordinator'): ?>
     <div class="menu">
-      <a class="item <?php echo $_GET['page'] == 'home' ? 'active' : null ?>" href="/coordinator/home.php?page=home">Home</a>
+      <a class="item <?php echo $_GET['page'] == 'home' ? 'active' : null ?>" href="/home.php?page=home&sub_page=home">Home</a>
       <?php if($_SESSION['is_admin']): ?>
         <a class="item <?php echo $_GET['page'] == 'accounts' ? 'active' : null ?>" href="/coordinator/account.php?page=accounts&sub_page=coordinator&type=coordinator">Accounts</a>
       <?php else: ?>

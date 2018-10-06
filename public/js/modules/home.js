@@ -5,17 +5,23 @@ jQuery(document).ready(function($) {
 
     var $ActivityContainer = $manageHome.find('#ActivityContainer')
     var $ActivitySlider = $ActivityContainer.find('#ActivitySlider')
+    var $NoActivity = $manageHome.find('#NoActivity')
 
     function generateActivities(data, container) {
-      data.map(function(d) {
-        var $item = $("<div/>").addClass('item')
-        var $img = $('<div/>').css('backgroundImage', `url(${d.image_url})`).addClass('image')
-        var $caption = $('<p/>').addClass('caption')
-        $caption.html(d.description)
-        $item.append($img)
-        $item.append($caption)
-        $ActivitySlider.append($item)
-      })
+      if(data) {
+        data.map(function(d) {
+          var $item = $("<div/>").addClass('item')
+          var $img = $('<div/>').css('backgroundImage', `url(${d.image_url})`).addClass('image')
+          var $caption = $('<p/>').addClass('caption')
+          $caption.html(d.description)
+          $item.append($img)
+          $item.append($caption)
+          $ActivitySlider.append($item)
+        })
+      }else {
+        $NoActivity.show();
+        $ActivitySlider.hide();
+      }
     }
 
     function getActivities(){

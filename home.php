@@ -17,23 +17,9 @@
 
     <div id="ActivityContainer">
       <h3 class="title">ALS Activities</h3>
-      <div id="ActivitySlider">
-        <!-- <div class="item">
-          <img src="/public/images/sliders/1538289921.jpg" />
-          <p class="caption">Adventurer Cheesecake Brownie</p>
-        </div>
-        <div class="item">
-          <img src="/public/images/sliders/1538289921.jpg" />
-          <p class="caption">Adventurer Lemon</p>
-        </div>
-        <div class="item">
-          <img src="/public/images/sliders/1538289921.jpg" />
-          <p class="caption">Adventurer Donut</p>
-        </div>
-        <div class="item">
-          <img src="/public/images/sliders/1538289921.jpg" />
-          <p class="caption">Adventurer Caramel</p>
-        </div> -->
+      <div id="ActivitySlider"></div>
+      <div id="NoActivity">
+        <h3 class="message">No Activities</h3>
       </div>
     </div>
   </div>

@@ -41,7 +41,7 @@
   background-color:#FE141A;
   color: #fff;
   margin: 0;
-  padding: 10px 10px 0;
+  padding: 10px;
   text-align: center;
 }
 
@@ -49,7 +49,19 @@
   display: flex;
   align-items: center;
   background-color: #FE141A;
-  padding: 10px;
+  padding: 0 10px 10px;
+}
+
+#ActivityContainer> #NoActivity {
+  display: none;
+  text-align: center;
+  color: #fff;
+  background-color: #bb2323;
+  padding: 20px;
+}
+
+#ActivityContainer> #NoActivity > .message {
+  margin: 0
 }
 
 #ActivityContainer > #ActivitySlider > .slidenav {
