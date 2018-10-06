@@ -1,3 +1,6 @@
+#ManageHome {
+  height: 100%;
+}
 #ManageHome > .activities > tbody > tr > td > .activity{
   height: 115px;
   background-size: cover;
@@ -45,6 +48,8 @@
 #ActivityContainer > #ActivitySlider {
   display: flex;
   align-items: center;
+  background-color: #FE141A;
+  padding: 10px;
 }
 
 #ActivityContainer > #ActivitySlider > .slidenav {
@@ -53,7 +58,7 @@
   position: absolute;
   z-index: 1;
   cursor: pointer;
-  fill: #fff;
+  fill: #fe141a;
 }
 
 #ActivityContainer > #ActivitySlider > #prevSlide {
@@ -66,21 +71,24 @@
 
 #ActivityContainer > #ActivitySlider > .slick-list{
   height: 500px;
+  width: 100%;
 }
 
 #ActivityContainer > #ActivitySlider > .slick-list > .slick-track {
-  width: 100% !important;
+  height: 100%;
 }
 
 #ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item {
-  height: 500px;
-  width: 100% !important;
   position: relative;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item > img {
-  height: 100%;
+#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item  > .image{
+  position: absolute;
   width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 #ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item > .caption {

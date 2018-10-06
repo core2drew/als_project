@@ -7,10 +7,9 @@ jQuery(document).ready(function($) {
     var $ActivitySlider = $ActivityContainer.find('#ActivitySlider')
 
     function generateActivities(data, container) {
-      container.empty();
       data.map(function(d) {
         var $item = $("<div/>").addClass('item')
-        var $img = $('<img/>').attr('src', d.image_url)
+        var $img = $('<div/>').css('backgroundImage', `url(${d.image_url})`).addClass('image')
         var $caption = $('<p/>').addClass('caption')
         $caption.html(d.description)
         $item.append($img)
@@ -26,6 +25,7 @@ jQuery(document).ready(function($) {
         success: function(res) {
           //Generate activities
           generateActivities(res.data, $ActivitySlider)
+
           $('#ActivitySlider').slick({
             prevArrow:
             `<svg version="1.1" id="prevSlide" class="slidenav" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -54,6 +54,7 @@ jQuery(document).ready(function($) {
     
     function init(){
       getActivities();
+      
     }
     return {
       init: init
