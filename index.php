@@ -4,10 +4,10 @@
   if(isset($_SESSION['is_logged_in'])) {
     switch($_SESSION['type']) {
       case 'student':
-        header("Location: lessons.php");
+        header("Location: home.php");
         break;
       case 'teacher':
-        header("Location: teacher/students.php");
+        header("Location: home.php");
         break;
       case 'coordinator':
         if($_SESSION['is_admin']) {
