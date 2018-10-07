@@ -39,8 +39,9 @@
           $answer_correctly_count = $row['answer_correctly_count'];
           if($answered) {
             $percentage = ($answer_correctly_count / $answered) * 100;
+          } else {
+            $percentage = 0;
           }
-          $percentage = 0;
           $table_row =
           "<tr>
             <td>$question</td>
