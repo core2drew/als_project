@@ -14,12 +14,36 @@
 <div id="Dashboard" class="wrapper">
   <?php include 'includes/sidebar.php'; ?>
   <div id="ManageHome" class="page">
-
-    <div id="ActivityContainer">
-      <h3 class="title">ALS Activities</h3>
-      <div id="ActivitySlider"></div>
-      <div id="NoActivity">
-        <h3 class="message">No Activities</h3>
+    <div id="Home">
+      <div id="ActivityAnnouncement">
+        <div id="ActivityContainer" class="content">
+          <h3 class="title">Activities</h3>
+          <div id="ActivitySlider"></div>
+        </div>
+        <div id="AnnouncementContainer" class="content">
+          <h3 class="title">Announcement</h3>
+          <div id="Announcements"></div>
+        </div>
+      </div>
+      <div id="MissionVision">
+        <div class="content">
+          <h3 class="title">Vision</h3>
+          <p class="description">
+            In partnership with other producers of learning, 
+            the Bureau of Alternative Learning System will 
+            develop exemplary programs and open creative 
+            learning opportunities to achieve multiple 
+            literacy for all.
+          </p>
+        </div>
+        <div class="content">
+          <h3 class="title">Mission</h3>
+          <p class="description">
+            The Bureau of Alternative Learning System envisions 
+            itself to be the leading producers of Filipino lifelong 
+            learners.
+          </p>
+        </div>
       </div>
     </div>
   </div>

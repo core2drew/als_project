@@ -3,11 +3,10 @@ jQuery(document).ready(function($) {
 
     var $manageHome = $('#ManageHome')
 
-    var $ActivityContainer = $manageHome.find('#ActivityContainer')
-    var $ActivitySlider = $ActivityContainer.find('#ActivitySlider')
-    var $NoActivity = $manageHome.find('#NoActivity')
+    var $ActivitySlider = $manageHome.find('#ActivitySlider')
+    var $Announcements = $manageHome.find('#Announcements')
 
-    function generateActivities(data, container) {
+    function generateActivities(data, $container) {
       if(data) {
         data.map(function(d) {
           var $item = $("<div/>").addClass('item')
@@ -19,11 +18,38 @@ jQuery(document).ready(function($) {
           $ActivitySlider.append($item)
         })
         sliderInit()
-      }else {
+      } else {
         var $noActivity = $('<div/>').attr('id', 'NoActivity')
         var $message = $('<h3/>').addClass('message').html('No Activities')
         $noActivity.append($message)
-        $ActivitySlider.append($noActivity);
+        $container.append($noActivity);
+      }
+    }
+
+    function generateAnnouncements(data, $container){
+      if(data) {
+        data.map(function(d) {
+          var $item = $("<div/>").addClass('item')
+          var $announcer = $("<span/>").addClass('announcer')
+          var $profileImage = $('<img/>').attr('src', d.profile_image_url).addClass('image')
+          var $name = $('<span/>').addClass('name').append(d.announcer)
+
+          $announcer.append($profileImage).append($name)
+
+          var $announcement = $("<div/>").addClass('announcement')
+          var $postDate = $('<p/>').addClass('post-date').append(d.created_at)
+          var $message = $('<p/>').addClass('message').append(d.announcement)
+
+          $announcement.append($postDate).append($message)
+
+          $item.append($announcer).append($announcement)
+          $container.append($item)
+        })
+      } else {
+        var $noAnnouncements = $('<div/>').attr('id', 'NoAnnouncements')
+        var $message = $('<h3/>').addClass('message').html('No Announcements')
+        $noAnnouncements.append($message)
+        $container.append($noAnnouncements);
       }
     }
 
@@ -62,9 +88,24 @@ jQuery(document).ready(function($) {
         }
       })
     }
+
+    function getAnnouncements(){
+      $.ajax({
+        type: 'GET',
+        url: '/resources/announcement/announcement.php',
+        success: function(res) {
+          //Generate activities
+          generateAnnouncements(res.data, $Announcements)
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      })
+    }
     
     function init(){
       getActivities();
+      getAnnouncements();
     }
     return {
       init: init

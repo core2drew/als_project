@@ -37,7 +37,15 @@
   height: 100px;
 }
 
-#ActivityContainer > .title {
+#Home {
+  display: flex;
+}
+
+#ActivityAnnouncement {
+  flex: 1;
+}
+
+#ActivityAnnouncement > .content > .title {
   background-color:#FE141A;
   color: #fff;
   margin: 0;
@@ -45,26 +53,30 @@
   text-align: center;
 }
 
-#ActivityContainer > #ActivitySlider {
+#ActivityAnnouncement > .content > #ActivitySlider {
   display: flex;
   align-items: center;
   background-color: #FE141A;
   padding: 0 10px 10px;
 }
 
-#ActivityContainer> #NoActivity {
-  display: none;
+
+#ActivityAnnouncement > .content > #ActivitySlider > #NoActivity,
+#ActivityAnnouncement > .content > #Announcements > #NoAnnouncements {
+  width: 100%;
   text-align: center;
   color: #fff;
   background-color: #bb2323;
   padding: 20px;
+  box-sizing: border-box;
 }
 
-#ActivityContainer> #NoActivity > .message {
+#ActivityAnnouncement > .content > #ActivitySlider > #NoActivity > .message,
+#ActivityAnnouncement > .content > #Announcements > #NoAnnouncements > .message {
   margin: 0
 }
 
-#ActivityContainer > #ActivitySlider > .slidenav {
+#ActivityAnnouncement > .content > #ActivitySlider > .slidenav {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -73,28 +85,28 @@
   fill: #fe141a;
 }
 
-#ActivityContainer > #ActivitySlider > #prevSlide {
+#ActivityAnnouncement > .content > #ActivitySlider > #prevSlide {
   left: 10px;
 }
 
-#ActivityContainer > #ActivitySlider > #nextSlide {
+#ActivityAnnouncement > .content > #ActivitySlider > #nextSlide {
   right: 10px;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list{
+#ActivityAnnouncement > .content > #ActivitySlider > .slick-list{
   height: 500px;
   width: 100%;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list > .slick-track {
+#ActivityAnnouncement > .content > #ActivitySlider > .slick-list > .slick-track {
   height: 100%;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item {
+#ActivityAnnouncement > .content > #ActivitySlider > .slick-list > .slick-track > .item {
   position: relative;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item  > .image{
+#ActivityAnnouncement > .content > #ActivitySlider > .slick-list > .slick-track > .item  > .image{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -103,11 +115,88 @@
   background-repeat: no-repeat;
 }
 
-#ActivityContainer > #ActivitySlider > .slick-list > .slick-track > .item > .caption {
+#ActivityAnnouncement > .content > #ActivitySlider > .slick-list > .slick-track > .item > .caption {
   position: absolute;
   bottom: 0;
   background-color: rgba(167, 167, 167, 0.5);
   margin: 0;
   width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#ActivityAnnouncement > #ActivityContainer {
+  margin-bottom: 10px;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer {
+  background-color: #fe141a;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements {
+  padding: 0 10px 10px;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 10px;
+  color: #000;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item:nth-last-child(n + 2) {
+  margin-bottom: 10px;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcer {
+  margin-right: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcer > .image {
+  width: 85px;
+  background-color: #fff;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  border: 1px solid #cecece;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcer > .name {
+  font-size: small;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcement > .post-date {
+  margin: 0;
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+#ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcement > .message {
+  text-align: justify;
+  margin: 0;
+  font-size: small;
+}
+
+#MissionVision {
+  flex: 0.5;
+  padding: 0 20px;
+}
+
+#MissionVision > .content > .title{
+ text-align: center;
+ margin: 0;
+ background:#3c9eff;
+ padding: 10px;
+ color: #fff;
+
+}
+
+#MissionVision > .content > .description {
+  text-align: justify;
+  margin-top: 0;
+  border: 3px solid #3c9eff;
   padding: 10px;
 }

@@ -1,3 +1,6 @@
+#Coordinator {
+  height: 100%;
+}
 
 #Coordinator > .page > .content > .title {
   text-transform: capitalize;
