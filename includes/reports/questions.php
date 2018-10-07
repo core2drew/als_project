@@ -37,7 +37,10 @@
           $question = $row['question'];
           $answered = $row['answered'];
           $answer_correctly_count = $row['answer_correctly_count'];
-          $percentage = ($answer_correctly_count / $answered) * 100;
+          if($answered) {
+            $percentage = ($answer_correctly_count / $answered) * 100;
+          }
+          $percentage = 0;
           $table_row =
           "<tr>
             <td>$question</td>
