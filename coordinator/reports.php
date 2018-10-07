@@ -23,6 +23,7 @@
 </div>
 
 <?php include '../includes/exam/modals.php' ?>
+<?php include '../includes/profile/modals.php';?>
 <?php include '../includes/html/scripts.php'?>
 <script src="/public/js/modules/exam.js"></script>
 <?php include '../includes/html/footer.php' ?>

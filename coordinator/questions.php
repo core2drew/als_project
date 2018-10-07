@@ -23,6 +23,7 @@
 </div>
 
 <?php include '../includes/question/modals.php'; ?>
+<?php include '../includes/profile/modals.php';?>
 <?php include '../includes/html/scripts.php';?>
 <script src="/public/js/modules/question.js"></script>
 <?php include '../includes/html/footer.php'; ?>

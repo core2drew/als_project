@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
         currentProfileImage;
 
     var $manageAccounts = $('#ManageAccounts')
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.account");
     var $loading = $modalContainer.find('.loading');
     
     //All Modals
@@ -30,7 +30,7 @@ jQuery(document).ready(function($){
     var $saveButton = $createModal.find('.create');
 
     //Update
-    var $updateModal = $modalContainer.find('#UpdateModal');
+    var $updateModal = $modalContainer.find('#UpdateModal.account');
     var $updateForm = $updateModal.find(".form");
     var $updateButton = $updateModal.find('.update');
 

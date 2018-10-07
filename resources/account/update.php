@@ -1,7 +1,12 @@
 <?php 
+
   require '../../config/db_connect.php';
   include "../../resources/_global.php";
   header('Content-Type: application/json');
+
+  @ob_start();
+  session_id($_POST['session_id']);
+  session_start();
 
   $json_data['success'] = false;
 
@@ -41,6 +46,7 @@
       } else {
         $profile_image_url = $_POST['profile_image_url'];
       }
+      $_SESSION['fullname'] = $_POST['lastname'] .', '. $_POST['firstname'];
 
       $id = mysqli_real_escape_string($conn, $_POST['id']);
       $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
@@ -63,5 +69,6 @@
       }
     }
   }
-
+  session_commit();
+  @ob_get_clean();
   echo json_encode($json_data);

@@ -1,3 +1,7 @@
+#Teacher {
+  height: 100%;
+}
+
 #AssignExamModal > .content > .table > thead > tr > th:nth-last-child(1),
 #AssignQuizModal > .content > .table > thead > tr > th:nth-last-child(1){
   text-align: center;

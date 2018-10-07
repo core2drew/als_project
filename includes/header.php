@@ -33,8 +33,8 @@
         </svg>
       </p>
       <div class="menu">
-        <a class="item" href="/profile.php?page=profile&id=<?php echo $id ?>">Profile</a>
-        <a class="item" href="#">About</a>
+        <a class="item" id="UpdateProfileInfo" data-user-id="<?php echo $id ?>" data-session-id="<?php echo session_id() ?>">Profile</a>
+        <!-- <a class="item" href="#">About</a> -->
         <a class="item" href="/logout.php">Logout</a>
       </div>
     </div>

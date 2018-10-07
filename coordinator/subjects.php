@@ -16,6 +16,7 @@
 </div>
 
 <?php include '../includes/subjects/modals.php'; ?>
+<?php include '../includes/profile/modals.php';?>
 <?php include '../includes/html/scripts.php';?>
 <script src="/public/js/modules/subject.js"></script>
 <?php include '../includes/html/footer.php'; ?>

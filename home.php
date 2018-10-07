@@ -50,6 +50,7 @@
 </div>
 
 <?php include 'includes/html/scripts.php'?>
+<?php include 'includes/profile/modals.php';?>
 <script src="/public/slick/slick.min.js"></script>
 <script src="/public/js/modules/home.js"></script>
 <?php include 'includes/html/footer.php' ?>
