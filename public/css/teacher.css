@@ -1,5 +1,5 @@
 #Teacher {
-  height: 100%;
+  min-height: 100%;
 }
 
 #AssignExamModal > .content > .table > thead > tr > th:nth-last-child(1),

@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
       timer = new Timer();
       var $minutes = $countDown.find('.minutes');
 
-      timer.start({countdown: true, startValues: {seconds: 30}});
+      timer.start({countdown: true, startValues: {seconds: minutes}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
