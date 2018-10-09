@@ -1,5 +1,5 @@
 #ManageHome {
-  height: 100%;
+  min-height: 100%;
 }
 #ManageHome > .activities > tbody > tr > td > .activity{
   height: 115px;

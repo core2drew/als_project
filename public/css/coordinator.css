@@ -1,5 +1,5 @@
 #Coordinator {
-  height: 100%;
+  min-height: 100%;
 }
 
 #Coordinator > .page > .content > .title {
