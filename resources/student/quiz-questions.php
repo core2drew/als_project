@@ -20,8 +20,8 @@
   $questions_id = implode("','", $questions_id);
 
   //Get current questions of exam
-  $question_query = "SELECT DISTINCT quest.id, quest.question, quiz.minutes FROM quizzes quiz 
-  LEFT JOIN questions quest ON quiz.subject_id = quest.subject_id WHERE quest.id IN ('". $questions_id ."') AND quest.deleted_at IS NULL";
+  $question_query = "SELECT DISTINCT quest.id, quest.question, quest.question_type, quiz.minutes,  FROM quizzes quiz 
+  RIGHT JOIN questions quest ON quiz.subject_id = quest.subject_id WHERE quest.id IN ('". $questions_id ."') AND quest.deleted_at IS NULL";
   //Results of query
   $question_result = mysqli_query($conn, $question_query);
 
@@ -33,6 +33,7 @@
       $data['id'] = $question_row['id'];
       $data['question'] = $question_row['question'];
       $data['answers'] = [];
+      $data['question_type'] = $question_row['question_type'];
 
       $answer_query = "SELECT id, answer, is_answer FROM answers WHERE question_id = $question_row[id]";
       $answer_result = mysqli_query($conn, $answer_query);

@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
       timer = new Timer();
       var $minutes = $countDown.find('.minutes');
 
-      timer.start({countdown: true, startValues: {seconds: minutes}});
+      timer.start({countdown: true, startValues: {minutes: minutes}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
@@ -107,22 +107,25 @@ jQuery(document).ready(function(){
 
         $questionItem.append($question)
 
-        data.answers.map(function(ans){
-          var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
-          var $choicesItem = $('<div/>').addClass('choice')
+        if(data.question_type == 'multiple' || data.question_type == 'true-false') {
+          data.answers.map(function(ans){
+            var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
+            var $choicesItem = $('<div/>').addClass('choice')
 
-          $radioButton.on('click', function(e) {
-            answers[i] = {
-              'question_id': data.id,
-              'answer_id': ans.id
-            }
+            $radioButton.on('click', function(e) {
+              answers[i] = {
+                'question_id': data.id,
+                'answer_id': ans.id
+              }
+            })
+            $choicesItem.append($radioButton).append(ans.answer)
+            $choices.append($choicesItem)
+            $questionItem.append($choices)
           })
-
-          $choicesItem.append($radioButton).append(ans.answer)
-          $choices.append($choicesItem)
-          $questionItem.append($choices)
-        })
-        $quizQuestions.append($questionItem)
+          $quizQuestions.append($questionItem)
+        } else if (data.question_type == 'fill-in') {
+          
+        }
       })
       $submitQuiz.show();
       startCountDown(quizMinutes);
@@ -240,7 +243,6 @@ jQuery(document).ready(function(){
         }),
         success: function(res){
           if(res.success) {
-            console.log(res.data)
             generateQuestions(res.data)
           }
         },
