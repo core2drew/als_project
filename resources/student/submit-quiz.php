@@ -32,9 +32,8 @@
         }
 
         $data['answers'] = [];
-        $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN quiz_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
+        $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, qr.user_id, qr.fill_in_answer FROM answers as ans LEFT JOIN quiz_records as qr  ON qr.answer_id = ans.id AND qr.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
         $answer_result = mysqli_query($conn, $answer_query);
-
         while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
           $answer_data = [
             'id' => $answer_row['id'],
@@ -44,6 +43,7 @@
           ];
           array_push($data['answers'], $answer_data);
         }
+        
         array_push($json_data['data'], $data);
       }
       return $json_data;
@@ -63,7 +63,8 @@
       if(isset($answer)) {
         $question_id = $answer->question_id;
         $answer_id = $answer->answer_id;
-        $query = "INSERT INTO quiz_records (user_id, quiz_id, question_id, answer_id) VALUES ('$user_id', '$quiz_id', '$question_id', '$answer_id')";
+        $fill_in_answer = isset($answer->fill_in_answer) ? $answer->fill_in_answer : NULL;
+        $query = "INSERT INTO quiz_records (user_id, quiz_id, question_id, answer_id, fill_in_answer) VALUES ('$user_id', '$quiz_id', '$question_id', '$answer_id', '$fill_in_answer')";
         $result = mysqli_query($conn, $query);
       }
     }

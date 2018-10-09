@@ -98,7 +98,6 @@ jQuery(document).ready(function(){
         var $question = $('<div/>').addClass('question')
         var $questionItem = $('<div/>').addClass('question-item')
         var $number = $('<span/>').addClass('numbering')
-        var $choices = $('<div/>').addClass('choices')
 
         var numbering = `${i + 1}).`;
         $number.html(numbering)
@@ -107,28 +106,42 @@ jQuery(document).ready(function(){
 
         $questionItem.append($question)
 
-        if(data.question_type == 'multiple' || data.question_type == 'true-false') {
-          data.answers.map(function(ans){
+        var $choices = $('<div/>').addClass('choices')
+        data.answers.map(function(ans){
+          if(data.question_type == 'multiple' || data.question_type == 'true-false') {
             var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
             var $choicesItem = $('<div/>').addClass('choice')
 
             $radioButton.on('click', function(e) {
               answers[i] = {
                 'question_id': data.id,
+                'question_type': data.question_type,
                 'answer_id': ans.id
               }
             })
+
             $choicesItem.append($radioButton).append(ans.answer)
             $choices.append($choicesItem)
             $questionItem.append($choices)
-          })
-          $quizQuestions.append($questionItem)
-        } else if (data.question_type == 'fill-in') {
-          
-        }
+          }
+          else if (data.question_type == 'fill-in') {
+            $fillIn = $('<input/>').addClass('fill-input');
+            $fillIn.on('change', function(e) {
+              answers[i] = {
+                'question_id': data.id,
+                'question_type': data.question_type,
+                'answer_id': ans.id,
+                'fill_in_answer': e.target.value
+              }
+            })
+  
+            $questionItem.append($fillIn)
+          }
+        })
+        $quizQuestions.append($questionItem)
       })
-      $submitQuiz.show();
       startCountDown(quizMinutes);
+      $submitQuiz.show();
     }
 
     function generateAnswers(data, $container) {
@@ -213,7 +226,6 @@ jQuery(document).ready(function(){
           answers: JSON.stringify(answers)
         },
         success: function(res) {
-          console.log(res)
           showAnswers(res.data)
         },
         error: function(err) {
