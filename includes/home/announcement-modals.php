@@ -1,5 +1,5 @@
 
-<div class="modal-container">
+<div class="modal-container announcement">
   <div id="DeleteModal" class="modal announcement">
     <div class="title">Confirmation</div>
     <div class="content">Are you sure you want to delete this announcement?</div>

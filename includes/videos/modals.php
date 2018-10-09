@@ -1,4 +1,4 @@
-<div class="modal-container">
+<div class="modal-container educational">
   <div class="loading">
     <div class="lds-ripple">
       <div class="ripple"></div>

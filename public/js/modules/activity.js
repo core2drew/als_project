@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
     var validateCreate, validateUpdate, activityId, currentSliderImage;
 
     var $manageAccounts = $('#ManageHome')
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.activity");
 
     var $tableActions = $manageAccounts.find('.table-actions')
     var $activityTable = $manageAccounts.find('.table.activities');

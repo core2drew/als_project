@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
     var validateCreateExam, validateUpdateExam;
 
     var $manageExams = $("#ManageExams");
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.exams");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
