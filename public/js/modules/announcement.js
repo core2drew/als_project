@@ -48,7 +48,7 @@ jQuery(document).ready(function($){
           'id': announcementId
         }),
         success: function(res){
-          
+          console.log(res);
           if(res.success) {
             $title.val(res.data.title)
             $announcement.val(res.data.announcement)
