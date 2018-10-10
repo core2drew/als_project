@@ -112,7 +112,7 @@
           <input type="text" name="generate_count" placeholder="How many questions to generate?"/>
           <span class="count">
             <label>Maximum Question Count:</label>
-            <?php echo $questions_count ?>
+            <?php echo $available_question_count ?>
           </span>
         </div>
       </form>

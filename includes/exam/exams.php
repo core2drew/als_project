@@ -1,6 +1,6 @@
 <?php
   if($_SESSION['type'] !== 'student') {
-    $query = "SELECT id, title, questions_id, minutes FROM exams WHERE subject_id = $subject_id AND questions_id IS NOT NULL AND deleted_at IS NULL";
+    $query = "SELECT id, title, questions_id, minutes, (SELECT COUNT(*) FROM questions WHERE subject_id = $subject_id AND deleted_at IS NULL) as available_question_count FROM exams WHERE subject_id = $subject_id AND questions_id IS NOT NULL AND deleted_at IS NULL";
   } else {
     $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
@@ -9,7 +9,7 @@
 
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
-
+  $available_question_count = 0;
   $go_back_link = $is_coordinator || $is_teacher ? "$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level" : null;
 
   if(!$is_coordinator) {
@@ -63,6 +63,7 @@
           $minutes = $row['minutes'];
           $subject = isset($row['subject']) ? $row['subject'] : null;
           $questions_count = empty($row['questions_id']) ? 0 : count(explode(',', $row['questions_id']));
+          $available_question_count = !empty($row['available_question_count']) ? $row['available_question_count'] : 0;
           $is_taken = isset($row['is_taken']) ? $row['is_taken'] : null;
           if($is_coordinator) {
             $questions = "<a class='button' href=$_SERVER[PHP_SELF]?page=examandquestions&sub_page=exams&grade_level=$grade_level&subject_id=$subject_id&exam_id=$id>Questions</a>";
