@@ -13,7 +13,8 @@
 }
 
 #LoginWrapper > #Header > .container > .als-logo > .img{
-  width: 80px;
+  width: 60px;
+  height: 60px;
 }
 
 #LoginWrapper > #Header > .container > #LoginForm {

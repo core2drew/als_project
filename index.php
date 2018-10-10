@@ -25,7 +25,7 @@
     <div id="Header">
       <div class="container">
         <div class="als-logo">
-          <img class="img" src="/public/images/als-logo.png"/>
+          <img class="img" src="/public/images/als-logo-2.png"/>
         </div>
         <form id="LoginForm" method="POST" autocomplete="off">
           <div class="field">
