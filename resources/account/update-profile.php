@@ -5,6 +5,8 @@
   header('Content-Type: application/json');
 
   @ob_start();
+  session_id($_POST['session_id']);
+  session_start();
 
   $json_data['success'] = false;
 
@@ -67,5 +69,6 @@
       }
     }
   }
-
+  session_commit();
+  @ob_get_clean();
   echo json_encode($json_data);
