@@ -165,21 +165,43 @@ jQuery(document).ready(function(){
         $questionItem.append($question)
 
         data.answers.map(function(ans){
-          var $choicesItem = $('<div/>').addClass('choice')
-          
           if(ans.user_answer) {
-            $choicesItem.addClass('user-answer')
             //Remove no answer if user has an answer
             $noAnswer.remove()
           }
 
-          if(ans.is_answer) {
-            $choicesItem.addClass('correct-answer')
-          }
+          if(data.question_type == 'multiple' || data.question_type == 'true-false') {
+            var $choicesItem = $('<div/>').addClass('choice')
+            if(ans.user_answer) {
+              $choicesItem.addClass('user-answer')
+            }
 
-          $choicesItem.append(ans.answer)
-          $choices.append($choicesItem)
-          $questionItem.append($choices)
+            if(ans.is_answer) {
+              $choicesItem.addClass('correct-answer')
+            }
+
+            $choicesItem.append(ans.answer)
+            $choices.append($choicesItem)
+
+            $questionItem.append($choices)
+            
+          } else if(data.question_type == 'fill-in') {
+            var $fillInAnswer = $('<div/>').addClass('fill-in-answer')
+            var $fillInUserAnswer = $('<div/>').addClass('fill-in-user-answer')
+
+            //Check if user answer is correct
+            if(ans.answer != ans.fill_in_answer) {
+              $fillInAnswer.append(ans.answer)
+              $questionItem.append($fillInAnswer)
+            }else {
+              $fillInUserAnswer.addClass('correct-answer')
+            }
+
+            if(ans.user_answer) {
+              $fillInUserAnswer.append(ans.fill_in_answer)
+              $questionItem.append($fillInUserAnswer)
+            }
+          }
         })
         if(data.explanation) {
           $explanation.html(`<label class='label'>Explanation:</label>`)

@@ -26,7 +26,11 @@
 }
 
 #QuizQuestions > .question-item > .choices > .choice,
-#QuizQuestionsAnswers > .question-item > .choices > .choice {
+#QuizQuestions > .question-item > .fill-in-answer,
+#QuizQuestions > .question-item > .fill-in-user-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice,
+#QuizQuestionsAnswers > .question-item > .fill-in-answer,
+#QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
   display: flex;
   align-items: center;
   padding: 15px 37px;
@@ -38,17 +42,23 @@
 }
 
 #QuizQuestions > .question-item > .choices > .choice.is-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer {
+#QuizQuestions > .question-item > .fill-in-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer,
+#QuizQuestionsAnswers > .question-item > .fill-in-answer {
   background: #c2ffc2;
 }
 
 #QuizQuestions > .question-item > .choices > .choice.user-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.user-answer {
+#QuizQuestions > .question-item > .fill-in-user-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.user-answer,
+#QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
   background: #ffcecf;
 }
 
 #QuizQuestions > .question-item > .choices > .choice.correct-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.correct-answer {
+#QuizQuestions > .question-item > .fill-in-user-answer.correct-answer,
+#QuizQuestionsAnswers > .question-item > .choices > .choice.correct-answer,
+#QuizQuestionsAnswers > .question-item > .fill-in-user-answer.correct-answer {
   background: #c2ffc2 !important;
 }
 

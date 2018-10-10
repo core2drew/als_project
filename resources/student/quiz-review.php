@@ -12,7 +12,7 @@
   $questions_id = implode("','", $questions_id);
 
   //Get current questions of exam
-  $question_query = "SELECT DISTINCT quest.id, quest.question, quest.explanation FROM quizzes quiz 
+  $question_query = "SELECT DISTINCT quest.id, quest.question, quest.explanation, quest.question_type FROM quizzes quiz 
   LEFT JOIN questions quest ON quiz.subject_id = quest.subject_id
   WHERE quest.id IN ('". $questions_id ."') AND quest.question_type IS NOT NULL AND quest.deleted_at IS NULL";
 
@@ -27,6 +27,7 @@
       $data = [];
       $data['id'] = $question_row['id'];
       $data['question'] = $question_row['question'];
+      $data['question_type'] = $question_row['question_type'];
       
       if(isset($question_row['explanation']) && !empty($question_row['explanation'])) {
         $data['explanation'] = $question_row['explanation'];
@@ -40,7 +41,7 @@
           'answer' => $answer_row['answer'],
           'user_answer' => isset($answer_row['user_id']) ? true : false,
           'is_answer' => (int)$answer_row['is_answer'] === 1 ? true : false,
-          'fill_in_answer'=> $answer_row['fill_in_answer']
+          'fill_in_answer'=> isset($answer_row['fill_in_answer']) ? $answer_row['fill_in_answer'] : null
         ];
         array_push($data['answers'], $answer_data);
       }
