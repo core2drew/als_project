@@ -5,7 +5,7 @@
 
 <div id="Header">
   <div class="als-logo">
-    <img class="img" src="/public/images/als-logo.png"/>
+    <img class="img" src="/public/images/als-logo-2.png"/>
   </div>
   <?php if($_SESSION['type'] === 'coordinator'): ?>
     <div class="menu">
