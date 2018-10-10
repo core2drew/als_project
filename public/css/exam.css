@@ -99,6 +99,16 @@
   max-width: 400px;
 }
 
+#GenerateModal > .content > .form > .question-count > input {
+  margin-bottom: 5px;
+}
+
+#GenerateModal > .content > .form > .question-count > .count {
+  font-size: x-small;
+  text-align: right;
+  font-style: italic;
+}
+
 .modal-container > .modal.exams > .content > .form > .input:nth-last-child(n + 2) {
   margin-bottom: 10px;
 }

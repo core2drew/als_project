@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
     var includedQuestions = [];
     var examId = 0;
     var question_url = '/resources/exam/questions.php'
-    var validateCreateExam, validateUpdateExam;
+    var validateCreateExam, validateUpdateExam, validateGenerateExam;
 
     var $manageExams = $("#ManageExams");
     var $modalContainer = $(".modal-container.exams");
@@ -18,6 +18,8 @@ jQuery(document).ready(function($){
     //Exam Table Actions
     var $createExamButton = $tableActions.find('#CreateExam');
     var $addExamQuestionButton = $tableActions.find("#AddExamQuestion");
+    var $generateExamButton = $tableActions.find('#GenerateExam');
+
     //Exam Question Table Actions
     var $removeExamQuestionButton = $examQuestionTable.find('.delete');
     var $viewExamQuestionButton = $examQuestionTable.find('.view');
@@ -42,6 +44,11 @@ jQuery(document).ready(function($){
     var $examQuestionModal = $modalContainer.find("#ExamQuestionModal");
     var $examQuestionModalTable = $examQuestionModal.find('.table');
     var $saveExamQuestionsButton = $examQuestionModal.find('.save');
+    
+    //Generate Exam Question Modal
+    var $generateModal = $modalContainer.find('#GenerateModal')
+    var $generateModalForm = $generateModal.find(".form");
+    var $generateButton = $generateModal.find('.create');
 
     //View Exam Question modal
     var $examViewQuestionModal = $modalContainer.find('#ExamViewQuestionModal');
@@ -89,7 +96,7 @@ jQuery(document).ready(function($){
       return container.append(tableBody);
     }
 
-    function saveExam(e){
+    function saveExam(){
       var url = '/resources/exam/add.php';
       var data = $createModalForm.serialize(); // Convert form data to URL params
 
@@ -111,7 +118,29 @@ jQuery(document).ready(function($){
       }
     }
 
-    function updateExam(e) {
+    function generateExam() {
+      var url = '/resources/exam/generate.php';
+      var data = $generateModalForm.serialize(); // Convert form data to URL params
+
+       //Is form valid
+       if(validateGenerateExam.form()) {
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(res){
+            if(res.success) {
+              location.reload();
+            }
+          },
+          error: function(err) {
+            console.error("Something went wrong");
+          }
+        });
+      }
+    }
+
+    function updateExam() {
       var data = $updateModalForm.serializeArray(); // Convert form data to URL params
       data.push({name: 'id', value: examId})
       
@@ -275,6 +304,12 @@ jQuery(document).ready(function($){
       $deleteModal.show();
     }
 
+    function showGenerateModal(){
+      $modalContainer.addClass('active')
+      $generateModal.show();
+      helperModule.clearInputFile($generateModalForm)
+    }
+
     function showExamQuestionsModal() {
       $modalContainer.addClass('active');
       var subjectId = $examQuestionModal.data('subjectId');
@@ -303,11 +338,13 @@ jQuery(document).ready(function($){
       $deleteModal.hide();
       $updateModal.hide();
       $createModal.hide();
+      $generateModal.hide();
       $examQuestionModal.hide();
       $examViewQuestionModal.hide();
       includedQuestions = []; //reset included
       validateCreateExam.resetForm()
       validateUpdateExam.resetForm()
+      validateGenerateExam.resetForm();
     }
 
     function init() {
@@ -342,19 +379,42 @@ jQuery(document).ready(function($){
           }
         } 
       })
+
+      validateGenerateExam = $generateModalForm.validate({
+        errorClass: "error-field",
+        rules: {
+          title: {
+            required: true
+          },
+          instruction: {
+            required: true
+          },
+          minutes: {
+            required: true,
+            digits: true
+          },
+          generate_count: {
+            required: true,
+            digits: true
+          }
+        } 
+      })
+
+      //Show Modal
       $createExamButton.on('click', showCreateModal)
+      $generateExamButton.on('click', showGenerateModal)
       $addExamQuestionButton.on('click', showExamQuestionsModal)
       $yesDeleteButton.on('click', deleteExam)
-  
-      //Show Modal
       $updateRecordButton.on('click', showUpdateModal)
       $deleteRecordButton.on('click', showDeleteModal)
+
   
       //Close all modals
       $modal.find('.close').on('click', closeModals)
   
       $saveButton.on('click', saveExam)
       $updateButton.on('click', updateExam)
+      $generateButton.on('click', generateExam)
   
       //save included question
       $saveExamQuestionsButton.on('click', saveExamQuestions)

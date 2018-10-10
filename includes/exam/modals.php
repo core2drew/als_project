@@ -93,4 +93,33 @@
       <span class="action button close">Close</span>
     </div>
   </div>
+
+  <div id="GenerateModal" class="modal exams">
+    <div class="title">Generate Exam</div>
+    <div class="content">
+      <form id="GenerateForm" class="form" method="POST">
+        <input type="hidden" name="subject_id" value="<?php echo $subject_id ?>" />
+        <div class="input">
+          <input type="text" name="title" placeholder="Title"/>
+        </div>
+        <div class="input instruction">
+          <textarea name="instruction" placeholder="Instruction"></textarea>
+        </div>
+        <div class="input">
+          <input type="text" name="minutes" placeholder="Minutes" />
+        </div>
+        <div class="input question-count">
+          <input type="text" name="generate_count" placeholder="How many questions to generate?"/>
+          <span class="count">
+            <label>Maximum Question Count:</label>
+            <?php echo $questions_count ?>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="actions">
+      <span class="action button create">Create</span>
+      <span class="action button close">Cancel</span>
+    </div>
+  </div>
 </div>

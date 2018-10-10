@@ -27,6 +27,7 @@
 <?php if($is_coordinator): ?>
   <div class="table-actions">
     <span id='CreateExam' class='button'>Create Exam</span>
+    <span id='GenerateExam' class='button'>Generate Exam</span>
   </div>
 <?php endif ?>
 
