@@ -1,21 +1,21 @@
 jQuery(document).ready(function($){
   //Questions Module
  var questionModule = (function(){
-   var questionId;
-   var quizId;
-   var choicesCount;
-
-   var validationRules = {
-     question: {
-       required: true
-     },
-     choice_1: {
-       required: true
-     },
-     choice_2: {
-       required: true
-     }
-   }
+	var questionId;
+	var quizId;
+	var choicesCount;
+	var validateCreateQuiz;
+	var validationRules = {
+		question: {
+		required: true
+		},
+		choice_1: {
+		required: true
+		},
+		choice_2: {
+		required: true
+		}
+	}
 
    var $manageQuiz = $("#ManageQuiz");
    var $modalContainer = $(".modal-container");
@@ -36,6 +36,12 @@ jQuery(document).ready(function($){
    var $createModalForm = $createModal.find(".form");
    var $saveButton = $createModal.find('.create');
    var $choices = $createModal.find('.choices');
+   var $questionType = $createModal.find('#QuestionType')
+
+   //Choices Type
+   var $multipleChoice = $createModal.find('#MultipleChoice')
+   var $trueOrFalse = $createModal.find('#TrueOrFalse')
+   var $fillInTheBlank = $createModal.find('#FillInTheBlank')
 
    //Delete Question Modal / Actions
    var $deleteModal = $modalContainer.find('#DeleteModal');
@@ -48,7 +54,8 @@ jQuery(document).ready(function($){
 
    function showCreateModal(){
      $modalContainer.addClass('active')
-     $createModal.show();
+	  $createModal.show();
+	  helperModule.clearInputFile($createModalForm)
    }
 
    function showViewModal(){
@@ -103,28 +110,31 @@ jQuery(document).ready(function($){
    }
    
    function saveQuestion() {
-     var url = '/resources/question/add-quiz-question.php';
-     var data = $createModalForm.serializeArray(); // Convert form data to URL params
-     var hasAnswer = false;
+		var url = '/resources/question/add-quiz-question.php';
+		var data = $createModalForm.serializeArray(); // Convert form data to URL params
+		var hasAnswer = false;
+		var questionType = 'multiple';
 
-     data.map(function(d, i){
-       if(d.name == 'is_answer') {
-         hasAnswer = true
-       }
-     })
+		console.log(data)
 
-     //Validate form field
-     $createModalForm.validate({
-       errorClass: "error-field"
-     })
-     
+		data.map(function(d, i){
+			if(d.name == 'is_answer') {
+				hasAnswer = true
+			}
+			if(d.name == 'question-type') {
+				questionType = d.value
+			}
+		})
+
      //Is form valid
-     if($createModalForm.valid()) {
-
-       if(!hasAnswer) {
-         alert('Select answer to proceed')
-         return
-       }
+     if(validateCreateQuiz.form()) {
+			if(
+				!hasAnswer && 
+				(questionType === 'multiple' || questionType === 'true-false')
+			) {
+				alert('Select answer to proceed')
+				return
+			}
 
        $.ajax({
          type: "POST",
@@ -212,26 +222,83 @@ jQuery(document).ready(function($){
      $modalContainer.removeClass('active');
      $deleteModal.hide();
      $createModal.hide();
-     $viewModal.hide();
+	  $viewModal.hide();
+	  validateCreateQuiz.resetForm();
+	  resetQuestionType()
    }
 
+   function changeQuestionType(e) {
+		helperModule.clearInputFile($multipleChoice)
+		helperModule.clearInputFile($trueOrFalse)
+		validateCreateQuiz.resetForm();
+		var value = e.target.value
+		switch(value) {
+			case 'multiple':
+			$multipleChoice.siblings().hide();
+			$multipleChoice.show();
+			break;
+			case 'true-false':
+			$trueOrFalse.siblings().hide();
+			$trueOrFalse.show();
+			break;
+			case 'fill-in':
+			$fillInTheBlank.siblings().hide();
+			$fillInTheBlank.show();
+			break;
+			default:
+			$multipleChoice.siblings().hide();
+			$multipleChoice.show();
+		}
+	}
+	
+	function resetQuestionType(){
+		$multipleChoice.siblings().hide();
+      $multipleChoice.show();
+	}
+
    function init() {
-     //Table Actions
-     $createQuestionButton.on('click', showCreateModal)
-     $viewRecord.on('click', showViewModal)
-     $removeQuestionButton.on('click', showDeleteModal)
- 
-     //Modal Actions
-     $modal.find('.close').on('click', closeModals)
+		validateCreateQuiz = $createModalForm.validate({
+			errorClass: "error-field",
+			rules: {
+				question: {
+					required: true
+				},
+				choice_1: {
+					required: true
+				},
+				choice_2: {
+					required: true
+				},
+				choice_3: {
+					required: true
+				},
+				choice_4: {
+					required: true
+				},
+				fillanswer: {
+					required: true
+				}
+			}
+		})
+		//Table Actions
+		$createQuestionButton.on('click', showCreateModal)
+		$viewRecord.on('click', showViewModal)
+		$removeQuestionButton.on('click', showDeleteModal)
+	
+		//Modal Actions
+		$modal.find('.close').on('click', closeModals)
 
-     //Create Question Modal Action
-     $saveButton.on('click', saveQuestion)
+		//Create Question Modal Action
+		$saveButton.on('click', saveQuestion)
 
-     //Confirmation Delete Modal Action
-     $yesDeleteButton.on('click', deleteQuestion)
+		//Confirmation Delete Modal Action
+		$yesDeleteButton.on('click', deleteQuestion)
 
-     $addChoiceButton.on('click', addChoice)
-     $choices.on('click', '.remove', removeChoice)
+		$addChoiceButton.on('click', addChoice)
+		$choices.on('click', '.remove', removeChoice)
+		
+		//Change choices
+		$questionType.on('change', changeQuestionType)
    }
 
    return {

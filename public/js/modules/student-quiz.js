@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
       timer = new Timer();
       var $minutes = $countDown.find('.minutes');
 
-      timer.start({countdown: true, startValues: {seconds: 30}});
+      timer.start({countdown: true, startValues: {minutes: minutes}});
       $minutes.html(timer.getTimeValues().toString());
       timer.addEventListener('secondsUpdated', function (e) {
         $minutes.html(timer.getTimeValues().toString());
@@ -98,7 +98,6 @@ jQuery(document).ready(function(){
         var $question = $('<div/>').addClass('question')
         var $questionItem = $('<div/>').addClass('question-item')
         var $number = $('<span/>').addClass('numbering')
-        var $choices = $('<div/>').addClass('choices')
 
         var numbering = `${i + 1}).`;
         $number.html(numbering)
@@ -107,25 +106,42 @@ jQuery(document).ready(function(){
 
         $questionItem.append($question)
 
+        var $choices = $('<div/>').addClass('choices')
         data.answers.map(function(ans){
-          var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
-          var $choicesItem = $('<div/>').addClass('choice')
+          if(data.question_type == 'multiple' || data.question_type == 'true-false') {
+            var $radioButton = $(`<input type='radio' name='question_${data.id}' value=${ans.id}>`)
+            var $choicesItem = $('<div/>').addClass('choice')
 
-          $radioButton.on('click', function(e) {
-            answers[i] = {
-              'question_id': data.id,
-              'answer_id': ans.id
-            }
-          })
+            $radioButton.on('click', function(e) {
+              answers[i] = {
+                'question_id': data.id,
+                'question_type': data.question_type,
+                'answer_id': ans.id
+              }
+            })
 
-          $choicesItem.append($radioButton).append(ans.answer)
-          $choices.append($choicesItem)
-          $questionItem.append($choices)
+            $choicesItem.append($radioButton).append(ans.answer)
+            $choices.append($choicesItem)
+            $questionItem.append($choices)
+          }
+          else if (data.question_type == 'fill-in') {
+            $fillIn = $('<input/>').addClass('fill-input');
+            $fillIn.on('change', function(e) {
+              answers[i] = {
+                'question_id': data.id,
+                'question_type': data.question_type,
+                'answer_id': ans.id,
+                'fill_in_answer': e.target.value
+              }
+            })
+  
+            $questionItem.append($fillIn)
+          }
         })
         $quizQuestions.append($questionItem)
       })
-      $submitQuiz.show();
       startCountDown(quizMinutes);
+      $submitQuiz.show();
     }
 
     function generateAnswers(data, $container) {
@@ -149,21 +165,43 @@ jQuery(document).ready(function(){
         $questionItem.append($question)
 
         data.answers.map(function(ans){
-          var $choicesItem = $('<div/>').addClass('choice')
-          
           if(ans.user_answer) {
-            $choicesItem.addClass('user-answer')
             //Remove no answer if user has an answer
             $noAnswer.remove()
           }
 
-          if(ans.is_answer) {
-            $choicesItem.addClass('correct-answer')
-          }
+          if(data.question_type == 'multiple' || data.question_type == 'true-false') {
+            var $choicesItem = $('<div/>').addClass('choice')
+            if(ans.user_answer) {
+              $choicesItem.addClass('user-answer')
+            }
 
-          $choicesItem.append(ans.answer)
-          $choices.append($choicesItem)
-          $questionItem.append($choices)
+            if(ans.is_answer) {
+              $choicesItem.addClass('correct-answer')
+            }
+
+            $choicesItem.append(ans.answer)
+            $choices.append($choicesItem)
+
+            $questionItem.append($choices)
+            
+          } else if(data.question_type == 'fill-in') {
+            var $fillInAnswer = $('<div/>').addClass('fill-in-answer')
+            var $fillInUserAnswer = $('<div/>').addClass('fill-in-user-answer')
+
+            //Check if user answer is correct
+            if(ans.answer != ans.fill_in_answer) {
+              $fillInAnswer.append(ans.answer)
+              $questionItem.append($fillInAnswer)
+            }else {
+              $fillInUserAnswer.addClass('correct-answer')
+            }
+
+            if(ans.user_answer) {
+              $fillInUserAnswer.append(ans.fill_in_answer)
+              $questionItem.append($fillInUserAnswer)
+            }
+          }
         })
         if(data.explanation) {
           $explanation.html(`<label class='label'>Explanation:</label>`)
@@ -210,7 +248,6 @@ jQuery(document).ready(function(){
           answers: JSON.stringify(answers)
         },
         success: function(res) {
-          console.log(res)
           showAnswers(res.data)
         },
         error: function(err) {
@@ -240,7 +277,6 @@ jQuery(document).ready(function(){
         }),
         success: function(res){
           if(res.success) {
-            console.log(res.data)
             generateQuestions(res.data)
           }
         },

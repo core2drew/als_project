@@ -23,8 +23,13 @@
       } else {
         $exam_query = "UPDATE quizzes SET questions_id=NULL WHERE id=$quiz_id";
       }
-
       $exam_result = mysqli_query($conn, $exam_query);
+
+      //Delete question
+      $deleted_at = date("Y-m-d H:i:s");
+      $question_query = "UPDATE questions SET deleted_at='$deleted_at'  WHERE id=$question_id";
+      $question_result = mysqli_query($conn, $question_query);
+
       if($exam_result) {
         $json_data['success'] = true;
       } else {

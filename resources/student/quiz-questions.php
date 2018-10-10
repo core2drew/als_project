@@ -20,8 +20,9 @@
   $questions_id = implode("','", $questions_id);
 
   //Get current questions of exam
-  $question_query = "SELECT DISTINCT quest.id, quest.question, quiz.minutes FROM quizzes quiz 
-  LEFT JOIN questions quest ON quiz.subject_id = quest.subject_id WHERE quest.id IN ('". $questions_id ."') AND quest.deleted_at IS NULL";
+  $question_query = "SELECT DISTINCT quest.id, quest.question, quest.question_type FROM questions quest 
+  WHERE quest.id IN ('". $questions_id ."') AND quest.question_type IS NOT NULL AND quest.deleted_at IS NULL";
+
   //Results of query
   $question_result = mysqli_query($conn, $question_query);
 
@@ -32,8 +33,9 @@
     while($question_row = mysqli_fetch_array($question_result, MYSQLI_ASSOC)) {
       $data['id'] = $question_row['id'];
       $data['question'] = $question_row['question'];
+      $data['question_type'] = $question_row['question_type'];
       $data['answers'] = [];
-
+     
       $answer_query = "SELECT id, answer, is_answer FROM answers WHERE question_id = $question_row[id]";
       $answer_result = mysqli_query($conn, $answer_query);
 
@@ -41,7 +43,7 @@
         $answer_data = [
           'id' => $answer_row['id'],
           'answer' => $answer_row['answer'],
-          'is_answer' => (int)$answer_row['is_answer'] === 1 ? true : false
+          //'is_answer' => (int)$answer_row['is_answer'] === 1 ? true : false
         ];
         array_push($data['answers'], $answer_data);
       }
