@@ -24,10 +24,17 @@
   text-align: center;
 }
 
-#ManageQuiz > .table.quiz > thead > tr > th:nth-last-child(1),
+#ManageQuiz > .table.quiz > thead > tr > th:nth-last-child(1) {
+  text-align: center;
+}
+
 #ManageQuiz > .table.quiz > tbody > tr > td:nth-last-child(1) {
   width: 340px;
   text-align: center;
+}
+
+#ManageQuiz > .table.quiz > tbody > tr > td.student:nth-last-child(1) {
+  width: 130px;
 }
 
 #ManageQuiz > .table.quiz.questions > thead > tr > th:nth-last-child(1),

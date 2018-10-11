@@ -33,9 +33,13 @@
   width: 180px;
 }
 
+#ManageExams > .table.exam > tbody > tr > td.student:nth-last-child(1) {
+  width: 130px;
+}
+
 #ManageExams > .table.exam.questions > thead > tr > th:nth-last-child(1),
 #ManageExams > .table.exam.questions > tbody > tr > td:nth-last-child(1) {
-  width: 150px;
+  width: 115px;
   text-align: center;
 }
 

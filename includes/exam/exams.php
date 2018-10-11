@@ -98,7 +98,7 @@
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$table_action</td>
+              <td class='option student'>$table_action</td>
             </tr>";
           }
           echo $table_row;

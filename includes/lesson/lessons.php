@@ -66,7 +66,7 @@
               $table_row =
               "<tr>
                 <td>$row[title]</td>
-                <td class='option'>$view</td>
+                <td class='option teacher-student'>$view</td>
               </tr>";
             }
             echo $table_row;

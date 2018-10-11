@@ -46,8 +46,16 @@
   width: 100px;
 }
 
-#ManageLessons > .table.lessons > thead > tr > th:nth-child(2),
+#ManageLessons > .table.lessons > thead > tr > th:nth-child(2) {
+  text-align: center;
+}
+
 #ManageLessons > .table.lessons > tbody > tr > td:nth-child(2) {
   text-align: center;
   width: 175px;
 } 
+
+
+#ManageLessons > .table.lessons > tbody > tr > td.teacher-student:nth-child(2) {
+  width: 80px;
+}
