@@ -26,6 +26,7 @@
   </div>
 
 <?php include 'includes/html/scripts.php';?>
+<?php include 'includes/profile/modals.php';?>
 <script src="/public/ckeditor5/ckeditor.js"></script>
 <script src="/public/js/modules/lesson.js"></script>
 <?php include 'includes/html/footer.php'; ?>

@@ -22,5 +22,6 @@
 
 <?php include 'includes/videos/modals.php' ?>
 <?php include 'includes/html/scripts.php'?>
+<?php include 'includes/profile/modals.php';?>
 <script src="/public/js/modules/educationalvideo.js"></script>
 <?php include 'includes/html/footer.php' ?>

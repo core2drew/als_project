@@ -31,5 +31,6 @@
 
 <?php include '../includes/teacher/modals.php' ?>
 <?php include '../includes/html/scripts.php'?>
+<?php include '../includes/profile/modals.php';?>
 <script src="/public/js/modules/teacher.js"></script>
 <?php include '../includes/html/footer.php' ?>

@@ -68,3 +68,6 @@
     ?>
   </div>
 </div>
+<?php include '../includes/html/scripts.php'?>
+<?php include '../includes/profile/modals.php';?>
+<?php include '../includes/html/footer.php' ?>

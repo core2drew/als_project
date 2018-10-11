@@ -25,5 +25,6 @@
 
 <?php include '../includes/quiz/modals.php' ?>
 <?php include '../includes/html/scripts.php'?>
+<?php include '../includes/profile/modals.php';?>
 <script src="/public/js/modules/quiz.js"></script>
 <?php include '../includes/html/footer.php' ?>

@@ -21,5 +21,6 @@
 
 <?php include '../includes/html/scripts.php'?>
 <script src="/public/js/modules/announcement.js"></script>
+<?php include '../includes/profile/modals.php';?>
 <?php include '../includes/home/announcement-modals.php' ?>
 <?php include '../includes/html/footer.php' ?>

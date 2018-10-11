@@ -26,6 +26,7 @@
 
 <?php include 'includes/student/modals.php' ?>
 <?php include 'includes/html/scripts.php'?>
+<?php include 'includes/profile/modals.php';?>
 <script src="/public/js/easytimer.min.js"></script>
 <script src="/public/js/modules/student.js"></script>
 <?php include 'includes/html/footer.php' ?>
