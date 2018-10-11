@@ -18,10 +18,17 @@
   width: 90px;
 }
 
-#ManageEducationalVideos > .table.educationalvideo > thead > tr > th:nth-child(2),
+#ManageEducationalVideos > .table.educationalvideo > thead > tr > th:nth-child(2) {
+  text-align: center;
+}
+
 #ManageEducationalVideos > .table.educationalvideo > tbody > tr > td:nth-child(2) {
   width: 250px;
   text-align: center;
+}
+
+#ManageEducationalVideos > .table.educationalvideo > tbody > tr > td.teacher-student:nth-child(2) {
+  width: 85px;
 }
 
 .modal-container > .modal > .content > .form > #UploadVideo > input[name='video_file'] {
@@ -45,4 +52,9 @@
   align-items: center;
   font-size: 0.7em;
   text-transform: uppercase;
+}
+
+#ViewModal > .content {
+  max-width: 500px;
+  max-height: 500px;
 }

@@ -40,6 +40,7 @@
 }
 
 #ManageQuestions > .table.subjects > thead > tr > th:nth-child(2) {
+  min-width: 135px;
   text-align: center;
 } 
 

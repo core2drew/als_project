@@ -13,15 +13,20 @@
   width: 1%;
 }
 
+#ManageQuiz > .table.subjects > thead > tr > th:nth-child(1),
+#ManageQuiz > .table.subjects > tbody > tr > td:nth-child(1) {
+  width: 100%;
+}
+
 #ManageQuiz > .table.subjects > thead > tr > th:nth-child(2),
 #ManageQuiz > .table.subjects > tbody > tr > td:nth-child(2) {
-  width: 60px;
+  min-width: 120px;
   text-align: center;
 }
 
 #ManageQuiz > .table.quiz > thead > tr > th:nth-last-child(1),
 #ManageQuiz > .table.quiz > tbody > tr > td:nth-last-child(1) {
-  width: 265px;
+  width: 340px;
   text-align: center;
 }
 

@@ -44,13 +44,13 @@
             $table_row =
             "<tr>
               <td>$row[title]</td>
-              <td class='option'>$view $update $remove</td>
+              <td class='option coordinator'>$view $update $remove</td>
             </tr>";
           } else {
             $table_row =
             "<tr>
               <td>$row[title]</td>
-              <td class='option'>$view</td>
+              <td class='option teacher-student'>$view</td>
             </tr>";
           }
           echo $table_row;

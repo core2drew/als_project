@@ -85,7 +85,7 @@
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$questions $assign_exam</td>
+              <td class='option teacher'>$questions $assign_exam</td>
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 

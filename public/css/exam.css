@@ -19,10 +19,18 @@
   text-align: center;
 }
 
-#ManageExams > .table.exam > thead > tr > th:nth-last-child(1),
+
+#ManageExams > .table.exam > thead > tr > th:nth-last-child(1){
+  text-align: center;
+}
+
 #ManageExams > .table.exam > tbody > tr > td:nth-last-child(1) {
   width: 265px;
   text-align: center;
+}
+
+#ManageExams > .table.exam > tbody > tr > td.teacher:nth-last-child(1) {
+  width: 180px;
 }
 
 #ManageExams > .table.exam.questions > thead > tr > th:nth-last-child(1),

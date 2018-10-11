@@ -201,3 +201,8 @@
   border: 3px solid #3c9eff;
   padding: 10px;
 }
+
+.table.announcements > thead > tr > th:nth-last-child(1) {
+  width: 160px;
+  text-align: center;
+}
