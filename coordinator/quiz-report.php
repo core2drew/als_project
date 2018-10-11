@@ -14,9 +14,9 @@
   <div id="ManageReports" class="page">
     <?php
       if($subject_id) {
-        include '../includes/reports/questions.php';
+        include '../includes/reports/quiz/students.php';
       } else {
-        include '../includes/reports/subjects.php';
+        include '../includes/reports/quiz/subjects.php';
       }
     ?>
   </div>

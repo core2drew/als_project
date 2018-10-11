@@ -18,7 +18,7 @@
       <a class="item <?php echo $_GET['page'] == 'subjects' ? 'active' : null ?>" href="/coordinator/subjects.php?page=subjects&grade_level=1">Subjects</a>
       <a class="item <?php echo $_GET['page'] == 'lessonandvideos' ? 'active' : null ?>" href="/coordinator/lessons.php?page=lessonandvideos&sub_page=lessons&grade_level=1">Lessons & Videos</a>
       <a class="item <?php echo $_GET['page'] == 'examandquestions' ? 'active' : null ?>" href="/coordinator/questions.php?page=examandquestions&sub_page=questions&grade_level=1">Exam & Questions</a>
-      <a class="item <?php echo $_GET['page'] == 'reports' ? 'active' : null ?>" href="/coordinator/reports.php?page=reports&grade_level=1">Reports</a>
+      <a class="item <?php echo $_GET['page'] == 'reports' ? 'active' : null ?>" href="/coordinator/itemanalysis.php?page=reports&sub_page=quiz&grade_level=1">Reports</a>
     </div>
   <?php endif; ?>
   <div class="profile">

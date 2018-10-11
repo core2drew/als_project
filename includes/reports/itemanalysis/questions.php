@@ -1,5 +1,5 @@
 <?php
-  $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=reports&sub_page=reports&grade_level=$grade_level";
+  $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=reports&sub_page=itemanalysis&grade_level=$grade_level";
 
   $query = "SELECT question,
   (SELECT COUNT(*) FROM exam_records, answers 
