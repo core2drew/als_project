@@ -14,7 +14,7 @@
     $questions_id = [];
 
     //Randomize
-    $generate_query = "SELECT id FROM questions WHERE subject_id = $subject_id AND deleted_at IS NULL ORDER BY RAND() LIMIT $generate_count";
+    $generate_query = "SELECT id FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL ORDER BY RAND() LIMIT $generate_count";
     $generate_result = mysqli_query($conn, $generate_query);
     
     while($generate_row = mysqli_fetch_array($generate_result, MYSQLI_ASSOC)) {

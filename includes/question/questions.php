@@ -1,5 +1,5 @@
 <?php
-  $query = "SELECT id, question FROM questions WHERE subject_id=$subject_id AND deleted_at IS NULL";
+  $query = "SELECT id, question FROM questions WHERE subject_id=$subject_id AND type='exam' AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
