@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
     var subjectId;
 
     var $manageExams = $("#ManageExams");
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.teacher");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
