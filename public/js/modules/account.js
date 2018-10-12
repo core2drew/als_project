@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
         currentProfileImage;
 
     var $manageAccounts = $('#ManageAccounts')
-    var $modalContainer = $(".modal-container.account");
+    var $modalContainer = $(".modal-container.account").not('.profile');
     var $loading = $modalContainer.find('.loading');
     
     //All Modals

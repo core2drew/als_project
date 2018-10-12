@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
     var validation;
 
     var $manageSubjects = $("#ManageSubjects");
-    var $modalContainer = $(".modal-container.subject");
+    var $modalContainer = $(".modal-container.subject").not('.profile');
 
     //All Modals
     var $modal = $modalContainer.find('.modal');

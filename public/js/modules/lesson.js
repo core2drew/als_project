@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
     var lessonEditor, lessonId, validateCreate, validateUpdate;
 
     var $manageLessons = $("#ManageLessons");
-    var $modalContainer = $(".modal-container.lessons");
+    var $modalContainer = $(".modal-container.lessons").not('.profile');
 
     //All Modals
     var $modal = $modalContainer.find('.modal');

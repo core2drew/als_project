@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
     var timer;
 
     var $manageQuiz = $("#ManageQuiz");
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container").not('.profile');
 
     //All Modals
     var $modal = $modalContainer.find('.modal');

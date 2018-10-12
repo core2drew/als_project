@@ -16,7 +16,7 @@ jQuery(document).ready(function($){
     }
 
     var $manageQuestions = $("#ManageQuestions");
-    var $modalContainer = $(".modal-container.questions");
+    var $modalContainer = $(".modal-container.questions").not('.profile');
 
     //All Modals
     var $modal = $modalContainer.find('.modal');

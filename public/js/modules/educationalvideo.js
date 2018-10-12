@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
       var uploadOption = 'upload';
 
       var $manageEducationalVideos= $("#ManageEducationalVideos");
-      var $modalContainer = $(".modal-container.educational");
+      var $modalContainer = $(".modal-container.educational").not('.profile');
       var $loading = $modalContainer.find('.loading');
 
       //All Modals
