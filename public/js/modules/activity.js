@@ -8,6 +8,7 @@ jQuery(document).ready(function($){
 
     var $tableActions = $manageAccounts.find('.table-actions')
     var $activityTable = $manageAccounts.find('.table.activities');
+    var $loading = $modalContainer.find('.loading');
     var $modal = $modalContainer.find('.modal');
 
     var $createRecordButton = $tableActions.find('#CreateActivity')
@@ -116,6 +117,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -142,6 +144,7 @@ jQuery(document).ready(function($){
 
     function updateRecord(){
       if($updateForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', activityId)
         formData.append('slider_image_url', currentSliderImage)
@@ -169,6 +172,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
+      $loading.addClass('active')
       var url = '/resources/activity/delete.php';
       $.ajax({
         type: "POST",
