@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
 
     var $manageLessons = $("#ManageLessons");
     var $modalContainer = $(".modal-container.lessons").not('.profile');
-
+    var $loading = $manageLessons.find('.loading');
     //All Modals
     var $modal = $modalContainer.find('.modal');
 
@@ -32,6 +32,7 @@ jQuery(document).ready(function($){
 
     function createLesson(){
       if($createForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($createForm[0]);
         formData.append('editor_data', lessonEditor.getData())
         $.ajax({
@@ -56,6 +57,7 @@ jQuery(document).ready(function($){
 
     function updateLesson() {
       if($updateForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('editor_data', lessonEditor.getData())
         $.ajax({
@@ -78,7 +80,7 @@ jQuery(document).ready(function($){
       }
     }
 
-    function deleteLesson() {
+    function deleteLesson() { 
       var url = '/resources/lesson/delete.php';
       $.ajax({
         type: "POST",

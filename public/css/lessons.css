@@ -59,3 +59,10 @@
 #ManageLessons > .table.lessons > tbody > tr > td.teacher-student:nth-child(2) {
   width: 80px;
 }
+
+#ManageLessons > .loading {
+  position: fixed;
+}
+#ManageLessons > .loading.active {
+  display: flex;
+}

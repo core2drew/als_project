@@ -13,6 +13,12 @@
 <!-- Display only when action is set-->
 <?php if($action): ?>
   <?php if($action == 'create'): ?>
+    <div class="loading">
+      <div class="lds-ripple">
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+      </div>
+    </div>
     <div class="title">
       <h2>Create Lesson</h2>
       <a class="button" href="<?php echo $back_link_lessons ?>">Back</a>
