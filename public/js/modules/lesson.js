@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
     var lessonEditor, lessonId, validateCreate, validateUpdate;
 
     var $manageLessons = $("#ManageLessons");
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.lessons");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');
@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
     var $updateForm = $manageLessons.find('#UpdateForm');
     var $updateButton = $updateForm.find('.update');
 
-    var $removeLessonButton = $lessonTable.find('.remove');
+    var $removeLessonButton = $lessonTable.find('.delete');
 
     //Delete Question Modal / Actions
     var $deleteModal = $modalContainer.find('#DeleteModal');
