@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
 
     var $manageSubjects = $("#ManageSubjects");
     var $modalContainer = $(".modal-container.subject").not('.profile');
-
+    var $loading = $modalContainer.find('.loading');
     //All Modals
     var $modal = $modalContainer.find('.modal');
 
@@ -34,6 +34,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -55,6 +56,7 @@ jQuery(document).ready(function($){
 
     function updateRecord() {
       if($updateForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', subjectId)
 
@@ -79,6 +81,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
+      $loading.addClass('active')
       var url = '/resources/subject/delete.php';
       $.ajax({
         type: "POST",
