@@ -5,7 +5,7 @@
 
   $json_data['success'] = false;
 
-  $id = isset($id) ? mysqli_real_escape_string($conn, $_GET['id']) : null;
+  $id = isset($_GET['id']) ? mysqli_real_escape_string($conn, $_GET['id']) : null;
   $type = isset($_GET['type']) ? $_GET['type'] : null;
 
 
