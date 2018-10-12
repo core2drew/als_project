@@ -1,5 +1,11 @@
 
 <div class="modal-container announcement">
+  <div class="loading">
+    <div class="lds-ripple">
+      <div class="ripple"></div>
+      <div class="ripple"></div>
+    </div>
+  </div>
   <div id="DeleteModal" class="modal announcement">
     <div class="title">Confirmation</div>
     <div class="content">Are you sure you want to delete this announcement?</div>

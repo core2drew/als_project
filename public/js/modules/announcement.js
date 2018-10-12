@@ -8,6 +8,7 @@ jQuery(document).ready(function($){
 
     var $tableActions = $manageAccounts.find('.table-actions')
     var $announcementTable = $manageAccounts.find('.table.announcements');
+    var $loading = $modalContainer.find('.loading');
     var $modal = $modalContainer.find('.modal');
 
     var $createRecordButton = $tableActions.find('#CreateAnnouncement')
@@ -79,6 +80,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -103,6 +105,7 @@ jQuery(document).ready(function($){
 
     function updateRecord(){
       if($updateForm.valid()) {
+        $loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', announcementId)
         $.ajax({
@@ -127,6 +130,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
+      $loading.addClass('active')
       var url = '/resources/announcement/delete.php';
       $.ajax({
         type: "POST",
