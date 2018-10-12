@@ -7,6 +7,7 @@
   $grade_level = isset($_GET['grade_level']) ? $_GET['grade_level'] : null;
   $subject_id = isset($_GET['subject_id']) ? $_GET['subject_id'] : null;
   $question_id = isset($_GET['question_id']) ? $_GET['question_id'] : null;
+  $type='exam'
 ?>
 
 <div id="Coordinator" class="wrapper">

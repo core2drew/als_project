@@ -1,5 +1,5 @@
 <?php
-  $query = "SELECT id, title, (SELECT COUNT(*) FROM questions WHERE subject_id = subjects.id AND deleted_at IS NULL) as count
+  $query = "SELECT id, title, (SELECT COUNT(*) FROM questions WHERE subject_id = subjects.id AND type='$type' AND deleted_at IS NULL) as count
   FROM subjects 
   WHERE grade_level = $grade_level AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
