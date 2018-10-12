@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <?php if(isset($row['reviewer_link'])): ?>
+  <?php if(isset($row['reviewer_link']) && !empty($row['reviewer_link'])): ?>
     <a class="button" target="_blank" href="<?php echo $row['reviewer_link'] ?>">Download Reviewer</a>
   <?php endif ?>
 </div>
