@@ -29,7 +29,7 @@
         </div>
         <form id="LoginForm" method="POST" autocomplete="off">
           <div class="field">
-            <input class="input" type="text" name="email" placeholder="Email"/>
+            <input class="input" type="text" name="email" placeholder="Email or LRN"/>
           </div>
           <div class="field">
             <input class="input" type="password" name="password" placeholder="Password"/>

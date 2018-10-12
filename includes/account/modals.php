@@ -57,7 +57,7 @@
           </div>
         <?php endif; ?>
         <div class="input">
-          <input type="text" name="email" placeholder="Email" required />
+          <input type="text" name="email" placeholder="Email or LRN" required />
         </div>
         <div class="input">
           <input type="password" name="password" placeholder = "Password" required/>

@@ -21,7 +21,7 @@
           <input type="text" name="contactno" placeholder="Contact No." required />
         </div>
         <div class="input">
-          <input type="text" name="email" placeholder="Email" required />
+          <input type="text" name="email" placeholder="Email or LRN" required />
         </div>
         <div class="input">
           <input type="password" name="password" placeholder = "Password" required/>
