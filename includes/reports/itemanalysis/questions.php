@@ -6,7 +6,7 @@
   WHERE answers.id = exam_records.answer_id AND exam_records.question_id = questions.id) as answered,
   (SELECT COUNT(*) FROM exam_records, answers 
   WHERE answers.id = exam_records.answer_id AND answers.is_answer = 1 AND exam_records.question_id = questions.id) as answer_correctly_count
-  FROM questions WHERE subject_id = $subject_id AND deleted_at IS NULL";
+  FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
