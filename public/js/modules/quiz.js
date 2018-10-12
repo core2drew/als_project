@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
     var quizId = 0;
 
     var $manageQuiz = $("#ManageQuiz");
-    var $modalContainer = $(".modal-container");
+    var $modalContainer = $(".modal-container.quiz");
 
     //All Modals
     var $modal = $modalContainer.find('.modal');

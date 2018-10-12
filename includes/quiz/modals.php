@@ -1,4 +1,4 @@
-<div class="modal-container">
+<div class="modal-container quiz">
   <div id="DeleteModal" class="modal quiz">
     <div class="title">Confirmation</div>
     <div class="content">Are you sure you want to delete this quiz?</div>

@@ -59,7 +59,7 @@ jQuery(document).ready(function($){
               $lastName.val(res.data.lastname)
               $firstName.val(res.data.firstname)
               $address.val(res.data.address)
-              $contactNo.val(res.data.address)
+              $contactNo.val(res.data.contactno)
               $teacher.val(res.data.teacher_id)
               $email.val(res.data.email)
               $password.val(res.data.password)
