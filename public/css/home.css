@@ -155,6 +155,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcer > .image {
@@ -171,14 +172,12 @@
 
 #ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcement > .post-date {
   margin: 0;
-  font-size: small;
   margin-bottom: 5px;
 }
 
 #ActivityAnnouncement > #AnnouncementContainer > #Announcements > .item > .announcement > .message {
   text-align: justify;
   margin: 0;
-  font-size: small;
 }
 
 #MissionVision {
