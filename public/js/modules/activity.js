@@ -107,9 +107,9 @@ jQuery(document).ready(function($){
 
     function closeModals(){
       $modalContainer.removeClass('active');
-      //$updateModal.hide();
+      $updateModal.hide();
       $createModal.hide();
-      //$deleteModal.hide();
+      $deleteModal.hide();
       validateCreate.resetForm();
       validateUpdate.resetForm();
     }
