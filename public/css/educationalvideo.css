@@ -35,9 +35,9 @@
   display: none;
 }
 
-.modal-container > .modal > .content > .form > #SaveLink {
+/* .modal-container > .modal > .content > .form > #SaveLink {
   display: none;
-}
+} */
 
 .educationalvideo > .content > .form > .input:nth-last-child(n + 2) {
   margin-bottom: 10px;

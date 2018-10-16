@@ -18,19 +18,19 @@
   <div id="CreateModal" class="modal educationalvideo">
     <div class="title">Upload Video</div>
     <div class="content">
-      <div class="tabs">
+      <!-- <div class="tabs">
         <span class="tab active" data-tab-action="upload">Upload</span>
         <span class="tab" data-tab-action="link">Link</span>
-      </div>
+      </div> -->
       <form id="CreateForm" autocomplete="off" class="form" method="POST">
         <div class="input">
           <input type="text" name="title" placeholder="Title" required/>
         </div>
-        <div class="input" id="UploadVideo">
+        <!-- <div class="input" id="UploadVideo">
           <span class="button choose-video">Choose Video</span>
           <input type="text" name="filename" placeholder="Upload Video" readonly required/>
           <input type="file" name="video_file" accept="video/mp4"/>
-        </div>
+        </div> -->
         <div class="input" id="SaveLink">
           <input type="hidden" name="filename" value = ""/>
           <input type="text" name="video_link" placeholder="Video Link"/>
@@ -47,19 +47,19 @@
   <div id="UpdateModal" class="modal educationalvideo">
     <div class="title">Update Video</div>
     <div class="content">
-      <div class="tabs">
+      <!-- <div class="tabs">
         <span class="tab" data-tab-action="upload">Upload</span>
         <span class="tab" data-tab-action="link">Link</span>
-      </div>
+      </div> -->
       <form id="UpdateForm" autocomplete="off" class="form" method="POST">
         <div class="input">
           <input type="text" name="title" placeholder="Title" required/>
         </div>
-        <div class="input" id="UploadVideo">
+        <!-- <div class="input" id="UploadVideo">
           <span class="button choose-video">Choose Video</span>
           <input type="text" name="filename" placeholder="Upload Video" readonly required/>
           <input type="file" name="video_file" accept="video/mp4"/>
-        </div>
+        </div> -->
         <div class="input" id="SaveLink">
           <input type="hidden" name="filename" value=""/>
           <input type="text" name="video_link" placeholder="Video Link"/>

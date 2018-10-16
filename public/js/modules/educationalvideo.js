@@ -262,7 +262,7 @@ jQuery(document).ready(function($){
         $deleteModal.hide();
         $viewModal.hide();
         $viewModalVideo.pause()
-        resetTab()
+        //resetTab()
       }
       
       function init(){
