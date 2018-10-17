@@ -17,10 +17,15 @@
     $grade_level = $row['grade_level'];
     $profile_image_url = $row['profile_image_url'];
     $is_admin = $row['is_admin'];
-    
     $count = mysqli_num_rows($result);
 
     if($count == 1) {
+      //Attendance
+      $log_at = date("Y-m-d H:i:s");
+      $query = "INSERT INTO user_logs (user_id, log_at) VALUES ($user_id, '$log_at')";
+      $result = mysqli_query($conn, $query);
+      echo $query ;
+
       $_SESSION['is_logged_in'] = true;
       $_SESSION['type'] = $type;
       $_SESSION['fullname'] = $fullname;
@@ -29,10 +34,6 @@
       $_SESSION['profile_image_url'] = $profile_image_url;
       $_SESSION['is_admin'] = $is_admin;
       
-      //Attendance
-      $log_at = date("Y-m-d H:i:s");
-      $query = "INSERT INTO user_logs (user_id, log_at) VALUES ($user_id, '$log_at')";
-      $result = mysqli_query($conn, $query);
     }else {
       $error_fields['login'] = 'Incorrect username or Password';
       //echo "Error " . mysqli_error($conn);

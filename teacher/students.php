@@ -11,6 +11,7 @@
   $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
 
   $query = "SELECT
+    id,
     lastname,
     firstname,
     address,
@@ -41,22 +42,28 @@
           <th>Address</th>
           <th>Contact No.</th>
           <th>Email</th>
+          <th>Logs</th>
         </thead>
         <tbody>
           <?php
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $id = $row['id'];
               $last_name = $row['lastname'];
               $first_name = $row['firstname'];
               $address = $row['address'];
               $contactno = $row['contactno'];
               $email = $row['email'];
               $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
+              $attendance_url = "/teacher/attendance.php?user_id=$row[id]";
+              $view_btn = "<a href=$attendance_url class='button create'>View Logs</a>";
+              
               $table_row =
                 "<tr>
                   <td>$last_name, $first_name</td>
                   <td>$address</td>
                   <td>$contactno</td>
                   <td>$email</td>
+                  <td>$view_btn</td>
                 </tr>";
               echo $table_row;
             }
