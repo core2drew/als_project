@@ -19,7 +19,6 @@
     $is_admin = $row['is_admin'];
     
     $count = mysqli_num_rows($result);
-    mysqli_close($conn);
 
     if($count == 1) {
       $_SESSION['is_logged_in'] = true;
@@ -29,6 +28,11 @@
       $_SESSION['grade_level'] = $grade_level;
       $_SESSION['profile_image_url'] = $profile_image_url;
       $_SESSION['is_admin'] = $is_admin;
+      
+      //Attendance
+      $log_at = date("Y-m-d H:i:s");
+      $query = "INSERT INTO user_logs (user_id, log_at) VALUES ($user_id, '$log_at')";
+      $result = mysqli_query($conn, $query);
     }else {
       $error_fields['login'] = 'Incorrect username or Password';
       //echo "Error " . mysqli_error($conn);

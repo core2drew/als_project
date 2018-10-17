@@ -35,11 +35,11 @@
         contactno,
         email
         FROM users WHERE type = 'coordinator' AND is_admin = 0 AND deleted_at IS NULL";
-        $create_link = "/coordinator/account/create.php?page=accounts&sub_page=$type&type=$type";
     }
   
     $result = mysqli_query($conn, $query);
     $count = mysqli_num_rows($result);
+    
 ?>
 
 <?php if($sub_page !== 'coordinator'): ?>
@@ -95,9 +95,12 @@
           $contactno = $row['contactno'];
           $email = $row['email'];
           $teacher_name = isset($row['teacher_name']) ? $row['teacher_name'] : '';
+          $attendance_url = "/coordinator/attendance.php?page=accounts&sub_page=$sub_page&type=$type&grade_level=$grade_level&user_id=$row[id]";
+
+          $view_btn = "<a href=$attendance_url class='button create'>View Logs</a>";
           $update_btn = "<span class='button update' data-user-id=$row[id] data-user-type=$type>Update</span>";
           $delete_btn = "<span class='button delete' data-user-id=$row[id] data-user-type=$type>Delete</span>";
-
+          
           if($type == 'student') {
             $table_row =
             "<tr>
@@ -106,7 +109,7 @@
               <td>$contactno</td>
               <td>$email</td>
               <td>$teacher_name</td>
-              <td class='option'>$update_btn $delete_btn</td>
+              <td class='option'>$view_btn $update_btn $delete_btn</td>
             </tr>";
           }else if($type == 'teacher' || $type == 'coordinator') {
             $table_row =
@@ -115,7 +118,7 @@
               <td>$address</td>
               <td>$contactno</td>
               <td>$email</td>
-              <td class='option'>$update_btn $delete_btn</td>
+              <td class='option'>$view_btn $update_btn $delete_btn</td>
             </tr>";
           }
           echo $table_row;
