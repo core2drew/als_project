@@ -35,11 +35,11 @@
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $id = $row['id'];
           $title = $row['title'];
-          $exam = "<a class='button' href=$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level&subject_id=$id>View Report</a>";
+          $exam = "<a class='button' href=$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level&subject_id=$id>Exams</a>";
           $table_row =
           "<tr>
             <td>$title</td>
-            <td class='option'>$exam</td>
+            <td>$exam</td>
           </tr>";
           echo $table_row;
         }

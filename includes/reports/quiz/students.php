@@ -16,7 +16,7 @@
     ( SELECT questions_id FROM quizzes WHERE id = uq.quiz_id) as items 
     FROM users student RIGHT JOIN users_has_quiz as uq
     ON student.id = uq.user_id
-    WHERE student.type='student' AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
+    WHERE student.type='student' AND student.grade_level=$grade_level AND uq.quiz_id = $quiz_id AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>

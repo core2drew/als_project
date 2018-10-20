@@ -1,5 +1,5 @@
 <?php 
-  $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level";
+  $go_back = "$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level&subject_id=$subject_id";
 
   //Display all student account
   $query = "SELECT
@@ -15,14 +15,14 @@
     ) as score,
     ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
     FROM users student RIGHT JOIN users_has_exam as ue
-    ON student.id = ue.user_id
-    WHERE student.type='student' AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+    ON student.id = ue.user_id, exams
+    WHERE student.type='student' AND exams.subject_id = $subject_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
 <div class="title">
   <h2>Exam Report</h2>
-  <a class="button" href="<?php echo $go_back_to_subjects ?>">Back</a>
+  <a class="button" href="<?php echo $go_back ?>">Back</a>
 </div>
 
 <?php
