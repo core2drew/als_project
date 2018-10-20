@@ -117,7 +117,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -144,7 +144,7 @@ jQuery(document).ready(function($){
 
     function updateRecord(){
       if($updateForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', activityId)
         formData.append('slider_image_url', currentSliderImage)
@@ -172,7 +172,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
-      $loading.addClass('active')
+      //$loading.addClass('active')
       var url = '/resources/activity/delete.php';
       $.ajax({
         type: "POST",

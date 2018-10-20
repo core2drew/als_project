@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
 
     function createLesson(){
       if($createForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($createForm[0]);
         formData.append('editor_data', lessonEditor.getData())
         $.ajax({
@@ -57,7 +57,7 @@ jQuery(document).ready(function($){
 
     function updateLesson() {
       if($updateForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('editor_data', lessonEditor.getData())
         $.ajax({

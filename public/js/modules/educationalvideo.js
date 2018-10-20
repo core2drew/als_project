@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
       }
 
       function showUpdateModal() {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var url = '/resources/educationalvideo';
         var $title = $updateModal.find('input[name=title]');
         var $filename = $updateModal.find('input[name=filename]');
@@ -118,7 +118,7 @@ jQuery(document).ready(function($){
 
       function createRecord(){
         if($createForm.valid()) {
-          $loading.addClass('active')
+          //$loading.addClass('active')
           var formData = new FormData($createForm[0]);
           formData.append('upload_option', uploadOption)
 
@@ -170,7 +170,7 @@ jQuery(document).ready(function($){
       }
 
       function deleteRecord() {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var url = '/resources/educationalvideo/delete.php';
         $.ajax({
           type: "POST",

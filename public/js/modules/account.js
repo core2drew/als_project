@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
     }
 
     function showUpdateModal() {
-      $loading.addClass('active')
+      //$loading.addClass('active')
       
       var $this = $(this)
       userId = $this.data('userId');
@@ -149,7 +149,7 @@ jQuery(document).ready(function($){
 
     function createRecord(){
       if($createForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($createForm[0]);
         $.ajax({
           type: "POST",
@@ -177,7 +177,7 @@ jQuery(document).ready(function($){
     function updateRecord(){
       currentUserId = $manageAccounts.data('currentUserId')
       if($updateForm.valid()) {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         var formData = new FormData($updateForm[0]);
         formData.append('id', userId)
         formData.append('current_user_id', currentUserId)
@@ -207,7 +207,7 @@ jQuery(document).ready(function($){
     }
 
     function deleteRecord() {
-      $loading.addClass('active')
+      //$loading.addClass('active')
       var url = '/resources/account/delete.php';
       $.ajax({
         type: "POST",

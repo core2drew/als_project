@@ -29,7 +29,7 @@ jQuery(document).ready(function($){
       var $showPasswordButton = $modal.find('.show-password');
       
       function showUpdateModal() {
-        $loading.addClass('active')
+        //$loading.addClass('active')
         
         var $this = $(this)
         userId = $this.data('userId');
@@ -120,7 +120,7 @@ jQuery(document).ready(function($){
   
       function updateRecord(){
         if($updateForm.valid()) {
-          $loading.addClass('active')
+          //$loading.addClass('active')
           var formData = new FormData($updateForm[0]);
           formData.append('id', userId)
           formData.append('current_user_id', userId)
