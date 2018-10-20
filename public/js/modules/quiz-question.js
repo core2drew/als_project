@@ -186,7 +186,7 @@ jQuery(document).ready(function($){
      var $remove = $('<span/>').addClass('button remove')
      var $label = $('<label/>').addClass('label')
 
-     var $isAnswer = $(`<input type=radio name=is_answer value=${currentName}/>`)
+     var $isAnswer = $(`<input type=radio name=is_answer value=${currentName} />`)
      var $input = $(`<input type=text name=${currentName} placeholder='Choice ${choicesCount}' required/>`)
      var $answer = $('<div/>').addClass('answer')
      
@@ -257,6 +257,7 @@ jQuery(document).ready(function($){
 	}
 
    function init() {
+    $questionType.parent().show();
 		validateCreateQuiz = $createModalForm.validate({
 			errorClass: "error-field",
 			rules: {
