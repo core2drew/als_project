@@ -40,6 +40,7 @@
       <th>Exam Title</th>
       <th>Date</th>
       <th>Score</th>
+      <th>Percentage</th>
     </thead>
     <tbody>
       <?php
@@ -50,12 +51,15 @@
           $date = $row['date'];
           $items = count(explode(',', $row['items']));
           $score = $row['score'].'/'.$items;
+          $percentage = ($row['score'] / $items) * 100;
+          $percentage = number_format($percentage, 2);
           $table_row =
           "<tr>
             <td>$name</td>
             <td>$title</td>
             <td>$date</td>
             <td>$score</td>
+            <td>$percentage %</td>
           </tr>";
           echo $table_row;
         }
