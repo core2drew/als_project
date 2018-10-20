@@ -86,6 +86,10 @@
   margin-bottom: 0;
 }
 
+#CreateModal > .content > .form > .question-type {
+  display: none;
+}
+
 #CreateModal > .content > .form > .choice-types > #TrueOrFalse,
 #CreateModal > .content > .form > .choice-types > #FillInTheBlank {
   display: none;
