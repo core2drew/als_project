@@ -80,12 +80,13 @@
             //$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id
             $questions = "<span class='button view-exam'  data-subject-id=$subject_id data-exam-id=$id>View</span>";
             $assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
+            $view_report = "<a class='button view-report' href='exams.php?subject_id=$subject_id&is_report=1&exam_id=$id&teacher_id=$_SESSION[user_id]'>View Report</a>";
             $table_row =
             "<tr>
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option teacher'>$questions $assign_exam</td>
+              <td class='option teacher'>$questions $assign_exam $view_report</td>
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 

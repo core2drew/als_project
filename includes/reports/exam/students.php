@@ -1,8 +1,13 @@
 <?php 
-  $go_back = "$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level&subject_id=$subject_id";
+  if(isset($teacher_id)) {
+    $go_back = "$_SERVER[PHP_SELF]?subject_id=$subject_id";
+  } else {
+    $go_back = "$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level&subject_id=$subject_id";
+  }
 
-  //Display all student account
-  $query = "SELECT
+
+  if(isset($teacher_id)) {
+    $query = "SELECT
     student.id,
     CONCAT(student.lastname, ', ' ,student.firstname) as name,
     (SELECT title FROM exams WHERE id = ue.exam_id) as title,
@@ -16,7 +21,27 @@
     ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
     FROM users student RIGHT JOIN users_has_exam as ue
     ON student.id = ue.user_id, exams
-    WHERE student.type='student' AND exams.subject_id = $subject_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+    WHERE student.type='student' AND exams.subject_id = $subject_id AND teacher_id = $teacher_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+  
+  } else {
+    //Display all student account
+    $query = "SELECT
+      student.id,
+      CONCAT(student.lastname, ', ' ,student.firstname) as name,
+      (SELECT title FROM exams WHERE id = ue.exam_id) as title,
+      ue.created_at as date,
+      (
+        SELECT COUNT(*) FROM exam_records as er
+        LEFT JOIN answers as ans
+        ON er.answer_id = ans.id
+        WHERE er.user_id = ue.user_id AND ans.is_answer = 1
+      ) as score,
+      ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
+      FROM users student RIGHT JOIN users_has_exam as ue
+      ON student.id = ue.user_id, exams
+      WHERE student.type='student' AND exams.subject_id = $subject_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+  }
+  
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
