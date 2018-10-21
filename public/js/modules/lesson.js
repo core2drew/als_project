@@ -34,7 +34,7 @@ jQuery(document).ready(function($){
       if($createForm.valid()) {
         //$loading.addClass('active')
         var formData = new FormData($createForm[0]);
-        formData.append('editor_data', lessonEditor.getData())
+        //formData.append('editor_data', lessonEditor.getData())
         $.ajax({
           type: "POST",
           url: '/resources/lesson/add.php',
@@ -59,7 +59,7 @@ jQuery(document).ready(function($){
       if($updateForm.valid()) {
         //$loading.addClass('active')
         var formData = new FormData($updateForm[0]);
-        formData.append('editor_data', lessonEditor.getData())
+        //formData.append('editor_data', lessonEditor.getData())
         $.ajax({
           type: "POST",
           url: `/resources/lesson/update.php`,
@@ -134,7 +134,7 @@ jQuery(document).ready(function($){
     }
 
     var init = function(){
-      ckeditorInit()
+      //ckeditorInit() //Initialize ckeditor
       validateCreate = $createForm.validate({ errorClass: "error-field" })
       validateUpdate = $updateForm.validate({ errorClass: "error-field" })
 

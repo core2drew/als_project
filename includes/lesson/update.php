@@ -9,14 +9,14 @@
     <input type="text" name="title" placeholder="Title" value="<?php echo $row['title'] ?>" required/>
   </div>
   <div id="LessonEditorContainer">
-    <div class="document-editor">
+    <!-- <div class="document-editor">
       <div class="document-editor__toolbar"></div>
       <div class="document-editor__editable-container">
           <div class="document-editor__editable">
             <?php echo $row['lesson'] ?>
           </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="input" id="LessonReviewer">
     <input type="text" name="filename" readonly placeholder="Upload Reviewer" value="<?php echo $row['reviewer_filename'] ?>"/>
