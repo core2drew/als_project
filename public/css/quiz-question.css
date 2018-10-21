@@ -35,6 +35,7 @@
   align-items: center;
   padding: 15px 37px;
   font-weight: bold;
+  justify-content: space-between;
 }
 
 #QuizQuestions > .question-item > .choices > .choice > input[type=radio] {
@@ -46,6 +47,11 @@
 #QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer,
 #QuizQuestionsAnswers > .question-item > .fill-in-answer {
   background: #c2ffc2;
+}
+
+#QuizQuestions > .question-item > .choices > .choice > .legend,
+#QuizQuestionsAnswers > .question-item > .choices > .choice > .legend {
+  font-size: small;
 }
 
 #QuizQuestions > .question-item > .choices > .choice.user-answer,

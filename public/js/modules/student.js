@@ -156,13 +156,16 @@ jQuery(document).ready(function($){
             $choicesItem.addClass('user-answer')
             //Remove no answer if user has an answer
             $noAnswer.remove()
+            $choicesItem.append("<span class='your-answer legend'>Your Answer</span>")
           }
 
           if(ans.is_answer) {
             $choicesItem.addClass('correct-answer')
+            $choicesItem.append("<span class='correct-answer legend'>Corrent Answer</span>")
+            $choicesItem.children('.your-answer').remove();
           }
 
-          $choicesItem.append(ans.answer)
+          $choicesItem.prepend(ans.answer)
           $choices.append($choicesItem)
           $questionItem.append($choices)
         })

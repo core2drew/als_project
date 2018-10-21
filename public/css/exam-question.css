@@ -31,6 +31,12 @@
   align-items: center;
   padding: 15px 37px;
   font-weight: bold;
+  justify-content: space-between;
+}
+
+#ExamQuestions > .question-item > .choices > .choice > .legend,
+#ExamQuestionsAnswers > .question-item > .choices > .choice > .legend {
+  font-size: small;
 }
 
 #ExamQuestions > .question-item > .choices > .choice > input[type=radio] {
