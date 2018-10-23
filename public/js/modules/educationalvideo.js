@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
           validateCreate,
           validateUpdate,
           currentFilename;
-      var uploadOption = 'upload';
+      var uploadOption = 'link';
 
       var $manageEducationalVideos= $("#ManageEducationalVideos");
       var $modalContainer = $(".modal-container.educational").not('.profile');
