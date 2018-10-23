@@ -1,4 +1,49 @@
 
+
+#ManageQuiz {
+  display: flex;
+}
+
+#QuizQuestionsAnswers {
+  flex: 1
+}
+
+
+#QuizResult {
+  flex: 0.2;
+  padding: 0 20px;
+}
+
+#QuizResult > .title {
+  margin-top: 0;
+}
+
+#QuizResult > .legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#QuizResult > .legend > .legend {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+#QuizResult > .correct > .legend {
+  background: #c2ffc2 !important;
+}
+
+#QuizResult > .wrong > .legend{
+  background: #ffcecf;
+}
+
+#ExamQuestions,
+#ExamQuestionsAnswers {
+  margin-bottom: 15px;
+  max-width: 89%;
+}
+
 #QuizQuestions,
 #QuizQuestionsAnswers {
   margin-bottom: 15px;

@@ -43,29 +43,28 @@
   </div>
   <div id="ExamQuestions" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
   <div id="SubmitExam" class="button">Submit</div>
-<?php else: ?>
-  <?php 
-    //Get exam result
-    $exam_result_query = "SELECT
-    (
-      SELECT COUNT(*) FROM exam_records as er
-      LEFT JOIN answers as ans
-      ON er.answer_id = ans.id
-      WHERE er.user_id = ue.user_id AND ans.is_answer = 1
-    ) as score,
-    ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
-    FROM users student RIGHT JOIN users_has_exam as ue
-    ON student.id = ue.user_id, exams
-    WHERE student.id = $_SESSION[user_id] AND ue.exam_id = $exam_id AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
-    $exam_query_result = mysqli_query($conn, $exam_result_query);
-    $exam_result_row = mysqli_fetch_array($exam_query_result, MYSQLI_ASSOC);
+<?php else: 
+  //Get exam result
+  $exam_result_query = "SELECT
+  (
+    SELECT COUNT(*) FROM exam_records as er
+    LEFT JOIN answers as ans
+    ON er.answer_id = ans.id
+    WHERE er.user_id = ue.user_id AND ans.is_answer = 1
+  ) as score,
+  ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
+  FROM users student RIGHT JOIN users_has_exam as ue
+  ON student.id = ue.user_id, exams
+  WHERE student.id = $_SESSION[user_id] AND ue.exam_id = $exam_id AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+  $exam_query_result = mysqli_query($conn, $exam_result_query);
+  $exam_result_row = mysqli_fetch_array($exam_query_result, MYSQLI_ASSOC);
 
-    $items = count(explode(',', $exam_result_row['items']));
-    $score = $exam_result_row['score'].'/'.$items;
-    $percentage = ($exam_result_row['score'] / $items) * 100;
-    $percentage = number_format($percentage, 2);
+  $items = count(explode(',', $exam_result_row['items']));
+  $score = $exam_result_row['score'].'/'.$items;
+  $percentage = ($exam_result_row['score'] / $items) * 100;
+  $percentage = number_format($percentage, 2);
+?>
 
-  ?>
   <div id="ExamQuestionsAnswers" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
   <div id="ExamResults">
     <h3 class="title">Legend:</h3>

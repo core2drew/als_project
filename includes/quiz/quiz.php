@@ -40,8 +40,45 @@
   </div>
   <div id="QuizQuestions" data-quiz-id="<?php echo $quiz_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $user_id ?>></div>
   <div id="SubmitQuiz" class="button">Submit</div>
-<?php else: ?>
+<?php else: 
+    //Get exam result
+    $exam_result_query = "SELECT
+    (
+      SELECT COUNT(*) FROM quiz_records as qr
+      LEFT JOIN answers as ans
+      ON qr.answer_id = ans.id
+      WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
+    ) as score,
+    ( SELECT questions_id FROM quizzes WHERE id = uq.quiz_id) as items 
+    FROM users student RIGHT JOIN users_has_quiz as uq
+    ON student.id = uq.user_id
+    WHERE student.id = $_SESSION[user_id] AND uq.quiz_id = $quiz_id AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
+    $exam_query_result = mysqli_query($conn, $exam_result_query);
+    $exam_result_row = mysqli_fetch_array($exam_query_result, MYSQLI_ASSOC);
+
+    $items = count(explode(',', $exam_result_row['items']));
+    $score = $exam_result_row['score'].'/'.$items;
+    $percentage = ($exam_result_row['score'] / $items) * 100;
+    $percentage = number_format($percentage, 2);
+?>
   <div id="QuizQuestionsAnswers" data-quiz-id="<?php echo $quiz_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $user_id ?>></div>
+  <div id="QuizResult">
+    <h3 class="title">Legend:</h3>
+    <div class="legend correct">
+      <span class="legend"></span>
+      Correct Answer
+    </div>
+    <div class="legend wrong">
+      <span class="legend"></span>
+      Wrong Answer
+    </div>
+    <div class="score">
+      <h3 class="title">Score: <?php echo $score ?></h3>
+    </div>
+    <div class="percentage">
+      <h3 class="title">Percentage: <?php echo $percentage ?></h3>
+    </div>
+  </div>
 <?php endif ?>
 
 <?php if($user_type == 'teacher'): ?>
