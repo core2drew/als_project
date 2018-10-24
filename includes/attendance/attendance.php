@@ -20,17 +20,19 @@
 ?>
   <table class="table attendance">
     <thead>
-      <th>Name</th>
+      <th>Count</th>
       <th>Date and Time</th>
     </thead>
     <tbody>
       <?php
+        $count = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           $fullname = $row['name'];
           $log_at = $row['log_at'];
+          $count ++;
           $table_row =
             "<tr>
-              <td>$fullname</td>
+              <td>$count</td>
               <td>$log_at</td>
             </tr>";
           echo $table_row;
