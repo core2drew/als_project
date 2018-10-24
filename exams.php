@@ -13,7 +13,7 @@
 ?>
 <div id="Dashboard" class="wrapper">
   <?php include 'includes/sidebar.php'; ?>
-  <div id="ManageExams" class="page">
+  <div id="ManageExams" class="page student">
     <?php
       if($exam_id) {
         include 'includes/exam/exam.php';

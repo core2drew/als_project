@@ -12,7 +12,7 @@
 ?>
 <div id="Teacher" class="wrapper">
   <?php include 'includes/sidebar.php' ?>
-  <div id="ManageQuiz" class="page">
+  <div id="ManageQuiz" class="page student">
     <?php
       if($quiz_id) {
         include 'includes/quiz/quiz.php';
