@@ -1,79 +1,78 @@
-#ManageQuiz.student {
+#QuizResultsContainer {
   display: flex;
 }
 
-#QuizQuestionsAnswers {
+#QuizResultsContainer > #QuizQuestionsAnswers {
   flex: 1
 }
 
-
-#QuizResult {
+#QuizResultsContainer > #QuizResult {
   flex: 0.2;
   padding: 0 20px;
 }
 
-#QuizResult > .title {
+#QuizResultsContainer > #QuizResult > .title {
   margin-top: 0;
 }
 
-#QuizResult > .legend {
+#QuizResultsContainer > #QuizResult > .legend {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-#QuizResult > .legend > .legend {
+#QuizResultsContainer > #QuizResult > .legend > .legend {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
 
-#QuizResult > .correct > .legend {
+#QuizResultsContainer > #QuizResult > .correct > .legend {
   background: #c2ffc2 !important;
 }
 
-#QuizResult > .wrong > .legend{
+#QuizResultsContainer > #QuizResult > .wrong > .legend{
   background: #ffcecf;
 }
 
 #ExamQuestions,
-#ExamQuestionsAnswers {
+#QuizResultsContainer > #QuizQuestionsAnswers {
   margin-bottom: 15px;
   max-width: 89%;
 }
 
 #QuizQuestions,
-#QuizQuestionsAnswers {
+#QuizResultsContainer > #QuizQuestionsAnswers {
   margin-bottom: 15px;
   max-width: 89%;
 }
 
 #QuizQuestions > .question-item:nth-last-child(n + 2),
-#QuizQuestionsAnswers > .question-item:nth-last-child(n + 2) {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item:nth-last-child(n + 2) {
   margin-bottom: 40px;
 }
 
 #QuizQuestions > .question-item > .question,
-#QuizQuestionsAnswers > .question-item > .question {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .question {
   background: #efefef;
   padding: 15px;
 }
 #QuizQuestions > .question-item > .question > .numbering,
-#QuizQuestionsAnswers > .question-item > .question > .numbering {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .question > .numbering {
   margin-right: 5px;
 }
 
 #QuizQuestions > .question-item > .choices,
-#QuizQuestionsAnswers > .question-item > .choices {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices {
   background: #fff;
 }
 
 #QuizQuestions > .question-item > .choices > .choice,
 #QuizQuestions > .question-item > .fill-in-answer,
 #QuizQuestions > .question-item > .fill-in-user-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice,
-#QuizQuestionsAnswers > .question-item > .fill-in-answer,
-#QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .fill-in-answer,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
   display: flex;
   align-items: center;
   padding: 15px 37px;
@@ -87,45 +86,45 @@
 
 #QuizQuestions > .question-item > .choices > .choice.is-answer,
 #QuizQuestions > .question-item > .fill-in-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer,
-#QuizQuestionsAnswers > .question-item > .fill-in-answer {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice.is-answer,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .fill-in-answer {
   background: #c2ffc2;
 }
 
 #QuizQuestions > .question-item > .choices > .choice > .legend,
-#QuizQuestionsAnswers > .question-item > .choices > .choice > .legend {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice > .legend {
   font-size: small;
 }
 
 #QuizQuestions > .question-item > .choices > .choice.user-answer,
 #QuizQuestions > .question-item > .fill-in-user-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.user-answer,
-#QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice.user-answer,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .fill-in-user-answer {
   background: #ffcecf;
 }
 
 #QuizQuestions > .question-item > .choices > .choice.correct-answer,
 #QuizQuestions > .question-item > .fill-in-user-answer.correct-answer,
-#QuizQuestionsAnswers > .question-item > .choices > .choice.correct-answer,
-#QuizQuestionsAnswers > .question-item > .fill-in-user-answer.correct-answer {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice.correct-answer,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .fill-in-user-answer.correct-answer {
   background: #c2ffc2 !important;
 }
 
 #QuizQuestions > .question-item > .explanation,
-#QuizQuestionsAnswers > .question-item > .explanation {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .explanation {
   padding: 10px 15px;
   font-size: 0.8em;
   background: #3295ff;
   color: #ffffff;
 }
 #QuizQuestions > .question-item > .explanation > .label,
-#QuizQuestionsAnswers > .question-item > .explanation > .label {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .explanation > .label {
   font-weight: bold;
   margin-right: 10px;
 }
 
 #QuizQuestions > .question-item > .noanswer,
-#QuizQuestionsAnswers > .question-item > .noanswer {
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .noanswer {
   font-size: 0.8em;
   background-color: #fe141a;
   color: #fff;

@@ -69,23 +69,24 @@
   $percentage = ($exam_result_row['score'] / $items) * 100;
   $percentage = number_format($percentage, 2);
 ?>
-
-  <div id="ExamQuestionsAnswers" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
-  <div id="ExamResults">
-    <h3 class="title">Legend:</h3>
-    <div class="legend correct">
-      <span class="legend"></span>
-      Correct Answer
-    </div>
-    <div class="legend wrong">
-      <span class="legend"></span>
-      Wrong Answer
-    </div>
-    <div class="score">
-      <h3 class="title">Score: <?php echo $score ?></h3>
-    </div>
-    <div class="percentage">
-      <h3 class="title">Percentage: <?php echo $percentage ?></h3>
+  <div id="ExamResultsContainer">
+    <div id="ExamQuestionsAnswers" data-exam-id="<?php echo $exam_id ?>" data-questions-id="<?php echo $questions_id ?>" data-user-id=<?php echo $_SESSION['user_id'] ?>></div>
+    <div id="ExamResults">
+      <h3 class="title">Legend:</h3>
+      <div class="legend correct">
+        <span class="legend"></span>
+        Correct Answer
+      </div>
+      <div class="legend wrong">
+        <span class="legend"></span>
+        Wrong Answer
+      </div>
+      <div class="score">
+        <h3 class="title">Score: <?php echo $score ?></h3>
+      </div>
+      <div class="percentage">
+        <h3 class="title">Percentage: <?php echo $percentage ?></h3>
+      </div>
     </div>
   </div>
 <?php endif ?>

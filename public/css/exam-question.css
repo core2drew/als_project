@@ -1,77 +1,77 @@
-#ManageExams.student {
+#ExamResultsContainer {
   display: flex;
 }
 
-#ExamQuestionsAnswers {
+#ExamResultsContainer > #ExamQuestionsAnswers {
   flex: 1
 }
 
-#ExamResults {
+#ExamResultsContainer > #ExamResults {
   flex: 0.2;
   padding: 0 20px;
 }
 
-#ExamResults > .title {
+#ExamResultsContainer > #ExamResults > .title {
   margin-top: 0;
 }
 
-#ExamResults > .legend {
+#ExamResultsContainer > #ExamResults > .legend {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-#ExamResults > .legend > .legend {
+#ExamResultsContainer > #ExamResults > .legend > .legend {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
 
-#ExamResults > .correct > .legend {
+#ExamResultsContainer > #ExamResults > .correct > .legend {
   background: #c2ffc2 !important;
 }
 
-#ExamResults > .wrong > .legend{
+#ExamResultsContainer > #ExamResults > .wrong > .legend{
   background: #ffcecf;
 }
 
 #ExamQuestions,
-#ExamQuestionsAnswers {
+#ExamResultsContainer > #ExamQuestionsAnswers {
   margin-bottom: 15px;
   max-width: 89%;
 }
 
 #ExamQuestions > .question-item:nth-last-child(n + 2),
-#ExamQuestionsAnswers > .question-item:nth-last-child(n + 2) {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item:nth-last-child(n + 2) {
   margin-bottom: 40px;
 }
 
 #ExamQuestions > .question-item > .question,
-#ExamQuestionsAnswers > .question-item > .question {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .question {
   background: #efefef;
   padding: 15px;
 }
 #ExamQuestions > .question-item > .question > .numbering,
-#ExamQuestionsAnswers > .question-item > .question > .numbering {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .question > .numbering {
   margin-right: 5px;
 }
 
 #ExamQuestions > .question-item > .choices,
-#ExamQuestionsAnswers > .question-item > .choices {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices {
   background: #fff;
 }
 
 #ExamQuestions > .question-item > .choices > .choice,
-#ExamQuestionsAnswers > .question-item > .choices > .choice {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px 37px;
   font-weight: bold;
-  justify-content: space-between;
 }
 
 #ExamQuestions > .question-item > .choices > .choice > .legend,
-#ExamQuestionsAnswers > .question-item > .choices > .choice > .legend {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice > .legend {
   font-size: small;
 }
 
@@ -80,35 +80,35 @@
 }
 
 #ExamQuestions > .question-item > .choices > .choice.is-answer,
-#ExamQuestionsAnswers > .question-item > .choices > .choice.is-answer {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice.is-answer {
   background: #c2ffc2;
 }
 
 #ExamQuestions > .question-item > .choices > .choice.user-answer,
-#ExamQuestionsAnswers > .question-item > .choices > .choice.user-answer {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice.user-answer {
   background: #ffcecf;
 }
 
 #ExamQuestions > .question-item > .choices > .choice.correct-answer,
-#ExamQuestionsAnswers > .question-item > .choices > .choice.correct-answer {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice.correct-answer {
   background: #c2ffc2 !important;
 }
 
 #ExamQuestions > .question-item > .explanation,
-#ExamQuestionsAnswers > .question-item > .explanation {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .explanation {
   padding: 10px 15px;
   font-size: 0.8em;
   background: #3295ff;
   color: #ffffff;
 }
 #ExamQuestions > .question-item > .explanation > .label,
-#ExamQuestionsAnswers > .question-item > .explanation > .label {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .explanation > .label {
   font-weight: bold;
   margin-right: 10px;
 }
 
 #ExamQuestions > .question-item > .noanswer,
-#ExamQuestionsAnswers > .question-item > .noanswer {
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .noanswer {
   font-size: 0.8em;
   background-color: #fe141a;
   color: #fff;
