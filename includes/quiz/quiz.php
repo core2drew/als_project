@@ -1,9 +1,13 @@
 <?php 
-    $exam_query= "SELECT title, questions_id, minutes, instruction FROM quizzes WHERE id=$quiz_id AND deleted_at IS NULL";
+    $exam_query= "SELECT minutes FROM quizzes WHERE id=$quiz_id AND deleted_at IS NULL";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
+
+    $questions_query = "SELECT questions_id FROM users_has_quiz WHERE quiz_id = $quiz_id AND user_id = $_SESSION[user_id]";
+    $questions_result = mysqli_query($conn, $questions_query);
+    $questions_row = mysqli_fetch_array($questions_result, MYSQLI_ASSOC);
     
-    $questions_id = isset($exam_row['questions_id']) ? $exam_row['questions_id'] : null; 
+    $questions_id = isset($questions_row['questions_id']) ? $questions_row['questions_id'] : null; 
     
     $minutes = isset($exam_row['minutes']) ? $exam_row['minutes'] : null; 
 
@@ -49,7 +53,7 @@
       ON qr.answer_id = ans.id
       WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
     ) as score,
-    ( SELECT questions_id FROM quizzes WHERE id = uq.quiz_id) as items 
+    ( SELECT questions_id FROM users_haz_quiz WHERE quiz_id = $quiz_id AND user_id = $user_id) as items 
     FROM users student RIGHT JOIN users_has_quiz as uq
     ON student.id = uq.user_id
     WHERE student.id = $_SESSION[user_id] AND uq.quiz_id = $quiz_id AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
