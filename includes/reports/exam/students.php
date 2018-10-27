@@ -18,7 +18,7 @@
       ON er.answer_id = ans.id
       WHERE er.user_id = ue.user_id AND ans.is_answer = 1
     ) as score,
-    ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
+    ( SELECT questions_id FROM users_has_exam WHERE exam_id = $exam_id) as items 
     FROM users student RIGHT JOIN users_has_exam as ue
     ON student.id = ue.user_id
     WHERE student.type='student' AND teacher_id = $teacher_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
@@ -36,7 +36,7 @@
         ON er.answer_id = ans.id
         WHERE er.user_id = ue.user_id AND ans.is_answer = 1
       ) as score,
-      ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
+      ( SELECT questions_id FROM users_has_exam WHERE exam_id = $exam_id) as items 
       FROM users student RIGHT JOIN users_has_exam as ue
       ON student.id = ue.user_id
       WHERE student.type='student' AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";

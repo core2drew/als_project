@@ -1,10 +1,15 @@
 <?php 
-    $exam_query= "SELECT questions_id, minutes  FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
+    $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null; 
+    
+    $exam_query= "SELECT minutes  FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
+
+    $questions_query = "SELECT questions_id FROM users_has_exam WHERE exam_id = $exam_id AND user_id = $_SESSION[user_id]";
+    $questions_result = mysqli_query($conn, $questions_query);
+    $questions_row = mysqli_fetch_array($questions_result, MYSQLI_ASSOC);
     
-    $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null; 
-    $questions_id = isset($exam_row['questions_id']) ? $exam_row['questions_id'] : null; 
+    $questions_id = isset($questions_row['questions_id']) ? $questions_row['questions_id'] : null; 
     
     $minutes = isset($exam_row['minutes']) ? $exam_row['minutes'] : null; 
 
@@ -52,7 +57,7 @@
     ON er.answer_id = ans.id
     WHERE er.user_id = ue.user_id AND ans.is_answer = 1
   ) as score,
-  ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
+  ( SELECT questions_id FROM users_has_exam WHERE exam_id = $exam_id AND user_id=$_SESSION[user_id]) as items 
   FROM users student RIGHT JOIN users_has_exam as ue
   ON student.id = ue.user_id, exams
   WHERE student.id = $_SESSION[user_id] AND ue.exam_id = $exam_id AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
