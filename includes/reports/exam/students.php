@@ -20,8 +20,8 @@
     ) as score,
     ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
     FROM users student RIGHT JOIN users_has_exam as ue
-    ON student.id = ue.user_id, exams
-    WHERE student.type='student' AND exams.subject_id = $subject_id AND teacher_id = $teacher_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+    ON student.id = ue.user_id
+    WHERE student.type='student' AND teacher_id = $teacher_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
   
   } else {
     //Display all student account
@@ -38,10 +38,9 @@
       ) as score,
       ( SELECT questions_id FROM exams WHERE id = ue.exam_id) as items 
       FROM users student RIGHT JOIN users_has_exam as ue
-      ON student.id = ue.user_id, exams
-      WHERE student.type='student' AND exams.subject_id = $subject_id AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
+      ON student.id = ue.user_id
+      WHERE student.type='student' AND ue.exam_id = $exam_id AND student.grade_level=$grade_level AND student.deleted_at IS NULL AND ue.taken_at IS NOT NULL";
   }
-  
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
