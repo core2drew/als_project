@@ -1,5 +1,5 @@
 <?php 
-    $exam_query= "SELECT title, questions_id, minutes, instruction FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
+    $exam_query= "SELECT questions_id, minutes  FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
     
