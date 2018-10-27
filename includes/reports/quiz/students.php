@@ -18,7 +18,7 @@
       ON qr.answer_id = ans.id
       WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
     ) as score,
-    ( SELECT questions_id FROM users_has_quiz WHERE quiz_id = $quiz_id) as items 
+    uq.questions_id as items
     FROM users student RIGHT JOIN users_has_quiz as uq
     ON student.id = uq.user_id
     WHERE student.type='student' AND student.grade_level=$grade_level AND teacher_id = $teacher_id AND uq.quiz_id = $quiz_id AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
@@ -35,7 +35,7 @@
       ON qr.answer_id = ans.id
       WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
     ) as score,
-    ( SELECT questions_id FROM users_has_exam WHERE quiz_id = $quiz_id) as items 
+    uq.questions_id as items
     FROM users student RIGHT JOIN users_has_quiz as uq
     ON student.id = uq.user_id
     WHERE student.type='student' AND student.grade_level=$grade_level AND uq.quiz_id = $quiz_id AND student.deleted_at IS NULL AND uq.taken_at IS NOT NULL";
