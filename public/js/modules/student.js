@@ -214,8 +214,8 @@ jQuery(document).ready(function($){
           answers: JSON.stringify(answers)
         },
         success: function(res) {
-          console.log(res)
-          showAnswers(res.data)
+          location.reload()
+          //showAnswers(res.data)
         },
         error: function(err) {
           console.error("Something went wrong");
