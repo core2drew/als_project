@@ -39,6 +39,7 @@
           $answer_correctly_count = $row['answer_correctly_count'];
           if($answered) {
             $percentage = ($answer_correctly_count / $answered) * 100;
+            $percentage = number_format($percentage, 2);
           } else {
             $percentage = 0;
           }

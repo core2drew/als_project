@@ -1,7 +1,7 @@
 <?php 
     $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null; 
     
-    $exam_query= "SELECT minutes  FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
+    $exam_query= "SELECT minutes FROM exams WHERE id=$exam_id AND deleted_at IS NULL";
     $exam_result = mysqli_query($conn, $exam_query);
     $exam_row = mysqli_fetch_array($exam_result, MYSQLI_ASSOC);
 
