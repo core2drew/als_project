@@ -27,7 +27,7 @@
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
     $created_at = date("Y-m-d H:i:s");
-    $query = "INSERT INTO users_has_quiz (user_id, quiz_id, created_at) VALUES ('$user_id', '$quiz_id', '$created_at')";
+    $query = "INSERT INTO users_has_quiz (user_id, quiz_id, created_at, questions_id) VALUES ('$user_id', '$quiz_id', '$created_at', '$row[questions_id]')";
     $result = mysqli_query($conn, $query);
 
     if($result) {
