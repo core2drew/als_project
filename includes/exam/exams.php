@@ -1,6 +1,6 @@
 <?php
   if($_SESSION['type'] !== 'student') {
-    $query = "SELECT id, title, questions_id, minutes, (SELECT COUNT(*) FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL) as available_question_count FROM exams WHERE subject_id = $subject_id AND questions_id IS NOT NULL AND deleted_at IS NULL";
+    $query = "SELECT id, title, questions_id, minutes, (SELECT COUNT(*) FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL) as available_question_count FROM exams WHERE subject_id = $subject_id AND deleted_at IS NULL";
   } else {
     $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
