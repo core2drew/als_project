@@ -171,7 +171,7 @@ jQuery(document).ready(function(){
           }
 
           if(data.question_type == 'multiple' || data.question_type == 'true-false') {
-            var $choicesItem = $('<div/>').addClass('choice')
+            var $choicesItem = $('<div/>').addClass('choice result')
             if(ans.user_answer) {
               $choicesItem.addClass('user-answer')
               $choicesItem.append("<span class='your-answer legend'>Your Answer</span>")

@@ -77,6 +77,10 @@
   align-items: center;
   padding: 15px 37px;
   font-weight: bold;
+}
+
+#QuizQuestions > .question-item > .choices > .choice.result,
+#QuizResultsContainer > #QuizQuestionsAnswers > .question-item > .choices > .choice.result {
   justify-content: space-between;
 }
 

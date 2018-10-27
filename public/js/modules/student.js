@@ -150,7 +150,7 @@ jQuery(document).ready(function($){
         $questionItem.append($question)
 
         data.answers.map(function(ans){
-          var $choicesItem = $('<div/>').addClass('choice')
+          var $choicesItem = $('<div/>').addClass('choice result')
           
           if(ans.user_answer) {
             $choicesItem.addClass('user-answer')

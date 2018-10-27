@@ -65,9 +65,13 @@
 #ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 15px 37px;
   font-weight: bold;
+}
+
+#ExamQuestions > .question-item > .choices > .choice.result,
+#ExamResultsContainer > #ExamQuestionsAnswers > .question-item > .choices > .choice.result {
+  justify-content: space-between;
 }
 
 #ExamQuestions > .question-item > .choices > .choice > .legend,
