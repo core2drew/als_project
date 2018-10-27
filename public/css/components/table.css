@@ -69,6 +69,7 @@
   background-color: #ececec;
   color: #9e9e9e;
   text-align: center;
+  width: 100%;
 }
 
 .no-records > .message {
