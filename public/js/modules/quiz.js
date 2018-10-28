@@ -42,7 +42,7 @@ jQuery(document).ready(function($){
     var $assignQuizModal = $modalContainer.find('#AssignQuizModal')
     var $assignQuizModalTable = $assignQuizModal.find('.table')
     var $assignQuizButton = $quizTable.find('.assign')
-    
+    var $assignQuizToAllButton = $quizTable.find('.assign-to-all')
 
     function makeQuestionTable(container, data) {
       var tableBody = container.find('tbody')
@@ -184,6 +184,26 @@ jQuery(document).ready(function($){
           }
         },
         error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
+    function assignQuizToAll() {
+      var $this = $(this)
+      var teacherId = $this.data('teacherId')
+      var quizId = $this.data('quizId')
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-quiz-to-all.php',
+        data: $.param({
+          teacher_id: teacherId,
+          quiz_id: quizId
+        }),
+        success: function(res){
+          alert(res.message)
+        },
+        error: function() {
           console.error("Something went wrong");
         }
       });
@@ -368,6 +388,7 @@ jQuery(document).ready(function($){
       $updateButton.on('click', updateRecord)
 
       $assignQuizButton.on('click', showAssignQuizModal)
+      $assignQuizToAllButton.on('click', assignQuizToAll)
     }
 
     return {

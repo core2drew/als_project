@@ -12,7 +12,8 @@ jQuery(document).ready(function($){
 
     var $examsTable = $manageExams.find('.table.exam');
 
-    var $assignExamButton = $examsTable.find('.assign-exam')
+    //var $assignExamButton = $examsTable.find('.assign-exam')
+    var $assignExamToAllButton = $examsTable.find('.assign-exam-to-all')
     var $viewExamButton = $examsTable.find('.view-exam')
 
     var $examQuestions = $manageExams.find('#ExamQuestions')
@@ -115,6 +116,26 @@ jQuery(document).ready(function($){
       $assignExamModal.hide();
     }
 
+    function assignExamToAll(e) {
+      var $this = $(this)
+      var teacherId = $this.data('teacherId')
+      var examId = $this.data('examId')
+      $.ajax({
+        type: "POST",
+        url: '/resources/teacher/assign-exam-to-all.php',
+        data: $.param({
+          teacher_id: teacherId,
+          exam_id: examId
+        }),
+        success: function(res){
+          alert(res.message)
+        },
+        error: function(err) {
+          console.error("Something went wrong");
+        }
+      });
+    }
+
     function assignExam(studentId, examId) {
       $.ajax({
         type: "POST",
@@ -205,7 +226,8 @@ jQuery(document).ready(function($){
       //Close all modals
       $modal.find('.close').on('click', closeModals)
 
-      $assignExamButton.on('click', showAssignExamModal)
+      //$assignExamButton.on('click', showAssignExamModal)
+      $assignExamToAllButton.on('click', assignExamToAll)
       $viewExamButton.on('click', showInstruction)
       $viewExam.on('click', startView)
 

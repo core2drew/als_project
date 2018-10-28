@@ -1,7 +1,11 @@
 <?php
-  if($_SESSION['type'] !== 'student') {
+  if($_SESSION['type'] == 'coordinator') {
     $query = "SELECT id, title, questions_id, minutes, (SELECT COUNT(*) FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL) as available_question_count FROM exams WHERE subject_id = $subject_id AND deleted_at IS NULL";
-  } else {
+  } 
+  else if($_SESSION['type'] == 'teacher') {
+    $query = "SELECT id, title, questions_id, minutes, (SELECT COUNT(*) FROM questions WHERE subject_id = $subject_id AND type='exam' AND deleted_at IS NULL) as available_question_count FROM exams WHERE subject_id = $subject_id AND questions_id IS NOT NULL AND deleted_at IS NULL";
+  } 
+  else {
     $query = "SELECT a.id, a.title, a.minutes, a.questions_id, b.taken_at IS NOT NULL as is_taken,
     (select title from subjects where id = a.subject_id) as subject
     from exams a inner join users_has_exam b on a.id = b.exam_id where user_id = $user_id and a.deleted_at is null and b.deleted_at is null";
@@ -79,14 +83,15 @@
           } else if($is_teacher){
             //$_SERVER[PHP_SELF]?subject_id=$subject_id&exam_id=$id
             $questions = "<span class='button view-exam'  data-subject-id=$subject_id data-exam-id=$id>View</span>";
-            $assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
+            //$assign_exam = "<span class='button assign-exam' data-exam-id=$id>Assign Exam</span>";
             $view_report = "<a class='button view-report' href='exams.php?subject_id=$subject_id&is_report=1&exam_id=$id&teacher_id=$_SESSION[user_id]'>View Report</a>";
+            $assign_exam_to_all = "<span class='button assign-exam-to-all' data-exam-id=$id data-teacher-id=$_SESSION[user_id]>Assign Exam</span>";
             $table_row =
             "<tr>
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option teacher'>$questions $assign_exam $view_report</td>
+              <td class='option teacher'>$questions $assign_exam_to_all $view_report</td>
             </tr>";
           } else if ($is_student) {
             //href=$_SERVER[PHP_SELF]?exam_id=$id 

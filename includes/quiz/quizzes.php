@@ -59,6 +59,7 @@
           if($user_type == 'teacher'){
             $questions = "<a class='button view-quiz' href=/teacher/questions.php?subject_id=$subject_id&quiz_id=$id>Questions</a>";
             $assign_quiz = "<span class='button assign' data-quiz-id=$id>Assign</span>";
+            $assign_quiz_to_all = "<span class='button assign-to-all' data-quiz-id=$id data-teacher-id=$_SESSION[user_id]>Assign To All</span>";
             $update_quiz = "<span class='button update' data-quiz-id=$id>Update</span>";
             $report_quiz = "<a class='button' href='quiz.php?subject_id=$subject_id&is_report=1&quiz_id=$id&teacher_id=$_SESSION[user_id]'>View Report</a>";
             $remove_quiz = "<span class='button delete' data-quiz-id=$id>Remove</span>";
@@ -67,7 +68,7 @@
               <td>$title</td>
               <td>$questions_count</td>
               <td>$minutes</td>
-              <td class='option'>$questions $assign_quiz $update_quiz $report_quiz $remove_quiz</td>
+              <td class='option'>$questions $assign_quiz $assign_quiz_to_all $update_quiz $report_quiz $remove_quiz</td>
             </tr>";
           } else if ($user_type == 'student') {
             $view_result = "<span class='button view-result' data-quiz-id=$id>View Result</span>";
