@@ -20,7 +20,7 @@
   $questions_id = implode("','", $questions_id);
 
   //Get current questions of exam
-  $question_query = "SELECT DISTINCT quest.id, quest.question, ex.minutes FROM exams ex 
+  $question_query = "SELECT DISTINCT quest.id, quest.question FROM exams ex 
   LEFT JOIN questions quest ON ex.subject_id = quest.subject_id WHERE quest.id IN ('". $questions_id ."') AND quest.deleted_at IS NULL";
   //Results of query
   $question_result = mysqli_query($conn, $question_query);
