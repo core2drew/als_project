@@ -34,7 +34,7 @@
         $data['explanation'] = $question_row['explanation'];
       }
       $data['answers'] = [];
-      $answer_query = "SELECT DISTINCT ans.id, ans.answer, ans.is_answer, qr.user_id, qr.fill_in_answer FROM answers as ans LEFT JOIN quiz_records as qr  ON qr.answer_id = ans.id AND qr.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
+      $answer_query = "SELECT DISTINCT ans.id, ans.answer, ans.is_answer, qr.user_id, qr.fill_in_answer FROM answers as ans LEFT JOIN quiz_records as qr  ON qr.answer_id = ans.id AND qr.user_id = $user_id AND qr.exam_id = $quiz_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
       $answer_result = mysqli_query($conn, $answer_query);
       while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
         $answer_data = [
