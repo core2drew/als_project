@@ -4,6 +4,7 @@
   $json_data['success'] = false;
 
   $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+  $exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
 
   $questions_id = isset($_GET['questions_id']) ? mysqli_real_escape_string($conn, $_GET['questions_id']) : null; 
   // convert string to array example "1,2,3" to [1,2,3]
@@ -32,7 +33,7 @@
         $data['explanation'] = $question_row['explanation'];
       }
       $data['answers'] = [];
-      $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
+      $answer_query = "SELECT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] AND er.exam_id = $exam_id ORDER BY id ASC";
       $answer_result = mysqli_query($conn, $answer_query);
 
       while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
