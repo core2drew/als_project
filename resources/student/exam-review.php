@@ -33,7 +33,7 @@
         $data['explanation'] = $question_row['explanation'];
       }
       $data['answers'] = [];
-      $answer_query = "SELECT DISTINCT(ans.id), ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
+      $answer_query = "SELECT DISTINCT ans.id, ans.answer, ans.is_answer, er.user_id FROM answers as ans LEFT JOIN exam_records as er  ON er.answer_id = ans.id AND er.user_id = $user_id WHERE ans.question_id = $question_row[id] ORDER BY id ASC";
       $answer_result = mysqli_query($conn, $answer_query);
 
       while($answer_row = mysqli_fetch_array($answer_result, MYSQLI_ASSOC)) {
