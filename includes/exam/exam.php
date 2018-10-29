@@ -63,7 +63,7 @@
       SELECT COUNT(*) FROM exam_records as er
       LEFT JOIN answers as ans
       ON er.answer_id = ans.id
-      WHERE er.user_id = ue.user_id AND ans.is_answer = 1
+      WHERE er.user_id = ue.user_id AND ans.is_answer = 1 AND er.exam_id = $exam_id
     ) as score,
     ( SELECT questions_id FROM users_has_exam WHERE exam_id = $exam_id AND user_id=$_SESSION[user_id]) as items 
     FROM users student RIGHT JOIN users_has_exam as ue

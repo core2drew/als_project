@@ -16,7 +16,7 @@
       SELECT COUNT(*) FROM quiz_records as qr
       LEFT JOIN answers as ans
       ON qr.answer_id = ans.id
-      WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
+      WHERE qr.user_id = uq.user_id AND ans.is_answer = 1 AND qr.quiz_id = $quiz_id
     ) as score,
     uq.questions_id as items
     FROM users student RIGHT JOIN users_has_quiz as uq
@@ -33,7 +33,7 @@
       SELECT COUNT(*) FROM quiz_records as qr
       LEFT JOIN answers as ans
       ON qr.answer_id = ans.id
-      WHERE qr.user_id = uq.user_id AND ans.is_answer = 1
+      WHERE qr.user_id = uq.user_id AND ans.is_answer = 1 AND uq.quiz_id = $quiz_id
     ) as score,
     uq.questions_id as items
     FROM users student RIGHT JOIN users_has_quiz as uq
