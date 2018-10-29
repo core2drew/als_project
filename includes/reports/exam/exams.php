@@ -2,7 +2,7 @@
   $go_back_to_subjects = "$_SERVER[PHP_SELF]?page=reports&sub_page=exam&grade_level=$grade_level";
 
   //Display all student account
-  $query = "SELECT id, title FROM exams WHERE subject_id = $subject_id";
+  $query = "SELECT id, title FROM exams WHERE subject_id = $subject_id AND deleted_at IS NULL";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 ?>
