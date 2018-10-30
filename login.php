@@ -21,7 +21,10 @@
 
     if($count == 1) {
       //Attendance
+      $timezone = "Asia/Hong_Kong";
+      date_default_timezone_set($timezone);
       $log_at = date("Y-m-d H:i:s");
+
       $query = "INSERT INTO user_logs (user_id, log_at) VALUES ($user_id, '$log_at')";
       $result = mysqli_query($conn, $query);
       echo $query ;
